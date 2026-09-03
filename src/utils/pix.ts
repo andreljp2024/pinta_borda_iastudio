@@ -3,15 +3,30 @@ import QRCode from 'qrcode';
 /**
  * Remove accents and special non-ASCII characters to comply with Bacen EMV standard.
  */
-export function sanitizeTextForPix(text: string, maxLength?: number): string {
+export function sanitizeTextForPix(text?: string, maxLength?: number): string {
   if (!text) return '';
   const sanitized = text
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^A-Za-z0-9 ]/g, '')
+    .replace(/\s+/g, ' ')
     .trim()
     .toUpperCase();
   return maxLength ? sanitized.slice(0, maxLength) : sanitized;
+}
+
+/**
+ * Sanitizes a transaction ID (txid) according to Banco Central do Brasil rules:
+ * - If not provided, empty, or '***', returns '***' (Bacen standard universal identifier)
+ * - Otherwise, strictly alphanumeric [a-zA-Z0-9], max 25 characters
+ */
+export function sanitizeTxid(txid?: string): string {
+  if (!txid) return '***';
+  const trimmed = txid.trim();
+  if (!trimmed || trimmed === '***') return '***';
+  const alphanumeric = trimmed.replace(/[^A-Za-z0-9]/g, '');
+  if (!alphanumeric) return '***';
+  return alphanumeric.slice(0, 25);
 }
 
 /**
@@ -277,16 +292,16 @@ export function generatePixPayload(params: PixPayloadParams): {
   // Tag 00: Payload Format Indicator (Fixed "01")
   const id00 = formatTlv('00', '01');
 
-  // Tag 01: Point of Initiation Method: "11" (Static, reusable code) or "12" (Dynamic)
+  // Tag 01: Point of Initiation Method: "11" (Static BR Code, supports fixed or open amount)
   const id01 = formatTlv('01', '11');
 
   // Tag 26: Merchant Account Information - Pix
+  // Note: For 100% universal bank app compatibility (Nubank, Itaú, BB, Bradesco, etc.),
+  // Tag 26 MUST only contain subtag 00 (GUI: br.gov.bcb.pix) and subtag 01 (Chave Pix).
+  // Subtag 02 (description) is omitted because several banking apps reject or fail to parse Tag 26 when subtag 02 is present.
   const gui = formatTlv('00', 'br.gov.bcb.pix');
   const key = formatTlv('01', normalizedKey);
-  const desc = params.description
-    ? formatTlv('02', sanitizeTextForPix(params.description, 40))
-    : '';
-  const id26 = formatTlv('26', `${gui}${key}${desc}`);
+  const id26 = formatTlv('26', `${gui}${key}`);
 
   // Tag 52: Merchant Category Code (Fixed "0000" or ISO 18245)
   const id52 = formatTlv('52', '0000');
@@ -296,7 +311,7 @@ export function generatePixPayload(params: PixPayloadParams): {
 
   // Tag 54: Transaction Amount (Optional, formatted to 2 decimals e.g. "10.00")
   let id54 = '';
-  if (params.amount && params.amount > 0) {
+  if (typeof params.amount === 'number' && !isNaN(params.amount) && params.amount > 0) {
     id54 = formatTlv('54', params.amount.toFixed(2));
   }
 
@@ -304,18 +319,16 @@ export function generatePixPayload(params: PixPayloadParams): {
   const id58 = formatTlv('58', 'BR');
 
   // Tag 59: Merchant Name (Max 25 characters, uppercase, no accents)
-  const safeName = sanitizeTextForPix(params.merchantName || 'PINTA E BORDA', 25);
-  const id59 = formatTlv('59', safeName || 'PINTA E BORDA');
+  const safeName = sanitizeTextForPix(params.merchantName, 25) || 'PINTA E BORDA';
+  const id59 = formatTlv('59', safeName);
 
   // Tag 60: Merchant City (Max 15 characters, uppercase, no accents)
-  const safeCity = sanitizeTextForPix(params.merchantCity || 'SAO LUIS', 15);
-  const id60 = formatTlv('60', safeCity || 'SAO LUIS');
+  const safeCity = sanitizeTextForPix(params.merchantCity, 15) || 'SAO LUIS';
+  const id60 = formatTlv('60', safeCity);
 
   // Tag 62: Additional Data Field Template (Reference label / txid)
   // Bacen requires txid for static pix, default to "***" if none provided
-  const safeTxid = params.txid
-    ? sanitizeTextForPix(params.txid, 25)
-    : '***';
+  const safeTxid = sanitizeTxid(params.txid);
   const txidTlv = formatTlv('05', safeTxid);
   const id62 = formatTlv('62', txidTlv);
 
@@ -334,7 +347,86 @@ export function generatePixPayload(params: PixPayloadParams): {
 }
 
 /**
- * Generates a high-quality QR Code image Data URL (PNG base64) from a PIX payload.
+ * Parses an EMVCo BR Code (Pix payload) back into individual tags for verification and debugging.
+ */
+export function parsePixPayload(payload: string): {
+  isValid: boolean;
+  tags: Record<string, string>;
+  details: {
+    formatIndicator?: string;
+    initiationMethod?: string;
+    pixKey?: string;
+    merchantCategory?: string;
+    currency?: string;
+    amount?: number;
+    countryCode?: string;
+    merchantName?: string;
+    merchantCity?: string;
+    txid?: string;
+    crc?: string;
+  };
+} {
+  if (!payload || payload.length < 20) {
+    return { isValid: false, tags: {}, details: {} };
+  }
+
+  const tags: Record<string, string> = {};
+  let i = 0;
+  while (i < payload.length) {
+    const id = payload.slice(i, i + 2);
+    const len = parseInt(payload.slice(i + 2, i + 4), 10);
+    if (isNaN(len)) break;
+    const val = payload.slice(i + 4, i + 4 + len);
+    tags[id] = val;
+    i += 4 + len;
+  }
+
+  // Extract key from tag 26
+  let pixKey = '';
+  if (tags['26']) {
+    const tag26 = tags['26'];
+    const keyMatch = tag26.match(/01(\d{2})(.+)/);
+    if (keyMatch) {
+      const keyLen = parseInt(keyMatch[1], 10);
+      pixKey = keyMatch[2].slice(0, keyLen);
+    }
+  }
+
+  // Extract txid from tag 62
+  let txid = '';
+  if (tags['62']) {
+    const tag62 = tags['62'];
+    const txidMatch = tag62.match(/05(\d{2})(.+)/);
+    if (txidMatch) {
+      const txidLen = parseInt(txidMatch[1], 10);
+      txid = txidMatch[2].slice(0, txidLen);
+    }
+  }
+
+  const amount = tags['54'] ? parseFloat(tags['54']) : undefined;
+
+  return {
+    isValid: !!(tags['00'] && tags['26'] && tags['63']),
+    tags,
+    details: {
+      formatIndicator: tags['00'],
+      initiationMethod: tags['01'],
+      pixKey,
+      merchantCategory: tags['52'],
+      currency: tags['53'],
+      amount,
+      countryCode: tags['58'],
+      merchantName: tags['59'],
+      merchantCity: tags['60'],
+      txid,
+      crc: tags['63'],
+    },
+  };
+}
+
+/**
+ * Generates a high-quality, high-contrast QR Code image Data URL (PNG base64) from a PIX payload.
+ * Default color is pure black (#000000) on white (#ffffff) for optimal camera scanning across all mobile phones.
  */
 export async function generatePixQrCodeDataUrl(
   payload: string,
@@ -342,16 +434,17 @@ export async function generatePixQrCodeDataUrl(
     width?: number;
     margin?: number;
     color?: { dark?: string; light?: string };
+    errorCorrectionLevel?: 'L' | 'M' | 'Q' | 'H';
   }
 ): Promise<string> {
   if (!payload) return '';
   return QRCode.toDataURL(payload, {
-    width: options?.width || 320,
+    width: options?.width || 360,
     margin: options?.margin ?? 2,
     color: {
-      dark: options?.color?.dark || '#380c25',
+      dark: options?.color?.dark || '#000000',
       light: options?.color?.light || '#ffffff',
     },
-    errorCorrectionLevel: 'M',
+    errorCorrectionLevel: options?.errorCorrectionLevel || 'M',
   });
 }
