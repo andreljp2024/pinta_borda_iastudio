@@ -27,6 +27,7 @@ import {
   ArrowRightLeft,
   SlidersHorizontal,
   ChevronLeft,
+  Settings,
 } from 'lucide-react';
 import { useApp, ActiveView } from '../../context/AppContext';
 import { UserRole } from '../../types';
@@ -73,6 +74,7 @@ export const AdminDashboardLayout: React.FC<AdminDashboardLayoutProps> = ({
     shifts,
     activeShift,
     notifications,
+    storeSettings,
   } = useApp();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -216,6 +218,20 @@ export const AdminDashboardLayout: React.FC<AdminDashboardLayoutProps> = ({
         },
       ],
     },
+    {
+      title: 'Administração & Sistema',
+      items: [
+        {
+          id: 'settings',
+          label: 'Configurações',
+          icon: Settings,
+          badge: 'Geral',
+          badgeColor: 'bg-[#fff0f5] text-[#db2777] border border-[#fbcfe8]',
+          adminOnly: true,
+          description: 'Usuários, logo, dados da loja e parâmetros',
+        },
+      ],
+    },
   ];
 
   // Filter sections if search is active
@@ -313,8 +329,16 @@ export const AdminDashboardLayout: React.FC<AdminDashboardLayoutProps> = ({
                 className="flex items-center gap-2.5 text-left cursor-pointer group"
                 title="Pinta e Borda — Painel de Gestão"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#380c25] text-white flex items-center justify-center font-display font-bold text-sm tracking-tight shrink-0 shadow-2xs group-hover:bg-[#f43f7e] transition-colors">
-                  pb
+                <div className="w-9 h-9 rounded-xl bg-[#380c25] text-white flex items-center justify-center overflow-hidden shrink-0 shadow-2xs group-hover:ring-2 group-hover:ring-[#f43f7e]/40 transition-all p-0.5">
+                  {storeSettings.logoUrl ? (
+                    <img
+                      src={storeSettings.logoUrl}
+                      alt={storeSettings.storeName}
+                      className="w-full h-full object-contain rounded-lg"
+                    />
+                  ) : (
+                    <span className="font-display font-bold text-sm tracking-tight">pb</span>
+                  )}
                 </div>
                 {!sidebarCollapsed && (
                   <div className="leading-tight overflow-hidden">

@@ -15,6 +15,8 @@ import {
   SaleItem,
   PaymentMethod,
   CommunityAnnouncement,
+  AppUser,
+  StoreSettings,
 } from '../types';
 import {
   INITIAL_PARTNERS,
@@ -28,6 +30,8 @@ import {
   INITIAL_NOTIFICATIONS,
   INITIAL_AUDIT_LOGS,
   INITIAL_ANNOUNCEMENTS,
+  INITIAL_APP_USERS,
+  INITIAL_STORE_SETTINGS,
 } from '../mockData';
 
 export type ActiveView =
@@ -45,7 +49,8 @@ export type ActiveView =
   | 'sales'
   | 'reports'
   | 'audit'
-  | 'artisan-portal';
+  | 'artisan-portal'
+  | 'settings';
 
 interface AppContextType {
   // Navigation & Role
@@ -73,8 +78,16 @@ interface AppContextType {
   notifications: AppNotification[];
   auditLogs: AuditLog[];
   announcements: CommunityAnnouncement[];
+  users: AppUser[];
+  storeSettings: StoreSettings;
 
   // Actions
+  addUser: (user: Omit<AppUser, 'id' | 'createdAt'>) => void;
+  updateUser: (id: string, updates: Partial<AppUser>) => void;
+  deleteUser: (id: string) => void;
+  toggleUserStatus: (id: string) => void;
+  updateStoreSettings: (updates: Partial<StoreSettings>) => void;
+  resetStoreSettings: () => void;
   startShift: (partnerId: string, operatorName: string, notes?: string) => Shift;
   endShift: (shiftId: string, notes?: string) => void;
   requestShiftHandover: (newPartnerId: string, newOperatorName: string) => void;
@@ -227,10 +240,28 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : INITIAL_ANNOUNCEMENTS;
   });
 
+  const [users, setUsers] = useState<AppUser[]>(() => {
+    const saved = localStorage.getItem('pb_users');
+    return saved ? JSON.parse(saved) : INITIAL_APP_USERS;
+  });
+
+  const [storeSettings, setStoreSettings] = useState<StoreSettings>(() => {
+    const saved = localStorage.getItem('pb_store_settings');
+    return saved ? JSON.parse(saved) : INITIAL_STORE_SETTINGS;
+  });
+
   // Sync with localStorage
   useEffect(() => {
     localStorage.setItem('pb_partners', JSON.stringify(partners));
   }, [partners]);
+
+  useEffect(() => {
+    localStorage.setItem('pb_users', JSON.stringify(users));
+  }, [users]);
+
+  useEffect(() => {
+    localStorage.setItem('pb_store_settings', JSON.stringify(storeSettings));
+  }, [storeSettings]);
 
   useEffect(() => {
     localStorage.setItem('pb_announcements', JSON.stringify(announcements));
@@ -1095,6 +1126,93 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
   };
 
+  // User Management Actions
+  const addUser = (userData: Omit<AppUser, 'id' | 'createdAt'>) => {
+    const newUser: AppUser = {
+      ...userData,
+      id: `user-${Date.now().toString(36)}`,
+      createdAt: new Date().toISOString(),
+    };
+    setUsers((prev) => [newUser, ...prev]);
+    logAudit(
+      'CRIAR_USUARIO',
+      'User',
+      newUser.id,
+      `Cadastrou o usuário ${newUser.name} com papel ${newUser.role} e status ${newUser.status}.`
+    );
+  };
+
+  const updateUser = (id: string, updates: Partial<AppUser>) => {
+    setUsers((prev) =>
+      prev.map((u) => {
+        if (u.id === id) {
+          const updated = { ...u, ...updates };
+          logAudit(
+            'ATUALIZAR_USUARIO',
+            'User',
+            id,
+            `Atualizou os dados do usuário ${updated.name}.`
+          );
+          return updated;
+        }
+        return u;
+      })
+    );
+  };
+
+  const deleteUser = (id: string) => {
+    const user = users.find((u) => u.id === id);
+    setUsers((prev) => prev.filter((u) => u.id !== id));
+    logAudit(
+      'REMOVER_USUARIO',
+      'User',
+      id,
+      `Removeu o usuário ${user?.name || id} do sistema.`
+    );
+  };
+
+  const toggleUserStatus = (id: string) => {
+    setUsers((prev) =>
+      prev.map((u) => {
+        if (u.id === id) {
+          const nextStatus = u.status === 'ATIVO' ? 'INATIVO' : 'ATIVO';
+          logAudit(
+            'ALTERAR_STATUS_USUARIO',
+            'User',
+            id,
+            `Alterou o status do usuário ${u.name} de ${u.status} para ${nextStatus}.`
+          );
+          return { ...u, status: nextStatus };
+        }
+        return u;
+      })
+    );
+  };
+
+  // Store Settings Actions
+  const updateStoreSettings = (updates: Partial<StoreSettings>) => {
+    setStoreSettings((prev) => {
+      const updated = { ...prev, ...updates };
+      logAudit(
+        'ATUALIZAR_CONFIGURACOES',
+        'StoreSettings',
+        'store-settings',
+        `Atualizou parâmetros e identidade da loja colaborativa.`
+      );
+      return updated;
+    });
+  };
+
+  const resetStoreSettings = () => {
+    setStoreSettings(INITIAL_STORE_SETTINGS);
+    logAudit(
+      'RESETAR_CONFIGURACOES',
+      'StoreSettings',
+      'store-settings',
+      'Restaurou os parâmetros padrão da Pinta e Borda.'
+    );
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -1119,6 +1237,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         settlements,
         notifications,
         auditLogs,
+        announcements,
+        users,
+        storeSettings,
+        addUser,
+        updateUser,
+        deleteUser,
+        toggleUserStatus,
+        updateStoreSettings,
+        resetStoreSettings,
         startShift,
         endShift,
         requestShiftHandover,
@@ -1134,7 +1261,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         updatePartner,
         deletePartner,
         togglePartnerStatus,
-        announcements,
         createAnnouncement,
         deleteAnnouncement,
         createFeeRule,

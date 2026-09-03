@@ -18,6 +18,7 @@ import { ReportsView } from './components/reports/ReportsView';
 import { AuditLogsView } from './components/audit/AuditLogsView';
 import { PresentationModal } from './components/presentation/PresentationModal';
 import { ArtisanPortalView } from './components/portal/ArtisanPortalView';
+import { SettingsView } from './components/settings/SettingsView';
 
 const AppContent: React.FC = () => {
   const { activeView, setActiveView } = useApp();
@@ -90,6 +91,7 @@ const AppContent: React.FC = () => {
       {activeView === 'reports' && <ReportsView />}
       {activeView === 'audit' && <AuditLogsView />}
       {activeView === 'artisan-portal' && <ArtisanPortalView />}
+      {activeView === 'settings' && <SettingsView />}
 
       {/* Global Auth / Profile Switching Modal */}
       <AuthModal

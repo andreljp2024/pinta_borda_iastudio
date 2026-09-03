@@ -267,3 +267,86 @@ export interface CommunityAnnouncement {
   pinned?: boolean;
 }
 
+export type SystemUserRole = 'ADMIN' | 'OPERATOR' | 'PARTNER';
+
+export interface UserPermissions {
+  canAccessPdv: boolean;
+  canManageProducts: boolean;
+  canManageStock: boolean;
+  canManageSettlements: boolean;
+  canManageShifts: boolean;
+  canEditSettings: boolean;
+  canPostAnnouncements: boolean;
+  canCancelSales: boolean;
+}
+
+export interface AppUser {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  role: SystemUserRole;
+  partnerId?: string;
+  partnerName?: string;
+  avatarUrl?: string;
+  status: 'ATIVO' | 'INATIVO' | 'BLOQUEADO';
+  pinCode?: string;
+  permissions: UserPermissions;
+  createdAt: string;
+  lastLoginAt?: string;
+  notes?: string;
+}
+
+export interface StoreSettings {
+  // Store info & legal entity
+  storeName: string;
+  legalName: string;
+  document: string;
+  stateRegistration?: string;
+  email: string;
+  phone: string;
+  whatsapp: string;
+  instagram: string;
+  website?: string;
+
+  // Physical Location at Shopping
+  shoppingName: string;
+  shoppingFloor: string;
+  addressStreet: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  zipCode: string;
+
+  // Brand Identity & Visual Assets
+  logoUrl: string;
+  tagline: string;
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+
+  // Centralized Store PIX
+  pixKeyType: 'CNPJ' | 'EMAIL' | 'TELEFONE' | 'ALEATORIA';
+  pixKey: string;
+  pixHolderName: string;
+  pixBank: string;
+  pixAgency: string;
+  pixAccount: string;
+
+  // Operating Hours
+  openingHoursWeekdays: string;
+  openingHoursSunday: string;
+
+  // Operational Rules & Parameters
+  standardMonthlyFee: number;
+  defaultCommissionRate: number;
+  shiftDailyFee: number;
+  initialCashDrawerFloat: number;
+  monthlyFeeDueDay: number;
+  settlementFrequency: 'QUINZENAL' | 'MENSAL';
+  defaultMinStockAlert: number;
+  receiptFooterMessage: string;
+  allowDirectPixOnPdv: boolean;
+}
+
+
