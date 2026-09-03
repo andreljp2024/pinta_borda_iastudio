@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Search,
   Plus,
@@ -22,6 +22,7 @@ import { useApp } from '../../context/AppContext';
 import { Product, PaymentMethod, Sale } from '../../types';
 import { ReceiptModal } from './ReceiptModal';
 import { handleImageError, FALLBACK_PRODUCT_IMAGE } from '../../utils/imageFallbacks';
+import { generatePixPayload, generatePixQrCodeDataUrl } from '../../utils/pix';
 
 export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShiftModal }) => {
   const {
@@ -32,6 +33,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
     createSale,
     getApplicableFeeRule,
     feeRules,
+    storeSettings,
   } = useApp();
 
   // Search and filter
@@ -55,6 +57,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
   // Pix dynamic state
   const [pixCopied, setPixCopied] = useState(false);
   const [pixWebhookConfirmed, setPixWebhookConfirmed] = useState(false);
+  const [pdvQrCodeUrl, setPdvQrCodeUrl] = useState<string>('');
 
   // Success modal
   const [completedSale, setCompletedSale] = useState<Sale | null>(null);
@@ -107,6 +110,42 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
     });
     return Array.from(map.values());
   }, [cart, partners]);
+
+  // Dynamic Bacen Pix payload for PDV checkout
+  const pdvPixResult = useMemo(() => {
+    if (paymentMethod !== 'PIX_CENTRALIZADO' && paymentMethod !== 'PIX_DIRETO') return null;
+    return generatePixPayload({
+      pixKey: storeSettings.pixKey,
+      pixKeyType: storeSettings.pixKeyType,
+      merchantName: storeSettings.pixHolderName || storeSettings.storeName || 'PINTA E BORDA',
+      merchantCity: storeSettings.city || 'SAO LUIS',
+      amount: totalGross > 0 ? totalGross : undefined,
+      txid: activeShift ? `CX${activeShift.id.slice(-6).toUpperCase()}` : '***',
+      description: 'Pinta e Borda PDV',
+    });
+  }, [paymentMethod, storeSettings, totalGross, activeShift]);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (pdvPixResult?.isValid && pdvPixResult.payload) {
+      generatePixQrCodeDataUrl(pdvPixResult.payload, {
+        width: 240,
+        margin: 1,
+        color: { dark: '#1f4e38', light: '#ffffff' },
+      })
+        .then((url) => {
+          if (isMounted) setPdvQrCodeUrl(url);
+        })
+        .catch((err) => {
+          console.error('Erro gerando QR Code PDV:', err);
+        });
+    } else {
+      setPdvQrCodeUrl('');
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [pdvPixResult]);
 
   const handleAddToCart = (product: Product) => {
     if (product.stock <= 0) {
@@ -566,44 +605,96 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
                 {/* Pix Configuration (PRD Section 20) */}
                 {(paymentMethod === 'PIX_CENTRALIZADO' || paymentMethod === 'PIX_DIRETO') && (
-                  <div className="bg-[#eaf4ef] p-3.5 rounded-xl border border-[#bed8c7] space-y-3 text-xs font-mono-craft">
-                    <div className="flex items-center gap-2">
-                      <QrCode className="w-5 h-5 text-[#1f4e38]" />
-                      <div>
-                        <div className="font-bold text-[#1f4e38]">
-                          {paymentMethod === 'PIX_CENTRALIZADO' ? 'Pix Centralizado Pinta e Borda' : 'Pix Direto Marca'}
+                  <div className="bg-[#eaf4ef] p-3.5 rounded-2xl border border-[#bed8c7] space-y-3 text-xs font-mono-craft">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="p-1.5 rounded-lg bg-[#1f4e38]/10 text-[#1f4e38]">
+                          <QrCode className="w-5 h-5" />
+                        </span>
+                        <div>
+                          <div className="font-bold text-[#1f4e38]">
+                            {paymentMethod === 'PIX_CENTRALIZADO'
+                              ? 'Pix Centralizado Pinta e Borda'
+                              : 'Pix Direto Marca'}
+                          </div>
+                          <div className="text-[11px] text-[#2e684c]">
+                            Favorecido: <span className="font-semibold">{storeSettings.pixHolderName}</span>
+                          </div>
+                          <div className="text-[10px] text-[#2e684c]">
+                            Chave ({storeSettings.pixKeyType}): <span className="font-bold">{storeSettings.pixKey}</span>
+                          </div>
                         </div>
-                        <div className="text-[10px] text-[#2e684c]">
-                          Chave CNPJ: 28.919.022/0001-87 (Pinta e Borda Coworking)
+                      </div>
+
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1f4e38] text-white">
+                        Bacen BR Code
+                      </span>
+                    </div>
+
+                    {/* Interactive QR Code & Price Display */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 p-3 bg-white rounded-xl border border-[#bed8c7]/80">
+                      {pdvQrCodeUrl ? (
+                        <div className="relative group">
+                          <img
+                            src={pdvQrCodeUrl}
+                            alt="QR Code Pix"
+                            className="w-28 h-28 rounded-lg object-contain border border-stone-200 shadow-2xs"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span className="text-[8px] font-extrabold text-[#00bdae] bg-white/95 px-1 py-0.5 rounded shadow-xs border border-[#00bdae]/30">
+                              pix
+                            </span>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="w-28 h-28 flex items-center justify-center text-[10px] text-stone-400 bg-stone-50 rounded-lg">
+                          Gerando QR...
+                        </div>
+                      )}
+
+                      <div className="space-y-1 text-center sm:text-left">
+                        <div className="text-[10px] uppercase font-bold text-stone-500 tracking-wider">
+                          Valor Cobrado no Balcão
+                        </div>
+                        <div className="text-xl font-bold text-[#1f4e38]">
+                          R$ {totalGross.toFixed(2).replace('.', ',')}
+                        </div>
+                        <div className="text-[10px] text-stone-500">
+                          {storeSettings.pixBank} • Ag {storeSettings.pixAgency} CC {storeSettings.pixAccount}
+                        </div>
+                        <div className="text-[9px] text-stone-400">
+                          Cliente pode ler a câmera ou colar o código no app
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2 pt-1">
                       <button
                         type="button"
                         onClick={() => {
-                          navigator.clipboard.writeText('00020126580014br.gov.bcb.pix0136289190220001875204000053039865802BR5924PINTA E BORDA COWORKING');
-                          setPixCopied(true);
-                          setTimeout(() => setPixCopied(false), 2000);
+                          if (pdvPixResult?.payload) {
+                            navigator.clipboard.writeText(pdvPixResult.payload);
+                            setPixCopied(true);
+                            setTimeout(() => setPixCopied(false), 2000);
+                          }
                         }}
-                        className="flex-1 py-1.5 px-2 bg-white hover:bg-[#d9ede2] rounded-lg border border-[#bed8c7] font-semibold text-[#1f4e38] flex items-center justify-center gap-1 cursor-pointer"
+                        className="flex-1 py-2 px-2.5 bg-white hover:bg-[#d9ede2] rounded-xl border border-[#bed8c7] font-semibold text-[#1f4e38] flex items-center justify-center gap-1.5 cursor-pointer text-xs shadow-2xs transition-colors"
                       >
                         {pixCopied ? <Check className="w-3.5 h-3.5 text-[#1f4e38]" /> : <Copy className="w-3.5 h-3.5" />}
-                        {pixCopied ? 'Chave Copiada!' : 'Copiar Chave Pix'}
+                        {pixCopied ? 'Pix Copia e Cola Copiado!' : 'Copiar Pix Copia e Cola'}
                       </button>
 
                       <button
                         type="button"
-                        onClick={() => setPixWebhookConfirmed(true)}
-                        className={`py-1.5 px-3 rounded-lg font-semibold text-xs flex items-center gap-1 cursor-pointer ${
+                        onClick={() => setPixWebhookConfirmed(!pixWebhookConfirmed)}
+                        className={`py-2 px-3 rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 cursor-pointer transition-all shadow-2xs ${
                           pixWebhookConfirmed
                             ? 'bg-[#1f4e38] text-white'
                             : 'bg-[#2d7353] text-white hover:bg-[#1f4e38]'
                         }`}
                       >
                         <CheckCircle2 className="w-3.5 h-3.5" />
-                        {pixWebhookConfirmed ? 'Confirmado!' : 'Confirmar Recebimento'}
+                        {pixWebhookConfirmed ? 'Comprovante Validado ✓' : 'Confirmar Recebimento'}
                       </button>
                     </div>
                   </div>

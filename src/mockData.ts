@@ -1415,7 +1415,7 @@ export const OFFICIAL_PINTA_BORDA_LOGO_SVG =
 export const INITIAL_STORE_SETTINGS: StoreSettings = {
   storeName: 'Pinta e Borda — Casa Colaborativa',
   legalName: 'Associação Coletiva Pinta e Borda de Artesãos do Maranhão',
-  document: '48.291.834/0001-92',
+  document: '48.291.834/0001-20',
   stateRegistration: '12.984.712-4',
   email: 'contato@pintaeborda.com.br',
   phone: '(98) 3245-8890',
@@ -1441,7 +1441,7 @@ export const INITIAL_STORE_SETTINGS: StoreSettings = {
 
   // Official Centralized Store PIX
   pixKeyType: 'CNPJ',
-  pixKey: '48.291.834/0001-92',
+  pixKey: '48.291.834/0001-20',
   pixHolderName: 'Pinta e Borda Casa Colaborativa',
   pixBank: 'Banco do Brasil (001)',
   pixAgency: '3412-8',
