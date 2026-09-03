@@ -72,7 +72,7 @@ export const SettingsView: React.FC = () => {
               <Shield className="w-3.5 h-3.5 text-[#f43f7e]" />
               Painel Administrativo • Pinta e Borda
             </div>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Configurações Gerais do Sistema
             </h1>
             <p className="text-sm text-stone-200/90 max-w-2xl leading-relaxed">
@@ -90,7 +90,7 @@ export const SettingsView: React.FC = () => {
                 />
               </div>
               <div className="text-left">
-                <p className="text-xs font-bold text-white font-serif">{storeSettings.storeName}</p>
+                <p className="text-xs font-bold text-white">{storeSettings.storeName}</p>
                 <p className="text-[10px] text-[#ffb8ce]">{storeSettings.shoppingName}</p>
               </div>
             </div>

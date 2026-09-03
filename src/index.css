@@ -8,6 +8,68 @@
   }
 }
 
+/* ==========================================================================
+   ADMIN / BACKEND TYPOGRAPHY (Estilo Calibri / Humanist Sans de Alta Legibilidade)
+   ========================================================================== */
+
+:root {
+  --font-calibri-stack: 'Calibri', 'Carlito', 'Aptos', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+.font-admin {
+  font-family: var(--font-calibri-stack);
+  letter-spacing: -0.01em;
+}
+
+/* Ensure the entire admin dashboard layout, child views, modals, and tables use the Calibri stack */
+.admin-scope,
+.admin-scope * {
+  font-family: var(--font-calibri-stack);
+}
+
+/* Retain monospace styling only for codes/barcodes/PINs/currencies when explicitly needed */
+.admin-scope .font-mono,
+.admin-scope .font-mono-craft,
+.admin-scope code,
+.admin-scope kbd {
+  font-family: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+/* Headings in admin use clean, highly legible humanist sans (estilo Calibri) instead of decorative serif */
+.admin-scope h1,
+.admin-scope h2,
+.admin-scope h3,
+.admin-scope h4,
+.admin-scope h5,
+.admin-scope h6,
+.admin-scope .font-display,
+.admin-scope .font-serif,
+.admin-scope .font-serif-display,
+.admin-scope .font-serif-luxury {
+  font-family: var(--font-calibri-stack) !important;
+  letter-spacing: -0.015em;
+}
+
+/* Tables, form inputs, buttons, badges in admin */
+.admin-scope table,
+.admin-scope th,
+.admin-scope td,
+.admin-scope input,
+.admin-scope select,
+.admin-scope textarea,
+.admin-scope button {
+  font-family: var(--font-calibri-stack);
+}
+
+/* Increase reading comfort in data-dense tables and financial cards */
+.admin-scope td,
+.admin-scope p,
+.admin-scope span,
+.admin-scope label {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 .font-display {
   font-family: 'Playfair Display', Georgia, serif;
 }

@@ -260,7 +260,7 @@ export const AdminDashboardLayout: React.FC<AdminDashboardLayoutProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#fff5f8] text-[#380c25] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#fff5f8] text-[#380c25] flex flex-col admin-scope font-admin">
       {/* Top Notification/Shift Micro-Bar */}
       <div className="bg-[#420f2c] text-[#fff0f5] text-xs px-4 py-1.5 flex flex-wrap items-center justify-between border-b border-[#2a071b] shrink-0 z-30">
         <div className="flex items-center gap-2 text-[11px]">

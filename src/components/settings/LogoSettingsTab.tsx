@@ -117,7 +117,7 @@ export const LogoSettingsTab: React.FC = () => {
             <span className="p-1.5 rounded-lg bg-[#fff0f5] text-[#f43f7e]">
               <Image className="w-5 h-5" />
             </span>
-            <h2 className="text-xl font-serif font-bold text-[#380c25]">
+            <h2 className="text-xl font-bold text-[#380c25]">
               Logo & Identidade Visual da Pinta e Borda
             </h2>
           </div>
@@ -177,7 +177,7 @@ export const LogoSettingsTab: React.FC = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <h4 className="font-serif font-bold text-lg text-[#380c25] mt-4">
+              <h4 className="font-bold text-lg text-[#380c25] mt-4">
                 Pinta e Borda
               </h4>
               <p className="text-xs text-[#f43f7e] font-semibold tracking-widest uppercase">
@@ -205,7 +205,7 @@ export const LogoSettingsTab: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <p className="font-serif font-bold text-xs text-white">Pinta e Borda</p>
+                    <p className="font-bold text-xs text-white">Pinta e Borda</p>
                     <p className="text-[9px] text-[#ffb8ce] uppercase tracking-wider">Shopping Rio Anil</p>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export const LogoSettingsTab: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <p className="font-serif font-semibold text-xs text-[#3d2719]">Tag de Embalagem & Sacola</p>
+                    <p className="font-semibold text-xs text-[#3d2719]">Tag de Embalagem & Sacola</p>
                     <p className="text-[10px] text-[#71543e]">Artesanato com Alma Maranhense</p>
                   </div>
                 </div>

@@ -46,7 +46,7 @@ export const OperationalParametersTab: React.FC = () => {
             <span className="p-1.5 rounded-lg bg-[#fff0f5] text-[#f43f7e]">
               <Sliders className="w-5 h-5" />
             </span>
-            <h2 className="text-xl font-serif font-bold text-[#380c25]">
+            <h2 className="text-xl font-bold text-[#380c25]">
               Parâmetros Financeiros & Operacionais
             </h2>
           </div>
@@ -179,7 +179,7 @@ export const OperationalParametersTab: React.FC = () => {
                   {activePartnersCount} ateliês ativos × R$ {formData.standardMonthlyFee.toFixed(2)}
                 </p>
               </div>
-              <p className="text-xl font-serif font-bold text-[#f43f7e]">
+              <p className="text-xl font-bold text-[#f43f7e]">
                 R$ {estimatedMonthlyRevenue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}/mês
               </p>
             </div>

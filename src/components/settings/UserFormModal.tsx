@@ -179,7 +179,7 @@ export const UserFormModal: React.FC<UserFormModalProps> = ({
               <User className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-serif font-bold tracking-wide">
+              <h2 className="text-lg font-bold tracking-wide">
                 {userToEdit ? 'Editar Usuário / Operador' : 'Novo Usuário do Sistema'}
               </h2>
               <p className="text-xs text-[#ffb8ce]">

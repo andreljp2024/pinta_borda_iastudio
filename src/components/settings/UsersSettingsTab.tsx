@@ -91,7 +91,7 @@ export const UsersSettingsTab: React.FC = () => {
             <span className="p-1.5 rounded-lg bg-[#fff0f5] text-[#f43f7e]">
               <Users className="w-5 h-5" />
             </span>
-            <h2 className="text-xl font-serif font-bold text-[#380c25]">
+            <h2 className="text-xl font-bold text-[#380c25]">
               Gestão de Usuários & Operadores de Caixa
             </h2>
           </div>
@@ -113,23 +113,23 @@ export const UsersSettingsTab: React.FC = () => {
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <div className="bg-white p-4 rounded-xl border border-stone-200/80 shadow-xs">
           <p className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">Total de Contas</p>
-          <p className="text-2xl font-serif font-bold text-[#380c25] mt-0.5">{totalUsers}</p>
+          <p className="text-2xl font-bold text-[#380c25] mt-0.5">{totalUsers}</p>
         </div>
         <div className="bg-white p-4 rounded-xl border border-emerald-100 shadow-xs">
           <p className="text-[11px] font-bold text-emerald-600 uppercase tracking-wider">Ativos no Sistema</p>
-          <p className="text-2xl font-serif font-bold text-emerald-700 mt-0.5">{activeCount}</p>
+          <p className="text-2xl font-bold text-emerald-700 mt-0.5">{activeCount}</p>
         </div>
         <div className="bg-white p-4 rounded-xl border border-purple-100 shadow-xs">
           <p className="text-[11px] font-bold text-purple-600 uppercase tracking-wider">Administradores</p>
-          <p className="text-2xl font-serif font-bold text-purple-800 mt-0.5">{adminCount}</p>
+          <p className="text-2xl font-bold text-purple-800 mt-0.5">{adminCount}</p>
         </div>
         <div className="bg-white p-4 rounded-xl border border-pink-100 shadow-xs">
           <p className="text-[11px] font-bold text-[#f43f7e] uppercase tracking-wider">Operadores de Caixa</p>
-          <p className="text-2xl font-serif font-bold text-[#f43f7e] mt-0.5">{operatorCount}</p>
+          <p className="text-2xl font-bold text-[#f43f7e] mt-0.5">{operatorCount}</p>
         </div>
         <div className="bg-white p-4 rounded-xl border border-amber-100 shadow-xs col-span-2 sm:col-span-1">
           <p className="text-[11px] font-bold text-amber-600 uppercase tracking-wider">Artesãs com Acesso</p>
-          <p className="text-2xl font-serif font-bold text-amber-700 mt-0.5">{partnerUserCount}</p>
+          <p className="text-2xl font-bold text-amber-700 mt-0.5">{partnerUserCount}</p>
         </div>
       </div>
 

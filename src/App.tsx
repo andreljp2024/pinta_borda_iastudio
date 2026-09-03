@@ -69,42 +69,44 @@ const AppContent: React.FC = () => {
 
   // Backend Admin Views with dedicated Dashboard Menu Layout
   return (
-    <AdminDashboardLayout
-      onOpenAuth={() => setIsAuthModalOpen(true)}
-      onOpenNotifications={() => setActiveView('audit')}
-      onOpenShiftModal={() => setActiveView('shifts')}
-      onOpenPresentation={() => setIsPresentationOpen(true)}
-    >
-      {activeView === 'dashboard' && (
-        <DashboardView onOpenAuth={() => setIsAuthModalOpen(true)} />
-      )}
-      {activeView === 'pdv' && (
-        <PdvView onOpenShiftModal={() => setActiveView('shifts')} />
-      )}
-      {activeView === 'products' && <ProductsView />}
-      {activeView === 'stock' && <StockView />}
-      {activeView === 'shifts' && <ShiftsView />}
-      {activeView === 'partners' && <PartnersView />}
-      {(activeView === 'settlements' || activeView === 'financial') && <SettlementsView />}
-      {activeView === 'fees' && <FeeRulesView />}
-      {activeView === 'sales' && <SalesView />}
-      {activeView === 'reports' && <ReportsView />}
-      {activeView === 'audit' && <AuditLogsView />}
-      {activeView === 'artisan-portal' && <ArtisanPortalView />}
-      {activeView === 'settings' && <SettingsView />}
+    <div className="admin-scope font-admin min-h-screen">
+      <AdminDashboardLayout
+        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onOpenNotifications={() => setActiveView('audit')}
+        onOpenShiftModal={() => setActiveView('shifts')}
+        onOpenPresentation={() => setIsPresentationOpen(true)}
+      >
+        {activeView === 'dashboard' && (
+          <DashboardView onOpenAuth={() => setIsAuthModalOpen(true)} />
+        )}
+        {activeView === 'pdv' && (
+          <PdvView onOpenShiftModal={() => setActiveView('shifts')} />
+        )}
+        {activeView === 'products' && <ProductsView />}
+        {activeView === 'stock' && <StockView />}
+        {activeView === 'shifts' && <ShiftsView />}
+        {activeView === 'partners' && <PartnersView />}
+        {(activeView === 'settlements' || activeView === 'financial') && <SettlementsView />}
+        {activeView === 'fees' && <FeeRulesView />}
+        {activeView === 'sales' && <SalesView />}
+        {activeView === 'reports' && <ReportsView />}
+        {activeView === 'audit' && <AuditLogsView />}
+        {activeView === 'artisan-portal' && <ArtisanPortalView />}
+        {activeView === 'settings' && <SettingsView />}
 
-      {/* Global Auth / Profile Switching Modal */}
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-      />
+        {/* Global Auth / Profile Switching Modal */}
+        <AuthModal
+          isOpen={isAuthModalOpen}
+          onClose={() => setIsAuthModalOpen(false)}
+        />
 
-      {/* Dossiê & Apresentação Institucional Modal */}
-      <PresentationModal
-        isOpen={isPresentationOpen}
-        onClose={() => setIsPresentationOpen(false)}
-      />
-    </AdminDashboardLayout>
+        {/* Dossiê & Apresentação Institucional Modal */}
+        <PresentationModal
+          isOpen={isPresentationOpen}
+          onClose={() => setIsPresentationOpen(false)}
+        />
+      </AdminDashboardLayout>
+    </div>
   );
 };
 

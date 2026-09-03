@@ -51,7 +51,7 @@ export const StoreDataTab: React.FC = () => {
             <span className="p-1.5 rounded-lg bg-[#fff0f5] text-[#f43f7e]">
               <Building2 className="w-5 h-5" />
             </span>
-            <h2 className="text-xl font-serif font-bold text-[#380c25]">
+            <h2 className="text-xl font-bold text-[#380c25]">
               Dados Institucionais da Pinta e Borda
             </h2>
           </div>
@@ -509,7 +509,7 @@ export const StoreDataTab: React.FC = () => {
                 <rect x="75" y="75" width="15" height="10" fill="#380c25" />
               </svg>
             </div>
-            <p className="font-serif font-bold text-xs text-[#380c25]">
+            <p className="font-bold text-xs text-[#380c25]">
               {formData.pixHolderName || 'Pinta e Borda'}
             </p>
             <p className="font-mono text-[10px] text-[#f43f7e] font-bold mt-0.5 truncate max-w-full">
