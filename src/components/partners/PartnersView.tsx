@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Partner } from '../../types';
+import { handleImageError, FALLBACK_AVATAR_IMAGE } from '../../utils/imageFallbacks';
 
 export const PartnersView: React.FC = () => {
   const { partners, updatePartner, addPartner, userRole } = useApp();
@@ -209,6 +210,9 @@ export const PartnersView: React.FC = () => {
                   <img
                     src={partner.brandLogo}
                     alt={partner.brandName}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                     className="w-12 h-12 rounded-full object-cover border-2 border-[#ded6ca] shadow-2xs"
                   />
                   <div>

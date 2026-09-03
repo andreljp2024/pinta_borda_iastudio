@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useApp, ActiveView } from '../../context/AppContext';
 import { UserRole } from '../../types';
+import { handleImageError, FALLBACK_AVATAR_IMAGE } from '../../utils/imageFallbacks';
 
 interface NavbarProps {
   onOpenAuth: () => void;
@@ -452,6 +453,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                           <img
                             src={p.brandLogo}
                             alt={p.brandName}
+                            loading="lazy"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                             className="w-6 h-6 rounded-full object-cover border border-[#ded6ca]"
                           />
                           <div className="truncate">

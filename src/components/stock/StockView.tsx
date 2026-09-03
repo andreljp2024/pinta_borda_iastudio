@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Product, StockMovement, StockMovementType } from '../../types';
+import { handleImageError, FALLBACK_PRODUCT_IMAGE } from '../../utils/imageFallbacks';
 
 export const StockView: React.FC = () => {
   const {
@@ -231,6 +232,9 @@ export const StockView: React.FC = () => {
                         <img
                           src={prod.imageUrl}
                           alt={prod.name}
+                          loading="lazy"
+                          referrerPolicy="no-referrer"
+                          onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                           className="w-8 h-8 rounded-lg object-cover border border-[#ded6ca]"
                         />
                         <span className="max-w-xs truncate font-display text-sm">{prod.name}</span>

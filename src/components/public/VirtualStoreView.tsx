@@ -18,6 +18,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { Product, Partner } from '../../types';
 import { ProductDetailModal } from './ProductDetailModal';
+import { handleImageError, FALLBACK_PRODUCT_IMAGE, FALLBACK_AVATAR_IMAGE } from '../../utils/imageFallbacks';
 
 export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth }) => {
   const { products, partners, categories, setActiveView, storePartnerFilter, setStorePartnerFilter } = useApp();
@@ -201,6 +202,9 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
               <img
                 src={currentPartnerInfo.brandLogo}
                 alt={currentPartnerInfo.brandName}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                 className="w-16 h-16 rounded-2xl object-cover border border-[#ded6ca] shadow-2xs"
               />
               <div>
@@ -316,7 +320,9 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
                     <img
                       src={product.imageUrl}
                       alt={product.name}
+                      loading="lazy"
                       referrerPolicy="no-referrer"
+                      onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
 

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Product } from '../../types';
+import { handleImageError, FALLBACK_PRODUCT_IMAGE } from '../../utils/imageFallbacks';
 
 export const ProductsView: React.FC = () => {
   const {
@@ -248,6 +249,9 @@ export const ProductsView: React.FC = () => {
                       <img
                         src={prod.imageUrl}
                         alt={prod.name}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                         className="w-9 h-9 rounded-lg object-cover border border-[#ded6ca]"
                       />
                       <div>

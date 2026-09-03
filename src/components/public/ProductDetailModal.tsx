@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, MessageCircle, Store, Check, AlertCircle, Tag, Sparkles } from 'lucide-react';
 import { Product, Partner } from '../../types';
+import { handleImageError, FALLBACK_PRODUCT_IMAGE, FALLBACK_AVATAR_IMAGE } from '../../utils/imageFallbacks';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -40,6 +41,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           <img
             src={product.imageUrl}
             alt={product.name}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
             className="w-full h-full object-cover"
           />
           {product.isFeatured && (
@@ -59,6 +63,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <img
                   src={partner.brandLogo}
                   alt={partner.brandName}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                   className="w-9 h-9 rounded-full object-cover border border-[#ded6ca] shadow-2xs"
                 />
                 <div>

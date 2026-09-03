@@ -23,6 +23,7 @@ import { useApp } from '../../context/AppContext';
 import { VolunteerRegistrationModal } from './VolunteerRegistrationModal';
 import { ProductDetailModal } from './ProductDetailModal';
 import { Product } from '../../types';
+import { handleImageError, FALLBACK_PRODUCT_IMAGE, FALLBACK_AVATAR_IMAGE } from '../../utils/imageFallbacks';
 
 // The 14 official partner brands of Pinta e Borda
 export const BRANDS_DOSSIE = [
@@ -142,7 +143,7 @@ export const BRANDS_DOSSIE = [
     id: 'tutabel',
     number: '08',
     symbol: '◌',
-    name: 'Tuta Bel? Criações',
+    name: 'Tuta Belô Criações',
     founder: 'Yara Mendes',
     segment: 'Moda Autoral & Patchwork',
     categoryGroup: 'moda',
@@ -372,16 +373,25 @@ export const LandingPage: React.FC<{
                     className="inline-block h-10 w-10 rounded-full ring-2 ring-[#faf7f0] object-cover"
                     src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80"
                     alt="Keka"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                   />
                   <img
                     className="inline-block h-10 w-10 rounded-full ring-2 ring-[#faf7f0] object-cover"
                     src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80"
                     alt="Artesã"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                   />
                   <img
                     className="inline-block h-10 w-10 rounded-full ring-2 ring-[#faf7f0] object-cover"
                     src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80"
                     alt="Artesã"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                   />
                   <div className="inline-flex items-center justify-center h-10 w-10 rounded-full ring-2 ring-[#faf7f0] bg-[#f0e7d8] text-[#933f28] text-xs font-mono-craft font-bold">
                     +14
@@ -403,6 +413,9 @@ export const LandingPage: React.FC<{
                     src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80"
                     alt="Ateliê Pinta e Borda"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1c3830]/90 via-[#1c3830]/25 to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 text-[#fffaf2]">
@@ -479,9 +492,12 @@ export const LandingPage: React.FC<{
               <div className="relative w-full max-w-[380px] aspect-[4/5]">
                 <div className="photo-shape w-full h-full relative overflow-hidden shadow-xl border border-[#ded6ca]">
                   <img
-                    src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=700&auto=format&fit=crop&q=80"
+                    src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=700&auto=format&fit=crop&q=80"
                     alt="Espaço Pinta e Borda"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                   />
                   <div className="absolute inset-0 bg-[#253a35]/20" />
                 </div>
@@ -627,6 +643,9 @@ export const LandingPage: React.FC<{
                       <img
                         src={product.imageUrl}
                         alt={product.name}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       {/* Heart button */}
@@ -973,6 +992,9 @@ export const LandingPage: React.FC<{
                     <img
                       src={selectedBrandDrawer.image}
                       alt={selectedBrandDrawer.name}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                       className="w-full h-full object-cover"
                     />
                   </div>

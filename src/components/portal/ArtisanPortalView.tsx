@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Partner, Product, SaleItem } from '../../types';
+import { handleImageError, FALLBACK_PRODUCT_IMAGE, FALLBACK_AVATAR_IMAGE } from '../../utils/imageFallbacks';
 
 export const ArtisanPortalView: React.FC = () => {
   const {
@@ -338,6 +339,9 @@ export const ArtisanPortalView: React.FC = () => {
                 <img
                   src={activePartner.brandLogo}
                   alt={activePartner.brandName}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                   className="w-14 h-14 rounded-2xl object-cover border-2 border-[#b56f55]/30 shadow-xs"
                 />
                 <div>
@@ -634,6 +638,9 @@ export const ArtisanPortalView: React.FC = () => {
                           <img
                             src={product.imageUrl}
                             alt={product.name}
+                            loading="lazy"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                             className="w-12 h-12 rounded-xl object-cover border border-[#ded6ca] shrink-0"
                           />
                           <div className="min-w-0">
@@ -864,6 +871,9 @@ export const ArtisanPortalView: React.FC = () => {
                 <img
                   src={restockProduct.imageUrl}
                   alt={restockProduct.name}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                   className="w-12 h-12 rounded-xl object-cover border border-[#ded6ca]"
                 />
                 <div>

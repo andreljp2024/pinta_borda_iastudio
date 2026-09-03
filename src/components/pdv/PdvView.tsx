@@ -21,6 +21,7 @@ import confetti from 'canvas-confetti';
 import { useApp } from '../../context/AppContext';
 import { Product, PaymentMethod, Sale } from '../../types';
 import { ReceiptModal } from './ReceiptModal';
+import { handleImageError, FALLBACK_PRODUCT_IMAGE } from '../../utils/imageFallbacks';
 
 export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShiftModal }) => {
   const {
@@ -306,6 +307,9 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                       <img
                         src={prod.imageUrl}
                         alt={prod.name}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                         className="w-full h-full object-cover"
                       />
                       <span className="absolute bottom-1 right-1 bg-[#253a35]/80 text-white text-[9px] px-1.5 py-0.5 rounded font-mono-craft">
