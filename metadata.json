@@ -1,0 +1,6 @@
+{
+  "name": "Pinta e Borda",
+  "description": "Plataforma de gestão para coworking e loja colaborativa de artesanato no Rio Anil Shopping, São Luís/MA.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
