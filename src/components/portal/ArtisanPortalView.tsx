@@ -247,13 +247,13 @@ export const ArtisanPortalView: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f5ef] pb-16">
+    <div className="min-h-screen bg-[#fbf4f6] pb-16">
       {/* Top Header & Mode Switcher Bar */}
-      <div className="bg-[#253a35] text-[#fffaf2] border-b border-[#1b2b27] px-4 py-3 sticky top-18 z-30 shadow-xs">
+      <div className="bg-[#2e1420] text-[#ffffff] border-b border-[#250f19] px-4 py-3 sticky top-18 z-30 shadow-xs">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Brand & Portal Title */}
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#1f4e38] border border-[#3c6b54] flex items-center justify-center text-[#d4ba84]">
+            <div className="w-8 h-8 rounded-full bg-[#1f4e38] border border-[#3c6b54] flex items-center justify-center text-[#dc9b86]">
               <Smartphone className="w-4 h-4" />
             </div>
             <div>
@@ -261,7 +261,7 @@ export const ArtisanPortalView: React.FC = () => {
                 <h1 className="font-display font-semibold text-base leading-none">
                   Portal da Artesã
                 </h1>
-                <span className="px-2 py-0.5 rounded-full text-[10px] bg-[#d4ba84]/20 text-[#d4ba84] font-mono-craft border border-[#d4ba84]/30">
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-[#dc9b86]/20 text-[#dc9b86] font-mono-craft border border-[#dc9b86]/30">
                   Visão Produtora
                 </span>
               </div>
@@ -274,7 +274,7 @@ export const ArtisanPortalView: React.FC = () => {
           {/* Controls: Partner Selector & Smartphone View Switcher */}
           <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
             {/* Quick Partner Switcher */}
-            <div className="flex items-center gap-1.5 bg-[#1b2b27] px-2.5 py-1.5 rounded-xl border border-[#30483f]">
+            <div className="flex items-center gap-1.5 bg-[#250f19] px-2.5 py-1.5 rounded-xl border border-[#412433]">
               <span className="text-[10px] font-mono-craft text-[#95b19f] uppercase tracking-wider">
                 Ateliê:
               </span>
@@ -284,10 +284,10 @@ export const ArtisanPortalView: React.FC = () => {
                   setSelectedPartnerId(e.target.value);
                   setUserRole('PARTNER', e.target.value);
                 }}
-                className="bg-transparent text-xs text-[#fffaf2] font-semibold focus:outline-none cursor-pointer pr-2"
+                className="bg-transparent text-xs text-[#ffffff] font-semibold focus:outline-none cursor-pointer pr-2"
               >
                 {partners.map((p) => (
-                  <option key={p.id} value={p.id} className="bg-[#253a35] text-white">
+                  <option key={p.id} value={p.id} className="bg-[#2e1420] text-white">
                     {p.brandName} ({p.ownerName})
                   </option>
                 ))}
@@ -299,8 +299,8 @@ export const ArtisanPortalView: React.FC = () => {
               onClick={() => setIsMobileSimulated(!isMobileSimulated)}
               className={`px-3 py-1.5 rounded-xl text-xs font-mono-craft flex items-center gap-1.5 transition-colors cursor-pointer border ${
                 isMobileSimulated
-                  ? 'bg-[#d4ba84] text-[#253a35] font-bold border-[#d4ba84]'
-                  : 'bg-[#1b2b27] text-[#c9d9d0] hover:text-white border-[#30483f]'
+                  ? 'bg-[#dc9b86] text-[#2e1420] font-bold border-[#dc9b86]'
+                  : 'bg-[#250f19] text-[#c9d9d0] hover:text-white border-[#412433]'
               }`}
               title="Simular visualização idêntica à tela de um celular"
             >
@@ -318,21 +318,21 @@ export const ArtisanPortalView: React.FC = () => {
         <div
           className={`mx-auto transition-all duration-300 ${
             isMobileSimulated
-              ? 'max-w-[414px] bg-[#fffaf2] rounded-[42px] border-[10px] border-[#253a35] shadow-2xl p-4 min-h-[780px] relative overflow-hidden'
+              ? 'max-w-[414px] bg-[#ffffff] rounded-[42px] border-[10px] border-[#2e1420] shadow-2xl p-4 min-h-[780px] relative overflow-hidden'
               : 'w-full'
           }`}
         >
           {/* Simulated phone ear speaker if framed */}
           {isMobileSimulated && (
-            <div className="w-28 h-4 bg-[#253a35] rounded-full mx-auto mb-4 flex items-center justify-center">
-              <div className="w-3 h-3 rounded-full bg-[#1b2b27] mr-2" />
-              <div className="w-12 h-1 bg-[#1b2b27] rounded-full" />
+            <div className="w-28 h-4 bg-[#2e1420] rounded-full mx-auto mb-4 flex items-center justify-center">
+              <div className="w-3 h-3 rounded-full bg-[#250f19] mr-2" />
+              <div className="w-12 h-1 bg-[#250f19] rounded-full" />
             </div>
           )}
 
           {/* Header Card: Artisan Brand Profile Banner */}
-          <div className="bg-white rounded-3xl p-4 sm:p-5 border border-[#ded6ca] shadow-xs mb-4 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#ede5d8]/40 rounded-full blur-2xl pointer-events-none" />
+          <div className="bg-white rounded-3xl p-4 sm:p-5 border border-[#edd5dc] shadow-xs mb-4 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#f6ebef]/40 rounded-full blur-2xl pointer-events-none" />
 
             <div className="flex items-start justify-between gap-3 relative z-10">
               <div className="flex items-center gap-3">
@@ -342,20 +342,20 @@ export const ArtisanPortalView: React.FC = () => {
                   loading="lazy"
                   referrerPolicy="no-referrer"
                   onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
-                  className="w-14 h-14 rounded-2xl object-cover border-2 border-[#b56f55]/30 shadow-xs"
+                  className="w-14 h-14 rounded-2xl object-cover border-2 border-[#c85a78]/30 shadow-xs"
                 />
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h2 className="font-display font-semibold text-lg text-[#253a35] leading-tight">
+                    <h2 className="font-display font-semibold text-lg text-[#2e1420] leading-tight">
                       {activePartner.brandName}
                     </h2>
                     <span className="inline-block w-2 h-2 rounded-full bg-[#82c39a]" title="Ateliê Ativo" />
                   </div>
-                  <p className="text-xs text-[#52615a] font-medium">
+                  <p className="text-xs text-[#644855] font-medium">
                     {activePartner.ownerName}
                   </p>
-                  <div className="flex items-center gap-2 mt-1 text-[11px] font-mono-craft text-[#7d8c83]">
-                    <span className="text-[#b56f55] font-semibold">{activePartner.category}</span>
+                  <div className="flex items-center gap-2 mt-1 text-[11px] font-mono-craft text-[#8e727e]">
+                    <span className="text-[#c85a78] font-semibold">{activePartner.category}</span>
                     <span>•</span>
                     <span>{partnerProducts.length} peças cadastradas</span>
                   </div>
@@ -368,18 +368,18 @@ export const ArtisanPortalView: React.FC = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-[#1f4e38] animate-pulse" />
                   <span>Loja Aberta</span>
                 </div>
-                <p className="text-[10px] text-[#7d8c83] font-mono-craft mt-1">
+                <p className="text-[10px] text-[#8e727e] font-mono-craft mt-1">
                   Shopping Rio Anil
                 </p>
               </div>
             </div>
 
             {/* Quick Balcão Attendant Info */}
-            <div className="mt-3.5 pt-3 border-t border-[#ede5d8] flex flex-wrap items-center justify-between gap-2 text-xs font-mono-craft">
-              <div className="flex items-center gap-1.5 text-[#52615a]">
-                <Store className="w-3.5 h-3.5 text-[#b56f55]" />
+            <div className="mt-3.5 pt-3 border-t border-[#f6ebef] flex flex-wrap items-center justify-between gap-2 text-xs font-mono-craft">
+              <div className="flex items-center gap-1.5 text-[#644855]">
+                <Store className="w-3.5 h-3.5 text-[#c85a78]" />
                 <span>Plantão no balcão agora:</span>
-                <strong className="text-[#253a35]">
+                <strong className="text-[#2e1420]">
                   {activeShift ? activeShift.operatorName : 'Equipe Pinta e Borda'}
                 </strong>
               </div>
@@ -387,7 +387,7 @@ export const ArtisanPortalView: React.FC = () => {
               {/* View brand in public catalog */}
               <button
                 onClick={() => navigateToStoreWithPartner(activePartner.id)}
-                className="text-[11px] text-[#b56f55] hover:text-[#8f523c] font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+                className="text-[11px] text-[#c85a78] hover:text-[#8d3b53] font-semibold flex items-center gap-1 transition-colors cursor-pointer"
               >
                 <span>Ver Minha Vitrine</span>
                 <ExternalLink className="w-3 h-3" />
@@ -396,13 +396,13 @@ export const ArtisanPortalView: React.FC = () => {
           </div>
 
           {/* Quick Navigation Tabs (Optimized for thumb tapping) */}
-          <div className="grid grid-cols-4 gap-1.5 p-1 bg-[#ede5d8]/70 rounded-2xl border border-[#ded6ca] mb-4 font-mono-craft text-xs">
+          <div className="grid grid-cols-4 gap-1.5 p-1 bg-[#f6ebef]/70 rounded-2xl border border-[#edd5dc] mb-4 font-mono-craft text-xs">
             <button
               onClick={() => setActiveTab('SALES')}
               className={`py-2 px-1 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
                 activeTab === 'SALES'
-                  ? 'bg-[#253a35] text-[#fffaf2] shadow-xs'
-                  : 'text-[#52615a] hover:text-[#253a35]'
+                  ? 'bg-[#2e1420] text-[#ffffff] shadow-xs'
+                  : 'text-[#644855] hover:text-[#2e1420]'
               }`}
             >
               <DollarSign className="w-4 h-4" />
@@ -413,14 +413,14 @@ export const ArtisanPortalView: React.FC = () => {
               onClick={() => setActiveTab('STOCK')}
               className={`py-2 px-1 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer relative ${
                 activeTab === 'STOCK'
-                  ? 'bg-[#253a35] text-[#fffaf2] shadow-xs'
-                  : 'text-[#52615a] hover:text-[#253a35]'
+                  ? 'bg-[#2e1420] text-[#ffffff] shadow-xs'
+                  : 'text-[#644855] hover:text-[#2e1420]'
               }`}
             >
               <Package className="w-4 h-4" />
               <span className="text-[10px] truncate">Reposição</span>
               {lowStockProducts.length > 0 && (
-                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#b56f55]" />
+                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#c85a78]" />
               )}
             </button>
 
@@ -428,8 +428,8 @@ export const ArtisanPortalView: React.FC = () => {
               onClick={() => setActiveTab('SHIFTS')}
               className={`py-2 px-1 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
                 activeTab === 'SHIFTS'
-                  ? 'bg-[#253a35] text-[#fffaf2] shadow-xs'
-                  : 'text-[#52615a] hover:text-[#253a35]'
+                  ? 'bg-[#2e1420] text-[#ffffff] shadow-xs'
+                  : 'text-[#644855] hover:text-[#2e1420]'
               }`}
             >
               <Clock className="w-4 h-4" />
@@ -440,8 +440,8 @@ export const ArtisanPortalView: React.FC = () => {
               onClick={() => setActiveTab('SHARE')}
               className={`py-2 px-1 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
                 activeTab === 'SHARE'
-                  ? 'bg-[#253a35] text-[#fffaf2] shadow-xs'
-                  : 'text-[#52615a] hover:text-[#253a35]'
+                  ? 'bg-[#2e1420] text-[#ffffff] shadow-xs'
+                  : 'text-[#644855] hover:text-[#2e1420]'
               }`}
             >
               <Share2 className="w-4 h-4" />
@@ -453,9 +453,9 @@ export const ArtisanPortalView: React.FC = () => {
           {activeTab === 'SALES' && (
             <div className="space-y-4 animate-in fade-in duration-200">
               {/* Highlight Hero Card: Vendas de Hoje */}
-              <div className="bg-gradient-to-br from-[#253a35] to-[#1a2c28] text-white rounded-3xl p-5 border border-[#1b2b27] shadow-md relative overflow-hidden">
+              <div className="bg-gradient-to-br from-[#2e1420] to-[#240f19] text-white rounded-3xl p-5 border border-[#250f19] shadow-md relative overflow-hidden">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-mono-craft text-[#d4ba84] uppercase tracking-wider font-semibold">
+                  <span className="text-xs font-mono-craft text-[#dc9b86] uppercase tracking-wider font-semibold">
                     Vendas no Balcão de Hoje
                   </span>
                   <span className="text-[10px] font-mono-craft text-[#95b19f] bg-white/10 px-2 py-0.5 rounded-full">
@@ -472,7 +472,7 @@ export const ArtisanPortalView: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <p className="text-[10px] text-[#c9d9d0] font-mono-craft">Bruto faturado:</p>
-                    <p className="text-sm font-bold text-[#d4ba84] font-mono-craft">
+                    <p className="text-sm font-bold text-[#dc9b86] font-mono-craft">
                       R$ {partnerSalesData.todayGross.toFixed(2).replace('.', ',')}
                     </p>
                   </div>
@@ -490,9 +490,9 @@ export const ArtisanPortalView: React.FC = () => {
               {/* Financial Status Cards (Pix & Monthly fee) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono-craft text-xs">
                 {/* Pix Registration Card */}
-                <div className="bg-white p-3.5 rounded-2xl border border-[#ded6ca] shadow-2xs">
+                <div className="bg-white p-3.5 rounded-2xl border border-[#edd5dc] shadow-2xs">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[10px] uppercase font-bold text-[#7d8c83]">
+                    <span className="text-[10px] uppercase font-bold text-[#8e727e]">
                       Chave Pix p/ Repasse
                     </span>
                     <button
@@ -512,18 +512,18 @@ export const ArtisanPortalView: React.FC = () => {
                       )}
                     </button>
                   </div>
-                  <p className="font-bold text-[#253a35] text-xs truncate">
+                  <p className="font-bold text-[#2e1420] text-xs truncate">
                     {activePartner.pixKey || 'Não cadastrada'}
                   </p>
-                  <p className="text-[10px] text-[#7d8c83] mt-0.5">
+                  <p className="text-[10px] text-[#8e727e] mt-0.5">
                     Titular: {activePartner.pixHolderName || activePartner.ownerName}
                   </p>
                 </div>
 
                 {/* Monthly Space Fee */}
-                <div className="bg-white p-3.5 rounded-2xl border border-[#ded6ca] shadow-2xs">
+                <div className="bg-white p-3.5 rounded-2xl border border-[#edd5dc] shadow-2xs">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[10px] uppercase font-bold text-[#7d8c83]">
+                    <span className="text-[10px] uppercase font-bold text-[#8e727e]">
                       Mensalidade do Espaço
                     </span>
                     <span
@@ -536,39 +536,39 @@ export const ArtisanPortalView: React.FC = () => {
                       {currentMonthlyFee?.status === 'PAGO' ? 'Em dia' : 'Aberta'}
                     </span>
                   </div>
-                  <p className="font-bold text-[#253a35] text-xs">
+                  <p className="font-bold text-[#2e1420] text-xs">
                     R$ {activePartner.contract.monthlyFee.toFixed(2).replace('.', ',')} / mês
                   </p>
-                  <p className="text-[10px] text-[#7d8c83] mt-0.5">
+                  <p className="text-[10px] text-[#8e727e] mt-0.5">
                     Comissão da casa: {activePartner.contract.salesCommissionRate}%
                   </p>
                 </div>
               </div>
 
               {/* Feed: Peças Vendidas Recentemente */}
-              <div className="bg-white rounded-2xl p-4 border border-[#ded6ca] shadow-2xs space-y-3">
+              <div className="bg-white rounded-2xl p-4 border border-[#edd5dc] shadow-2xs space-y-3">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-display font-semibold text-sm text-[#253a35]">
+                  <h3 className="font-display font-semibold text-sm text-[#2e1420]">
                     Últimas Vendas no Shopping
                   </h3>
-                  <span className="text-[10px] font-mono-craft text-[#7d8c83]">
+                  <span className="text-[10px] font-mono-craft text-[#8e727e]">
                     Atualizado em tempo real
                   </span>
                 </div>
 
                 {partnerSalesData.recentItems.length === 0 ? (
-                  <div className="text-center py-6 text-[#7d8c83] font-mono-craft text-xs">
+                  <div className="text-center py-6 text-[#8e727e] font-mono-craft text-xs">
                     <p>Nenhuma venda registrada recentemente para este ateliê.</p>
                   </div>
                 ) : (
-                  <div className="divide-y divide-[#ede5d8] font-mono-craft text-xs">
+                  <div className="divide-y divide-[#f6ebef] font-mono-craft text-xs">
                     {partnerSalesData.recentItems.map((item, idx) => (
                       <div key={idx} className="py-2.5 flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-semibold text-[#253a35] leading-snug">
+                          <p className="font-semibold text-[#2e1420] leading-snug">
                             {item.quantity}x {item.productName}
                           </p>
-                          <p className="text-[10px] text-[#7d8c83] mt-0.5">
+                          <p className="text-[10px] text-[#8e727e] mt-0.5">
                             Cupom {item.saleNumber} • Por {item.operatorName} • {new Date(item.timestamp).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                           </p>
                         </div>
@@ -576,7 +576,7 @@ export const ArtisanPortalView: React.FC = () => {
                           <p className="font-bold text-[#1f4e38]">
                             + R$ {item.netAmount.toFixed(2).replace('.', ',')}
                           </p>
-                          <p className="text-[10px] text-[#7d8c83]">
+                          <p className="text-[10px] text-[#8e727e]">
                             (Bruto R$ {item.subtotal.toFixed(2).replace('.', ',')})
                           </p>
                         </div>
@@ -593,13 +593,13 @@ export const ArtisanPortalView: React.FC = () => {
             <div className="space-y-4 animate-in fade-in duration-200">
               {/* Alert Banner if items are low */}
               {lowStockProducts.length > 0 ? (
-                <div className="bg-[#fff3ed] border border-[#f7c8b4] p-3.5 rounded-2xl flex items-start gap-3">
-                  <AlertTriangle className="w-5 h-5 text-[#b56f55] shrink-0 mt-0.5" />
+                <div className="bg-[#fff5f8] border border-[#f9d3de] p-3.5 rounded-2xl flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-[#c85a78] shrink-0 mt-0.5" />
                   <div className="text-xs">
-                    <p className="font-bold text-[#94442a]">
+                    <p className="font-bold text-[#91324c]">
                       Atenção: {lowStockProducts.length} {lowStockProducts.length === 1 ? 'peça precisa' : 'peças precisam'} de reposição
                     </p>
-                    <p className="text-[#a66e53] text-[11px] mt-0.5 font-light">
+                    <p className="text-[#b84c6c] text-[11px] mt-0.5 font-light">
                       Itens que esgotaram ou estão abaixo do estoque de segurança no quiosque do shopping.
                     </p>
                   </div>
@@ -617,17 +617,17 @@ export const ArtisanPortalView: React.FC = () => {
               )}
 
               {/* Product Stock List */}
-              <div className="bg-white rounded-2xl p-4 border border-[#ded6ca] shadow-2xs space-y-3">
+              <div className="bg-white rounded-2xl p-4 border border-[#edd5dc] shadow-2xs space-y-3">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-display font-semibold text-sm text-[#253a35]">
+                  <h3 className="font-display font-semibold text-sm text-[#2e1420]">
                     Peças no Quiosque do Rio Anil
                   </h3>
-                  <span className="text-[10px] font-mono-craft text-[#7d8c83]">
+                  <span className="text-[10px] font-mono-craft text-[#8e727e]">
                     {partnerProducts.length} itens no total
                   </span>
                 </div>
 
-                <div className="divide-y divide-[#ede5d8]">
+                <div className="divide-y divide-[#f6ebef]">
                   {partnerProducts.map((product) => {
                     const isZero = product.stock === 0;
                     const isLow = product.stock > 0 && product.stock <= product.minStock;
@@ -641,13 +641,13 @@ export const ArtisanPortalView: React.FC = () => {
                             loading="lazy"
                             referrerPolicy="no-referrer"
                             onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
-                            className="w-12 h-12 rounded-xl object-cover border border-[#ded6ca] shrink-0"
+                            className="w-12 h-12 rounded-xl object-cover border border-[#edd5dc] shrink-0"
                           />
                           <div className="min-w-0">
-                            <p className="font-medium text-xs text-[#253a35] truncate">
+                            <p className="font-medium text-xs text-[#2e1420] truncate">
                               {product.name}
                             </p>
-                            <p className="text-[10px] text-[#7d8c83] font-mono-craft">
+                            <p className="text-[10px] text-[#8e727e] font-mono-craft">
                               R$ {product.price.toFixed(2).replace('.', ',')} • SKU: {product.sku}
                             </p>
 
@@ -679,7 +679,7 @@ export const ArtisanPortalView: React.FC = () => {
                               setRestockProduct(product);
                               setIsRestockOpen(true);
                             }}
-                            className="p-2 bg-[#ede5d8] hover:bg-[#ded6ca] text-[#253a35] rounded-xl text-xs font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                            className="p-2 bg-[#f6ebef] hover:bg-[#edd5dc] text-[#2e1420] rounded-xl text-xs font-semibold flex items-center gap-1 cursor-pointer transition-colors"
                             title="Lançar reposição de estoque"
                           >
                             <Plus className="w-3.5 h-3.5" />
@@ -706,11 +706,11 @@ export const ArtisanPortalView: React.FC = () => {
           {activeTab === 'SHIFTS' && (
             <div className="space-y-4 animate-in fade-in duration-200">
               {/* Next shift hero card */}
-              <div className="bg-white rounded-3xl p-5 border border-[#ded6ca] shadow-2xs space-y-3">
+              <div className="bg-white rounded-3xl p-5 border border-[#edd5dc] shadow-2xs space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-[#b56f55]" />
-                    <span className="text-xs font-mono-craft text-[#52615a] uppercase font-bold">
+                    <Calendar className="w-4 h-4 text-[#c85a78]" />
+                    <span className="text-xs font-mono-craft text-[#644855] uppercase font-bold">
                       Seu Próximo Plantão no Shopping
                     </span>
                   </div>
@@ -722,29 +722,29 @@ export const ArtisanPortalView: React.FC = () => {
                 </div>
 
                 {nextShift ? (
-                  <div className="bg-[#fffaf2] p-4 rounded-2xl border border-[#ede5d8] space-y-2">
+                  <div className="bg-[#ffffff] p-4 rounded-2xl border border-[#f6ebef] space-y-2">
                     <div className="flex items-baseline justify-between">
-                      <p className="font-display font-semibold text-base text-[#253a35]">
+                      <p className="font-display font-semibold text-base text-[#2e1420]">
                         {new Date(nextShift.startTime).toLocaleDateString('pt-BR', {
                           weekday: 'long',
                           day: '2-digit',
                           month: 'long',
                         })}
                       </p>
-                      <p className="text-xs font-mono-craft font-bold text-[#b56f55]">
+                      <p className="text-xs font-mono-craft font-bold text-[#c85a78]">
                         10:00 às 16:00
                       </p>
                     </div>
-                    <p className="text-xs text-[#7d8c83] font-mono-craft">
+                    <p className="text-xs text-[#8e727e] font-mono-craft">
                       Local: Quiosque Pinta e Borda • Rio Anil Shopping (Piso L2)
                     </p>
-                    <p className="text-[11px] text-[#52615a]">
+                    <p className="text-[11px] text-[#644855]">
                       Operador responsável escalado:{' '}
-                      <strong className="text-[#253a35]">{nextShift.operatorName}</strong>
+                      <strong className="text-[#2e1420]">{nextShift.operatorName}</strong>
                     </p>
                   </div>
                 ) : (
-                  <div className="p-4 rounded-2xl bg-[#ede5d8]/40 border border-[#ded6ca] text-center text-xs text-[#7d8c83] font-mono-craft">
+                  <div className="p-4 rounded-2xl bg-[#f6ebef]/40 border border-[#edd5dc] text-center text-xs text-[#8e727e] font-mono-craft">
                     <p>Você não possui nenhum plantão pendente na escala desta semana.</p>
                   </div>
                 )}
@@ -756,7 +756,7 @@ export const ArtisanPortalView: React.FC = () => {
                       setIsShiftSwapOpen(true);
                       setSwapSuccess(false);
                     }}
-                    className="flex-1 py-2.5 px-3 bg-[#ede5d8] hover:bg-[#ded6ca] text-[#253a35] rounded-xl font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    className="flex-1 py-2.5 px-3 bg-[#f6ebef] hover:bg-[#edd5dc] text-[#2e1420] rounded-xl font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
                     <span>Solicitar Troca de Plantão</span>
@@ -764,7 +764,7 @@ export const ArtisanPortalView: React.FC = () => {
 
                   <button
                     onClick={() => setActiveView('shifts')}
-                    className="py-2.5 px-3 border border-[#ded6ca] text-[#52615a] hover:text-[#253a35] rounded-xl font-medium flex items-center justify-center gap-1 cursor-pointer"
+                    className="py-2.5 px-3 border border-[#edd5dc] text-[#644855] hover:text-[#2e1420] rounded-xl font-medium flex items-center justify-center gap-1 cursor-pointer"
                   >
                     <span>Ver Escala Completa</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -773,8 +773,8 @@ export const ArtisanPortalView: React.FC = () => {
               </div>
 
               {/* Collaborative Policy Info */}
-              <div className="bg-[#ede5d8]/60 p-4 rounded-2xl border border-[#ded6ca] text-xs text-[#52615a] space-y-1.5">
-                <p className="font-bold text-[#253a35] flex items-center gap-1.5">
+              <div className="bg-[#f6ebef]/60 p-4 rounded-2xl border border-[#edd5dc] text-xs text-[#644855] space-y-1.5">
+                <p className="font-bold text-[#2e1420] flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-[#1f4e38]" />
                   Regimento de Plantões Colaborativos
                 </p>
@@ -788,23 +788,23 @@ export const ArtisanPortalView: React.FC = () => {
           {/* TAB 4: DIVULGAÇÃO & WHATSAPP */}
           {activeTab === 'SHARE' && (
             <div className="space-y-4 animate-in fade-in duration-200">
-              <div className="bg-white rounded-3xl p-5 border border-[#ded6ca] shadow-2xs space-y-4">
+              <div className="bg-white rounded-3xl p-5 border border-[#edd5dc] shadow-2xs space-y-4">
                 <div>
-                  <h3 className="font-display font-semibold text-base text-[#253a35]">
+                  <h3 className="font-display font-semibold text-base text-[#2e1420]">
                     Divulgue suas Peças aos Clientes
                   </h3>
-                  <p className="text-xs text-[#52615a] mt-0.5">
+                  <p className="text-xs text-[#644855] mt-0.5">
                     Compartilhe o link da sua marca na loja oficial ou envie um convite acolhedor para seus contatos do WhatsApp.
                   </p>
                 </div>
 
                 {/* Direct Link Box */}
-                <div className="bg-[#fffaf2] p-3.5 rounded-2xl border border-[#ded6ca] space-y-2 font-mono-craft text-xs">
-                  <span className="text-[10px] text-[#7d8c83] uppercase font-bold">
+                <div className="bg-[#ffffff] p-3.5 rounded-2xl border border-[#edd5dc] space-y-2 font-mono-craft text-xs">
+                  <span className="text-[10px] text-[#8e727e] uppercase font-bold">
                     Seu Link Direto na Vitrine:
                   </span>
-                  <div className="flex items-center justify-between gap-2 bg-white p-2.5 rounded-xl border border-[#ded6ca]">
-                    <span className="text-xs text-[#253a35] font-semibold truncate">
+                  <div className="flex items-center justify-between gap-2 bg-white p-2.5 rounded-xl border border-[#edd5dc]">
+                    <span className="text-xs text-[#2e1420] font-semibold truncate">
                       pintaeborda.com.br/loja?marca={activePartner.id}
                     </span>
                     <button
@@ -836,8 +836,8 @@ export const ArtisanPortalView: React.FC = () => {
                 </button>
 
                 {/* Mini Preview of Message */}
-                <div className="bg-[#e6ebe7] p-3 rounded-2xl border border-[#ded6ca]">
-                  <p className="text-[10px] font-mono-craft text-[#52615a] uppercase font-bold mb-1">
+                <div className="bg-[#f7ecf0] p-3 rounded-2xl border border-[#edd5dc]">
+                  <p className="text-[10px] font-mono-craft text-[#644855] uppercase font-bold mb-1">
                     Mensagem que será enviada:
                   </p>
                   <div className="bg-[#dcf8c6] p-3 rounded-xl text-[11px] text-[#111b21] leading-relaxed">
@@ -852,15 +852,15 @@ export const ArtisanPortalView: React.FC = () => {
 
       {/* QUICK RESTOCK MODAL */}
       {isRestockOpen && restockProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/65 backdrop-blur-xs p-4">
-          <div className="bg-[#fffaf2] rounded-3xl max-w-sm w-full shadow-2xl border border-[#ded6ca] overflow-hidden p-5 animate-in fade-in zoom-in-95 font-mono-craft text-xs">
-            <div className="flex items-center justify-between pb-3 border-b border-[#ded6ca]">
-              <h3 className="font-display font-semibold text-base text-[#253a35]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2e1420]/65 backdrop-blur-xs p-4">
+          <div className="bg-[#ffffff] rounded-3xl max-w-sm w-full shadow-2xl border border-[#edd5dc] overflow-hidden p-5 animate-in fade-in zoom-in-95 font-mono-craft text-xs">
+            <div className="flex items-center justify-between pb-3 border-b border-[#edd5dc]">
+              <h3 className="font-display font-semibold text-base text-[#2e1420]">
                 Repor Estoque no Quiosque
               </h3>
               <button
                 onClick={() => setIsRestockOpen(false)}
-                className="p-1 text-[#7d8c83] hover:text-[#253a35] cursor-pointer"
+                className="p-1 text-[#8e727e] hover:text-[#2e1420] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -874,23 +874,23 @@ export const ArtisanPortalView: React.FC = () => {
                   loading="lazy"
                   referrerPolicy="no-referrer"
                   onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
-                  className="w-12 h-12 rounded-xl object-cover border border-[#ded6ca]"
+                  className="w-12 h-12 rounded-xl object-cover border border-[#edd5dc]"
                 />
                 <div>
-                  <p className="font-semibold text-[#253a35] text-xs">{restockProduct.name}</p>
-                  <p className="text-[11px] text-[#7d8c83]">Estoque atual: {restockProduct.stock} un.</p>
+                  <p className="font-semibold text-[#2e1420] text-xs">{restockProduct.name}</p>
+                  <p className="text-[11px] text-[#8e727e]">Estoque atual: {restockProduct.stock} un.</p>
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] text-[#52615a] mb-1 font-semibold">
+                <label className="block text-[11px] text-[#644855] mb-1 font-semibold">
                   Quantidade levada ao quiosque:
                 </label>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => setRestockQty(Math.max(1, restockQty - 1))}
-                    className="w-10 h-10 bg-white border border-[#ded6ca] rounded-xl text-base font-bold text-[#253a35] cursor-pointer hover:bg-[#ede5d8]"
+                    className="w-10 h-10 bg-white border border-[#edd5dc] rounded-xl text-base font-bold text-[#2e1420] cursor-pointer hover:bg-[#f6ebef]"
                   >
                     -
                   </button>
@@ -899,12 +899,12 @@ export const ArtisanPortalView: React.FC = () => {
                     min="1"
                     value={restockQty}
                     onChange={(e) => setRestockQty(Number(e.target.value))}
-                    className="flex-1 h-10 text-center bg-white border border-[#ded6ca] rounded-xl font-bold text-sm text-[#253a35] focus:outline-none focus:border-[#1f4e38]"
+                    className="flex-1 h-10 text-center bg-white border border-[#edd5dc] rounded-xl font-bold text-sm text-[#2e1420] focus:outline-none focus:border-[#1f4e38]"
                   />
                   <button
                     type="button"
                     onClick={() => setRestockQty(restockQty + 1)}
-                    className="w-10 h-10 bg-white border border-[#ded6ca] rounded-xl text-base font-bold text-[#253a35] cursor-pointer hover:bg-[#ede5d8]"
+                    className="w-10 h-10 bg-white border border-[#edd5dc] rounded-xl text-base font-bold text-[#2e1420] cursor-pointer hover:bg-[#f6ebef]"
                   >
                     +
                   </button>
@@ -929,7 +929,7 @@ export const ArtisanPortalView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsRestockOpen(false)}
-                className="py-2.5 px-3 bg-[#ede5d8] text-[#52615a] hover:text-[#253a35] rounded-xl font-medium cursor-pointer"
+                className="py-2.5 px-3 bg-[#f6ebef] text-[#644855] hover:text-[#2e1420] rounded-xl font-medium cursor-pointer"
               >
                 Cancelar
               </button>
@@ -940,33 +940,33 @@ export const ArtisanPortalView: React.FC = () => {
 
       {/* SHIFT SWAP REQUEST MODAL */}
       {isShiftSwapOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/65 backdrop-blur-xs p-4">
-          <div className="bg-[#fffaf2] rounded-3xl max-w-sm w-full shadow-2xl border border-[#ded6ca] overflow-hidden p-5 animate-in fade-in zoom-in-95 font-mono-craft text-xs">
-            <div className="flex items-center justify-between pb-3 border-b border-[#ded6ca]">
-              <h3 className="font-display font-semibold text-base text-[#253a35]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2e1420]/65 backdrop-blur-xs p-4">
+          <div className="bg-[#ffffff] rounded-3xl max-w-sm w-full shadow-2xl border border-[#edd5dc] overflow-hidden p-5 animate-in fade-in zoom-in-95 font-mono-craft text-xs">
+            <div className="flex items-center justify-between pb-3 border-b border-[#edd5dc]">
+              <h3 className="font-display font-semibold text-base text-[#2e1420]">
                 Solicitar Troca de Plantão
               </h3>
               <button
                 onClick={() => setIsShiftSwapOpen(false)}
-                className="p-1 text-[#7d8c83] hover:text-[#253a35] cursor-pointer"
+                className="p-1 text-[#8e727e] hover:text-[#2e1420] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="py-4 space-y-3">
-              <p className="text-xs text-[#52615a]">
+              <p className="text-xs text-[#644855]">
                 Selecione a artesã com quem você combinou a troca de turno ou solicite à coordenação:
               </p>
 
               <div>
-                <label className="block text-[11px] text-[#52615a] mb-1 font-semibold">
+                <label className="block text-[11px] text-[#644855] mb-1 font-semibold">
                   Artesã / Ateliê Substituto:
                 </label>
                 <select
                   value={targetSwapPartnerId}
                   onChange={(e) => setTargetSwapPartnerId(e.target.value)}
-                  className="w-full p-2 bg-white border border-[#ded6ca] rounded-xl text-xs text-[#253a35] focus:outline-none"
+                  className="w-full p-2 bg-white border border-[#edd5dc] rounded-xl text-xs text-[#2e1420] focus:outline-none"
                 >
                   <option value="">Selecione a parceira...</option>
                   {partners
@@ -981,7 +981,7 @@ export const ArtisanPortalView: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] text-[#52615a] mb-1 font-semibold">
+                <label className="block text-[11px] text-[#644855] mb-1 font-semibold">
                   Motivo / Observação:
                 </label>
                 <textarea
@@ -989,7 +989,7 @@ export const ArtisanPortalView: React.FC = () => {
                   value={swapReason}
                   onChange={(e) => setSwapReason(e.target.value)}
                   placeholder="Ex: Produção intensa de encomendas para feira..."
-                  className="w-full p-2 bg-white border border-[#ded6ca] rounded-xl text-xs text-[#253a35] focus:outline-none"
+                  className="w-full p-2 bg-white border border-[#edd5dc] rounded-xl text-xs text-[#2e1420] focus:outline-none"
                 />
               </div>
 
@@ -1019,7 +1019,7 @@ export const ArtisanPortalView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsShiftSwapOpen(false)}
-                className="py-2.5 px-3 bg-[#ede5d8] text-[#52615a] hover:text-[#253a35] rounded-xl font-medium cursor-pointer"
+                className="py-2.5 px-3 bg-[#f6ebef] text-[#644855] hover:text-[#2e1420] rounded-xl font-medium cursor-pointer"
               >
                 Voltar
               </button>

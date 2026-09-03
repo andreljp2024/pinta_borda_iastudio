@@ -104,11 +104,11 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       {/* Top Breadcrumb */}
-      <div className="flex items-center justify-between text-xs font-mono-craft text-[#7d8c83]">
+      <div className="flex items-center justify-between text-xs font-mono-craft text-[#8e727e]">
         <div className="flex items-center gap-2">
           <span>pinta e borda</span>
           <span>/</span>
-          <span className="text-[#253a35] font-semibold">visão geral</span>
+          <span className="text-[#2e1420] font-semibold">visão geral</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="inline-block w-2 h-2 rounded-full bg-[#3c6b54]" />
@@ -117,15 +117,15 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
       </div>
 
       {/* Welcome & Context Header */}
-      <div className="bg-[#253a35] text-[#fffaf2] rounded-3xl p-6 sm:p-8 border border-[#38524a] shadow-md relative overflow-hidden">
+      <div className="bg-[#2e1420] text-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#4a2536] shadow-md relative overflow-hidden">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1f332d] text-[#d4ba84] rounded-full text-xs font-mono-craft border border-[#38524a]">
-              <Sparkles className="w-3.5 h-3.5 text-[#d4ba84]" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#2a121d] text-[#dc9b86] rounded-full text-xs font-mono-craft border border-[#4a2536]">
+              <Sparkles className="w-3.5 h-3.5 text-[#dc9b86]" />
               {isPartner ? `Ateliê: ${currentPartner.brandName}` : 'Gestão da Casa Colaborativa'}
             </div>
 
-            <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-[#fffaf2]">
+            <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-[#ffffff]">
               {isPartner
                 ? `Olá, ${currentPartner.ownerName}!`
                 : 'Bem-vinda à gestão da casa.'}
@@ -156,36 +156,36 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
             </button>
             <button
               onClick={onOpenAuth}
-              className="outline-button text-xs !border-[#38524a] !text-[#d4ba84] hover:!bg-[#1f332d]"
+              className="outline-button text-xs !border-[#4a2536] !text-[#dc9b86] hover:!bg-[#2a121d]"
             >
-              <Users className="w-4 h-4 text-[#d4ba84]" />
+              <Users className="w-4 h-4 text-[#dc9b86]" />
               <span>Alternar Perfil</span>
             </button>
           </div>
         </div>
 
         {/* Subtle decorative glow */}
-        <div className="absolute right-0 bottom-0 translate-y-12 translate-x-12 w-64 h-64 bg-[#d4ba84]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute right-0 bottom-0 translate-y-12 translate-x-12 w-64 h-64 bg-[#dc9b86]/5 rounded-full blur-3xl pointer-events-none" />
       </div>
 
       {/* Real-Time Shift Banner */}
-      <div className="bg-[#fffaf2] rounded-2xl p-4 sm:p-5 border border-[#ded6ca] shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-[#ffffff] rounded-2xl p-4 sm:p-5 border border-[#edd5dc] shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#ede5d8] text-[#824f3c] flex items-center justify-center font-bold shrink-0 border border-[#ded6ca]">
+          <div className="w-10 h-10 rounded-xl bg-[#f6ebef] text-[#9c3653] flex items-center justify-center font-bold shrink-0 border border-[#edd5dc]">
             <Clock className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-[#253a35] font-mono-craft">
+              <span className="text-xs font-bold text-[#2e1420] font-mono-craft">
                 {activeShift ? 'Expediente Físico em Andamento' : 'Aguardando Operador no Balcão'}
               </span>
               <span
                 className={`w-2 h-2 rounded-full ${
-                  activeShift ? 'bg-[#3c6b54] animate-pulse' : 'bg-[#b56f55]'
+                  activeShift ? 'bg-[#3c6b54] animate-pulse' : 'bg-[#c85a78]'
                 }`}
               />
             </div>
-            <p className="text-xs text-[#52615a] mt-0.5">
+            <p className="text-xs text-[#644855] mt-0.5">
               {activeShift ? (
                 <>
                   Plantonista Responsável: <strong>{activeShift.operatorName}</strong> ({activeShift.partnerName}) • Início:{' '}
@@ -210,13 +210,13 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Gross Sales */}
-        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs font-mono-craft text-[#7d8c83] mb-2">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs font-mono-craft text-[#8e727e] mb-2">
             <span>{isPartner ? 'Vendas da Minha Marca' : 'Faturamento Bruto'}</span>
-            <DollarSign className="w-4 h-4 text-[#b56f55]" />
+            <DollarSign className="w-4 h-4 text-[#c85a78]" />
           </div>
           <div>
-            <div className="text-2xl font-bold font-mono-craft text-[#253a35]">
+            <div className="text-2xl font-bold font-mono-craft text-[#2e1420]">
               R$ {totalGross.toFixed(2).replace('.', ',')}
             </div>
             <span className="text-[11px] font-mono-craft text-[#3c6b54] font-medium flex items-center gap-1 mt-1">
@@ -227,52 +227,52 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
         </div>
 
         {/* Net / Retention */}
-        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs font-mono-craft text-[#7d8c83] mb-2">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs font-mono-craft text-[#8e727e] mb-2">
             <span>{isPartner ? 'Meu Repasse Líquido' : 'Retenção P&B (10%)'}</span>
             <ArrowUpRight className="w-4 h-4 text-[#3c6b54]" />
           </div>
           <div>
-            <div className="text-2xl font-bold font-mono-craft text-[#b56f55]">
+            <div className="text-2xl font-bold font-mono-craft text-[#c85a78]">
               R$ {netEarnings.toFixed(2).replace('.', ',')}
             </div>
-            <span className="text-[11px] font-mono-craft text-[#7d8c83] mt-1 block">
+            <span className="text-[11px] font-mono-craft text-[#8e727e] mt-1 block">
               {isPartner ? 'Livre de taxas operacionais' : 'Fundo coletivo da casa'}
             </span>
           </div>
         </div>
 
         {/* Low Stock Warning */}
-        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs font-mono-craft text-[#7d8c83] mb-2">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs font-mono-craft text-[#8e727e] mb-2">
             <span>Estoque no Shopping</span>
-            <Package className="w-4 h-4 text-[#7d8c83]" />
+            <Package className="w-4 h-4 text-[#8e727e]" />
           </div>
           <div>
-            <div className="text-2xl font-bold font-mono-craft text-[#253a35]">
+            <div className="text-2xl font-bold font-mono-craft text-[#2e1420]">
               {lowStockCount > 0 ? (
-                <span className="text-[#b56f55]">{lowStockCount} em alerta</span>
+                <span className="text-[#c85a78]">{lowStockCount} em alerta</span>
               ) : (
                 <span className="text-[#3c6b54]">Abastecido</span>
               )}
             </div>
-            <span className="text-[11px] font-mono-craft text-[#7d8c83] mt-1 block">
+            <span className="text-[11px] font-mono-craft text-[#8e727e] mt-1 block">
               {lowStockCount > 0 ? 'Itens próximos do mínimo' : 'Estoque regular'}
             </span>
           </div>
         </div>
 
         {/* Community / Shifts */}
-        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs font-mono-craft text-[#7d8c83] mb-2">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs font-mono-craft text-[#8e727e] mb-2">
             <span>Comunidade Coworking</span>
-            <Users className="w-4 h-4 text-[#7d8c83]" />
+            <Users className="w-4 h-4 text-[#8e727e]" />
           </div>
           <div>
-            <div className="text-2xl font-bold font-mono-craft text-[#253a35]">
+            <div className="text-2xl font-bold font-mono-craft text-[#2e1420]">
               {partners.length} ateliês
             </div>
-            <span className="text-[11px] font-mono-craft text-[#7d8c83] mt-1 block">
+            <span className="text-[11px] font-mono-craft text-[#8e727e] mt-1 block">
               Artesãs no Rio Anil Shopping
             </span>
           </div>
@@ -282,63 +282,63 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
       {/* Middle Section: Chart & Recent Sales */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Weekly Chart (7 cols) */}
-        <div className="lg:col-span-7 bg-[#fffaf2] rounded-2xl p-6 border border-[#ded6ca] shadow-2xs space-y-4">
+        <div className="lg:col-span-7 bg-[#ffffff] rounded-2xl p-6 border border-[#edd5dc] shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-display font-medium text-lg text-[#253a35]">
+              <h3 className="font-display font-medium text-lg text-[#2e1420]">
                 Evolução de Vendas (Últimos 7 dias)
               </h3>
-              <p className="text-xs font-mono-craft text-[#7d8c83]">Volume consolidado no balcão presencial</p>
+              <p className="text-xs font-mono-craft text-[#8e727e]">Volume consolidado no balcão presencial</p>
             </div>
           </div>
 
           <div className="h-64 w-full pt-4">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={weeklySalesData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ede5d8" />
-                <XAxis dataKey="day" tick={{ fontSize: 11, fill: '#7d8c83' }} />
-                <YAxis tick={{ fontSize: 11, fill: '#7d8c83' }} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f6ebef" />
+                <XAxis dataKey="day" tick={{ fontSize: 11, fill: '#8e727e' }} />
+                <YAxis tick={{ fontSize: 11, fill: '#8e727e' }} />
                 <Tooltip
                   formatter={(val: any) => [`R$ ${Number(val).toFixed(2).replace('.', ',')}`, 'Vendas']}
-                  contentStyle={{ backgroundColor: '#253a35', borderRadius: '12px', color: '#fffaf2', fontSize: '12px', border: '1px solid #38524a' }}
+                  contentStyle={{ backgroundColor: '#2e1420', borderRadius: '12px', color: '#ffffff', fontSize: '12px', border: '1px solid #4a2536' }}
                 />
-                <Bar dataKey="vendas" fill="#b56f55" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="vendas" fill="#c85a78" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Recent Sales List (5 cols) */}
-        <div className="lg:col-span-5 bg-[#fffaf2] rounded-2xl p-6 border border-[#ded6ca] shadow-2xs flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-[#ffffff] rounded-2xl p-6 border border-[#edd5dc] shadow-2xs flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-[#ded6ca] mb-3">
-              <h3 className="font-display font-medium text-lg text-[#253a35]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#edd5dc] mb-3">
+              <h3 className="font-display font-medium text-lg text-[#2e1420]">
                 Últimas Vendas no Balcão
               </h3>
               <button
                 onClick={() => setActiveView('sales')}
-                className="text-xs font-mono-craft text-[#b56f55] hover:underline cursor-pointer"
+                className="text-xs font-mono-craft text-[#c85a78] hover:underline cursor-pointer"
               >
                 Ver todas →
               </button>
             </div>
 
-            <div className="divide-y divide-[#ede5d8]">
+            <div className="divide-y divide-[#f6ebef]">
               {recentSales.length === 0 ? (
-                <div className="py-8 text-center text-[#7d8c83] text-xs font-mono-craft">
+                <div className="py-8 text-center text-[#8e727e] text-xs font-mono-craft">
                   Nenhuma venda recente registrada.
                 </div>
               ) : (
                 recentSales.map((sale) => (
                   <div key={sale.id} className="py-2.5 flex items-center justify-between">
                     <div>
-                      <div className="font-bold text-xs font-mono-craft text-[#253a35]">{sale.saleNumber}</div>
-                      <div className="text-[11px] text-[#7d8c83]">
+                      <div className="font-bold text-xs font-mono-craft text-[#2e1420]">{sale.saleNumber}</div>
+                      <div className="text-[11px] text-[#8e727e]">
                         {sale.operatorName} • {sale.items.length} peças
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-bold text-xs font-mono-craft text-[#253a35]">
+                      <div className="font-bold text-xs font-mono-craft text-[#2e1420]">
                         R$ {sale.totalGross.toFixed(2).replace('.', ',')}
                       </div>
                       <span className="text-[10px] font-mono-craft text-[#3c6b54] font-semibold">
@@ -351,7 +351,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[#ded6ca]">
+          <div className="pt-4 border-t border-[#edd5dc]">
             <button
               onClick={() => setActiveView('settlements')}
               className="outline-button w-full !py-2.5 text-xs font-mono-craft flex items-center justify-center gap-1.5"

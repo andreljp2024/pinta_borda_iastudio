@@ -160,13 +160,13 @@ export const ProductsView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#b56f55] font-mono-craft">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#c85a78] font-mono-craft">
             Catálogo & Acervo
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#253a35]">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420]">
             Gestão de Produtos
           </h2>
-          <p className="text-xs sm:text-sm text-[#7d8c83] mt-1 font-light">
+          <p className="text-xs sm:text-sm text-[#8e727e] mt-1 font-light">
             Cadastre peças autorais, configure fotos, preços e publicação na vitrine física do Rio Anil Shopping.
           </p>
         </div>
@@ -175,21 +175,21 @@ export const ProductsView: React.FC = () => {
           onClick={handleOpenCreateModal}
           className="solid-button text-xs flex items-center gap-2 self-start sm:self-auto"
         >
-          <Plus className="w-4 h-4 text-[#d4ba84]" />
+          <Plus className="w-4 h-4 text-[#dc9b86]" />
           <span>Cadastrar Novo Produto</span>
         </button>
       </div>
 
       {/* Filters Bar */}
-      <div className="bg-[#fffaf2] rounded-2xl p-4 border border-[#ded6ca] shadow-2xs flex flex-col sm:flex-row gap-3 items-center justify-between font-mono-craft">
+      <div className="bg-[#ffffff] rounded-2xl p-4 border border-[#edd5dc] shadow-2xs flex flex-col sm:flex-row gap-3 items-center justify-between font-mono-craft">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-[#7d8c83] absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-[#8e727e] absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar por nome, SKU ou marca..."
-            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#ded6ca] focus:outline-none bg-white text-[#253a35]"
+            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#edd5dc] focus:outline-none bg-white text-[#2e1420]"
           />
         </div>
 
@@ -198,7 +198,7 @@ export const ProductsView: React.FC = () => {
             <select
               value={selectedPartnerId}
               onChange={(e) => setSelectedPartnerId(e.target.value)}
-              className="p-2 text-xs bg-white text-[#253a35] rounded-xl border border-[#ded6ca] focus:outline-none"
+              className="p-2 text-xs bg-white text-[#2e1420] rounded-xl border border-[#edd5dc] focus:outline-none"
             >
               <option value="all">Todas as Marcas</option>
               {partners.map((p) => (
@@ -212,7 +212,7 @@ export const ProductsView: React.FC = () => {
           <select
             value={selectedCategoryId}
             onChange={(e) => setSelectedCategoryId(e.target.value)}
-            className="p-2 text-xs bg-white text-[#253a35] rounded-xl border border-[#ded6ca] focus:outline-none"
+            className="p-2 text-xs bg-white text-[#2e1420] rounded-xl border border-[#edd5dc] focus:outline-none"
           >
             <option value="all">Todas as Categorias</option>
             {categories.map((c) => (
@@ -225,10 +225,10 @@ export const ProductsView: React.FC = () => {
       </div>
 
       {/* Products Table */}
-      <div className="bg-[#fffaf2] rounded-2xl border border-[#ded6ca] shadow-2xs overflow-hidden">
+      <div className="bg-[#ffffff] rounded-2xl border border-[#edd5dc] shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#ede5d8]/70 border-b border-[#ded6ca] text-[#7d8c83] uppercase tracking-wider text-[10px] font-mono-craft">
+            <thead className="bg-[#f6ebef]/70 border-b border-[#edd5dc] text-[#8e727e] uppercase tracking-wider text-[10px] font-mono-craft">
               <tr>
                 <th className="py-3 px-4 font-semibold">Produto</th>
                 <th className="py-3 px-4 font-semibold">SKU</th>
@@ -240,38 +240,38 @@ export const ProductsView: React.FC = () => {
                 <th className="py-3 px-4 font-semibold text-right">Ações</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#ede5d8] text-[#253a35]">
+            <tbody className="divide-y divide-[#f6ebef] text-[#2e1420]">
               {visibleProducts.map((prod) => {
                 const partner = partners.find((p) => p.id === prod.partnerId);
                 return (
-                  <tr key={prod.id} className="hover:bg-[#ede5d8]/40 transition-colors">
-                    <td className="py-3 px-4 font-medium text-[#253a35] flex items-center gap-2.5">
+                  <tr key={prod.id} className="hover:bg-[#f6ebef]/40 transition-colors">
+                    <td className="py-3 px-4 font-medium text-[#2e1420] flex items-center gap-2.5">
                       <img
                         src={prod.imageUrl}
                         alt={prod.name}
                         loading="lazy"
                         referrerPolicy="no-referrer"
                         onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
-                        className="w-9 h-9 rounded-lg object-cover border border-[#ded6ca]"
+                        className="w-9 h-9 rounded-lg object-cover border border-[#edd5dc]"
                       />
                       <div>
                         <div className="max-w-xs truncate font-display text-sm">{prod.name}</div>
-                        <div className="text-[10px] text-[#7d8c83] font-light">
+                        <div className="text-[10px] text-[#8e727e] font-light">
                           {prod.description?.substring(0, 40)}...
                         </div>
                       </div>
                     </td>
-                    <td className="py-3 px-4 font-mono-craft text-[#7d8c83]">{prod.sku}</td>
-                    <td className="py-3 px-4 font-medium text-[#253a35]">
+                    <td className="py-3 px-4 font-mono-craft text-[#8e727e]">{prod.sku}</td>
+                    <td className="py-3 px-4 font-medium text-[#2e1420]">
                       {partner?.brandName || 'N/A'}
                     </td>
-                    <td className="py-3 px-4 text-right font-bold font-mono-craft text-[#253a35]">
+                    <td className="py-3 px-4 text-right font-bold font-mono-craft text-[#2e1420]">
                       R$ {prod.price.toFixed(2).replace('.', ',')}
                     </td>
                     <td className="py-3 px-4 text-center font-mono-craft">
                       <span
                         className={`font-bold ${
-                          prod.stock <= prod.minStock ? 'text-[#b56f55]' : 'text-[#253a35]'
+                          prod.stock <= prod.minStock ? 'text-[#c85a78]' : 'text-[#2e1420]'
                         }`}
                       >
                         {prod.stock} un.
@@ -282,7 +282,7 @@ export const ProductsView: React.FC = () => {
                         onClick={() => handleToggleFeatured(prod)}
                         className={`p-1.5 rounded-md cursor-pointer transition-colors ${
                           prod.isFeatured
-                            ? 'bg-[#ede5d8] text-[#b56f55]'
+                            ? 'bg-[#f6ebef] text-[#c85a78]'
                             : 'bg-stone-100 text-stone-400 hover:text-stone-700'
                         }`}
                         title="Alternar destaque no catálogo público"
@@ -306,7 +306,7 @@ export const ProductsView: React.FC = () => {
                     <td className="py-3 px-4 text-right">
                       <button
                         onClick={() => handleOpenEditModal(prod)}
-                        className="p-1.5 text-[#52615a] hover:text-[#253a35] rounded-lg hover:bg-[#ede5d8] transition-colors cursor-pointer"
+                        className="p-1.5 text-[#644855] hover:text-[#2e1420] rounded-lg hover:bg-[#f6ebef] transition-colors cursor-pointer"
                         title="Editar produto"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
@@ -322,56 +322,56 @@ export const ProductsView: React.FC = () => {
 
       {/* Product Form Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/60 backdrop-blur-xs p-4">
-          <div className="bg-[#fffaf2] rounded-3xl max-w-lg w-full shadow-2xl border border-[#ded6ca] p-6 space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
-            <h3 className="font-display font-medium text-xl text-[#253a35]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2e1420]/60 backdrop-blur-xs p-4">
+          <div className="bg-[#ffffff] rounded-3xl max-w-lg w-full shadow-2xl border border-[#edd5dc] p-6 space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+            <h3 className="font-display font-medium text-xl text-[#2e1420]">
               {editingProduct ? 'Editar Produto Autoral' : 'Novo Produto para a Loja'}
             </h3>
 
             <form onSubmit={handleSaveProduct} className="space-y-3 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2">
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Nome da Peça</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Nome da Peça</label>
                   <input
                     type="text"
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
                     required
                     placeholder="Ex: Vestido Casinha de Abelha em Linho"
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Código SKU</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Código SKU</label>
                   <input
                     type="text"
                     value={formSku}
                     onChange={(e) => setFormSku(e.target.value)}
                     required
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs font-mono-craft bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs font-mono-craft bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Preço de Venda (R$)</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Preço de Venda (R$)</label>
                   <input
                     type="number"
                     step="0.01"
                     value={formPrice}
                     onChange={(e) => setFormPrice(parseFloat(e.target.value) || 0)}
                     required
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs font-bold font-mono-craft bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs font-bold font-mono-craft bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Marca Proprietária</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Marca Proprietária</label>
                   <select
                     value={formPartnerId}
                     onChange={(e) => setFormPartnerId(e.target.value)}
                     disabled={userRole === 'PARTNER'}
-                    className="w-full p-2.5 bg-white text-[#253a35] rounded-xl border border-[#ded6ca] text-xs focus:outline-none"
+                    className="w-full p-2.5 bg-white text-[#2e1420] rounded-xl border border-[#edd5dc] text-xs focus:outline-none"
                   >
                     {partners.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -382,11 +382,11 @@ export const ProductsView: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Categoria</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Categoria</label>
                   <select
                     value={formCategoryId}
                     onChange={(e) => setFormCategoryId(e.target.value)}
-                    className="w-full p-2.5 bg-white text-[#253a35] rounded-xl border border-[#ded6ca] text-xs focus:outline-none"
+                    className="w-full p-2.5 bg-white text-[#2e1420] rounded-xl border border-[#edd5dc] text-xs focus:outline-none"
                   >
                     {categories.map((c) => (
                       <option key={c.id} value={c.id}>
@@ -397,45 +397,45 @@ export const ProductsView: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Estoque Físico Inicial</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Estoque Físico Inicial</label>
                   <input
                     type="number"
                     value={formStock}
                     onChange={(e) => setFormStock(parseInt(e.target.value) || 0)}
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none font-mono-craft"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none font-mono-craft"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Estoque Mínimo (Alerta)</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Estoque Mínimo (Alerta)</label>
                   <input
                     type="number"
                     value={formMinStock}
                     onChange={(e) => setFormMinStock(parseInt(e.target.value) || 0)}
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none font-mono-craft"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none font-mono-craft"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">URL da Imagem</label>
+                <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">URL da Imagem</label>
                 <input
                   type="text"
                   value={formImageUrl}
                   onChange={(e) => setFormImageUrl(e.target.value)}
                   placeholder="https://..."
-                  className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs font-mono-craft bg-white text-[#253a35] focus:outline-none"
+                  className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs font-mono-craft bg-white text-[#2e1420] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Descrição Detalhada da Peça</label>
+                <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Descrição Detalhada da Peça</label>
                 <textarea
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
                   rows={3}
                   placeholder="Conte sobre materiais, técnicas manuais e especificações..."
-                  className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                  className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                 />
               </div>
 
@@ -445,9 +445,9 @@ export const ProductsView: React.FC = () => {
                     type="checkbox"
                     checked={formIsFeatured}
                     onChange={(e) => setFormIsFeatured(e.target.checked)}
-                    className="rounded text-[#b56f55] focus:ring-[#b56f55]"
+                    className="rounded text-[#c85a78] focus:ring-[#c85a78]"
                   />
-                  <span className="font-semibold text-[#253a35]">Destaque na Vitrine</span>
+                  <span className="font-semibold text-[#2e1420]">Destaque na Vitrine</span>
                 </label>
 
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -457,11 +457,11 @@ export const ProductsView: React.FC = () => {
                     onChange={(e) => setFormIsPublished(e.target.checked)}
                     className="rounded text-[#3c6b54] focus:ring-[#3c6b54]"
                   />
-                  <span className="font-semibold text-[#253a35]">Publicado no Catálogo</span>
+                  <span className="font-semibold text-[#2e1420]">Publicado no Catálogo</span>
                 </label>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-[#ded6ca] font-mono-craft">
+              <div className="flex justify-end gap-2 pt-4 border-t border-[#edd5dc] font-mono-craft">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}

@@ -66,20 +66,20 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-[#faf7f0]/95 backdrop-blur-md border-b border-[#e8ded0] shadow-[0_4px_20px_rgba(28,56,48,0.04)]">
+    <header className="sticky top-0 z-40 bg-[#fdf8f9]/95 backdrop-blur-md border-b border-[#ebd8e0] shadow-[0_4px_20px_rgba(28,56,48,0.04)]">
       {/* Top micro-bar with shift status */}
-      <div className="bg-[#1c3830] text-[#eaf0e8] text-xs px-4 py-1.5 flex flex-wrap items-center justify-between border-b border-[#142a24]">
+      <div className="bg-[#341724] text-[#eaf0e8] text-xs px-4 py-1.5 flex flex-wrap items-center justify-between border-b border-[#250f19]">
         <div className="flex items-center gap-2">
           <span className="inline-block w-2 h-2 rounded-full bg-[#7ec498] animate-pulse shadow-[0_0_8px_#7ec498]" />
           <span>
             {activeShift ? (
               <>
                 <strong className="text-white font-medium">Expediente no Balcão:</strong>{' '}
-                <span className="text-[#e0be75] font-semibold">{activeShift.operatorName}</span> (
+                <span className="text-[#e29b86] font-semibold">{activeShift.operatorName}</span> (
                 {activeShift.partnerName}) • Rio Anil Shopping
               </>
             ) : (
-              <span className="text-[#a9bdb1]">
+              <span className="text-[#b89fa9]">
                 Nenhum parceiro com expediente ativo no momento
               </span>
             )}
@@ -89,12 +89,12 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-4 text-xs font-mono-craft">
           <button
             onClick={onOpenShiftModal}
-            className="text-[#e0be75] hover:text-white underline flex items-center gap-1 cursor-pointer transition-colors"
+            className="text-[#e29b86] hover:text-white underline flex items-center gap-1 cursor-pointer transition-colors"
           >
-            <Clock className="w-3 h-3 text-[#e0be75]" />
+            <Clock className="w-3 h-3 text-[#e29b86]" />
             {activeShift ? 'Gerenciar / Passar Plantão' : 'Iniciar Expediente'}
           </button>
-          <span className="text-[#3b5950]">|</span>
+          <span className="text-[#4e293a]">|</span>
           <span className="text-[#95b19f] hidden sm:inline">São Luís · Maranhão</span>
         </div>
       </div>
@@ -108,15 +108,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveView('landing')}
               className="text-left flex items-center gap-3 group cursor-pointer focus:outline-none"
             >
-              <div className="brand-mark text-[#1e352e] group-hover:text-[#bd5b3e] transition-colors">
+              <div className="brand-mark text-[#2e1420] group-hover:text-[#c85a78] transition-colors">
                 <span>p</span>
                 <span>b</span>
               </div>
               <div className="leading-tight">
-                <span className="font-display text-xl font-medium tracking-tight text-[#1e352e] group-hover:text-[#bd5b3e] transition-colors">
-                  pinta <em className="font-normal italic text-[#bd5b3e]">e</em> borda
+                <span className="font-display text-xl font-medium tracking-tight text-[#2e1420] group-hover:text-[#c85a78] transition-colors">
+                  pinta <em className="font-normal italic text-[#c85a78]">e</em> borda
                 </span>
-                <span className="block text-[9px] font-mono-craft font-medium tracking-[0.2em] uppercase text-[#bd5b3e]">
+                <span className="block text-[9px] font-mono-craft font-medium tracking-[0.2em] uppercase text-[#c85a78]">
                   casa colaborativa
                 </span>
               </div>
@@ -128,7 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 text-xs font-medium">
               <button
                 onClick={() => setActiveView('landing')}
-                className="outline-button !py-1.5 !px-3 font-medium text-[#38524a] hover:text-[#9a6e52]"
+                className="outline-button !py-1.5 !px-3 font-medium text-[#4a2536] hover:text-[#a84e68]"
               >
                 ← Vitrine
               </button>
@@ -137,8 +137,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveView('dashboard')}
                 className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
                   activeView === 'dashboard'
-                    ? 'bg-[#253a35] text-[#fffaf2] font-semibold shadow-xs'
-                    : 'text-[#52615a] hover:text-[#253a35] hover:bg-[#eae3d5]'
+                    ? 'bg-[#2e1420] text-[#ffffff] font-semibold shadow-xs'
+                    : 'text-[#644855] hover:text-[#2e1420] hover:bg-[#f4e6ec]'
                 }`}
               >
                 Visão Geral
@@ -161,8 +161,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveView('pdv')}
                 className={`px-3 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer ${
                   activeView === 'pdv'
-                    ? 'bg-[#b56f55] text-white font-semibold shadow-xs'
-                    : 'bg-[#ede5d8] text-[#824f3c] hover:bg-[#e4d8c5]'
+                    ? 'bg-[#c85a78] text-white font-semibold shadow-xs'
+                    : 'bg-[#f6ebef] text-[#9c3653] hover:bg-[#eedbe2]'
                 }`}
               >
                 <ShoppingBag className="w-3.5 h-3.5" />
@@ -173,8 +173,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveView('stock')}
                 className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
                   activeView === 'stock'
-                    ? 'bg-[#253a35] text-white font-semibold'
-                    : 'text-[#52615a] hover:text-[#253a35] hover:bg-[#eae3d5]'
+                    ? 'bg-[#2e1420] text-white font-semibold'
+                    : 'text-[#644855] hover:text-[#2e1420] hover:bg-[#f4e6ec]'
                 }`}
               >
                 Estoque
@@ -184,8 +184,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveView('products')}
                 className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
                   activeView === 'products'
-                    ? 'bg-[#253a35] text-white font-semibold'
-                    : 'text-[#52615a] hover:text-[#253a35] hover:bg-[#eae3d5]'
+                    ? 'bg-[#2e1420] text-white font-semibold'
+                    : 'text-[#644855] hover:text-[#2e1420] hover:bg-[#f4e6ec]'
                 }`}
               >
                 Produtos
@@ -195,8 +195,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveView('shifts')}
                 className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
                   activeView === 'shifts'
-                    ? 'bg-[#253a35] text-white font-semibold'
-                    : 'text-[#52615a] hover:text-[#253a35] hover:bg-[#eae3d5]'
+                    ? 'bg-[#2e1420] text-white font-semibold'
+                    : 'text-[#644855] hover:text-[#2e1420] hover:bg-[#f4e6ec]'
                 }`}
               >
                 Plantões
@@ -207,8 +207,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => setActiveView('partners')}
                   className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
                     activeView === 'partners'
-                      ? 'bg-[#253a35] text-white font-semibold'
-                      : 'text-[#52615a] hover:text-[#253a35] hover:bg-[#eae3d5]'
+                      ? 'bg-[#2e1420] text-white font-semibold'
+                      : 'text-[#644855] hover:text-[#2e1420] hover:bg-[#f4e6ec]'
                   }`}
                 >
                   Parceiras
@@ -219,8 +219,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveView('financial')}
                 className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
                   activeView === 'financial'
-                    ? 'bg-[#253a35] text-white font-semibold'
-                    : 'text-[#52615a] hover:text-[#253a35] hover:bg-[#eae3d5]'
+                    ? 'bg-[#2e1420] text-white font-semibold'
+                    : 'text-[#644855] hover:text-[#2e1420] hover:bg-[#f4e6ec]'
                 }`}
               >
                 Repasses
@@ -230,8 +230,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveView('reports')}
                 className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
                   activeView === 'reports'
-                    ? 'bg-[#253a35] text-white font-semibold'
-                    : 'text-[#52615a] hover:text-[#253a35] hover:bg-[#eae3d5]'
+                    ? 'bg-[#2e1420] text-white font-semibold'
+                    : 'text-[#644855] hover:text-[#2e1420] hover:bg-[#f4e6ec]'
                 }`}
               >
                 Relatórios
@@ -242,8 +242,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => setActiveView('audit')}
                   className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
                     activeView === 'audit'
-                      ? 'bg-[#253a35] text-white font-semibold'
-                      : 'text-[#52615a] hover:text-[#253a35] hover:bg-[#eae3d5]'
+                      ? 'bg-[#2e1420] text-white font-semibold'
+                      : 'text-[#644855] hover:text-[#2e1420] hover:bg-[#f4e6ec]'
                   }`}
                 >
                   Auditoria
@@ -251,7 +251,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </nav>
           ) : (
-            <div className="hidden md:flex items-center space-x-7 text-[13px] font-medium text-[#52615a]">
+            <div className="hidden md:flex items-center space-x-7 text-[13px] font-medium text-[#644855]">
               <a
                 href="#sobre"
                 onClick={(e) => {
@@ -261,7 +261,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setTimeout(() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' }), 100);
                   }
                 }}
-                className="hover:text-[#b56f55] transition-colors cursor-pointer"
+                className="hover:text-[#c85a78] transition-colors cursor-pointer"
               >
                 O espaço
               </a>
@@ -275,7 +275,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setTimeout(() => document.getElementById('marcas')?.scrollIntoView({ behavior: 'smooth' }), 100);
                   }
                 }}
-                className="hover:text-[#b56f55] transition-colors cursor-pointer"
+                className="hover:text-[#c85a78] transition-colors cursor-pointer"
               >
                 Marcas
               </a>
@@ -289,7 +289,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setTimeout(() => document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' }), 100);
                   }
                 }}
-                className="hover:text-[#b56f55] transition-colors cursor-pointer"
+                className="hover:text-[#c85a78] transition-colors cursor-pointer"
               >
                 Catálogo
               </a>
@@ -303,7 +303,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setTimeout(() => document.getElementById('visite')?.scrollIntoView({ behavior: 'smooth' }), 100);
                   }
                 }}
-                className="hover:text-[#b56f55] transition-colors cursor-pointer"
+                className="hover:text-[#c85a78] transition-colors cursor-pointer"
               >
                 Visite
               </a>
@@ -311,10 +311,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               {onOpenPresentation && (
                 <button
                   onClick={onOpenPresentation}
-                  className="hover:text-[#b56f55] transition-colors cursor-pointer flex items-center gap-1 text-[12px] font-mono-craft text-[#a66e53]"
+                  className="hover:text-[#c85a78] transition-colors cursor-pointer flex items-center gap-1 text-[12px] font-mono-craft text-[#b84c6c]"
                   title="Dossiê Institucional P&B"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-[#b56f55]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#c85a78]" />
                   <span>Dossiê</span>
                 </button>
               )}
@@ -330,7 +330,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => setActiveView('dashboard')}
                   className="outline-button hidden sm:inline-flex"
                 >
-                  <LayoutDashboard className="w-3.5 h-3.5 text-[#b56f55]" />
+                  <LayoutDashboard className="w-3.5 h-3.5 text-[#c85a78]" />
                   <span>Gestão</span>
                 </button>
 
@@ -354,12 +354,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Notification Bell */}
             <button
               onClick={onOpenNotifications}
-              className="relative p-2 text-[#52615a] hover:text-[#253a35] hover:bg-[#ede5d8] rounded-full transition-colors cursor-pointer"
+              className="relative p-2 text-[#644855] hover:text-[#2e1420] hover:bg-[#f6ebef] rounded-full transition-colors cursor-pointer"
               title="Notificações em tempo real"
             >
               <Bell className="w-4 h-4" />
               {unreadNotifications > 0 && (
-                <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-[#b56f55] text-white text-[9px] font-mono-craft rounded-full flex items-center justify-center font-bold">
+                <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-[#c85a78] text-white text-[9px] font-mono-craft rounded-full flex items-center justify-center font-bold">
                   {unreadNotifications}
                 </span>
               )}
@@ -369,21 +369,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative">
               <button
                 onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                className="flex items-center gap-2 p-1 sm:px-2.5 sm:py-1 rounded-full border border-[#ded6ca] bg-[#fffaf2] hover:bg-white text-[#253a35] text-xs font-medium transition-all cursor-pointer"
+                className="flex items-center gap-2 p-1 sm:px-2.5 sm:py-1 rounded-full border border-[#edd5dc] bg-[#ffffff] hover:bg-white text-[#2e1420] text-xs font-medium transition-all cursor-pointer"
               >
                 <div
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-mono-craft font-bold ${
-                    userRole === 'ADMIN' ? 'bg-[#253a35]' : 'bg-[#b56f55]'
+                    userRole === 'ADMIN' ? 'bg-[#2e1420]' : 'bg-[#c85a78]'
                   }`}
                 >
                   {userRole === 'ADMIN' ? 'ADM' : currentPartner?.brandName.charAt(0) || 'P'}
                 </div>
                 <div className="text-left hidden xl:block leading-none pr-1">
-                  <span className="font-semibold text-[#253a35] text-[11px] block">
+                  <span className="font-semibold text-[#2e1420] text-[11px] block">
                     {userRole === 'ADMIN' ? 'Coordenação' : currentPartner?.brandName}
                   </span>
                 </div>
-                <ChevronDown className="w-3 h-3 text-[#87968e]" />
+                <ChevronDown className="w-3 h-3 text-[#997e8a]" />
               </button>
 
               {roleDropdownOpen && (
@@ -433,7 +433,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </div>
                   </button>
 
-                  <div className="px-3 py-1.5 text-[10px] font-semibold text-[#7d8c83] uppercase tracking-wider border-t border-[#ded6ca] mt-1 font-mono-craft">
+                  <div className="px-3 py-1.5 text-[10px] font-semibold text-[#8e727e] uppercase tracking-wider border-t border-[#edd5dc] mt-1 font-mono-craft">
                     Marcas Parceiras (Visão Restrita)
                   </div>
 
@@ -443,10 +443,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <button
                         key={p.id}
                         onClick={() => handleRoleChange('PARTNER', p.id)}
-                        className={`w-full text-left px-3 py-2 flex items-center justify-between text-xs hover:bg-[#ede5d8]/50 cursor-pointer ${
+                        className={`w-full text-left px-3 py-2 flex items-center justify-between text-xs hover:bg-[#f6ebef]/50 cursor-pointer ${
                           userRole === 'PARTNER' && currentPartner?.id === p.id
-                            ? 'bg-[#ede5d8] text-[#253a35] font-semibold'
-                            : 'text-[#253a35]'
+                            ? 'bg-[#f6ebef] text-[#2e1420] font-semibold'
+                            : 'text-[#2e1420]'
                         }`}
                       >
                         <div className="flex items-center gap-2 truncate">
@@ -456,27 +456,27 @@ export const Navbar: React.FC<NavbarProps> = ({
                             loading="lazy"
                             referrerPolicy="no-referrer"
                             onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
-                            className="w-6 h-6 rounded-full object-cover border border-[#ded6ca]"
+                            className="w-6 h-6 rounded-full object-cover border border-[#edd5dc]"
                           />
                           <div className="truncate">
                             <div className="truncate font-display font-medium">{p.brandName}</div>
-                            <div className="text-[10px] text-[#7d8c83] truncate font-mono-craft">{p.category}</div>
+                            <div className="text-[10px] text-[#8e727e] truncate font-mono-craft">{p.category}</div>
                           </div>
                         </div>
                         {userRole === 'PARTNER' && currentPartner?.id === p.id && (
-                          <CheckCircle2 className="w-4 h-4 text-[#b56f55] shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-[#c85a78] shrink-0" />
                         )}
                       </button>
                     ))}
                   </div>
 
-                  <div className="border-t border-[#ded6ca] pt-1 mt-1 px-3 py-1 font-mono-craft">
+                  <div className="border-t border-[#edd5dc] pt-1 mt-1 px-3 py-1 font-mono-craft">
                     <button
                       onClick={() => {
                         setRoleDropdownOpen(false);
                         onOpenAuth();
                       }}
-                      className="w-full text-center text-xs text-[#b56f55] hover:text-[#824f3c] py-1 font-medium cursor-pointer"
+                      className="w-full text-center text-xs text-[#c85a78] hover:text-[#9c3653] py-1 font-medium cursor-pointer"
                     >
                       Abrir Tela de Login P&B
                     </button>
@@ -489,14 +489,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Mobile Navigation Row */}
         {activeView === 'landing' || activeView === 'store' ? (
-          <div className="md:hidden flex items-center space-x-2 py-2 overflow-x-auto text-xs border-t border-[#ded6ca] no-scrollbar font-mono-craft">
+          <div className="md:hidden flex items-center space-x-2 py-2 overflow-x-auto text-xs border-t border-[#edd5dc] no-scrollbar font-mono-craft">
             <button
               onClick={() => {
                 setActiveView('landing');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className={`px-3 py-1.5 rounded-full shrink-0 font-bold transition-all cursor-pointer ${
-                activeView === 'landing' ? 'bg-[#253a35] text-[#fffaf2] shadow-xs' : 'bg-[#ede5d8] text-[#253a35]'
+                activeView === 'landing' ? 'bg-[#2e1420] text-[#ffffff] shadow-xs' : 'bg-[#f6ebef] text-[#2e1420]'
               }`}
             >
               Dossiê Institucional
@@ -506,8 +506,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveView('store')}
               className={`px-3 py-1.5 rounded-full shrink-0 font-bold flex items-center gap-1 transition-all cursor-pointer ${
                 activeView === 'store'
-                  ? 'bg-[#253a35] text-[#fffaf2] shadow-xs ring-2 ring-[#3c6b54]/50'
-                  : 'bg-[#ede5d8] text-[#b56f55] border border-[#ded6ca]'
+                  ? 'bg-[#2e1420] text-[#ffffff] shadow-xs ring-2 ring-[#3c6b54]/50'
+                  : 'bg-[#f6ebef] text-[#c85a78] border border-[#edd5dc]'
               }`}
             >
               <ShoppingBag className="w-3.5 h-3.5" />
@@ -521,7 +521,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   document.getElementById('marcas')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="px-2.5 py-1.5 rounded-full shrink-0 bg-[#ede5d8]/60 text-[#253a35] font-medium cursor-pointer"
+              className="px-2.5 py-1.5 rounded-full shrink-0 bg-[#f6ebef]/60 text-[#2e1420] font-medium cursor-pointer"
             >
               14 Ateliês
             </button>
@@ -533,7 +533,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   document.getElementById('acoes')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="px-2.5 py-1.5 rounded-full shrink-0 bg-[#ede5d8]/60 text-[#253a35] font-medium cursor-pointer"
+              className="px-2.5 py-1.5 rounded-full shrink-0 bg-[#f6ebef]/60 text-[#2e1420] font-medium cursor-pointer"
             >
               Ações Sociais
             </button>
@@ -545,7 +545,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   document.getElementById('loja-fisica')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="px-2.5 py-1.5 rounded-full shrink-0 bg-[#ede5d8]/60 text-[#253a35] font-medium cursor-pointer"
+              className="px-2.5 py-1.5 rounded-full shrink-0 bg-[#f6ebef]/60 text-[#2e1420] font-medium cursor-pointer"
             >
               Rio Anil Shopping
             </button>
@@ -557,22 +557,22 @@ export const Navbar: React.FC<NavbarProps> = ({
                   document.getElementById('parcerias-b2b')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="px-2.5 py-1.5 rounded-full shrink-0 bg-[#ede5d8]/60 text-[#253a35] font-medium cursor-pointer"
+              className="px-2.5 py-1.5 rounded-full shrink-0 bg-[#f6ebef]/60 text-[#2e1420] font-medium cursor-pointer"
             >
               Parcerias B2B
             </button>
           </div>
         ) : (
-          <div className="md:hidden flex items-center space-x-2 py-2 overflow-x-auto text-xs border-t border-[#ded6ca] no-scrollbar font-mono-craft">
+          <div className="md:hidden flex items-center space-x-2 py-2 overflow-x-auto text-xs border-t border-[#edd5dc] no-scrollbar font-mono-craft">
             <button
               onClick={() => setActiveView('landing')}
-              className="px-2.5 py-1 rounded-full shrink-0 bg-[#ede5d8] text-[#253a35] font-bold border border-[#ded6ca]"
+              className="px-2.5 py-1 rounded-full shrink-0 bg-[#f6ebef] text-[#2e1420] font-bold border border-[#edd5dc]"
             >
               Ver Dossiê
             </button>
             <button
               onClick={() => setActiveView('store')}
-              className="px-2.5 py-1 rounded-full shrink-0 bg-[#ede5d8] text-[#b56f55] font-bold border border-[#ded6ca] flex items-center gap-1"
+              className="px-2.5 py-1 rounded-full shrink-0 bg-[#f6ebef] text-[#c85a78] font-bold border border-[#edd5dc] flex items-center gap-1"
             >
               <ShoppingBag className="w-3 h-3" />
               Loja
@@ -580,7 +580,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setActiveView('dashboard')}
               className={`px-2.5 py-1 rounded-full shrink-0 ${
-                activeView === 'dashboard' ? 'bg-[#253a35] text-white font-bold' : 'text-[#52615a]'
+                activeView === 'dashboard' ? 'bg-[#2e1420] text-white font-bold' : 'text-[#644855]'
               }`}
             >
               Dashboard
@@ -599,7 +599,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setActiveView('pdv')}
               className={`px-2.5 py-1 rounded-full shrink-0 font-semibold ${
-                activeView === 'pdv' ? 'bg-[#b56f55] text-white' : 'bg-[#ede5d8] text-[#b56f55]'
+                activeView === 'pdv' ? 'bg-[#c85a78] text-white' : 'bg-[#f6ebef] text-[#c85a78]'
               }`}
             >
               PDV Balcão
@@ -607,7 +607,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setActiveView('stock')}
               className={`px-2.5 py-1 rounded-full shrink-0 ${
-                activeView === 'stock' ? 'bg-[#253a35] text-white font-bold' : 'text-[#52615a]'
+                activeView === 'stock' ? 'bg-[#2e1420] text-white font-bold' : 'text-[#644855]'
               }`}
             >
               Estoque
@@ -615,7 +615,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setActiveView('products')}
               className={`px-2.5 py-1 rounded-full shrink-0 ${
-                activeView === 'products' ? 'bg-[#253a35] text-white font-bold' : 'text-[#52615a]'
+                activeView === 'products' ? 'bg-[#2e1420] text-white font-bold' : 'text-[#644855]'
               }`}
             >
               Produtos
@@ -623,7 +623,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setActiveView('shifts')}
               className={`px-2.5 py-1 rounded-full shrink-0 ${
-                activeView === 'shifts' ? 'bg-[#253a35] text-white font-bold' : 'text-[#52615a]'
+                activeView === 'shifts' ? 'bg-[#2e1420] text-white font-bold' : 'text-[#644855]'
               }`}
             >
               Expedientes
@@ -632,7 +632,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => setActiveView('partners')}
                 className={`px-2.5 py-1 rounded-full shrink-0 ${
-                  activeView === 'partners' ? 'bg-[#253a35] text-white font-bold' : 'text-[#52615a]'
+                  activeView === 'partners' ? 'bg-[#2e1420] text-white font-bold' : 'text-[#644855]'
                 }`}
               >
                 Parceiros
@@ -641,7 +641,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setActiveView('financial')}
               className={`px-2.5 py-1 rounded-full shrink-0 ${
-                activeView === 'financial' ? 'bg-[#253a35] text-white font-bold' : 'text-[#52615a]'
+                activeView === 'financial' ? 'bg-[#2e1420] text-white font-bold' : 'text-[#644855]'
               }`}
             >
               Financeiro
@@ -649,7 +649,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setActiveView('reports')}
               className={`px-2.5 py-1 rounded-full shrink-0 ${
-                activeView === 'reports' ? 'bg-[#253a35] text-white font-bold' : 'text-[#52615a]'
+                activeView === 'reports' ? 'bg-[#2e1420] text-white font-bold' : 'text-[#644855]'
               }`}
             >
               Relatórios

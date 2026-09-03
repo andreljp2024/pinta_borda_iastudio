@@ -60,13 +60,13 @@ export const ShiftsView: React.FC = () => {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#b56f55] font-mono-craft">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#c85a78] font-mono-craft">
             Escala & Presença
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-[#253a35]">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-[#2e1420]">
             Gestão de Expedientes (Plantão)
           </h2>
-          <p className="text-xs sm:text-sm text-[#52615a] mt-1 font-light">
+          <p className="text-xs sm:text-sm text-[#644855] mt-1 font-light">
             Controle de turnos operacionais no balcão da loja do Rio Anil Shopping.
           </p>
         </div>
@@ -78,7 +78,7 @@ export const ShiftsView: React.FC = () => {
                 onClick={() => setShowHandoverModal(true)}
                 className="outline-button !py-2 !px-3.5 text-xs flex items-center gap-1.5"
               >
-                <ArrowRightLeft className="w-4 h-4 text-[#b56f55]" />
+                <ArrowRightLeft className="w-4 h-4 text-[#c85a78]" />
                 Passar Plantão
               </button>
               <button
@@ -106,11 +106,11 @@ export const ShiftsView: React.FC = () => {
       </div>
 
       {/* Active Shift Card */}
-      <div className="bg-[#fffaf2] rounded-3xl p-6 border border-[#ded6ca] shadow-2xs relative overflow-hidden">
-        <div className="flex items-center justify-between pb-4 border-b border-[#ded6ca]">
+      <div className="bg-[#ffffff] rounded-3xl p-6 border border-[#edd5dc] shadow-2xs relative overflow-hidden">
+        <div className="flex items-center justify-between pb-4 border-b border-[#edd5dc]">
           <div className="flex items-center gap-2.5">
-            <div className={`w-3 h-3 rounded-full ${activeShift ? 'bg-[#3c6b54] animate-pulse' : 'bg-[#ded6ca]'}`} />
-            <h3 className="font-display font-medium text-lg text-[#253a35]">
+            <div className={`w-3 h-3 rounded-full ${activeShift ? 'bg-[#3c6b54] animate-pulse' : 'bg-[#edd5dc]'}`} />
+            <h3 className="font-display font-medium text-lg text-[#2e1420]">
               {activeShift ? 'Expediente em Andamento Agora' : 'Nenhum Expediente Ativo'}
             </h3>
           </div>
@@ -124,40 +124,40 @@ export const ShiftsView: React.FC = () => {
         {activeShift ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
             <div>
-              <span className="text-[11px] text-[#7d8c83] uppercase font-semibold font-mono-craft">Operador Atual</span>
-              <div className="text-base font-bold text-[#253a35] mt-0.5 font-display">{activeShift.operatorName}</div>
-              <span className="text-xs text-[#b56f55] font-medium font-mono-craft">{activeShift.partnerName}</span>
+              <span className="text-[11px] text-[#8e727e] uppercase font-semibold font-mono-craft">Operador Atual</span>
+              <div className="text-base font-bold text-[#2e1420] mt-0.5 font-display">{activeShift.operatorName}</div>
+              <span className="text-xs text-[#c85a78] font-medium font-mono-craft">{activeShift.partnerName}</span>
             </div>
 
             <div>
-              <span className="text-[11px] text-[#7d8c83] uppercase font-semibold font-mono-craft">Entrada</span>
-              <div className="text-base font-bold text-[#253a35] mt-0.5 font-mono-craft">
+              <span className="text-[11px] text-[#8e727e] uppercase font-semibold font-mono-craft">Entrada</span>
+              <div className="text-base font-bold text-[#2e1420] mt-0.5 font-mono-craft">
                 {new Date(activeShift.startTime).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
               </div>
-              <span className="text-xs text-[#7d8c83] font-mono-craft">
+              <span className="text-xs text-[#8e727e] font-mono-craft">
                 {new Date(activeShift.startTime).toLocaleDateString('pt-BR')}
               </span>
             </div>
 
             <div>
-              <span className="text-[11px] text-[#7d8c83] uppercase font-semibold font-mono-craft">Vendas no Turno</span>
-              <div className="text-base font-bold text-[#253a35] mt-0.5 flex items-center gap-1.5 font-mono-craft">
-                <ShoppingBag className="w-4 h-4 text-[#7d8c83]" />
+              <span className="text-[11px] text-[#8e727e] uppercase font-semibold font-mono-craft">Vendas no Turno</span>
+              <div className="text-base font-bold text-[#2e1420] mt-0.5 flex items-center gap-1.5 font-mono-craft">
+                <ShoppingBag className="w-4 h-4 text-[#8e727e]" />
                 {activeShift.salesCount} vendas
               </div>
-              <span className="text-xs text-[#7d8c83] font-mono-craft">registradas no PDV</span>
+              <span className="text-xs text-[#8e727e] font-mono-craft">registradas no PDV</span>
             </div>
 
             <div>
-              <span className="text-[11px] text-[#7d8c83] uppercase font-semibold font-mono-craft">Volume Movimentado</span>
+              <span className="text-[11px] text-[#8e727e] uppercase font-semibold font-mono-craft">Volume Movimentado</span>
               <div className="text-lg font-bold text-[#1f4e38] mt-0.5 font-mono-craft">
                 R$ {activeShift.totalSalesAmount.toFixed(2).replace('.', ',')}
               </div>
-              <span className="text-xs text-[#7d8c83] font-mono-craft">faturamento coletivo</span>
+              <span className="text-xs text-[#8e727e] font-mono-craft">faturamento coletivo</span>
             </div>
           </div>
         ) : (
-          <div className="py-8 text-center text-[#52615a] text-xs sm:text-sm font-light">
+          <div className="py-8 text-center text-[#644855] text-xs sm:text-sm font-light">
             O balcão presencial no Rio Anil Shopping está aguardando abertura de turno.
             <div className="mt-4">
               <button
@@ -172,22 +172,22 @@ export const ShiftsView: React.FC = () => {
       </div>
 
       {/* Shifts History Table (PRD Section 13 e 29.3) */}
-      <div className="bg-[#fffaf2] rounded-3xl border border-[#ded6ca] shadow-2xs overflow-hidden">
-        <div className="p-4 sm:p-5 border-b border-[#ded6ca] flex items-center justify-between">
+      <div className="bg-[#ffffff] rounded-3xl border border-[#edd5dc] shadow-2xs overflow-hidden">
+        <div className="p-4 sm:p-5 border-b border-[#edd5dc] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-[#b56f55]" />
-            <h3 className="font-display font-medium text-base text-[#253a35]">
+            <Clock className="w-5 h-5 text-[#c85a78]" />
+            <h3 className="font-display font-medium text-base text-[#2e1420]">
               Histórico de Expedientes & Plantões
             </h3>
           </div>
-          <span className="text-xs text-[#7d8c83] font-mono-craft">
+          <span className="text-xs text-[#8e727e] font-mono-craft">
             {shifts.length} expedientes registrados
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#ede5d8]/60 border-b border-[#ded6ca] text-[#52615a] uppercase tracking-wider text-[10px] font-mono-craft">
+            <thead className="bg-[#f6ebef]/60 border-b border-[#edd5dc] text-[#644855] uppercase tracking-wider text-[10px] font-mono-craft">
               <tr>
                 <th className="py-3 px-4 font-semibold">Data & Turno</th>
                 <th className="py-3 px-4 font-semibold">Operador / Marca</th>
@@ -198,32 +198,32 @@ export const ShiftsView: React.FC = () => {
                 <th className="py-3 px-4 font-semibold">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#ded6ca] text-[#253a35]">
+            <tbody className="divide-y divide-[#edd5dc] text-[#2e1420]">
               {shifts.map((shift) => {
                 const isOngoing = shift.status === 'ATIVO';
                 return (
-                  <tr key={shift.id} className="hover:bg-[#ede5d8]/40 transition-colors">
-                    <td className="py-3 px-4 font-medium text-[#253a35] font-mono-craft">
+                  <tr key={shift.id} className="hover:bg-[#f6ebef]/40 transition-colors">
+                    <td className="py-3 px-4 font-medium text-[#2e1420] font-mono-craft">
                       {new Date(shift.startTime).toLocaleDateString('pt-BR')}
                     </td>
                     <td className="py-3 px-4">
-                      <div className="font-medium text-[#253a35] font-display">{shift.operatorName}</div>
-                      <div className="text-[10px] text-[#b56f55] font-mono-craft">{shift.partnerName}</div>
+                      <div className="font-medium text-[#2e1420] font-display">{shift.operatorName}</div>
+                      <div className="text-[10px] text-[#c85a78] font-mono-craft">{shift.partnerName}</div>
                     </td>
-                    <td className="py-3 px-4 font-mono-craft text-[#52615a]">
+                    <td className="py-3 px-4 font-mono-craft text-[#644855]">
                       {new Date(shift.startTime).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                       {' - '}
                       {shift.endTime
                         ? new Date(shift.endTime).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
                         : 'Em andamento'}
                     </td>
-                    <td className="py-3 px-4 text-[#7d8c83] font-mono-craft">
+                    <td className="py-3 px-4 text-[#8e727e] font-mono-craft">
                       {shift.durationMinutes ? `${Math.round(shift.durationMinutes / 60)}h ${shift.durationMinutes % 60}m` : 'Ativo'}
                     </td>
-                    <td className="py-3 px-4 text-center font-bold text-[#253a35] font-mono-craft">
+                    <td className="py-3 px-4 text-center font-bold text-[#2e1420] font-mono-craft">
                       {shift.salesCount}
                     </td>
-                    <td className="py-3 px-4 text-right font-bold text-[#253a35] font-mono-craft">
+                    <td className="py-3 px-4 text-right font-bold text-[#2e1420] font-mono-craft">
                       R$ {shift.totalSalesAmount.toFixed(2).replace('.', ',')}
                     </td>
                     <td className="py-3 px-4">
@@ -231,7 +231,7 @@ export const ShiftsView: React.FC = () => {
                         className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold font-mono-craft ${
                           isOngoing
                             ? 'bg-[#dff0e6] text-[#1f4e38] border border-[#bcdbc7]'
-                            : 'bg-[#ede5d8] text-[#52615a]'
+                            : 'bg-[#f6ebef] text-[#644855]'
                         }`}
                       >
                         {shift.status}
@@ -247,18 +247,18 @@ export const ShiftsView: React.FC = () => {
 
       {/* Start Shift Modal */}
       {showStartModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/60 backdrop-blur-xs p-4">
-          <div className="bg-[#fffaf2] rounded-3xl max-w-md w-full shadow-2xl border border-[#ded6ca] p-6 space-y-4 animate-in fade-in zoom-in-95">
-            <h3 className="font-display font-medium text-lg text-[#253a35]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2e1420]/60 backdrop-blur-xs p-4">
+          <div className="bg-[#ffffff] rounded-3xl max-w-md w-full shadow-2xl border border-[#edd5dc] p-6 space-y-4 animate-in fade-in zoom-in-95">
+            <h3 className="font-display font-medium text-lg text-[#2e1420]">
               Iniciar Expediente no Balcão
             </h3>
-            <p className="text-xs text-[#52615a] font-light">
+            <p className="text-xs text-[#644855] font-light">
               Informe quem é o artesão responsável pelo atendimento presencial no Rio Anil Shopping.
             </p>
 
             <form onSubmit={handleStartShiftSubmit} className="space-y-3 text-xs">
               <div>
-                <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Marca do Ateliê</label>
+                <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Marca do Ateliê</label>
                 <select
                   value={selectedPartnerId}
                   onChange={(e) => {
@@ -266,7 +266,7 @@ export const ShiftsView: React.FC = () => {
                     const p = partners.find((pt) => pt.id === e.target.value);
                     if (p) setOperatorName(p.ownerName);
                   }}
-                  className="w-full p-2.5 bg-white rounded-xl border border-[#ded6ca] text-xs focus:outline-none"
+                  className="w-full p-2.5 bg-white rounded-xl border border-[#edd5dc] text-xs focus:outline-none"
                 >
                   {partners.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -277,33 +277,33 @@ export const ShiftsView: React.FC = () => {
               </div>
 
               <div>
-                <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Nome do Operador</label>
+                <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Nome do Operador</label>
                 <input
                   type="text"
                   value={operatorName}
                   onChange={(e) => setOperatorName(e.target.value)}
                   required
                   placeholder="Nome completo de quem assume"
-                  className="w-full p-2.5 bg-white border border-[#ded6ca] rounded-xl text-xs focus:outline-none"
+                  className="w-full p-2.5 bg-white border border-[#edd5dc] rounded-xl text-xs focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Observações do Turno</label>
+                <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Observações do Turno</label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Ex: Turno da manhã, evento especial no shopping..."
                   rows={2}
-                  className="w-full p-2 bg-white border border-[#ded6ca] rounded-xl text-xs focus:outline-none"
+                  className="w-full p-2 bg-white border border-[#edd5dc] rounded-xl text-xs focus:outline-none"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-[#ded6ca] font-mono-craft">
+              <div className="flex justify-end gap-2 pt-3 border-t border-[#edd5dc] font-mono-craft">
                 <button
                   type="button"
                   onClick={() => setShowStartModal(false)}
-                  className="px-3 py-2 text-[#52615a] hover:text-[#253a35] font-semibold cursor-pointer"
+                  className="px-3 py-2 text-[#644855] hover:text-[#2e1420] font-semibold cursor-pointer"
                 >
                   Cancelar
                 </button>
@@ -321,18 +321,18 @@ export const ShiftsView: React.FC = () => {
 
       {/* Handover Modal */}
       {showHandoverModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/60 backdrop-blur-xs p-4">
-          <div className="bg-[#fffaf2] rounded-3xl max-w-md w-full shadow-2xl border border-[#ded6ca] p-6 space-y-4 animate-in fade-in zoom-in-95">
-            <h3 className="font-display font-medium text-lg text-[#253a35]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2e1420]/60 backdrop-blur-xs p-4">
+          <div className="bg-[#ffffff] rounded-3xl max-w-md w-full shadow-2xl border border-[#edd5dc] p-6 space-y-4 animate-in fade-in zoom-in-95">
+            <h3 className="font-display font-medium text-lg text-[#2e1420]">
               Passagem de Plantão
             </h3>
-            <p className="text-xs text-[#52615a] font-light">
-              O turno de <strong className="text-[#253a35]">{activeShift?.operatorName}</strong> será encerrado e transferido para o novo operador.
+            <p className="text-xs text-[#644855] font-light">
+              O turno de <strong className="text-[#2e1420]">{activeShift?.operatorName}</strong> será encerrado e transferido para o novo operador.
             </p>
 
             <form onSubmit={handleHandoverSubmit} className="space-y-3 text-xs">
               <div>
-                <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Novo Operador / Marca</label>
+                <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Novo Operador / Marca</label>
                 <select
                   value={selectedPartnerId}
                   onChange={(e) => {
@@ -340,7 +340,7 @@ export const ShiftsView: React.FC = () => {
                     const p = partners.find((pt) => pt.id === e.target.value);
                     if (p) setOperatorName(p.ownerName);
                   }}
-                  className="w-full p-2.5 bg-white rounded-xl border border-[#ded6ca] text-xs focus:outline-none"
+                  className="w-full p-2.5 bg-white rounded-xl border border-[#edd5dc] text-xs focus:outline-none"
                 >
                   {partners.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -351,21 +351,21 @@ export const ShiftsView: React.FC = () => {
               </div>
 
               <div>
-                <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Nome do Atendente</label>
+                <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Nome do Atendente</label>
                 <input
                   type="text"
                   value={operatorName}
                   onChange={(e) => setOperatorName(e.target.value)}
                   required
-                  className="w-full p-2.5 bg-white border border-[#ded6ca] rounded-xl text-xs focus:outline-none"
+                  className="w-full p-2.5 bg-white border border-[#edd5dc] rounded-xl text-xs focus:outline-none"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-[#ded6ca] font-mono-craft">
+              <div className="flex justify-end gap-2 pt-3 border-t border-[#edd5dc] font-mono-craft">
                 <button
                   type="button"
                   onClick={() => setShowHandoverModal(false)}
-                  className="px-3 py-2 text-[#52615a] hover:text-[#253a35] font-semibold cursor-pointer"
+                  className="px-3 py-2 text-[#644855] hover:text-[#2e1420] font-semibold cursor-pointer"
                 >
                   Cancelar
                 </button>

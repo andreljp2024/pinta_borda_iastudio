@@ -78,10 +78,10 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/60 backdrop-blur-xs p-4 overflow-y-auto selection:bg-[#ded6ca] selection:text-[#253a35]">
-      <div className="bg-[#fffaf2] rounded-3xl max-w-xl w-full shadow-2xl border border-[#ded6ca] overflow-hidden relative animate-in fade-in zoom-in-95 my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2e1420]/60 backdrop-blur-xs p-4 overflow-y-auto selection:bg-[#edd5dc] selection:text-[#2e1420]">
+      <div className="bg-[#ffffff] rounded-3xl max-w-xl w-full shadow-2xl border border-[#edd5dc] overflow-hidden relative animate-in fade-in zoom-in-95 my-8">
         {/* Header */}
-        <div className="bg-[#253a35] text-[#fffaf2] p-6 relative border-b border-[#1f332d]">
+        <div className="bg-[#2e1420] text-[#ffffff] p-6 relative border-b border-[#2a121d]">
           <button
             onClick={resetAndClose}
             className="absolute top-4 right-4 text-[#c9d9d0] hover:text-white bg-white/10 hover:bg-white/20 p-1.5 rounded-full transition-colors cursor-pointer"
@@ -89,13 +89,13 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
             <X className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center gap-2 text-[#d4ba84] text-xs font-semibold uppercase tracking-wider mb-2 font-mono-craft">
+          <div className="flex items-center gap-2 text-[#dc9b86] text-xs font-semibold uppercase tracking-wider mb-2 font-mono-craft">
             <Sparkles className="w-4 h-4" />
             <span>Cadastro de Voluntárias & Novos Ateliês</span>
           </div>
 
-          <h3 className="font-display text-2xl sm:text-3xl font-medium leading-tight text-[#fffaf2]">
-            Faça Parte do pinta <em className="italic text-[#d4ba84]">e</em> borda
+          <h3 className="font-display text-2xl sm:text-3xl font-medium leading-tight text-[#ffffff]">
+            Faça Parte do pinta <em className="italic text-[#dc9b86]">e</em> borda
           </h3>
           <p className="text-[#c9d9d0] text-xs sm:text-sm mt-1 leading-relaxed font-light">
             Una sua paixão pelo artesanato ao propósito solidário. Exponha no Rio Anil Shopping e participe das nossas ações sociais itinerantes.
@@ -106,8 +106,8 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
         <div className="p-6">
           {!submitted ? (
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="p-3.5 bg-[#ede5d8]/60 rounded-2xl border border-[#ded6ca] text-xs text-[#253a35] flex items-start gap-2.5">
-                <ShieldCheck className="w-5 h-5 text-[#b56f55] shrink-0 mt-0.5" />
+              <div className="p-3.5 bg-[#f6ebef]/60 rounded-2xl border border-[#edd5dc] text-xs text-[#2e1420] flex items-start gap-2.5">
+                <ShieldCheck className="w-5 h-5 text-[#c85a78] shrink-0 mt-0.5" />
                 <div className="leading-snug">
                   <strong>Regra Institucional de Ingresso:</strong> Conforme nosso dossiê, todas as marcas participantes aderem ao voluntariado e ao compromisso solidário mútuo no quiosque colaborativo.
                 </div>
@@ -115,7 +115,7 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#253a35] mb-1 font-mono-craft">
+                  <label className="block text-xs font-semibold text-[#2e1420] mb-1 font-mono-craft">
                     Seu Nome Completo *
                   </label>
                   <input
@@ -124,12 +124,12 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Ex: Maria Clara Silva"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] bg-white text-xs text-[#253a35] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] bg-white text-xs text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#253a35] mb-1 font-mono-craft">
+                  <label className="block text-xs font-semibold text-[#2e1420] mb-1 font-mono-craft">
                     Nome do Ateliê / Marca
                   </label>
                   <input
@@ -137,14 +137,14 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
                     value={formData.brandName}
                     onChange={(e) => setFormData({ ...formData, brandName: e.target.value })}
                     placeholder="Ex: Ateliê Sol da Ilha"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] bg-white text-xs text-[#253a35] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] bg-white text-xs text-[#2e1420] focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#253a35] mb-1 font-mono-craft">
+                  <label className="block text-xs font-semibold text-[#2e1420] mb-1 font-mono-craft">
                     WhatsApp (com DDD) *
                   </label>
                   <input
@@ -153,12 +153,12 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
                     value={formData.whatsapp}
                     onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
                     placeholder="(98) 99999-9999"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] bg-white text-xs text-[#253a35] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] bg-white text-xs text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#253a35] mb-1 font-mono-craft">
+                  <label className="block text-xs font-semibold text-[#2e1420] mb-1 font-mono-craft">
                     Instagram Oficial (@)
                   </label>
                   <input
@@ -166,20 +166,20 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
                     value={formData.instagram}
                     onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
                     placeholder="@seuatelie"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] bg-white text-xs text-[#253a35] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] bg-white text-xs text-[#2e1420] focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#253a35] mb-1 font-mono-craft">
+                  <label className="block text-xs font-semibold text-[#2e1420] mb-1 font-mono-craft">
                     Técnica / Segmento Manual *
                   </label>
                   <select
                     value={formData.craftType}
                     onChange={(e) => setFormData({ ...formData, craftType: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] bg-white text-xs text-[#253a35] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] bg-white text-xs text-[#2e1420] focus:outline-none"
                   >
                     <option value="Arte, Pintura & Azulejaria">Arte, Pintura & Azulejaria</option>
                     <option value="Biojoias & Acessórios Étnicos">Biojoias & Acessórios Étnicos</option>
@@ -194,13 +194,13 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#253a35] mb-1 font-mono-craft">
+                  <label className="block text-xs font-semibold text-[#2e1420] mb-1 font-mono-craft">
                     Como deseja participar? *
                   </label>
                   <select
                     value={formData.modality}
                     onChange={(e) => setFormData({ ...formData, modality: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] bg-white text-xs text-[#253a35] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] bg-white text-xs text-[#2e1420] focus:outline-none"
                   >
                     <option value="ambos">Expor no Shopping & Ações Sociais</option>
                     <option value="loja">Apenas Exposição no Quiosque</option>
@@ -210,13 +210,13 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#253a35] mb-1 font-mono-craft">
+                <label className="block text-xs font-semibold text-[#2e1420] mb-1 font-mono-craft">
                   Disponibilidade para Escala Colaborativa no Shopping
                 </label>
                 <select
                   value={formData.availability}
                   onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] bg-white text-xs text-[#253a35] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] bg-white text-xs text-[#2e1420] focus:outline-none"
                 >
                   <option value="Turnos semanais regulares (1 a 2 turnos/semana)">Turnos regulares (1 a 2 turnos por semana)</option>
                   <option value="Turnos flexíveis quinzenais">Turnos quinzenais</option>
@@ -226,7 +226,7 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#253a35] mb-1 font-mono-craft">
+                <label className="block text-xs font-semibold text-[#2e1420] mb-1 font-mono-craft">
                   Conte um pouco sobre sua trajetória e suas criações
                 </label>
                 <textarea
@@ -234,7 +234,7 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
                   value={formData.story}
                   onChange={(e) => setFormData({ ...formData, story: e.target.value })}
                   placeholder="Quais materiais você utiliza? Há quanto tempo cria? Por que deseja se juntar ao Pinta e Borda?"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] bg-white text-xs text-[#253a35] focus:outline-none resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] bg-white text-xs text-[#2e1420] focus:outline-none resize-none"
                 />
               </div>
 
@@ -246,7 +246,7 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
                   <Send className="w-4 h-4" />
                   <span>Enviar Pré-Inscrição</span>
                 </button>
-                <p className="text-[11px] text-[#7d8c83] text-center mt-2 font-sans">
+                <p className="text-[11px] text-[#8e727e] text-center mt-2 font-sans">
                   A curadoria do projeto entrará em contato para agendar uma conversa e visita ao espaço.
                 </p>
               </div>
@@ -258,20 +258,20 @@ export const VolunteerRegistrationModal: React.FC<VolunteerRegistrationModalProp
               </div>
 
               <div className="space-y-1">
-                <h4 className="font-display text-2xl font-medium text-[#253a35]">
+                <h4 className="font-display text-2xl font-medium text-[#2e1420]">
                   Pré-Inscrição Registrada com Sucesso!
                 </h4>
-                <p className="text-[#52615a] text-xs sm:text-sm max-w-md mx-auto leading-relaxed font-light">
+                <p className="text-[#644855] text-xs sm:text-sm max-w-md mx-auto leading-relaxed font-light">
                   Obrigada pelo interesse em somar com o <strong>Projeto Social Pinta e Borda</strong>.
                   Para acelerar sua avaliação, envie os dados diretamente à coordenação pelo WhatsApp:
                 </p>
               </div>
 
-              <div className="p-4 bg-[#ede5d8]/50 rounded-2xl border border-[#ded6ca] max-w-md mx-auto text-left text-xs space-y-1.5 font-mono-craft text-[#253a35]">
-                <div><strong className="text-[#7d8c83]">Artesã:</strong> {formData.name}</div>
-                <div><strong className="text-[#7d8c83]">Ateliê:</strong> {formData.brandName || 'Individual'}</div>
-                <div><strong className="text-[#7d8c83]">Segmento:</strong> {formData.craftType}</div>
-                <div><strong className="text-[#7d8c83]">WhatsApp:</strong> {formData.whatsapp}</div>
+              <div className="p-4 bg-[#f6ebef]/50 rounded-2xl border border-[#edd5dc] max-w-md mx-auto text-left text-xs space-y-1.5 font-mono-craft text-[#2e1420]">
+                <div><strong className="text-[#8e727e]">Artesã:</strong> {formData.name}</div>
+                <div><strong className="text-[#8e727e]">Ateliê:</strong> {formData.brandName || 'Individual'}</div>
+                <div><strong className="text-[#8e727e]">Segmento:</strong> {formData.craftType}</div>
+                <div><strong className="text-[#8e727e]">WhatsApp:</strong> {formData.whatsapp}</div>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 font-mono-craft">

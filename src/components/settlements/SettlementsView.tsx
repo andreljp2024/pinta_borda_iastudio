@@ -85,13 +85,13 @@ export const SettlementsView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#b56f55] font-mono-craft">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#c85a78] font-mono-craft">
             Transparência Financeira Auditável
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#253a35]">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420]">
             Repasses & Mensalidades
           </h2>
-          <p className="text-xs sm:text-sm text-[#7d8c83] mt-1 font-light">
+          <p className="text-xs sm:text-sm text-[#8e727e] mt-1 font-light">
             Consolidação matemática de vendas, taxas congeladas, comissões contratuais e contas a pagar/receber.
           </p>
         </div>
@@ -101,7 +101,7 @@ export const SettlementsView: React.FC = () => {
             <select
               value={selectedPartnerId}
               onChange={(e) => setSelectedPartnerId(e.target.value)}
-              className="w-full p-2.5 text-xs bg-white rounded-xl border border-[#ded6ca] text-[#253a35] focus:outline-none font-mono-craft"
+              className="w-full p-2.5 text-xs bg-white rounded-xl border border-[#edd5dc] text-[#2e1420] focus:outline-none font-mono-craft"
             >
               <option value="all">Todos os Ateliês</option>
               {partners.map((p) => (
@@ -116,54 +116,54 @@ export const SettlementsView: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs">
-          <div className="flex items-center justify-between text-xs font-mono-craft text-[#7d8c83] mb-2">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs">
+          <div className="flex items-center justify-between text-xs font-mono-craft text-[#8e727e] mb-2">
             <span>Repasses a Efetuar aos Artesãos</span>
             <ArrowDownRight className="w-4 h-4 text-[#3c6b54]" />
           </div>
           <div className="text-2xl font-bold font-mono-craft text-[#3c6b54]">
             R$ {totalNetPending.toFixed(2).replace('.', ',')}
           </div>
-          <span className="text-[11px] font-mono-craft text-[#7d8c83] mt-1 block">
+          <span className="text-[11px] font-mono-craft text-[#8e727e] mt-1 block">
             Saldo líquido auditado pronto para Pix
           </span>
         </div>
 
-        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs">
-          <div className="flex items-center justify-between text-xs font-mono-craft text-[#7d8c83] mb-2">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs">
+          <div className="flex items-center justify-between text-xs font-mono-craft text-[#8e727e] mb-2">
             <span>Mensalidades a Receber do Espaço</span>
-            <Building2 className="w-4 h-4 text-[#b56f55]" />
+            <Building2 className="w-4 h-4 text-[#c85a78]" />
           </div>
-          <div className="text-2xl font-bold font-mono-craft text-[#b56f55]">
+          <div className="text-2xl font-bold font-mono-craft text-[#c85a78]">
             R$ {totalMonthlyFeesPending.toFixed(2).replace('.', ',')}
           </div>
-          <span className="text-[11px] font-mono-craft text-[#7d8c83] mt-1 block">
+          <span className="text-[11px] font-mono-craft text-[#8e727e] mt-1 block">
             Custos fixos de locação e rateio do shopping
           </span>
         </div>
 
-        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs">
-          <div className="flex items-center justify-between text-xs font-mono-craft text-[#7d8c83] mb-2">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs">
+          <div className="flex items-center justify-between text-xs font-mono-craft text-[#8e727e] mb-2">
             <span>Regra de Taxa Congelada</span>
             <CheckCircle2 className="w-4 h-4 text-[#3c6b54]" />
           </div>
-          <div className="text-base font-display font-medium text-[#253a35]">
+          <div className="text-base font-display font-medium text-[#2e1420]">
             Auditabilidade por Venda
           </div>
-          <span className="text-[11px] text-[#52615a] mt-1 block font-light">
+          <span className="text-[11px] text-[#644855] mt-1 block font-light">
             A taxa de máquina cobrada do artesão nunca é renegociada retroativamente.
           </span>
         </div>
       </div>
 
       {/* Sub Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#ded6ca] font-mono-craft">
+      <div className="flex items-center gap-2 border-b border-[#edd5dc] font-mono-craft">
         <button
           onClick={() => setActiveTab('SETTLEMENTS')}
           className={`pb-3 px-3 text-xs font-bold transition-colors border-b-2 cursor-pointer ${
             activeTab === 'SETTLEMENTS'
-              ? 'border-[#b56f55] text-[#253a35]'
-              : 'border-transparent text-[#7d8c83] hover:text-[#253a35]'
+              ? 'border-[#c85a78] text-[#2e1420]'
+              : 'border-transparent text-[#8e727e] hover:text-[#2e1420]'
           }`}
         >
           Demonstrativos de Repasse Líquido ({visibleSettlements.length})
@@ -172,8 +172,8 @@ export const SettlementsView: React.FC = () => {
           onClick={() => setActiveTab('MONTHLY_FEES')}
           className={`pb-3 px-3 text-xs font-bold transition-colors border-b-2 cursor-pointer ${
             activeTab === 'MONTHLY_FEES'
-              ? 'border-[#b56f55] text-[#253a35]'
-              : 'border-transparent text-[#7d8c83] hover:text-[#253a35]'
+              ? 'border-[#c85a78] text-[#2e1420]'
+              : 'border-transparent text-[#8e727e] hover:text-[#2e1420]'
           }`}
         >
           Mensalidades do Espaço ({visibleMonthlyFees.length})
@@ -182,10 +182,10 @@ export const SettlementsView: React.FC = () => {
 
       {activeTab === 'SETTLEMENTS' ? (
         /* Settlements Table (PRD Section 22) */
-        <div className="bg-[#fffaf2] rounded-2xl border border-[#ded6ca] shadow-2xs overflow-hidden">
+        <div className="bg-[#ffffff] rounded-2xl border border-[#edd5dc] shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#ede5d8]/70 border-b border-[#ded6ca] text-[#7d8c83] uppercase tracking-wider text-[10px] font-mono-craft">
+              <thead className="bg-[#f6ebef]/70 border-b border-[#edd5dc] text-[#8e727e] uppercase tracking-wider text-[10px] font-mono-craft">
                 <tr>
                   <th className="py-3 px-4 font-semibold">Período / Referência</th>
                   <th className="py-3 px-4 font-semibold">Marca & Chave Pix</th>
@@ -197,27 +197,27 @@ export const SettlementsView: React.FC = () => {
                   <th className="py-3 px-4 font-semibold text-right">Ação</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#ede5d8] text-[#253a35]">
+              <tbody className="divide-y divide-[#f6ebef] text-[#2e1420]">
                 {visibleSettlements.map((st) => {
                   const partner = partners.find((p) => p.id === st.partnerId);
                   const isPaid = st.status === 'PAGO';
 
                   return (
-                    <tr key={st.id} className="hover:bg-[#ede5d8]/40 transition-colors">
-                      <td className="py-3.5 px-4 font-medium text-[#253a35]">
+                    <tr key={st.id} className="hover:bg-[#f6ebef]/40 transition-colors">
+                      <td className="py-3.5 px-4 font-medium text-[#2e1420]">
                         <div className="font-display text-sm">{st.period}</div>
-                        <div className="text-[10px] text-[#7d8c83] font-mono-craft">
+                        <div className="text-[10px] text-[#8e727e] font-mono-craft">
                           Gerado em: {new Date(st.createdAt).toLocaleDateString('pt-BR')}
                         </div>
                       </td>
                       <td className="py-3.5 px-4">
-                        <div className="font-bold text-[#253a35]">{st.partnerName}</div>
-                        <div className="flex items-center gap-1 text-[11px] text-[#7d8c83] font-mono-craft">
+                        <div className="font-bold text-[#2e1420]">{st.partnerName}</div>
+                        <div className="flex items-center gap-1 text-[11px] text-[#8e727e] font-mono-craft">
                           <span>Pix: {partner?.pixKey}</span>
                           {partner?.pixKey && (
                             <button
                               onClick={() => handleCopyPix(partner.pixKey, st.id)}
-                              className="text-[#7d8c83] hover:text-[#253a35] p-0.5 cursor-pointer"
+                              className="text-[#8e727e] hover:text-[#2e1420] p-0.5 cursor-pointer"
                               title="Copiar Chave Pix"
                             >
                               {copiedKey === st.id ? (
@@ -229,13 +229,13 @@ export const SettlementsView: React.FC = () => {
                           )}
                         </div>
                       </td>
-                      <td className="py-3.5 px-4 text-right font-semibold font-mono-craft text-[#253a35]">
+                      <td className="py-3.5 px-4 text-right font-semibold font-mono-craft text-[#2e1420]">
                         R$ {st.grossSales.toFixed(2).replace('.', ',')}
                       </td>
-                      <td className="py-3.5 px-4 text-right text-[#b56f55] font-medium font-mono-craft">
+                      <td className="py-3.5 px-4 text-right text-[#c85a78] font-medium font-mono-craft">
                         - R$ {st.paymentFeesDeducted.toFixed(2).replace('.', ',')}
                       </td>
-                      <td className="py-3.5 px-4 text-right text-[#7d8c83] font-mono-craft">
+                      <td className="py-3.5 px-4 text-right text-[#8e727e] font-mono-craft">
                         - R$ {st.pintaBordaCommissionDeducted.toFixed(2).replace('.', ',')}
                       </td>
                       <td className="py-3.5 px-4 text-right font-bold text-sm text-[#3c6b54] font-mono-craft">
@@ -246,7 +246,7 @@ export const SettlementsView: React.FC = () => {
                           className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${
                             isPaid
                               ? 'bg-[#dff0e6] text-[#1f4e38] border border-[#bcdbc7]'
-                              : 'bg-[#fcedea] text-[#b56f55] border border-[#f0c2b7]'
+                              : 'bg-[#fbebf0] text-[#c85a78] border border-[#fadbe5]'
                           }`}
                         >
                           {st.status}
@@ -269,7 +269,7 @@ export const SettlementsView: React.FC = () => {
                             Pagar via Pix
                           </button>
                         ) : (
-                          <span className="text-[10px] text-[#7d8c83] font-mono-craft">
+                          <span className="text-[10px] text-[#8e727e] font-mono-craft">
                             {st.paymentReference || 'Concluído'}
                           </span>
                         )}
@@ -283,10 +283,10 @@ export const SettlementsView: React.FC = () => {
         </div>
       ) : (
         /* Monthly Fees Table (PRD Section 23) */
-        <div className="bg-[#fffaf2] rounded-2xl border border-[#ded6ca] shadow-2xs overflow-hidden">
+        <div className="bg-[#ffffff] rounded-2xl border border-[#edd5dc] shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#ede5d8]/70 border-b border-[#ded6ca] text-[#7d8c83] uppercase tracking-wider text-[10px] font-mono-craft">
+              <thead className="bg-[#f6ebef]/70 border-b border-[#edd5dc] text-[#8e727e] uppercase tracking-wider text-[10px] font-mono-craft">
                 <tr>
                   <th className="py-3 px-4 font-semibold">Mês de Referência</th>
                   <th className="py-3 px-4 font-semibold">Marca / Artesão</th>
@@ -296,17 +296,17 @@ export const SettlementsView: React.FC = () => {
                   <th className="py-3 px-4 font-semibold text-right">Ação</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#ede5d8] text-[#253a35]">
+              <tbody className="divide-y divide-[#f6ebef] text-[#2e1420]">
                 {visibleMonthlyFees.map((fee) => {
                   const isPaid = fee.status === 'PAGO';
                   return (
-                    <tr key={fee.id} className="hover:bg-[#ede5d8]/40 transition-colors">
-                      <td className="py-3.5 px-4 font-bold font-display text-sm text-[#253a35]">{fee.monthReference}</td>
-                      <td className="py-3.5 px-4 font-medium text-[#253a35]">{fee.partnerName}</td>
-                      <td className="py-3.5 px-4 text-[#7d8c83] font-mono-craft">
+                    <tr key={fee.id} className="hover:bg-[#f6ebef]/40 transition-colors">
+                      <td className="py-3.5 px-4 font-bold font-display text-sm text-[#2e1420]">{fee.monthReference}</td>
+                      <td className="py-3.5 px-4 font-medium text-[#2e1420]">{fee.partnerName}</td>
+                      <td className="py-3.5 px-4 text-[#8e727e] font-mono-craft">
                         {new Date(fee.dueDate).toLocaleDateString('pt-BR')}
                       </td>
-                      <td className="py-3.5 px-4 text-right font-bold font-mono-craft text-[#253a35]">
+                      <td className="py-3.5 px-4 text-right font-bold font-mono-craft text-[#2e1420]">
                         R$ {fee.amount.toFixed(2).replace('.', ',')}
                       </td>
                       <td className="py-3.5 px-4 text-center font-mono-craft">
@@ -316,7 +316,7 @@ export const SettlementsView: React.FC = () => {
                               ? 'bg-[#dff0e6] text-[#1f4e38] border border-[#bcdbc7]'
                               : fee.status === 'ATRASADO'
                               ? 'bg-[#fae8e8] text-[#9b2c2c] border border-[#f5c6c6]'
-                              : 'bg-[#fcedea] text-[#b56f55] border border-[#f0c2b7]'
+                              : 'bg-[#fbebf0] text-[#c85a78] border border-[#fadbe5]'
                           }`}
                         >
                           {fee.status}
@@ -335,7 +335,7 @@ export const SettlementsView: React.FC = () => {
                             Dar Baixa
                           </button>
                         ) : (
-                          <span className="text-xs text-[#7d8c83] font-mono-craft">
+                          <span className="text-xs text-[#8e727e] font-mono-craft">
                             {fee.paidAt ? `Pago em ${new Date(fee.paidAt).toLocaleDateString('pt-BR')}` : 'Quitado'}
                           </span>
                         )}

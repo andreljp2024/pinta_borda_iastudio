@@ -200,21 +200,21 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* Operator Shift Alert Bar (PRD Section 13 & 15) */}
-      <div className="bg-[#fffaf2] rounded-2xl p-4 border border-[#ded6ca] shadow-2xs mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-[#ffffff] rounded-2xl p-4 border border-[#edd5dc] shadow-2xs mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#ede5d8] text-[#824f3c] flex items-center justify-center font-bold border border-[#ded6ca]">
+          <div className="w-10 h-10 rounded-xl bg-[#f6ebef] text-[#9c3653] flex items-center justify-center font-bold border border-[#edd5dc]">
             <Store className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#7d8c83] font-mono-craft">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8e727e] font-mono-craft">
                 Ponto de Venda • Rio Anil Shopping
               </span>
               <span className="inline-block w-2 h-2 rounded-full bg-[#3c6b54] animate-pulse" />
             </div>
-            <div className="text-sm font-bold text-[#253a35]">
+            <div className="text-sm font-bold text-[#2e1420]">
               Operador em Atendimento:{' '}
-              <span className="text-[#b56f55] font-semibold">
+              <span className="text-[#c85a78] font-semibold">
                 {activeShift ? activeShift.operatorName : 'Administrador Geral'}
               </span>
             </div>
@@ -227,7 +227,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
               onClick={onOpenShiftModal}
               className="outline-button !py-1.5 !px-3 text-xs flex items-center gap-1.5"
             >
-              <Clock className="w-3.5 h-3.5 text-[#b56f55]" />
+              <Clock className="w-3.5 h-3.5 text-[#c85a78]" />
               Trocar Operador / Encerrar Turno
             </button>
           ) : (
@@ -245,16 +245,16 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Product Selection Catalog (7 cols) */}
         <div className="lg:col-span-7 space-y-4">
-          <div className="bg-[#fffaf2] rounded-2xl p-4 border border-[#ded6ca] shadow-2xs space-y-3">
+          <div className="bg-[#ffffff] rounded-2xl p-4 border border-[#edd5dc] shadow-2xs space-y-3">
             {/* Search */}
             <div className="relative">
-              <Search className="w-4 h-4 text-[#7d8c83] absolute left-3 top-3" />
+              <Search className="w-4 h-4 text-[#8e727e] absolute left-3 top-3" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Pesquisar por nome, SKU (ex: TUT-001) ou ateliê..."
-                className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-[#ded6ca] focus:outline-none focus:ring-2 focus:ring-[#b56f55]/20 focus:border-[#b56f55] bg-white placeholder-[#7d8c83]"
+                className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-[#edd5dc] focus:outline-none focus:ring-2 focus:ring-[#c85a78]/20 focus:border-[#c85a78] bg-white placeholder-[#8e727e]"
               />
             </div>
 
@@ -264,8 +264,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                 onClick={() => setSelectedCategoryId('all')}
                 className={`px-3 py-1.5 rounded-full shrink-0 font-medium transition-colors cursor-pointer ${
                   selectedCategoryId === 'all'
-                    ? 'bg-[#253a35] text-[#fffaf2] font-semibold'
-                    : 'bg-[#ede5d8] text-[#52615a] hover:bg-[#e4d8c5]'
+                    ? 'bg-[#2e1420] text-[#ffffff] font-semibold'
+                    : 'bg-[#f6ebef] text-[#644855] hover:bg-[#eedbe2]'
                 }`}
               >
                 Todos
@@ -276,8 +276,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                   onClick={() => setSelectedCategoryId(cat.id)}
                   className={`px-3 py-1.5 rounded-full shrink-0 font-medium transition-colors cursor-pointer ${
                     selectedCategoryId === cat.id
-                      ? 'bg-[#253a35] text-[#fffaf2] font-semibold'
-                      : 'bg-[#ede5d8] text-[#52615a] hover:bg-[#e4d8c5]'
+                      ? 'bg-[#2e1420] text-[#ffffff] font-semibold'
+                      : 'bg-[#f6ebef] text-[#644855] hover:bg-[#eedbe2]'
                   }`}
                 >
                   {cat.name}
@@ -296,14 +296,14 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                 <div
                   key={prod.id}
                   onClick={() => !isOutOfStock && handleAddToCart(prod)}
-                  className={`bg-[#fffaf2] rounded-xl p-3 border transition-all flex flex-col justify-between select-none ${
+                  className={`bg-[#ffffff] rounded-xl p-3 border transition-all flex flex-col justify-between select-none ${
                     isOutOfStock
-                      ? 'opacity-50 border-[#ded6ca] cursor-not-allowed'
-                      : 'border-[#ded6ca] hover:border-[#b56f55] hover:shadow-sm cursor-pointer active:scale-98'
+                      ? 'opacity-50 border-[#edd5dc] cursor-not-allowed'
+                      : 'border-[#edd5dc] hover:border-[#c85a78] hover:shadow-sm cursor-pointer active:scale-98'
                   }`}
                 >
                   <div>
-                    <div className="relative aspect-4/3 rounded-lg overflow-hidden bg-[#ede5d8] mb-2">
+                    <div className="relative aspect-4/3 rounded-lg overflow-hidden bg-[#f6ebef] mb-2">
                       <img
                         src={prod.imageUrl}
                         alt={prod.name}
@@ -312,31 +312,31 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                         onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                         className="w-full h-full object-cover"
                       />
-                      <span className="absolute bottom-1 right-1 bg-[#253a35]/80 text-white text-[9px] px-1.5 py-0.5 rounded font-mono-craft">
+                      <span className="absolute bottom-1 right-1 bg-[#2e1420]/80 text-white text-[9px] px-1.5 py-0.5 rounded font-mono-craft">
                         {prod.sku}
                       </span>
                     </div>
 
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-[#b56f55] truncate font-mono-craft">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-[#c85a78] truncate font-mono-craft">
                       {partner?.brandName || 'Artesão'}
                     </div>
-                    <h4 className="font-medium text-xs text-[#253a35] line-clamp-2 leading-tight mt-0.5 font-display">
+                    <h4 className="font-medium text-xs text-[#2e1420] line-clamp-2 leading-tight mt-0.5 font-display">
                       {prod.name}
                     </h4>
                   </div>
 
-                  <div className="pt-2 mt-2 border-t border-[#ded6ca] flex items-center justify-between">
+                  <div className="pt-2 mt-2 border-t border-[#edd5dc] flex items-center justify-between">
                     <div>
-                      <div className="text-xs font-bold text-[#253a35] font-mono-craft">
+                      <div className="text-xs font-bold text-[#2e1420] font-mono-craft">
                         R$ {prod.price.toFixed(2).replace('.', ',')}
                       </div>
-                      <div className="text-[10px] text-[#7d8c83] font-mono-craft">
+                      <div className="text-[10px] text-[#8e727e] font-mono-craft">
                         {prod.stock} em estoque
                       </div>
                     </div>
                     <button
                       disabled={isOutOfStock}
-                      className="w-7 h-7 rounded-lg bg-[#ede5d8] hover:bg-[#b56f55] hover:text-white flex items-center justify-center text-[#824f3c] transition-colors border border-[#ded6ca]"
+                      className="w-7 h-7 rounded-lg bg-[#f6ebef] hover:bg-[#c85a78] hover:text-white flex items-center justify-center text-[#9c3653] transition-colors border border-[#edd5dc]"
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>
@@ -349,20 +349,20 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
         {/* Right Column: Multi-Brand Cashier & Payment Cart (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-[#fffaf2] rounded-2xl border border-[#ded6ca] shadow-2xs p-5 flex flex-col justify-between">
+          <div className="bg-[#ffffff] rounded-2xl border border-[#edd5dc] shadow-2xs p-5 flex flex-col justify-between">
             <div>
               {/* Cart Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-[#ded6ca]">
+              <div className="flex items-center justify-between pb-3 border-b border-[#edd5dc]">
                 <div className="flex items-center gap-2">
-                  <ShoppingBag className="w-5 h-5 text-[#b56f55]" />
-                  <h3 className="font-display font-medium text-base text-[#253a35]">
+                  <ShoppingBag className="w-5 h-5 text-[#c85a78]" />
+                  <h3 className="font-display font-medium text-base text-[#2e1420]">
                     Carrinho Multi-Marca
                   </h3>
                 </div>
                 {cart.length > 0 && (
                   <button
                     onClick={handleClearCart}
-                    className="text-xs text-[#b56f55] hover:text-[#824f3c] hover:underline cursor-pointer font-mono-craft"
+                    className="text-xs text-[#c85a78] hover:text-[#9c3653] hover:underline cursor-pointer font-mono-craft"
                   >
                     Limpar
                   </button>
@@ -370,9 +370,9 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
               </div>
 
               {/* Items List */}
-              <div className="divide-y divide-[#ede5d8] max-h-60 overflow-y-auto my-3 pr-1">
+              <div className="divide-y divide-[#f6ebef] max-h-60 overflow-y-auto my-3 pr-1">
                 {cart.length === 0 ? (
-                  <div className="py-8 text-center text-[#7d8c83] text-xs font-mono-craft">
+                  <div className="py-8 text-center text-[#8e727e] text-xs font-mono-craft">
                     Nenhum produto adicionado ao carrinho ainda. Clique nos itens ao lado para vender.
                   </div>
                 ) : (
@@ -381,10 +381,10 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     return (
                       <div key={item.product.id} className="py-2.5 flex items-center justify-between gap-2">
                         <div className="min-w-0 flex-1">
-                          <div className="text-xs font-medium text-[#253a35] truncate font-display">
+                          <div className="text-xs font-medium text-[#2e1420] truncate font-display">
                             {item.product.name}
                           </div>
-                          <div className="text-[10px] text-[#b56f55] font-mono-craft">
+                          <div className="text-[10px] text-[#c85a78] font-mono-craft">
                             {partner?.brandName} • R$ {item.product.price.toFixed(2).replace('.', ',')} un.
                           </div>
                         </div>
@@ -393,28 +393,28 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                         <div className="flex items-center gap-1.5 shrink-0">
                           <button
                             onClick={() => handleUpdateQuantity(item.product.id, -1)}
-                            className="w-6 h-6 rounded bg-[#ede5d8] hover:bg-[#ded6ca] flex items-center justify-center text-[#253a35] cursor-pointer"
+                            className="w-6 h-6 rounded bg-[#f6ebef] hover:bg-[#edd5dc] flex items-center justify-center text-[#2e1420] cursor-pointer"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="w-6 text-center text-xs font-bold text-[#253a35] font-mono-craft">
+                          <span className="w-6 text-center text-xs font-bold text-[#2e1420] font-mono-craft">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => handleUpdateQuantity(item.product.id, 1)}
-                            className="w-6 h-6 rounded bg-[#ede5d8] hover:bg-[#ded6ca] flex items-center justify-center text-[#253a35] cursor-pointer"
+                            className="w-6 h-6 rounded bg-[#f6ebef] hover:bg-[#edd5dc] flex items-center justify-center text-[#2e1420] cursor-pointer"
                           >
                             <Plus className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleRemoveFromCart(item.product.id)}
-                            className="w-6 h-6 rounded text-[#7d8c83] hover:text-[#b56f55] flex items-center justify-center ml-1 cursor-pointer"
+                            className="w-6 h-6 rounded text-[#8e727e] hover:text-[#c85a78] flex items-center justify-center ml-1 cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
 
-                        <div className="text-right font-bold text-xs text-[#253a35] shrink-0 w-16 font-mono-craft">
+                        <div className="text-right font-bold text-xs text-[#2e1420] shrink-0 w-16 font-mono-craft">
                           R$ {(item.product.price * item.quantity).toFixed(2).replace('.', ',')}
                         </div>
                       </div>
@@ -425,23 +425,23 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
               {/* Multi-brand Ownership Summary Tag */}
               {brandBreakdown.length > 1 && (
-                <div className="bg-[#ede5d8]/70 rounded-xl p-2.5 border border-[#ded6ca] mb-3 text-[11px] text-[#253a35] space-y-1 font-mono-craft">
-                  <div className="font-bold flex items-center gap-1 text-[#b56f55]">
-                    <Sparkles className="w-3 h-3 text-[#b56f55]" />
+                <div className="bg-[#f6ebef]/70 rounded-xl p-2.5 border border-[#edd5dc] mb-3 text-[11px] text-[#2e1420] space-y-1 font-mono-craft">
+                  <div className="font-bold flex items-center gap-1 text-[#c85a78]">
+                    <Sparkles className="w-3 h-3 text-[#c85a78]" />
                     Venda Compartilhada ({brandBreakdown.length} marcas):
                   </div>
                   {brandBreakdown.map((b) => (
-                    <div key={b.brandName} className="flex justify-between text-[#52615a]">
+                    <div key={b.brandName} className="flex justify-between text-[#644855]">
                       <span>{b.brandName} ({b.count} itens):</span>
-                      <span className="font-semibold text-[#253a35]">R$ {b.gross.toFixed(2).replace('.', ',')}</span>
+                      <span className="font-semibold text-[#2e1420]">R$ {b.gross.toFixed(2).replace('.', ',')}</span>
                     </div>
                   ))}
                 </div>
               )}
 
               {/* Payment Methods (PRD Section 17, 18, 20, 21) */}
-              <div className="space-y-3 pt-2 border-t border-[#ded6ca]">
-                <label className="block text-xs font-bold text-[#253a35] uppercase tracking-wide font-mono-craft">
+              <div className="space-y-3 pt-2 border-t border-[#edd5dc]">
+                <label className="block text-xs font-bold text-[#2e1420] uppercase tracking-wide font-mono-craft">
                   Forma de Pagamento
                 </label>
 
@@ -452,8 +452,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     onClick={() => setPaymentMethod('CREDITO')}
                     className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
                       paymentMethod === 'CREDITO'
-                        ? 'bg-[#253a35] text-white border-[#253a35] shadow-xs'
-                        : 'bg-[#ede5d8] border-[#ded6ca] text-[#253a35] hover:bg-[#e4d8c5]'
+                        ? 'bg-[#2e1420] text-white border-[#2e1420] shadow-xs'
+                        : 'bg-[#f6ebef] border-[#edd5dc] text-[#2e1420] hover:bg-[#eedbe2]'
                     }`}
                   >
                     Crédito
@@ -464,8 +464,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     onClick={() => setPaymentMethod('DEBITO')}
                     className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
                       paymentMethod === 'DEBITO'
-                        ? 'bg-[#253a35] text-white border-[#253a35] shadow-xs'
-                        : 'bg-[#ede5d8] border-[#ded6ca] text-[#253a35] hover:bg-[#e4d8c5]'
+                        ? 'bg-[#2e1420] text-white border-[#2e1420] shadow-xs'
+                        : 'bg-[#f6ebef] border-[#edd5dc] text-[#2e1420] hover:bg-[#eedbe2]'
                     }`}
                   >
                     Débito
@@ -477,7 +477,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
                       paymentMethod === 'PIX_CENTRALIZADO' || paymentMethod === 'PIX_DIRETO'
                         ? 'bg-[#1f4e38] text-white border-[#1f4e38] shadow-xs'
-                        : 'bg-[#ede5d8] border-[#ded6ca] text-[#253a35] hover:bg-[#e4d8c5]'
+                        : 'bg-[#f6ebef] border-[#edd5dc] text-[#2e1420] hover:bg-[#eedbe2]'
                     }`}
                   >
                     Pix
@@ -488,8 +488,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     onClick={() => setPaymentMethod('DINHEIRO')}
                     className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
                       paymentMethod === 'DINHEIRO'
-                        ? 'bg-[#253a35] text-white border-[#253a35] shadow-xs'
-                        : 'bg-[#ede5d8] border-[#ded6ca] text-[#253a35] hover:bg-[#e4d8c5]'
+                        ? 'bg-[#2e1420] text-white border-[#2e1420] shadow-xs'
+                        : 'bg-[#f6ebef] border-[#edd5dc] text-[#2e1420] hover:bg-[#eedbe2]'
                     }`}
                   >
                     Dinheiro
@@ -498,16 +498,16 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
                 {/* Credit Configuration */}
                 {paymentMethod === 'CREDITO' && (
-                  <div className="bg-[#ede5d8]/60 p-3 rounded-xl border border-[#ded6ca] space-y-2.5 text-xs font-mono-craft">
+                  <div className="bg-[#f6ebef]/60 p-3 rounded-xl border border-[#edd5dc] space-y-2.5 text-xs font-mono-craft">
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="block text-[11px] font-semibold text-[#52615a] mb-1">
+                        <label className="block text-[11px] font-semibold text-[#644855] mb-1">
                           Bandeira
                         </label>
                         <select
                           value={cardBrand}
                           onChange={(e) => setCardBrand(e.target.value as any)}
-                          className="w-full p-2 bg-white rounded-lg border border-[#ded6ca] text-xs focus:outline-none"
+                          className="w-full p-2 bg-white rounded-lg border border-[#edd5dc] text-xs focus:outline-none"
                         >
                           <option value="VISA">Visa</option>
                           <option value="MASTERCARD">Mastercard</option>
@@ -516,13 +516,13 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-semibold text-[#52615a] mb-1">
+                        <label className="block text-[11px] font-semibold text-[#644855] mb-1">
                           Parcelas
                         </label>
                         <select
                           value={installments}
                           onChange={(e) => setInstallments(Number(e.target.value))}
-                          className="w-full p-2 bg-white rounded-lg border border-[#ded6ca] text-xs focus:outline-none"
+                          className="w-full p-2 bg-white rounded-lg border border-[#edd5dc] text-xs focus:outline-none"
                         >
                           <option value={1}>1x à vista ({applicableRule?.feePercentage || 3.99}%)</option>
                           <option value={2}>2x (7.89%)</option>
@@ -539,9 +539,9 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
                 {/* Debit Configuration */}
                 {paymentMethod === 'DEBITO' && (
-                  <div className="bg-[#ede5d8]/60 p-3 rounded-xl border border-[#ded6ca] space-y-2 text-xs font-mono-craft">
+                  <div className="bg-[#f6ebef]/60 p-3 rounded-xl border border-[#edd5dc] space-y-2 text-xs font-mono-craft">
                     <div className="flex items-center justify-between">
-                      <span className="text-[#52615a]">Bandeira:</span>
+                      <span className="text-[#644855]">Bandeira:</span>
                       <div className="flex gap-2">
                         {(['VISA', 'MASTERCARD', 'ELO'] as const).map((b) => (
                           <button
@@ -549,7 +549,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                             type="button"
                             onClick={() => setCardBrand(b)}
                             className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
-                              cardBrand === b ? 'bg-[#253a35] text-white' : 'bg-white border border-[#ded6ca] text-[#253a35]'
+                              cardBrand === b ? 'bg-[#2e1420] text-white' : 'bg-white border border-[#edd5dc] text-[#2e1420]'
                             }`}
                           >
                             {b}
@@ -557,9 +557,9 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                         ))}
                       </div>
                     </div>
-                    <div className="text-[11px] text-[#52615a] flex justify-between">
+                    <div className="text-[11px] text-[#644855] flex justify-between">
                       <span>Taxa Stone Débito:</span>
-                      <span className="font-semibold text-[#253a35]">{feePct}%</span>
+                      <span className="font-semibold text-[#2e1420]">{feePct}%</span>
                     </div>
                   </div>
                 )}
@@ -611,16 +611,16 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
                 {/* Cash Configuration */}
                 {paymentMethod === 'DINHEIRO' && (
-                  <div className="bg-[#ede5d8]/60 p-3 rounded-xl border border-[#ded6ca] space-y-2 text-xs font-mono-craft">
+                  <div className="bg-[#f6ebef]/60 p-3 rounded-xl border border-[#edd5dc] space-y-2 text-xs font-mono-craft">
                     <div className="flex items-center justify-between gap-3">
-                      <label className="text-[#52615a] font-semibold">Valor Recebido (R$):</label>
+                      <label className="text-[#644855] font-semibold">Valor Recebido (R$):</label>
                       <input
                         type="number"
                         step="0.01"
                         value={cashReceived || ''}
                         onChange={(e) => setCashReceived(parseFloat(e.target.value) || 0)}
                         placeholder={totalGross.toFixed(2)}
-                        className="w-28 p-1.5 bg-white border border-[#ded6ca] rounded text-right font-bold text-[#253a35]"
+                        className="w-28 p-1.5 bg-white border border-[#edd5dc] rounded text-right font-bold text-[#2e1420]"
                       />
                     </div>
                     {cashReceived > totalGross && (
@@ -633,12 +633,12 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                 )}
 
                 {/* Optional Customer info with WhatsApp digital receipt incentive */}
-                <div className="pt-2 border-t border-[#ded6ca] space-y-2">
+                <div className="pt-2 border-t border-[#edd5dc] space-y-2">
                   <div className="flex items-center justify-between text-[11px] font-mono-craft">
-                    <span className="font-semibold text-[#253a35] flex items-center gap-1.5">
+                    <span className="font-semibold text-[#2e1420] flex items-center gap-1.5">
                       <span className="text-emerald-700">📱</span> Comprovante Digital via WhatsApp
                     </span>
-                    <span className="text-[10px] text-[#7d8c83] bg-[#ede5d8] px-2 py-0.5 rounded-full font-medium">
+                    <span className="text-[10px] text-[#8e727e] bg-[#f6ebef] px-2 py-0.5 rounded-full font-medium">
                       Sem papel • Sustentável
                     </span>
                   </div>
@@ -650,7 +650,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
                         placeholder="Nome do Cliente (opcional)"
-                        className="w-full p-2 bg-white border border-[#ded6ca] rounded-xl text-xs text-[#253a35] focus:outline-none focus:border-[#1f4e38]"
+                        className="w-full p-2 bg-white border border-[#edd5dc] rounded-xl text-xs text-[#2e1420] focus:outline-none focus:border-[#1f4e38]"
                       />
                     </div>
                     <div className="relative">
@@ -659,9 +659,9 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                         value={customerPhone}
                         onChange={(e) => setCustomerPhone(e.target.value)}
                         placeholder="WhatsApp do Cliente (DDD)"
-                        className="w-full pl-7 pr-2 py-2 bg-white border border-[#ded6ca] rounded-xl text-xs text-[#253a35] focus:outline-none focus:border-[#1f4e38]"
+                        className="w-full pl-7 pr-2 py-2 bg-white border border-[#edd5dc] rounded-xl text-xs text-[#2e1420] focus:outline-none focus:border-[#1f4e38]"
                       />
-                      <span className="absolute left-2.5 top-2.5 text-[#7d8c83] text-[11px]">📱</span>
+                      <span className="absolute left-2.5 top-2.5 text-[#8e727e] text-[11px]">📱</span>
                     </div>
                   </div>
                 </div>
@@ -669,21 +669,21 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
             </div>
 
             {/* Financial Settlement & Checkout Button (PRD Section 16, 19, 22) */}
-            <div className="pt-4 border-t border-[#ded6ca] space-y-3 mt-4">
-              <div className="bg-[#ede5d8]/50 rounded-xl p-3 text-xs space-y-1 border border-[#ded6ca] font-mono-craft">
-                <div className="flex justify-between text-[#52615a]">
+            <div className="pt-4 border-t border-[#edd5dc] space-y-3 mt-4">
+              <div className="bg-[#f6ebef]/50 rounded-xl p-3 text-xs space-y-1 border border-[#edd5dc] font-mono-craft">
+                <div className="flex justify-between text-[#644855]">
                   <span>Subtotal Bruto:</span>
-                  <span className="font-semibold text-[#253a35]">R$ {totalGross.toFixed(2).replace('.', ',')}</span>
+                  <span className="font-semibold text-[#2e1420]">R$ {totalGross.toFixed(2).replace('.', ',')}</span>
                 </div>
-                <div className="flex justify-between text-[#52615a]">
+                <div className="flex justify-between text-[#644855]">
                   <span>Taxa Máquina ({feePct}% congelada):</span>
-                  <span className="text-[#b56f55] font-medium">- R$ {estimatedFeeAmount.toFixed(2).replace('.', ',')}</span>
+                  <span className="text-[#c85a78] font-medium">- R$ {estimatedFeeAmount.toFixed(2).replace('.', ',')}</span>
                 </div>
-                <div className="flex justify-between text-[#52615a]">
+                <div className="flex justify-between text-[#644855]">
                   <span>Comissão Pinta e Borda (10%):</span>
-                  <span className="text-[#52615a] font-medium">- R$ {estimatedCommissionAmount.toFixed(2).replace('.', ',')}</span>
+                  <span className="text-[#644855] font-medium">- R$ {estimatedCommissionAmount.toFixed(2).replace('.', ',')}</span>
                 </div>
-                <div className="flex justify-between text-[#1f4e38] font-bold pt-1 border-t border-[#ded6ca]">
+                <div className="flex justify-between text-[#1f4e38] font-bold pt-1 border-t border-[#edd5dc]">
                   <span>Repasse Líquido aos Artesãos:</span>
                   <span>R$ {estimatedTotalNet.toFixed(2).replace('.', ',')}</span>
                 </div>
@@ -692,8 +692,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
               {/* Total Banner */}
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-[11px] text-[#7d8c83] uppercase font-semibold font-mono-craft">Total a Cobrar</span>
-                  <div className="text-2xl font-bold text-[#253a35] font-mono-craft">
+                  <span className="text-[11px] text-[#8e727e] uppercase font-semibold font-mono-craft">Total a Cobrar</span>
+                  <div className="text-2xl font-bold text-[#2e1420] font-mono-craft">
                     R$ {totalGross.toFixed(2).replace('.', ',')}
                   </div>
                 </div>

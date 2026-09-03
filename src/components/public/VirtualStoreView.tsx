@@ -71,32 +71,32 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
   const activePartnerCount = partners.filter((p) => p.status === 'ATIVO').length;
 
   return (
-    <div className="min-h-screen bg-[#f8f5ef] pb-24 text-[#253a35]">
+    <div className="min-h-screen bg-[#fbf4f6] pb-24 text-[#2e1420]">
       {/* Header Banner */}
-      <div className="bg-[#253a35] text-[#fffaf2] border-b border-[#38524a]">
+      <div className="bg-[#2e1420] text-[#ffffff] border-b border-[#4a2536]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-3 max-w-2xl">
               <button
                 onClick={() => setActiveView('landing')}
-                className="inline-flex items-center gap-1.5 text-xs font-mono-craft text-[#d4ba84] hover:text-[#fffaf2] transition-colors cursor-pointer mb-1"
+                className="inline-flex items-center gap-1.5 text-xs font-mono-craft text-[#dc9b86] hover:text-[#ffffff] transition-colors cursor-pointer mb-1"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 Voltar à Página Inicial
               </button>
-              <h1 className="font-display text-3xl sm:text-4xl font-medium tracking-tight text-[#fffaf2]">
+              <h1 className="font-display text-3xl sm:text-4xl font-medium tracking-tight text-[#ffffff]">
                 Vitrine Digital & Catálogo Físico
               </h1>
               <p className="text-[#c9d9d0] text-xs sm:text-sm leading-relaxed font-light">
                 Explore o acervo exclusivo de peças autorais disponíveis no quiosque do{' '}
-                <strong className="text-[#fffaf2] font-semibold">Rio Anil Shopping (2º Piso, em frente à Marisa)</strong>. Compre diretamente
+                <strong className="text-[#ffffff] font-semibold">Rio Anil Shopping (2º Piso, em frente à Marisa)</strong>. Compre diretamente
                 com o ateliê responsável via WhatsApp com entrega ou retirada no local.
               </p>
             </div>
 
             {/* Quick Shopping Info Pill */}
-            <div className="bg-[#1f332d] rounded-2xl p-4 border border-[#38524a] text-xs space-y-2 shrink-0 md:max-w-xs shadow-md">
-              <div className="flex items-center gap-2 text-[#d4ba84] font-medium font-mono-craft">
+            <div className="bg-[#2a121d] rounded-2xl p-4 border border-[#4a2536] text-xs space-y-2 shrink-0 md:max-w-xs shadow-md">
+              <div className="flex items-center gap-2 text-[#dc9b86] font-medium font-mono-craft">
                 <Store className="w-4 h-4" />
                 <span>Ponto de Retirada & Balcão</span>
               </div>
@@ -113,23 +113,23 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="sticky top-16 z-20 bg-[#fffaf2]/95 backdrop-blur-md border-b border-[#ded6ca] py-4 shadow-2xs">
+      <div className="sticky top-16 z-20 bg-[#ffffff]/95 backdrop-blur-md border-b border-[#edd5dc] py-4 shadow-2xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
           <div className="flex flex-col sm:flex-row gap-3">
             {/* Search Input */}
             <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7d8c83]" />
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8e727e]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Buscar por peça, técnica, SKU ou ateliê..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-full border border-[#ded6ca] bg-[#f8f5ef] text-xs font-mono-craft text-[#253a35] placeholder-[#7d8c83] focus:outline-hidden focus:border-[#b56f55] transition-all"
+                className="w-full pl-10 pr-4 py-2.5 rounded-full border border-[#edd5dc] bg-[#fbf4f6] text-xs font-mono-craft text-[#2e1420] placeholder-[#8e727e] focus:outline-hidden focus:border-[#c85a78] transition-all"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono-craft text-[#7d8c83] hover:text-[#253a35] cursor-pointer"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono-craft text-[#8e727e] hover:text-[#2e1420] cursor-pointer"
                 >
                   Limpar
                 </button>
@@ -141,7 +141,7 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
               <select
                 value={selectedPartner}
                 onChange={(e) => handlePartnerChange(e.target.value)}
-                className="px-3.5 py-2.5 rounded-full border border-[#ded6ca] bg-[#f8f5ef] text-xs font-mono-craft text-[#253a35] focus:outline-hidden focus:border-[#b56f55] cursor-pointer"
+                className="px-3.5 py-2.5 rounded-full border border-[#edd5dc] bg-[#fbf4f6] text-xs font-mono-craft text-[#2e1420] focus:outline-hidden focus:border-[#c85a78] cursor-pointer"
               >
                 <option value="ALL">Todos os Ateliês ({partners.length})</option>
                 {partners.map((partner) => (
@@ -155,7 +155,7 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-3.5 py-2.5 rounded-full border border-[#ded6ca] bg-[#f8f5ef] text-xs font-mono-craft text-[#253a35] focus:outline-hidden focus:border-[#b56f55] cursor-pointer"
+                className="px-3.5 py-2.5 rounded-full border border-[#edd5dc] bg-[#fbf4f6] text-xs font-mono-craft text-[#2e1420] focus:outline-hidden focus:border-[#c85a78] cursor-pointer"
               >
                 <option value="name">Ordenar: Nome A-Z</option>
                 <option value="price_asc">Menor Preço</option>
@@ -170,8 +170,8 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
               onClick={() => setSelectedCategory('ALL')}
               className={`px-4 py-2 rounded-full font-mono-craft whitespace-nowrap transition-all cursor-pointer text-xs ${
                 selectedCategory === 'ALL'
-                  ? 'bg-[#253a35] text-[#fffaf2] font-medium shadow-xs'
-                  : 'bg-[#ede5d8] text-[#52615a] hover:bg-[#ded6ca] hover:text-[#253a35]'
+                  ? 'bg-[#2e1420] text-[#ffffff] font-medium shadow-xs'
+                  : 'bg-[#f6ebef] text-[#644855] hover:bg-[#edd5dc] hover:text-[#2e1420]'
               }`}
             >
               Todas as Peças ({products.length})
@@ -182,8 +182,8 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
                 onClick={() => setSelectedCategory(cat.code)}
                 className={`px-4 py-2 rounded-full font-mono-craft whitespace-nowrap transition-all cursor-pointer text-xs ${
                   selectedCategory === cat.code
-                    ? 'bg-[#253a35] text-[#fffaf2] font-medium shadow-xs'
-                    : 'bg-[#ede5d8] text-[#52615a] hover:bg-[#ded6ca] hover:text-[#253a35]'
+                    ? 'bg-[#2e1420] text-[#ffffff] font-medium shadow-xs'
+                    : 'bg-[#f6ebef] text-[#644855] hover:bg-[#edd5dc] hover:text-[#2e1420]'
                 }`}
               >
                 {cat.name}
@@ -197,7 +197,7 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         {/* Selected Partner Highlight Banner */}
         {currentPartnerInfo && (
-          <div className="mb-8 bg-[#fffaf2] rounded-3xl p-6 border border-[#ded6ca] shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="mb-8 bg-[#ffffff] rounded-3xl p-6 border border-[#edd5dc] shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <img
                 src={currentPartnerInfo.brandLogo}
@@ -205,19 +205,19 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
                 loading="lazy"
                 referrerPolicy="no-referrer"
                 onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
-                className="w-16 h-16 rounded-2xl object-cover border border-[#ded6ca] shadow-2xs"
+                className="w-16 h-16 rounded-2xl object-cover border border-[#edd5dc] shadow-2xs"
               />
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#ede5d8] text-[#824f3c] font-mono-craft text-[10px] tracking-wider uppercase border border-[#ded6ca]">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#f6ebef] text-[#9c3653] font-mono-craft text-[10px] tracking-wider uppercase border border-[#edd5dc]">
                     Ateliê Autoral Maranhense
                   </span>
                 </div>
-                <h2 className="font-display text-2xl font-medium text-[#253a35] mt-0.5">
+                <h2 className="font-display text-2xl font-medium text-[#2e1420] mt-0.5">
                   {currentPartnerInfo.brandName}
                 </h2>
-                <p className="text-xs text-[#52615a] mt-0.5 font-light">
-                  Artesã criadora: <strong className="text-[#253a35] font-medium">{currentPartnerInfo.ownerName}</strong>
+                <p className="text-xs text-[#644855] mt-0.5 font-light">
+                  Artesã criadora: <strong className="text-[#2e1420] font-medium">{currentPartnerInfo.ownerName}</strong>
                 </p>
               </div>
             </div>
@@ -246,7 +246,7 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
               )}
               <button
                 onClick={() => handlePartnerChange('ALL')}
-                className="px-3.5 py-2 rounded-full bg-[#ede5d8] hover:bg-[#ded6ca] text-[#253a35] font-mono-craft text-xs transition-colors cursor-pointer border border-[#ded6ca]"
+                className="px-3.5 py-2 rounded-full bg-[#f6ebef] hover:bg-[#edd5dc] text-[#2e1420] font-mono-craft text-xs transition-colors cursor-pointer border border-[#edd5dc]"
               >
                 Ver todos os ateliês
               </button>
@@ -255,10 +255,10 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
         )}
 
         <div className="flex items-center justify-between mb-6">
-          <div className="text-xs text-[#52615a] font-mono-craft">
-            Exibindo <strong className="text-[#253a35]">{filteredProducts.length}</strong> peças autorais
+          <div className="text-xs text-[#644855] font-mono-craft">
+            Exibindo <strong className="text-[#2e1420]">{filteredProducts.length}</strong> peças autorais
             {selectedPartner !== 'ALL' && (
-              <span className="ml-1 text-[#b56f55]">
+              <span className="ml-1 text-[#c85a78]">
                 do ateliê {partners.find((p) => p.id === selectedPartner)?.brandName}
               </span>
             )}
@@ -271,7 +271,7 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
                 handlePartnerChange('ALL');
                 setSearchQuery('');
               }}
-              className="text-xs font-mono-craft text-[#b56f55] hover:underline cursor-pointer"
+              className="text-xs font-mono-craft text-[#c85a78] hover:underline cursor-pointer"
             >
               Redefinir filtros
             </button>
@@ -279,14 +279,14 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
         </div>
 
         {filteredProducts.length === 0 ? (
-          <div className="bg-[#fffaf2] rounded-3xl p-12 text-center border border-[#ded6ca] space-y-4 max-w-md mx-auto my-12 shadow-xs">
-            <div className="w-12 h-12 rounded-full bg-[#ede5d8] text-[#824f3c] flex items-center justify-center mx-auto">
+          <div className="bg-[#ffffff] rounded-3xl p-12 text-center border border-[#edd5dc] space-y-4 max-w-md mx-auto my-12 shadow-xs">
+            <div className="w-12 h-12 rounded-full bg-[#f6ebef] text-[#9c3653] flex items-center justify-center mx-auto">
               <ShoppingBag className="w-6 h-6" />
             </div>
-            <h3 className="font-display text-xl font-medium text-[#253a35]">
+            <h3 className="font-display text-xl font-medium text-[#2e1420]">
               Nenhuma peça encontrada
             </h3>
-            <p className="text-xs text-[#52615a] font-light leading-relaxed">
+            <p className="text-xs text-[#644855] font-light leading-relaxed">
               Não localizamos produtos para os filtros aplicados. Tente buscar por outros termos ou verifique todas as categorias.
             </p>
             <button
@@ -310,12 +310,12 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
               return (
                 <div
                   key={product.id}
-                  className="bg-[#fffaf2] rounded-3xl border border-[#ded6ca] overflow-hidden hover:border-[#b56f55] hover:shadow-lg transition-all flex flex-col group p-3.5"
+                  className="bg-[#ffffff] rounded-3xl border border-[#edd5dc] overflow-hidden hover:border-[#c85a78] hover:shadow-lg transition-all flex flex-col group p-3.5"
                 >
                   {/* Product Image */}
                   <div
                     onClick={() => setSelectedProduct(product)}
-                    className="relative aspect-square rounded-2xl overflow-hidden bg-[#ede5d8] cursor-pointer"
+                    className="relative aspect-square rounded-2xl overflow-hidden bg-[#f6ebef] cursor-pointer"
                   >
                     <img
                       src={product.imageUrl}
@@ -327,27 +327,27 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
                     />
 
                     <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
-                      <span className="px-2.5 py-1 rounded-full bg-[#253a35]/85 backdrop-blur-xs text-[#fffaf2] text-[10px] font-mono-craft">
+                      <span className="px-2.5 py-1 rounded-full bg-[#2e1420]/85 backdrop-blur-xs text-[#ffffff] text-[10px] font-mono-craft">
                         {product.partnerName}
                       </span>
                       {product.isFeatured && (
-                        <span className="px-2 py-0.5 rounded-full bg-[#b56f55] text-white text-[9px] font-mono-craft flex items-center gap-1 shadow-2xs">
-                          <Sparkles className="w-2.5 h-2.5 text-[#d4ba84]" /> Destaque
+                        <span className="px-2 py-0.5 rounded-full bg-[#c85a78] text-white text-[9px] font-mono-craft flex items-center gap-1 shadow-2xs">
+                          <Sparkles className="w-2.5 h-2.5 text-[#dc9b86]" /> Destaque
                         </span>
                       )}
                     </div>
 
                     <div className="absolute bottom-3 right-3">
                       {isOutOfStock ? (
-                        <span className="px-2 py-1 rounded-md bg-[#253a35]/85 text-[#c9d9d0] text-[10px] font-mono-craft">
+                        <span className="px-2 py-1 rounded-md bg-[#2e1420]/85 text-[#c9d9d0] text-[10px] font-mono-craft">
                           Sob encomenda
                         </span>
                       ) : isLowStock ? (
-                        <span className="px-2 py-1 rounded-md bg-[#ede5d8] text-[#824f3c] text-[10px] font-mono-craft font-bold border border-[#ded6ca]">
+                        <span className="px-2 py-1 rounded-md bg-[#f6ebef] text-[#9c3653] text-[10px] font-mono-craft font-bold border border-[#edd5dc]">
                           Últimas {product.stockPhysical} un.
                         </span>
                       ) : (
-                        <span className="px-2 py-1 rounded-md bg-[#fffaf2]/95 text-[#253a35] text-[10px] font-mono-craft border border-[#ded6ca] shadow-2xs">
+                        <span className="px-2 py-1 rounded-md bg-[#ffffff]/95 text-[#2e1420] text-[10px] font-mono-craft border border-[#edd5dc] shadow-2xs">
                           {product.stockPhysical} na casa
                         </span>
                       )}
@@ -357,34 +357,34 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
                   {/* Product Details */}
                   <div className="pt-3 px-1 flex-1 flex flex-col justify-between space-y-3">
                     <div>
-                      <div className="flex items-center justify-between text-[10px] text-[#7d8c83] font-mono-craft mb-1">
+                      <div className="flex items-center justify-between text-[10px] text-[#8e727e] font-mono-craft mb-1">
                         <span>{product.sku}</span>
                         <span>{product.category}</span>
                       </div>
                       <h3
                         onClick={() => setSelectedProduct(product)}
-                        className="font-display font-medium text-[#253a35] text-lg leading-snug group-hover:text-[#b56f55] transition-colors cursor-pointer line-clamp-2"
+                        className="font-display font-medium text-[#2e1420] text-lg leading-snug group-hover:text-[#c85a78] transition-colors cursor-pointer line-clamp-2"
                       >
                         {product.name}
                       </h3>
-                      <p className="text-xs text-[#52615a] mt-1 line-clamp-2 leading-relaxed font-light">
+                      <p className="text-xs text-[#644855] mt-1 line-clamp-2 leading-relaxed font-light">
                         {product.description}
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-[#ded6ca]/70 space-y-3">
+                    <div className="pt-2 border-t border-[#edd5dc]/70 space-y-3">
                       <div className="flex items-baseline justify-between">
                         <div>
-                          <span className="text-[10px] text-[#7d8c83] block uppercase font-mono-craft">
+                          <span className="text-[10px] text-[#8e727e] block uppercase font-mono-craft">
                             Preço no Shopping
                           </span>
-                          <span className="font-mono-craft font-bold text-lg text-[#253a35]">
+                          <span className="font-mono-craft font-bold text-lg text-[#2e1420]">
                             R$ {product.price.toFixed(2).replace('.', ',')}
                           </span>
                         </div>
 
                         {product.price >= 60 && (
-                          <span className="text-[10px] text-[#7d8c83] font-mono-craft">
+                          <span className="text-[10px] text-[#8e727e] font-mono-craft">
                             em até 3x no cartão
                           </span>
                         )}
@@ -394,7 +394,7 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setSelectedProduct(product)}
-                          className="flex-1 py-2 px-3 bg-[#ede5d8] hover:bg-[#ded6ca] text-[#253a35] rounded-xl text-xs font-mono-craft transition-colors cursor-pointer border border-[#ded6ca]"
+                          className="flex-1 py-2 px-3 bg-[#f6ebef] hover:bg-[#edd5dc] text-[#2e1420] rounded-xl text-xs font-mono-craft transition-colors cursor-pointer border border-[#edd5dc]"
                         >
                           Ver Detalhes
                         </button>
@@ -406,7 +406,7 @@ export const VirtualStoreView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenA
                           target="_blank"
                           rel="noopener noreferrer"
                           title="Comprar direto com a artesã no WhatsApp"
-                          className="p-2.5 bg-[#b56f55] hover:bg-[#965a44] text-white rounded-xl transition-colors cursor-pointer shrink-0 shadow-2xs"
+                          className="p-2.5 bg-[#c85a78] hover:bg-[#9e4660] text-white rounded-xl transition-colors cursor-pointer shrink-0 shadow-2xs"
                         >
                           <MessageCircle className="w-4 h-4" />
                         </a>

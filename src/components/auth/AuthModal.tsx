@@ -90,12 +90,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/60 backdrop-blur-xs p-4 selection:bg-[#ded6ca] selection:text-[#253a35]">
-      <div className="bg-[#fffaf2] rounded-3xl max-w-md w-full shadow-2xl border border-[#ded6ca] overflow-hidden relative animate-in fade-in zoom-in-95">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2e1420]/60 backdrop-blur-xs p-4 selection:bg-[#edd5dc] selection:text-[#2e1420]">
+      <div className="bg-[#ffffff] rounded-3xl max-w-md w-full shadow-2xl border border-[#edd5dc] overflow-hidden relative animate-in fade-in zoom-in-95">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-[#7d8c83] hover:text-[#253a35] bg-[#ede5d8]/70 hover:bg-[#ede5d8] p-1.5 rounded-full transition-colors cursor-pointer border border-[#ded6ca]"
+          className="absolute top-4 right-4 text-[#8e727e] hover:text-[#2e1420] bg-[#f6ebef]/70 hover:bg-[#f6ebef] p-1.5 rounded-full transition-colors cursor-pointer border border-[#edd5dc]"
         >
           <X className="w-4 h-4" />
         </button>
@@ -104,19 +104,19 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           <div className="p-6 sm:p-8">
             {/* Header */}
             <div className="text-center mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-[#253a35] text-[#fffaf2] flex items-center justify-center font-display font-medium text-lg mx-auto shadow-md mb-3 border border-[#3c6b54]">
+              <div className="w-12 h-12 rounded-2xl bg-[#2e1420] text-[#ffffff] flex items-center justify-center font-display font-medium text-lg mx-auto shadow-md mb-3 border border-[#3c6b54]">
                 P&B
               </div>
-              <h2 className="font-display text-2xl font-medium tracking-tight text-[#253a35]">
-                pinta <em className="italic text-[#b56f55]">e</em> borda
+              <h2 className="font-display text-2xl font-medium tracking-tight text-[#2e1420]">
+                pinta <em className="italic text-[#c85a78]">e</em> borda
               </h2>
-              <p className="text-xs text-[#7d8c83] mt-1 font-mono-craft">
+              <p className="text-xs text-[#8e727e] mt-1 font-mono-craft">
                 Gestão Compartilhada • Rio Anil Shopping
               </p>
             </div>
 
             {/* Profile Tab Toggle */}
-            <div className="grid grid-cols-2 p-1 bg-[#ede5d8]/70 rounded-xl mb-6 text-xs font-semibold border border-[#ded6ca] font-mono-craft">
+            <div className="grid grid-cols-2 p-1 bg-[#f6ebef]/70 rounded-xl mb-6 text-xs font-semibold border border-[#edd5dc] font-mono-craft">
               <button
                 type="button"
                 onClick={() => {
@@ -125,8 +125,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 }}
                 className={`py-2 rounded-lg transition-all cursor-pointer ${
                   tab === 'ADMIN'
-                    ? 'bg-[#253a35] text-white shadow-xs'
-                    : 'text-[#52615a] hover:text-[#253a35]'
+                    ? 'bg-[#2e1420] text-white shadow-xs'
+                    : 'text-[#644855] hover:text-[#2e1420]'
                 }`}
               >
                 ADMINISTRADOR
@@ -139,8 +139,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 }}
                 className={`py-2 rounded-lg transition-all cursor-pointer ${
                   tab === 'PARTNER'
-                    ? 'bg-[#253a35] text-white shadow-xs'
-                    : 'text-[#52615a] hover:text-[#253a35]'
+                    ? 'bg-[#2e1420] text-white shadow-xs'
+                    : 'text-[#644855] hover:text-[#2e1420]'
                 }`}
               >
                 ARTESÃO / PARCEIRO
@@ -150,7 +150,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               {tab === 'PARTNER' && (
                 <div>
-                  <label className="block text-xs font-semibold text-[#253a35] mb-1.5 font-mono-craft">
+                  <label className="block text-xs font-semibold text-[#2e1420] mb-1.5 font-mono-craft">
                     Selecione seu Ateliê / Marca
                   </label>
                   <select
@@ -160,7 +160,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                       const p = partners.find((pt) => pt.id === e.target.value);
                       if (p) setEmail(p.email);
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] text-xs bg-white text-[#253a35] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] text-xs bg-white text-[#2e1420] focus:outline-none"
                   >
                     {partners.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -172,7 +172,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
               )}
 
               <div>
-                <label className="block text-xs font-semibold text-[#253a35] mb-1.5 font-mono-craft">
+                <label className="block text-xs font-semibold text-[#2e1420] mb-1.5 font-mono-craft">
                   E-mail
                 </label>
                 <input
@@ -180,21 +180,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] text-xs bg-white text-[#253a35] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] text-xs bg-white text-[#2e1420] focus:outline-none"
                   placeholder="seu@email.com"
                 />
               </div>
 
               <div>
                 <div className="flex justify-between items-center mb-1.5">
-                  <label className="text-xs font-semibold text-[#253a35] font-mono-craft">Senha</label>
+                  <label className="text-xs font-semibold text-[#2e1420] font-mono-craft">Senha</label>
                   <a
                     href="#forgot"
                     onClick={(e) => {
                       e.preventDefault();
                       alert('Recuperação de senha: Link seguro enviado ao e-mail cadastrado.');
                     }}
-                    className="text-[11px] text-[#b56f55] hover:underline font-mono-craft"
+                    className="text-[11px] text-[#c85a78] hover:underline font-mono-craft"
                   >
                     Esqueci minha senha
                   </a>
@@ -204,7 +204,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] text-xs bg-white text-[#253a35] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#edd5dc] text-xs bg-white text-[#2e1420] focus:outline-none"
                   placeholder="••••••••"
                 />
               </div>
@@ -219,8 +219,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             </form>
 
             {/* Quick Demonstration Buttons */}
-            <div className="mt-6 pt-4 border-t border-[#ded6ca]">
-              <p className="text-[10px] font-semibold text-[#7d8c83] uppercase tracking-wider mb-2 font-mono-craft">
+            <div className="mt-6 pt-4 border-t border-[#edd5dc]">
+              <p className="text-[10px] font-semibold text-[#8e727e] uppercase tracking-wider mb-2 font-mono-craft">
                 Acesso Rápido para Avaliação:
               </p>
               <div className="flex flex-wrap gap-1.5 text-xs font-mono-craft">
@@ -232,7 +232,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     setActiveView('dashboard');
                     onClose();
                   }}
-                  className="px-2.5 py-1 bg-[#ede5d8] text-[#253a35] rounded-lg font-medium hover:bg-[#ded6ca] transition-colors cursor-pointer border border-[#ded6ca]"
+                  className="px-2.5 py-1 bg-[#f6ebef] text-[#2e1420] rounded-lg font-medium hover:bg-[#edd5dc] transition-colors cursor-pointer border border-[#edd5dc]"
                 >
                   Admin Geral
                 </button>
@@ -244,7 +244,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     setActiveView('dashboard');
                     onClose();
                   }}
-                  className="px-2.5 py-1 bg-[#fffaf2] text-[#b56f55] rounded-lg font-medium hover:bg-[#ede5d8] transition-colors cursor-pointer border border-[#ded6ca]"
+                  className="px-2.5 py-1 bg-[#ffffff] text-[#c85a78] rounded-lg font-medium hover:bg-[#f6ebef] transition-colors cursor-pointer border border-[#edd5dc]"
                 >
                   Tutabel (Infantil)
                 </button>
@@ -256,7 +256,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     setActiveView('dashboard');
                     onClose();
                   }}
-                  className="px-2.5 py-1 bg-[#fffaf2] text-[#b56f55] rounded-lg font-medium hover:bg-[#ede5d8] transition-colors cursor-pointer border border-[#ded6ca]"
+                  className="px-2.5 py-1 bg-[#ffffff] text-[#c85a78] rounded-lg font-medium hover:bg-[#f6ebef] transition-colors cursor-pointer border border-[#edd5dc]"
                 >
                   Armonizzare (Aromas)
                 </button>
@@ -268,7 +268,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     setActiveView('dashboard');
                     onClose();
                   }}
-                  className="px-2.5 py-1 bg-[#fffaf2] text-[#b56f55] rounded-lg font-medium hover:bg-[#ede5d8] transition-colors cursor-pointer border border-[#ded6ca]"
+                  className="px-2.5 py-1 bg-[#ffffff] text-[#c85a78] rounded-lg font-medium hover:bg-[#f6ebef] transition-colors cursor-pointer border border-[#edd5dc]"
                   title="Marca sem plantão, paga taxa de diarista"
                 >
                   MishiSaike (Sem plantão)
@@ -279,15 +279,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         ) : shiftPromptStep === 'START_SHIFT_PROMPT' ? (
           /* PRD Section 14: Prompt without active shift */
           <div className="p-6 sm:p-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#ede5d8] text-[#b56f55] flex items-center justify-center mx-auto mb-4 border border-[#ded6ca]">
+            <div className="w-12 h-12 rounded-full bg-[#f6ebef] text-[#c85a78] flex items-center justify-center mx-auto mb-4 border border-[#edd5dc]">
               <Clock className="w-6 h-6" />
             </div>
-            <h3 className="font-display text-xl font-medium text-[#253a35] mb-2">
+            <h3 className="font-display text-xl font-medium text-[#2e1420] mb-2">
               Iniciar seu Expediente?
             </h3>
-            <p className="text-xs text-[#52615a] mb-6 font-light">
+            <p className="text-xs text-[#644855] mb-6 font-light">
               Você está entrando no sistema como{' '}
-              <strong className="text-[#253a35] font-semibold">{currentPartner?.brandName}</strong>. Deseja
+              <strong className="text-[#2e1420] font-semibold">{currentPartner?.brandName}</strong>. Deseja
               assumir a operação presencial do balcão no Rio Anil Shopping agora?
             </p>
 
@@ -311,22 +311,22 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         ) : (
           /* PRD Section 14: Prompt with another active partner */
           <div className="p-6 sm:p-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#ede5d8] text-[#b56f55] flex items-center justify-center mx-auto mb-4 border border-[#ded6ca]">
+            <div className="w-12 h-12 rounded-full bg-[#f6ebef] text-[#c85a78] flex items-center justify-center mx-auto mb-4 border border-[#edd5dc]">
               <AlertTriangle className="w-6 h-6" />
             </div>
-            <h3 className="font-display text-xl font-medium text-[#253a35] mb-2">
+            <h3 className="font-display text-xl font-medium text-[#2e1420] mb-2">
               Expediente em Andamento
             </h3>
-            <div className="bg-[#ede5d8]/50 rounded-xl p-3 text-xs text-[#52615a] mb-4 border border-[#ded6ca] font-mono-craft text-left">
+            <div className="bg-[#f6ebef]/50 rounded-xl p-3 text-xs text-[#644855] mb-4 border border-[#edd5dc] font-mono-craft text-left">
               <p>
-                <strong className="text-[#253a35]">Operador atual:</strong> {activeShift?.operatorName}
+                <strong className="text-[#2e1420]">Operador atual:</strong> {activeShift?.operatorName}
               </p>
               <p className="mt-1">
-                <strong className="text-[#253a35]">Início:</strong>{' '}
+                <strong className="text-[#2e1420]">Início:</strong>{' '}
                 {activeShift ? new Date(activeShift.startTime).toLocaleTimeString('pt-BR') : ''}
               </p>
             </div>
-            <p className="text-xs text-[#52615a] mb-6 font-light">
+            <p className="text-xs text-[#644855] mb-6 font-light">
               Deseja solicitar a troca de expediente e assumir o balcão da loja agora?
             </p>
 

@@ -156,13 +156,13 @@ export const PartnersView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#b56f55] font-mono-craft">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#c85a78] font-mono-craft">
             Comunidade de Criadores
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#253a35]">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420]">
             Marcas & Artesãos Parceiros
           </h2>
-          <p className="text-xs sm:text-sm text-[#7d8c83] mt-1 font-light">
+          <p className="text-xs sm:text-sm text-[#8e727e] mt-1 font-light">
             Gestão cadastral, dados bancários Pix, contratos e escalas dos ateliês do Rio Anil Shopping.
           </p>
         </div>
@@ -172,26 +172,26 @@ export const PartnersView: React.FC = () => {
             onClick={handleOpenCreate}
             className="solid-button text-xs flex items-center gap-2 self-start sm:self-auto"
           >
-            <Plus className="w-4 h-4 text-[#d4ba84]" />
+            <Plus className="w-4 h-4 text-[#dc9b86]" />
             <span>Cadastrar Novo Ateliê</span>
           </button>
         )}
       </div>
 
       {/* Filter Row */}
-      <div className="bg-[#fffaf2] rounded-2xl p-4 border border-[#ded6ca] shadow-2xs flex flex-col sm:flex-row gap-3 items-center justify-between font-mono-craft">
+      <div className="bg-[#ffffff] rounded-2xl p-4 border border-[#edd5dc] shadow-2xs flex flex-col sm:flex-row gap-3 items-center justify-between font-mono-craft">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-[#7d8c83] absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-[#8e727e] absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar por marca, artesão ou CPF/CNPJ..."
-            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#ded6ca] focus:outline-none bg-white text-[#253a35]"
+            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#edd5dc] focus:outline-none bg-white text-[#2e1420]"
           />
         </div>
 
-        <div className="text-xs text-[#7d8c83]">
+        <div className="text-xs text-[#8e727e]">
           {filteredPartners.length} marcas cadastradas
         </div>
       </div>
@@ -201,7 +201,7 @@ export const PartnersView: React.FC = () => {
         {filteredPartners.map((partner) => (
           <div
             key={partner.id}
-            className="bg-[#fffaf2] rounded-2xl border border-[#ded6ca] shadow-2xs hover:border-[#b56f55]/40 hover:shadow-md transition-all p-5 flex flex-col justify-between"
+            className="bg-[#ffffff] rounded-2xl border border-[#edd5dc] shadow-2xs hover:border-[#c85a78]/40 hover:shadow-md transition-all p-5 flex flex-col justify-between"
           >
             <div>
               {/* Header */}
@@ -213,13 +213,13 @@ export const PartnersView: React.FC = () => {
                     loading="lazy"
                     referrerPolicy="no-referrer"
                     onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-[#ded6ca] shadow-2xs"
+                    className="w-12 h-12 rounded-full object-cover border-2 border-[#edd5dc] shadow-2xs"
                   />
                   <div>
-                    <h4 className="font-display font-medium text-[#253a35] text-base">
+                    <h4 className="font-display font-medium text-[#2e1420] text-base">
                       {partner.brandName}
                     </h4>
-                    <span className="text-xs text-[#7d8c83] font-light">{partner.ownerName}</span>
+                    <span className="text-xs text-[#8e727e] font-light">{partner.ownerName}</span>
                   </div>
                 </div>
 
@@ -227,42 +227,42 @@ export const PartnersView: React.FC = () => {
                   className={`px-2 py-0.5 rounded-full text-[10px] font-bold font-mono-craft ${
                     partner.status === 'ATIVO'
                       ? 'bg-[#dff0e6] text-[#1f4e38] border border-[#bcdbc7]'
-                      : 'bg-[#ede5d8] text-[#52615a] border border-[#ded6ca]'
+                      : 'bg-[#f6ebef] text-[#644855] border border-[#edd5dc]'
                   }`}
                 >
                   {partner.status}
                 </span>
               </div>
 
-              <div className="text-xs text-[#52615a] line-clamp-2 mb-4 font-light">
+              <div className="text-xs text-[#644855] line-clamp-2 mb-4 font-light">
                 {partner.brandDescription}
               </div>
 
               {/* Badges / Specs */}
-              <div className="grid grid-cols-2 gap-2 text-[11px] bg-[#ede5d8]/60 rounded-xl p-3 border border-[#ded6ca] mb-4 font-mono-craft">
+              <div className="grid grid-cols-2 gap-2 text-[11px] bg-[#f6ebef]/60 rounded-xl p-3 border border-[#edd5dc] mb-4 font-mono-craft">
                 <div>
-                  <span className="text-[#7d8c83] block text-[10px]">Espaço Físico:</span>
-                  <strong className="text-[#253a35]">{partner.spaceType}</strong>
+                  <span className="text-[#8e727e] block text-[10px]">Espaço Físico:</span>
+                  <strong className="text-[#2e1420]">{partner.spaceType}</strong>
                 </div>
 
                 <div>
-                  <span className="text-[#7d8c83] block text-[10px]">Mensalidade:</span>
-                  <strong className="text-[#253a35]">
+                  <span className="text-[#8e727e] block text-[10px]">Mensalidade:</span>
+                  <strong className="text-[#2e1420]">
                     R$ {partner.monthlyFee.toFixed(2).replace('.', ',')}/mês
                   </strong>
                 </div>
 
                 <div>
-                  <span className="text-[#7d8c83] block text-[10px]">Chave Pix:</span>
-                  <span className="text-[#253a35] text-[10px] truncate block">
+                  <span className="text-[#8e727e] block text-[10px]">Chave Pix:</span>
+                  <span className="text-[#2e1420] text-[10px] truncate block">
                     {partner.pixKey}
                   </span>
                 </div>
 
                 <div>
-                  <span className="text-[#7d8c83] block text-[10px]">Escala de Plantão:</span>
+                  <span className="text-[#8e727e] block text-[10px]">Escala de Plantão:</span>
                   <strong
-                    className={partner.worksShifts ? 'text-[#3c6b54]' : 'text-[#b56f55]'}
+                    className={partner.worksShifts ? 'text-[#3c6b54]' : 'text-[#c85a78]'}
                   >
                     {partner.worksShifts ? 'Cumpre Plantão' : 'Taxa Diarista'}
                   </strong>
@@ -271,7 +271,7 @@ export const PartnersView: React.FC = () => {
             </div>
 
             {/* Actions */}
-            <div className="pt-3 border-t border-[#ded6ca] flex items-center justify-between text-xs">
+            <div className="pt-3 border-t border-[#edd5dc] flex items-center justify-between text-xs">
               <div className="flex items-center gap-2">
                 <a
                   href={`https://wa.me/${partner.whatsapp.replace(/\D/g, '')}`}
@@ -288,7 +288,7 @@ export const PartnersView: React.FC = () => {
                     href={`https://instagram.com/${partner.instagram.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1.5 text-[#b56f55] hover:bg-[#fcedea] rounded-lg transition-colors cursor-pointer"
+                    className="p-1.5 text-[#c85a78] hover:bg-[#fbebf0] rounded-lg transition-colors cursor-pointer"
                     title="Instagram"
                   >
                     <Instagram className="w-4 h-4" />
@@ -312,100 +312,100 @@ export const PartnersView: React.FC = () => {
 
       {/* Partner Edit/Create Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/60 backdrop-blur-xs p-4">
-          <div className="bg-[#fffaf2] rounded-3xl max-w-lg w-full shadow-2xl border border-[#ded6ca] p-6 space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
-            <h3 className="font-display font-medium text-xl text-[#253a35]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2e1420]/60 backdrop-blur-xs p-4">
+          <div className="bg-[#ffffff] rounded-3xl max-w-lg w-full shadow-2xl border border-[#edd5dc] p-6 space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+            <h3 className="font-display font-medium text-xl text-[#2e1420]">
               {editingPartner ? 'Editar Ateliê Parceiro' : 'Novo Ateliê Parceiro'}
             </h3>
 
             <form onSubmit={handleSavePartner} className="space-y-3 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Nome da Marca</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Nome da Marca</label>
                   <input
                     type="text"
                     value={brandName}
                     onChange={(e) => setBrandName(e.target.value)}
                     required
                     placeholder="Ex: Tutabel"
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Nome do Artesão</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Nome do Artesão</label>
                   <input
                     type="text"
                     value={ownerName}
                     onChange={(e) => setOwnerName(e.target.value)}
                     required
                     placeholder="Ex: Maria Alice Rodrigues"
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">CPF ou CNPJ</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">CPF ou CNPJ</label>
                   <input
                     type="text"
                     value={document}
                     onChange={(e) => setDocument(e.target.value)}
                     required
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs font-mono-craft bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs font-mono-craft bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">E-mail</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">E-mail</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">WhatsApp de Atendimento</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">WhatsApp de Atendimento</label>
                   <input
                     type="text"
                     value={whatsapp}
                     onChange={(e) => setWhatsapp(e.target.value)}
                     required
                     placeholder="(98) 98123-4567"
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Instagram (@)</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Instagram (@)</label>
                   <input
                     type="text"
                     value={instagram}
                     onChange={(e) => setInstagram(e.target.value)}
                     placeholder="@marca.artesanal"
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Chave Pix Repasse</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Chave Pix Repasse</label>
                   <input
                     type="text"
                     value={pixKey}
                     onChange={(e) => setPixKey(e.target.value)}
                     required
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs font-mono-craft bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs font-mono-craft bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Tipo da Chave Pix</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Tipo da Chave Pix</label>
                   <select
                     value={pixKeyType}
                     onChange={(e) => setPixKeyType(e.target.value as any)}
-                    className="w-full p-2.5 bg-white text-[#253a35] rounded-xl border border-[#ded6ca] text-xs focus:outline-none"
+                    className="w-full p-2.5 bg-white text-[#2e1420] rounded-xl border border-[#edd5dc] text-xs focus:outline-none"
                   >
                     <option value="CPF">CPF</option>
                     <option value="CNPJ">CNPJ</option>
@@ -416,35 +416,35 @@ export const PartnersView: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Mensalidade (R$)</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Mensalidade (R$)</label>
                   <input
                     type="number"
                     value={monthlyFee}
                     onChange={(e) => setMonthlyFee(parseFloat(e.target.value) || 0)}
                     required
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs font-bold font-mono-craft bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs font-bold font-mono-craft bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Espaço no Ponto</label>
+                  <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Espaço no Ponto</label>
                   <input
                     type="text"
                     value={spaceType}
                     onChange={(e) => setSpaceType(e.target.value)}
                     placeholder="Ex: Nicho Central, Arara..."
-                    className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                    className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-[#253a35] mb-1 font-mono-craft">Descrição do Ateliê</label>
+                <label className="block font-semibold text-[#2e1420] mb-1 font-mono-craft">Descrição do Ateliê</label>
                 <textarea
                   value={brandDescription}
                   onChange={(e) => setBrandDescription(e.target.value)}
                   rows={2}
-                  className="w-full p-2.5 border border-[#ded6ca] rounded-xl text-xs bg-white text-[#253a35] focus:outline-none"
+                  className="w-full p-2.5 border border-[#edd5dc] rounded-xl text-xs bg-white text-[#2e1420] focus:outline-none"
                 />
               </div>
 
@@ -456,13 +456,13 @@ export const PartnersView: React.FC = () => {
                     onChange={(e) => setWorksShifts(e.target.checked)}
                     className="rounded text-[#3c6b54] focus:ring-[#3c6b54]"
                   />
-                  <span className="font-semibold text-[#253a35]">
+                  <span className="font-semibold text-[#2e1420]">
                     Cumpre escala de plantão no shopping (se desmarcado, paga diarista)
                   </span>
                 </label>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-[#ded6ca] font-mono-craft">
+              <div className="flex justify-end gap-2 pt-4 border-t border-[#edd5dc] font-mono-craft">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
