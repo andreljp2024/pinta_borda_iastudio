@@ -315,28 +315,28 @@ export const LandingPage: React.FC<{
   }, [selectedProduct, partners]);
 
   return (
-    <div className="min-h-screen bg-[#fdf8f9] text-[#2e1420]">
+    <div className="min-h-screen bg-[#fff5f8] text-[#380c25]">
       {/* 1. HERO SECTION */}
-      <section className="relative pt-12 pb-20 sm:pt-16 sm:pb-28 border-b border-[#ebd8e0] overflow-hidden">
+      <section className="relative pt-12 pb-20 sm:pt-16 sm:pb-28 border-b border-[#fce7f3] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-8">
               {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 text-xs font-mono-craft uppercase tracking-[0.22em] text-[#c85a78] font-medium">
-                <span className="w-7 h-[1.5px] bg-[#c85a78]" />
+              <div className="inline-flex items-center gap-2 text-xs font-mono-craft uppercase tracking-[0.22em] text-[#f43f7e] font-medium">
+                <span className="w-7 h-[1.5px] bg-[#f43f7e]" />
                 <span>Feito à mão, feito com intenção</span>
               </div>
 
               {/* Main Headline */}
-              <h1 className="font-display text-4xl sm:text-6xl lg:text-[68px] leading-[1.08] text-[#2e1420] font-medium tracking-tight">
+              <h1 className="font-display text-4xl sm:text-6xl lg:text-[68px] leading-[1.08] text-[#380c25] font-medium tracking-tight">
                 Onde o feito à mão{' '}
-                <em className="font-normal italic text-[#c85a78]">encontra</em>{' '}
+                <em className="font-normal italic text-[#f43f7e]">encontra</em>{' '}
                 novas histórias.
               </h1>
 
               {/* Sub-paragraph */}
-              <p className="text-base sm:text-lg text-[#593647] leading-relaxed max-w-xl font-light">
+              <p className="text-base sm:text-lg text-[#6d244c] leading-relaxed max-w-xl font-light">
                 Uma casa colaborativa em São Luís que reúne marcas autorais, encontros afetivos e
                 peças que carregam o tempo, o cuidado e a identidade de quem cria.
               </p>
@@ -360,17 +360,17 @@ export const LandingPage: React.FC<{
 
                 <button
                   onClick={() => setIsVolunteerModalOpen(true)}
-                  className="outline-button large !border-dashed text-[#c85a78] hover:text-[#2e1420]"
+                  className="outline-button large !border-dashed text-[#f43f7e] hover:text-[#380c25]"
                 >
                   Quero expor / Apoiar
                 </button>
               </div>
 
               {/* Maker Avatar Stack */}
-              <div className="pt-4 flex items-center gap-4 border-t border-[#ebd8e0] max-w-md">
+              <div className="pt-4 flex items-center gap-4 border-t border-[#fce7f3] max-w-md">
                 <div className="flex -space-x-2.5 overflow-hidden">
                   <img
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#fdf8f9] object-cover"
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#fff5f8] object-cover"
                     src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80"
                     alt="Keka"
                     loading="lazy"
@@ -378,7 +378,7 @@ export const LandingPage: React.FC<{
                     onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                   />
                   <img
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#fdf8f9] object-cover"
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#fff5f8] object-cover"
                     src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80"
                     alt="Artesã"
                     loading="lazy"
@@ -386,19 +386,19 @@ export const LandingPage: React.FC<{
                     onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                   />
                   <img
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#fdf8f9] object-cover"
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#fff5f8] object-cover"
                     src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80"
                     alt="Artesã"
                     loading="lazy"
                     referrerPolicy="no-referrer"
                     onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
                   />
-                  <div className="inline-flex items-center justify-center h-10 w-10 rounded-full ring-2 ring-[#fdf8f9] bg-[#fbe7ed] text-[#8c2a45] text-xs font-mono-craft font-bold">
+                  <div className="inline-flex items-center justify-center h-10 w-10 rounded-full ring-2 ring-[#fff5f8] bg-[#ffe4ee] text-[#be185d] text-xs font-mono-craft font-bold">
                     +14
                   </div>
                 </div>
-                <div className="text-xs font-mono-craft text-[#593647] leading-tight">
-                  <strong className="block text-[#2e1420] font-semibold">14 ateliês independentes</strong>
+                <div className="text-xs font-mono-craft text-[#6d244c] leading-tight">
+                  <strong className="block text-[#380c25] font-semibold">14 ateliês independentes</strong>
                   em um só endereço compartilhado
                 </div>
               </div>
@@ -417,9 +417,9 @@ export const LandingPage: React.FC<{
                     referrerPolicy="no-referrer"
                     onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#341724]/90 via-[#341724]/25 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#420f2c]/90 via-[#420f2c]/25 to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 text-[#ffffff]">
-                    <span className="text-[10px] font-mono-craft uppercase tracking-[0.22em] text-[#e29b86] font-semibold block mb-1">
+                    <span className="text-[10px] font-mono-craft uppercase tracking-[0.22em] text-[#ff7597] font-semibold block mb-1">
                       Rio Anil Shopping · Piso 2
                     </span>
                     <h3 className="font-display text-2xl font-medium leading-tight">
@@ -446,10 +446,10 @@ export const LandingPage: React.FC<{
 
                 {/* Floating card two */}
                 <div className="card-two">
-                  <div className="text-xs font-mono-craft text-[#8c2a45] uppercase font-bold tracking-wider">
+                  <div className="text-xs font-mono-craft text-[#be185d] uppercase font-bold tracking-wider">
                     Casa Colaborativa
                   </div>
-                  <div className="font-display text-sm font-medium text-[#2e1420]">
+                  <div className="font-display text-sm font-medium text-[#380c25]">
                     São Luís · Maranhão
                   </div>
                 </div>
@@ -460,22 +460,22 @@ export const LandingPage: React.FC<{
       </section>
 
       {/* 2. TICKER / BRAND RIBBON */}
-      <div className="bg-[#fdf5f7] border-b border-[#ebd8e0] py-3.5 overflow-hidden">
+      <div className="bg-[#fff0f5] border-b border-[#fce7f3] py-3.5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 flex items-center gap-6">
-          <span className="text-[10px] font-mono-craft uppercase tracking-[0.25em] text-[#8c2a45] font-bold shrink-0">
+          <span className="text-[10px] font-mono-craft uppercase tracking-[0.25em] text-[#be185d] font-bold shrink-0">
             Criações que têm história ·
           </span>
-          <div className="flex items-center gap-8 overflow-x-auto no-scrollbar whitespace-nowrap text-xs font-mono-craft text-[#593647]">
+          <div className="flex items-center gap-8 overflow-x-auto no-scrollbar whitespace-nowrap text-xs font-mono-craft text-[#6d244c]">
             {BRANDS_DOSSIE.map((brand, idx) => (
               <button
                 key={brand.id}
                 onClick={() => setSelectedBrandDrawer(brand)}
-                className="hover:text-[#c85a78] transition-colors cursor-pointer flex items-center gap-2 shrink-0"
+                className="hover:text-[#f43f7e] transition-colors cursor-pointer flex items-center gap-2 shrink-0"
               >
-                <span className="text-[#c85a78]">{brand.symbol}</span>
-                <span className="font-medium text-[#2e1420]">{brand.name}</span>
+                <span className="text-[#f43f7e]">{brand.symbol}</span>
+                <span className="font-medium text-[#380c25]">{brand.name}</span>
                 {idx < BRANDS_DOSSIE.length - 1 && (
-                  <span className="text-[#d9bece] font-light">·</span>
+                  <span className="text-[#f9a8d4] font-light">·</span>
                 )}
               </button>
             ))}
@@ -484,13 +484,13 @@ export const LandingPage: React.FC<{
       </div>
 
       {/* 3. SECTION "O ESPAÇO" (#sobre) */}
-      <section id="sobre" className="py-20 sm:py-28 border-b border-[#edd5dc]">
+      <section id="sobre" className="py-20 sm:py-28 border-b border-[#fbcfe8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left architectural photo */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-[380px] aspect-[4/5]">
-                <div className="photo-shape w-full h-full relative overflow-hidden shadow-xl border border-[#edd5dc]">
+                <div className="photo-shape w-full h-full relative overflow-hidden shadow-xl border border-[#fbcfe8]">
                   <img
                     src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=700&auto=format&fit=crop&q=80"
                     alt="Espaço Pinta e Borda"
@@ -499,13 +499,13 @@ export const LandingPage: React.FC<{
                     referrerPolicy="no-referrer"
                     onError={(e) => handleImageError(e, FALLBACK_PRODUCT_IMAGE)}
                   />
-                  <div className="absolute inset-0 bg-[#2e1420]/20" />
+                  <div className="absolute inset-0 bg-[#380c25]/20" />
                 </div>
                 <div className="card-two !bottom-6 !-left-4 !top-auto">
-                  <div className="text-[9px] font-mono-craft text-[#b84c6c] uppercase tracking-[0.2em]">
+                  <div className="text-[9px] font-mono-craft text-[#f43f7e] uppercase tracking-[0.2em]">
                     Manifesto
                   </div>
-                  <div className="font-display text-base font-medium text-[#2e1420] italic">
+                  <div className="font-display text-base font-medium text-[#380c25] italic">
                     "Um lugar para criar, partilhar e viver de arte."
                   </div>
                 </div>
@@ -515,16 +515,16 @@ export const LandingPage: React.FC<{
             {/* Right content */}
             <div className="lg:col-span-7 space-y-8">
               <div className="space-y-3">
-                <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#b84c6c] font-medium">
+                <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#f43f7e] font-medium">
                   01 · O espaço & o coletivo
                 </div>
-                <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#2e1420] leading-tight">
+                <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#380c25] leading-tight">
                   Mais que uma loja.{' '}
-                  <span className="italic text-[#c85a78]">Um ponto de encontro.</span>
+                  <span className="italic text-[#f43f7e]">Um ponto de encontro.</span>
                 </h2>
               </div>
 
-              <div className="space-y-4 text-base text-[#644855] leading-relaxed font-light">
+              <div className="space-y-4 text-base text-[#863b63] leading-relaxed font-light">
                 <p>
                   O <strong>Pinta e Borda</strong> nasceu em 2008 pelas mãos da artista plástica e artesã <strong>Keka (@ditodacor)</strong> como um projeto social itinerante. Com o tempo, transformou-se na primeira casa colaborativa em shopping center voltada exclusivamente ao artesanato autoral do Maranhão.
                 </p>
@@ -538,32 +538,32 @@ export const LandingPage: React.FC<{
 
               {/* 3 Coworking Pillar Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-5 rounded-2xl bg-[#f6ebef]/70 border border-[#edd5dc] space-y-2">
-                  <div className="font-mono-craft text-xs text-[#c85a78] font-bold">01</div>
-                  <h4 className="font-display text-lg font-medium text-[#2e1420]">
+                <div className="p-5 rounded-2xl bg-[#fff0f5]/70 border border-[#fbcfe8] space-y-2">
+                  <div className="font-mono-craft text-xs text-[#f43f7e] font-bold">01</div>
+                  <h4 className="font-display text-lg font-medium text-[#380c25]">
                     Coworking Criativo
                   </h4>
-                  <p className="text-xs text-[#644855] leading-relaxed">
+                  <p className="text-xs text-[#863b63] leading-relaxed">
                     Nichos personalizados onde cada ateliê expõe sua identidade de forma profissional.
                   </p>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#f6ebef]/70 border border-[#edd5dc] space-y-2">
-                  <div className="font-mono-craft text-xs text-[#c85a78] font-bold">02</div>
-                  <h4 className="font-display text-lg font-medium text-[#2e1420]">
+                <div className="p-5 rounded-2xl bg-[#fff0f5]/70 border border-[#fbcfe8] space-y-2">
+                  <div className="font-mono-craft text-xs text-[#f43f7e] font-bold">02</div>
+                  <h4 className="font-display text-lg font-medium text-[#380c25]">
                     Escala Cooperativa
                   </h4>
-                  <p className="text-xs text-[#644855] leading-relaxed">
+                  <p className="text-xs text-[#863b63] leading-relaxed">
                     Plantonistas treinadas que atendem e vendem produtos de todas as colegas com mesmo carinho.
                   </p>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#f6ebef]/70 border border-[#edd5dc] space-y-2">
-                  <div className="font-mono-craft text-xs text-[#c85a78] font-bold">03</div>
-                  <h4 className="font-display text-lg font-medium text-[#2e1420]">
+                <div className="p-5 rounded-2xl bg-[#fff0f5]/70 border border-[#fbcfe8] space-y-2">
+                  <div className="font-mono-craft text-xs text-[#f43f7e] font-bold">03</div>
+                  <h4 className="font-display text-lg font-medium text-[#380c25]">
                     Split Transparente
                   </h4>
-                  <p className="text-xs text-[#644855] leading-relaxed">
+                  <p className="text-xs text-[#863b63] leading-relaxed">
                     Fechamento quinzenal automatizado com extrato detalhado por Pix e zero retenções ocultas.
                   </p>
                 </div>
@@ -574,18 +574,18 @@ export const LandingPage: React.FC<{
       </section>
 
       {/* 4. SECTION "CATÁLOGO DA CASA" (#catalogo) */}
-      <section id="catalogo" className="py-20 sm:py-28 border-b border-[#edd5dc] bg-[#fcf6f8]">
+      <section id="catalogo" className="py-20 sm:py-28 border-b border-[#fbcfe8] bg-[#fff8fa]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Header & Filter Controls */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-3">
-              <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#b84c6c] font-medium">
+              <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#f43f7e] font-medium">
                 02 · Catálogo da casa
               </div>
-              <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#2e1420]">
+              <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#380c25]">
                 Feito para levar para a vida.
               </h2>
-              <p className="text-sm sm:text-base text-[#593647] max-w-lg font-light">
+              <p className="text-sm sm:text-base text-[#6d244c] max-w-lg font-light">
                 Peças exclusivas disponíveis para pronta entrega na loja física do Rio Anil Shopping ou sob encomenda direta com a artesã.
               </p>
             </div>
@@ -597,7 +597,7 @@ export const LandingPage: React.FC<{
                 placeholder="Buscar por peça ou ateliê..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 rounded-full border border-[#ebd8e0] bg-[#ffffff] text-xs font-mono-craft text-[#2e1420] placeholder-[#7a9186] focus:outline-none focus:border-[#c85a78] focus:ring-1 focus:ring-[#c85a78]/20 shadow-xs"
+                className="w-full pl-9 pr-4 py-2.5 rounded-full border border-[#fce7f3] bg-[#ffffff] text-xs font-mono-craft text-[#380c25] placeholder-[#7a9186] focus:outline-none focus:border-[#f43f7e] focus:ring-1 focus:ring-[#f43f7e]/20 shadow-xs"
               />
               <Search className="w-4 h-4 text-[#7a9186] absolute left-3 top-3" />
             </div>
@@ -618,8 +618,8 @@ export const LandingPage: React.FC<{
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-4 py-2 rounded-full text-xs font-mono-craft whitespace-nowrap transition-all cursor-pointer ${
                   selectedCategory === cat.id
-                    ? 'bg-[#341724] text-[#ffffff] font-medium shadow-xs'
-                    : 'bg-[#fdf5f7] text-[#593647] hover:bg-[#ebd8e0] hover:text-[#2e1420]'
+                    ? 'bg-[#420f2c] text-[#ffffff] font-medium shadow-xs'
+                    : 'bg-[#fff0f5] text-[#6d244c] hover:bg-[#fce7f3] hover:text-[#380c25]'
                 }`}
               >
                 {cat.label}
@@ -639,7 +639,7 @@ export const LandingPage: React.FC<{
                 >
                   <div>
                     {/* Artwork Container */}
-                    <div className="w-full aspect-[4/4.5] rounded-2xl bg-[#fbe7ed] relative overflow-hidden mb-4">
+                    <div className="w-full aspect-[4/4.5] rounded-2xl bg-[#ffe4ee] relative overflow-hidden mb-4">
                       <img
                         src={product.imageUrl}
                         alt={product.name}
@@ -653,8 +653,8 @@ export const LandingPage: React.FC<{
                         onClick={(e) => toggleFavorite(product.id, e)}
                         className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-xs transition-colors cursor-pointer ${
                           isFav
-                            ? 'bg-[#c85a78] text-white shadow-xs'
-                            : 'bg-white/85 text-[#593647] hover:text-[#c85a78]'
+                            ? 'bg-[#f43f7e] text-white shadow-xs'
+                            : 'bg-white/85 text-[#6d244c] hover:text-[#f43f7e]'
                         }`}
                       >
                         <Heart className={`w-4 h-4 ${isFav ? 'fill-current' : ''}`} />
@@ -662,8 +662,8 @@ export const LandingPage: React.FC<{
 
                       {/* Featured badge */}
                       {product.isFeatured && (
-                        <div className="absolute bottom-3 left-3 bg-[#341724]/90 text-[#e29b86] text-[10px] font-mono-craft px-2.5 py-1 rounded-full backdrop-blur-xs flex items-center gap-1">
-                          <Sparkles className="w-3 h-3 text-[#e29b86]" />
+                        <div className="absolute bottom-3 left-3 bg-[#420f2c]/90 text-[#ff7597] text-[10px] font-mono-craft px-2.5 py-1 rounded-full backdrop-blur-xs flex items-center gap-1">
+                          <Sparkles className="w-3 h-3 text-[#ff7597]" />
                           Destaque
                         </div>
                       )}
@@ -671,25 +671,25 @@ export const LandingPage: React.FC<{
 
                     {/* Meta info */}
                     <div className="space-y-1.5">
-                      <div className="text-[10px] font-mono-craft uppercase tracking-wider text-[#c85a78] font-medium truncate">
+                      <div className="text-[10px] font-mono-craft uppercase tracking-wider text-[#f43f7e] font-medium truncate">
                         {product.partnerName}
                       </div>
-                      <h3 className="font-display text-lg font-medium text-[#2e1420] group-hover:text-[#c85a78] transition-colors leading-snug line-clamp-2">
+                      <h3 className="font-display text-lg font-medium text-[#380c25] group-hover:text-[#f43f7e] transition-colors leading-snug line-clamp-2">
                         {product.name}
                       </h3>
                     </div>
                   </div>
 
                   {/* Price & Action */}
-                  <div className="pt-4 mt-2 border-t border-[#ebd8e0] flex items-center justify-between">
+                  <div className="pt-4 mt-2 border-t border-[#fce7f3] flex items-center justify-between">
                     <div>
                       <span className="text-[10px] font-mono-craft text-[#7a9186] block">Preço</span>
-                      <span className="font-mono-craft font-bold text-lg text-[#2e1420]">
+                      <span className="font-mono-craft font-bold text-lg text-[#380c25]">
                         R$ {product.price.toFixed(2).replace('.', ',')}
                       </span>
                     </div>
 
-                    <span className="text-xs font-mono-craft font-semibold text-[#c85a78] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+                    <span className="text-xs font-mono-craft font-semibold text-[#f43f7e] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
                       Ver detalhes →
                     </span>
                   </div>
@@ -704,7 +704,7 @@ export const LandingPage: React.FC<{
               onClick={() => setActiveView('store')}
               className="solid-forest-button large inline-flex items-center gap-2"
             >
-              <ShoppingBag className="w-4 h-4 text-[#e29b86]" />
+              <ShoppingBag className="w-4 h-4 text-[#ff7597]" />
               <span>Acessar vitrine digital completa ({products.length} peças)</span>
             </button>
           </div>
@@ -712,12 +712,12 @@ export const LandingPage: React.FC<{
       </section>
 
       {/* 5. SECTION "MARCAS COM ALMA" (#marcas) - Botanical Forest Green */}
-      <section id="marcas" className="py-20 sm:py-28 bg-[#341724] text-[#ffffff] border-b border-[#250f19]">
+      <section id="marcas" className="py-20 sm:py-28 bg-[#420f2c] text-[#ffffff] border-b border-[#2a071b]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-3">
-              <div className="text-xs font-mono-craft uppercase tracking-[0.25em] text-[#e29b86] font-semibold">
+              <div className="text-xs font-mono-craft uppercase tracking-[0.25em] text-[#ff7597] font-semibold">
                 03 · Quem faz acontecer
               </div>
               <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#ffffff]">
@@ -743,8 +743,8 @@ export const LandingPage: React.FC<{
                   onClick={() => setBrandCategoryFilter(f.id)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-mono-craft transition-all cursor-pointer ${
                     brandCategoryFilter === f.id
-                      ? 'bg-[#e29b86] text-[#341724] font-bold shadow-xs'
-                      : 'bg-[#391c2b] text-[#c9d9d0] hover:bg-[#2d5246] hover:text-[#ffffff]'
+                      ? 'bg-[#ff7597] text-[#420f2c] font-bold shadow-xs'
+                      : 'bg-[#501535] text-[#c9d9d0] hover:bg-[#2d5246] hover:text-[#ffffff]'
                   }`}
                 >
                   {f.label}
@@ -759,19 +759,19 @@ export const LandingPage: React.FC<{
               <div
                 key={brand.id}
                 onClick={() => setSelectedBrandDrawer(brand)}
-                className="bg-[#391c2b]/70 hover:bg-[#391c2b] rounded-3xl p-6 border border-[#4d283a] hover:border-[#e29b86] transition-all cursor-pointer group flex flex-col justify-between space-y-6 shadow-sm hover:shadow-2xl"
+                className="bg-[#501535]/70 hover:bg-[#501535] rounded-3xl p-6 border border-[#501535] hover:border-[#ff7597] transition-all cursor-pointer group flex flex-col justify-between space-y-6 shadow-sm hover:shadow-2xl"
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs font-mono-craft text-[#e29b86] pb-4 border-b border-[#4d283a]">
+                  <div className="flex items-center justify-between text-xs font-mono-craft text-[#ff7597] pb-4 border-b border-[#501535]">
                     <span className="font-semibold">{brand.number}</span>
                     <span className="text-lg">{brand.symbol}</span>
-                    <span className="text-[10px] tracking-widest uppercase bg-[#26101c] px-2.5 py-0.5 rounded-full text-[#c9d9d0]">
+                    <span className="text-[10px] tracking-widest uppercase bg-[#2a071b] px-2.5 py-0.5 rounded-full text-[#c9d9d0]">
                       {brand.categoryName}
                     </span>
                   </div>
 
                   <div className="pt-4 space-y-2">
-                    <h3 className="font-display text-2xl font-medium text-[#ffffff] group-hover:text-[#e29b86] transition-colors">
+                    <h3 className="font-display text-2xl font-medium text-[#ffffff] group-hover:text-[#ff7597] transition-colors">
                       {brand.name}
                     </h3>
                     <p className="text-xs font-mono-craft text-[#9ebfb0]">
@@ -783,9 +783,9 @@ export const LandingPage: React.FC<{
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-[#4d283a] text-xs font-mono-craft text-[#e29b86]">
+                <div className="flex items-center justify-between pt-4 border-t border-[#501535] text-xs font-mono-craft text-[#ff7597]">
                   <span>{brand.instagram}</span>
-                  <span className="group-hover:translate-x-1 transition-transform flex items-center gap-1 text-[#ffffff] group-hover:text-[#e29b86]">
+                  <span className="group-hover:translate-x-1 transition-transform flex items-center gap-1 text-[#ffffff] group-hover:text-[#ff7597]">
                     Conhecer ateliê →
                   </span>
                 </div>
@@ -796,27 +796,27 @@ export const LandingPage: React.FC<{
       </section>
 
       {/* 6. SECTION "VISITE A CASA" (#visite) */}
-      <section id="visite" className="py-20 sm:py-28 border-b border-[#edd5dc]">
+      <section id="visite" className="py-20 sm:py-28 border-b border-[#fbcfe8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Content */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#b84c6c] font-medium">
+              <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#f43f7e] font-medium">
                 04 · Visite a casa
               </div>
-              <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#2e1420] leading-tight">
+              <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#380c25] leading-tight">
                 Venha tomar um café conosco.
               </h2>
-              <p className="text-base text-[#644855] leading-relaxed font-light">
+              <p className="text-base text-[#863b63] leading-relaxed font-light">
                 Estamos de portas abertas todos os dias no Rio Anil Shopping, reunindo o melhor da produção artesanal maranhense com acolhimento e afeto.
               </p>
 
               <div className="space-y-4 pt-4 text-sm">
-                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#f6ebef]/60 border border-[#edd5dc]">
-                  <MapPin className="w-5 h-5 text-[#c85a78] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#fff0f5]/60 border border-[#fbcfe8]">
+                  <MapPin className="w-5 h-5 text-[#f43f7e] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block text-[#2e1420] font-semibold">Endereço</strong>
-                    <span className="text-[#644855] text-xs leading-relaxed block">
+                    <strong className="block text-[#380c25] font-semibold">Endereço</strong>
+                    <span className="text-[#863b63] text-xs leading-relaxed block">
                       Rio Anil Shopping, Piso 2 (em frente à Loja Marisa)
                       <br />
                       Avenida São Luís Rei de França, Turu — São Luís / MA
@@ -824,11 +824,11 @@ export const LandingPage: React.FC<{
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#f6ebef]/60 border border-[#edd5dc]">
-                  <Clock className="w-5 h-5 text-[#c85a78] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#fff0f5]/60 border border-[#fbcfe8]">
+                  <Clock className="w-5 h-5 text-[#f43f7e] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block text-[#2e1420] font-semibold">Horários de Funcionamento</strong>
-                    <span className="text-[#644855] text-xs leading-relaxed block">
+                    <strong className="block text-[#380c25] font-semibold">Horários de Funcionamento</strong>
+                    <span className="text-[#863b63] text-xs leading-relaxed block">
                       Segunda a Sábado: 10h às 22h
                       <br />
                       Domingos e Feriados: 14h às 20h
@@ -836,11 +836,11 @@ export const LandingPage: React.FC<{
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#f6ebef]/60 border border-[#edd5dc]">
-                  <Phone className="w-5 h-5 text-[#c85a78] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#fff0f5]/60 border border-[#fbcfe8]">
+                  <Phone className="w-5 h-5 text-[#f43f7e] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block text-[#2e1420] font-semibold">Contato & Curadoria</strong>
-                    <span className="text-[#644855] text-xs leading-relaxed block">
+                    <strong className="block text-[#380c25] font-semibold">Contato & Curadoria</strong>
+                    <span className="text-[#863b63] text-xs leading-relaxed block">
                       WhatsApp: (98) 98828-9123 (Keka)
                       <br />
                       Instagram: @ditodacor · @pintaeborda
@@ -864,7 +864,7 @@ export const LandingPage: React.FC<{
                   onClick={() => setIsVolunteerModalOpen(true)}
                   className="outline-button text-sm"
                 >
-                  <UserPlus className="w-4 h-4 text-[#c85a78]" />
+                  <UserPlus className="w-4 h-4 text-[#f43f7e]" />
                   <span>Cadastrar Ateliê / Voluntariado</span>
                 </button>
               </div>
@@ -872,16 +872,16 @@ export const LandingPage: React.FC<{
 
             {/* Right Card / Visual */}
             <div className="lg:col-span-6 flex justify-center">
-              <div className="w-full max-w-[440px] rounded-3xl p-8 bg-[#2e1420] text-[#ffffff] border border-[#4a2536] space-y-6 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-[#dc9b86]/10 blur-2xl pointer-events-none" />
+              <div className="w-full max-w-[440px] rounded-3xl p-8 bg-[#380c25] text-[#ffffff] border border-[#5c1a3e] space-y-6 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-[#ff7597]/10 blur-2xl pointer-events-none" />
 
-                <div className="brand-mark text-[#dc9b86]">
+                <div className="brand-mark text-[#ff7597]">
                   <span>p</span>
                   <span>b</span>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="text-[10px] font-mono-craft tracking-[0.2em] uppercase text-[#dc9b86]">
+                  <div className="text-[10px] font-mono-craft tracking-[0.2em] uppercase text-[#ff7597]">
                     Casa Colaborativa
                   </div>
                   <h3 className="font-display text-3xl font-medium leading-tight">
@@ -893,7 +893,7 @@ export const LandingPage: React.FC<{
                   Fundado em 2008 sem qualquer vínculo estatal ou partidário, o projeto é mantido pelo afeto e dedicação de dezenas de mulheres maranhenses que acreditam no poder transformador do artesanato autoral.
                 </p>
 
-                <div className="pt-4 border-t border-[#4a2536] flex items-center justify-between text-xs font-mono-craft text-[#dc9b86]">
+                <div className="pt-4 border-t border-[#5c1a3e] flex items-center justify-between text-xs font-mono-craft text-[#ff7597]">
                   <span>São Luís · Maranhão</span>
                   <span>Desde 2008</span>
                 </div>
@@ -904,40 +904,40 @@ export const LandingPage: React.FC<{
       </section>
 
       {/* 7. FOOTER */}
-      <footer className="py-12 bg-[#f6ebef] border-t border-[#edd5dc] text-[#644855] text-xs font-mono-craft">
+      <footer className="py-12 bg-[#fff0f5] border-t border-[#fbcfe8] text-[#863b63] text-xs font-mono-craft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="brand-mark text-[#2e1420]">
+            <div className="brand-mark text-[#380c25]">
               <span>p</span>
               <span>b</span>
             </div>
             <div>
-              <div className="font-display text-base font-medium text-[#2e1420]">
-                pinta <em className="italic font-normal text-[#c85a78]">e</em> borda
+              <div className="font-display text-base font-medium text-[#380c25]">
+                pinta <em className="italic font-normal text-[#f43f7e]">e</em> borda
               </div>
-              <div className="text-[9px] uppercase tracking-widest text-[#b84c6c]">
+              <div className="text-[9px] uppercase tracking-widest text-[#f43f7e]">
                 casa colaborativa · são luís / ma
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-6 text-[11px]">
-            <a href="#sobre" className="hover:text-[#c85a78] transition-colors">
+            <a href="#sobre" className="hover:text-[#f43f7e] transition-colors">
               O espaço
             </a>
-            <a href="#marcas" className="hover:text-[#c85a78] transition-colors">
+            <a href="#marcas" className="hover:text-[#f43f7e] transition-colors">
               Marcas
             </a>
-            <a href="#catalogo" className="hover:text-[#c85a78] transition-colors">
+            <a href="#catalogo" className="hover:text-[#f43f7e] transition-colors">
               Catálogo
             </a>
-            <a href="#visite" className="hover:text-[#c85a78] transition-colors">
+            <a href="#visite" className="hover:text-[#f43f7e] transition-colors">
               Visite
             </a>
             {onOpenPresentation && (
               <button
                 onClick={onOpenPresentation}
-                className="text-[#c85a78] font-bold hover:underline cursor-pointer"
+                className="text-[#f43f7e] font-bold hover:underline cursor-pointer"
               >
                 Dossiê
               </button>
@@ -950,7 +950,7 @@ export const LandingPage: React.FC<{
             </button>
           </div>
 
-          <div className="text-[11px] text-[#8e727e]">
+          <div className="text-[11px] text-[#9b4f76]">
             © {new Date().getFullYear()} Pinta e Borda · Feito à mão com afeto.
           </div>
         </div>
@@ -962,25 +962,25 @@ export const LandingPage: React.FC<{
           {/* Backdrop */}
           <div
             onClick={() => setSelectedBrandDrawer(null)}
-            className="absolute inset-0 bg-[#2e1420]/60 backdrop-blur-xs transition-opacity"
+            className="absolute inset-0 bg-[#380c25]/60 backdrop-blur-xs transition-opacity"
           />
 
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-md bg-[#ffffff] border-l border-[#edd5dc] shadow-2xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-300">
+            <div className="w-screen max-w-md bg-[#ffffff] border-l border-[#fbcfe8] shadow-2xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-300">
               <div className="space-y-6">
                 {/* Header with Close */}
-                <div className="flex items-center justify-between pb-4 border-b border-[#edd5dc]">
+                <div className="flex items-center justify-between pb-4 border-b border-[#fbcfe8]">
                   <div className="flex items-center gap-2">
-                    <span className="text-xl text-[#c85a78] font-mono-craft">
+                    <span className="text-xl text-[#f43f7e] font-mono-craft">
                       {selectedBrandDrawer.symbol}
                     </span>
-                    <span className="text-xs font-mono-craft uppercase tracking-widest text-[#b84c6c]">
+                    <span className="text-xs font-mono-craft uppercase tracking-widest text-[#f43f7e]">
                       Ateliê {selectedBrandDrawer.number}
                     </span>
                   </div>
                   <button
                     onClick={() => setSelectedBrandDrawer(null)}
-                    className="p-2 rounded-full hover:bg-[#f6ebef] text-[#644855] cursor-pointer transition-colors"
+                    className="p-2 rounded-full hover:bg-[#fff0f5] text-[#863b63] cursor-pointer transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -988,7 +988,7 @@ export const LandingPage: React.FC<{
 
                 {/* Brand Image & Header */}
                 <div className="space-y-4">
-                  <div className="w-full h-48 rounded-2xl overflow-hidden border border-[#edd5dc]">
+                  <div className="w-full h-48 rounded-2xl overflow-hidden border border-[#fbcfe8]">
                     <img
                       src={selectedBrandDrawer.image}
                       alt={selectedBrandDrawer.name}
@@ -1000,40 +1000,40 @@ export const LandingPage: React.FC<{
                   </div>
 
                   <div>
-                    <h3 className="font-display text-3xl font-medium text-[#2e1420]">
+                    <h3 className="font-display text-3xl font-medium text-[#380c25]">
                       {selectedBrandDrawer.name}
                     </h3>
-                    <p className="text-xs font-mono-craft text-[#b84c6c] mt-1">
+                    <p className="text-xs font-mono-craft text-[#f43f7e] mt-1">
                       {selectedBrandDrawer.segment}
                     </p>
                   </div>
                 </div>
 
                 {/* Founder Info */}
-                <div className="p-4 rounded-2xl bg-[#f6ebef]/70 border border-[#edd5dc] space-y-1">
-                  <span className="text-[10px] font-mono-craft uppercase tracking-wider text-[#8e727e] block">
+                <div className="p-4 rounded-2xl bg-[#fff0f5]/70 border border-[#fbcfe8] space-y-1">
+                  <span className="text-[10px] font-mono-craft uppercase tracking-wider text-[#9b4f76] block">
                     Criadora responsável
                   </span>
-                  <div className="font-display text-base font-medium text-[#2e1420]">
+                  <div className="font-display text-base font-medium text-[#380c25]">
                     {selectedBrandDrawer.founder}
                   </div>
-                  <div className="text-xs font-mono-craft text-[#c85a78]">
+                  <div className="text-xs font-mono-craft text-[#f43f7e]">
                     {selectedBrandDrawer.instagram}
                   </div>
                 </div>
 
                 {/* Full Description */}
                 <div className="space-y-2">
-                  <h4 className="text-xs font-mono-craft uppercase tracking-wider text-[#8e727e]">
+                  <h4 className="text-xs font-mono-craft uppercase tracking-wider text-[#9b4f76]">
                     Sobre a marca
                   </h4>
-                  <p className="text-sm text-[#644855] leading-relaxed font-light">
+                  <p className="text-sm text-[#863b63] leading-relaxed font-light">
                     {selectedBrandDrawer.desc}
                   </p>
                 </div>
 
                 {/* Coworking presence badge */}
-                <div className="p-3 bg-[#fbf3f5] rounded-xl border border-[#cbe0d3] text-[#2e1420] flex items-center gap-2.5 text-xs">
+                <div className="p-3 bg-[#fbf3f5] rounded-xl border border-[#cbe0d3] text-[#380c25] flex items-center gap-2.5 text-xs">
                   <Store className="w-4 h-4 text-[#3c6b54] shrink-0" />
                   <div>
                     <strong className="block font-medium">Nicho ativo no Rio Anil Shopping</strong>
@@ -1045,7 +1045,7 @@ export const LandingPage: React.FC<{
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-6 border-t border-[#edd5dc] space-y-3">
+              <div className="pt-6 border-t border-[#fbcfe8] space-y-3">
                 <a
                   href={`https://wa.me/${selectedBrandDrawer.whatsapp}?text=${encodeURIComponent(
                     `Olá! Encontrei o ateliê ${selectedBrandDrawer.name} na vitrine do Pinta e Borda e gostaria de conhecer mais sobre suas peças!`

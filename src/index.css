@@ -3,8 +3,8 @@
 @layer base {
   body {
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #fdf8f9;
-    color: #2e1420;
+    background-color: #fff5f8;
+    color: #380c25;
   }
 }
 
@@ -67,51 +67,51 @@
 }
 
 .outline-button {
-  border: 1.5px solid #e8d0d8;
-  color: #3d1a29;
+  border: 1.5px solid #fbcfe8;
+  color: #501535;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(4px);
 }
 .outline-button:hover {
-  border-color: #c85a78;
+  border-color: #f43f7e;
   background: #ffffff;
-  color: #c85a78;
+  color: #f43f7e;
   transform: translateY(-1.5px);
-  box-shadow: 0 6px 16px rgba(200, 90, 120, 0.16);
+  box-shadow: 0 6px 16px rgba(244, 63, 126, 0.2);
 }
 
 .solid-button {
-  background: #c85a78;
+  background: #f43f7e;
   color: #ffffff;
-  box-shadow: 0 6px 20px rgba(200, 90, 120, 0.28);
+  box-shadow: 0 6px 20px rgba(244, 63, 126, 0.32);
 }
 .solid-button:hover {
-  background: #b04965;
+  background: #db2777;
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(200, 90, 120, 0.38);
+  box-shadow: 0 10px 26px rgba(244, 63, 126, 0.42);
 }
 
 .solid-forest-button {
-  background: #341724;
-  color: #fdf5f7;
-  box-shadow: 0 6px 20px rgba(52, 23, 36, 0.22);
+  background: #420f2c;
+  color: #fff0f5;
+  box-shadow: 0 6px 20px rgba(66, 15, 44, 0.25);
 }
 .solid-forest-button:hover {
-  background: #250f19;
+  background: #2a071b;
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(52, 23, 36, 0.32);
+  box-shadow: 0 10px 26px rgba(66, 15, 44, 0.35);
 }
 
 .solid-gold-button {
-  background: #d8846c;
+  background: #ff6088;
   color: #ffffff;
-  box-shadow: 0 6px 20px rgba(216, 132, 108, 0.25);
+  box-shadow: 0 6px 20px rgba(255, 96, 136, 0.3);
   font-weight: 700;
 }
 .solid-gold-button:hover {
-  background: #c06f58;
+  background: #f43f7e;
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(216, 132, 108, 0.35);
+  box-shadow: 0 10px 24px rgba(255, 96, 136, 0.4);
 }
 
 .solid-button:active, .outline-button:active, .solid-forest-button:active, .solid-gold-button:active {
@@ -129,15 +129,15 @@
   gap: 5px;
   font-size: 12px;
   font-weight: 600;
-  color: #c85a78;
-  border-bottom: 1.5px solid #f2cad6;
+  color: #f43f7e;
+  border-bottom: 1.5px solid #fbcfe8;
   padding-bottom: 2px;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s;
 }
 .text-link:hover {
-  color: #8c2a45;
-  border-color: #c85a78;
+  color: #be185d;
+  border-color: #f43f7e;
 }
 
 .eyebrow {
@@ -145,7 +145,7 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-size: 10.5px;
-  color: #c85a78;
+  color: #f43f7e;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -156,19 +156,19 @@
 .hero-art {
   height: 500px;
   position: relative;
-  background: #f5e6eb;
+  background: #ffecf2;
   border-radius: 52% 48% 12% 12% / 40% 38% 10% 10%;
   overflow: hidden;
-  background-image: radial-gradient(#965e7428 1.2px, transparent 1.2px);
+  background-image: radial-gradient(#f43f7e28 1.2px, transparent 1.2px);
   background-size: 14px 14px;
-  box-shadow: 0 24px 50px -12px rgba(52, 23, 36, 0.16);
+  box-shadow: 0 24px 50px -12px rgba(66, 15, 44, 0.16);
 }
 .art-sun {
   position: absolute;
   width: 290px;
   height: 290px;
   border-radius: 50%;
-  background: #f3c4d0;
+  background: #ffb8ce;
   top: -35px;
   right: 2px;
   opacity: 0.88;
@@ -176,19 +176,19 @@
 }
 .art-card {
   position: absolute;
-  box-shadow: 12px 20px 30px rgba(80, 41, 58, 0.22);
+  box-shadow: 12px 20px 30px rgba(80, 20, 48, 0.22);
 }
 .card-one {
-  background: #c85a78;
+  background: #f43f7e;
   width: 205px;
   height: 260px;
   left: 48px;
   top: 130px;
   transform: rotate(-7deg);
   padding: 24px;
-  color: #fffafb;
+  color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 16px 36px rgba(200, 90, 120, 0.35);
+  box-shadow: 0 16px 36px rgba(244, 63, 126, 0.35);
   transition: transform 0.3s ease;
 }
 .card-one:hover {
@@ -203,11 +203,11 @@
 .art-line {
   height: 90px;
   width: 1px;
-  background: rgba(255, 250, 251, 0.45);
+  background: rgba(255, 255, 255, 0.5);
   margin: 58px auto 0;
 }
 .card-two {
-  background: #e29b86;
+  background: #ff7597;
   width: 190px;
   height: 120px;
   right: 36px;
@@ -219,7 +219,7 @@
   justify-content: center;
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 14px 30px rgba(226, 155, 134, 0.3);
+  box-shadow: 0 14px 30px rgba(255, 117, 151, 0.35);
   transition: transform 0.3s ease;
 }
 .card-two:hover {
@@ -238,14 +238,14 @@
 /* Craft card elevation & borders */
 .craft-card {
   background: #ffffff;
-  border: 1px solid #edd5dc;
+  border: 1px solid #fbcfe8;
   border-radius: 20px;
-  box-shadow: 0 4px 18px -2px rgba(52, 23, 36, 0.05);
+  box-shadow: 0 4px 18px -2px rgba(66, 15, 44, 0.05);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .craft-card:hover {
-  border-color: #c85a78;
-  box-shadow: 0 14px 34px -4px rgba(52, 23, 36, 0.12);
+  border-color: #f43f7e;
+  box-shadow: 0 14px 34px -4px rgba(244, 63, 126, 0.16);
   transform: translateY(-3px);
 }
 
@@ -265,19 +265,19 @@
 }
 .brand-card-ref:hover {
   background: rgba(255, 255, 255, 0.09);
-  border-color: #f3c4d0;
+  border-color: #ffb8ce;
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
 }
 
 /* Subtle texture overlays */
 .pattern-azulejo {
-  background-image: radial-gradient(#c85a7818 1px, transparent 1px);
+  background-image: radial-gradient(#f43f7e18 1px, transparent 1px);
   background-size: 16px 16px;
 }
 
 .pattern-linen {
-  background-image: radial-gradient(#34172412 1px, transparent 1px);
+  background-image: radial-gradient(#420f2c12 1px, transparent 1px);
   background-size: 12px 12px;
 }
 

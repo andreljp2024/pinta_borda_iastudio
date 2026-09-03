@@ -24,7 +24,7 @@ const AppContent: React.FC = () => {
   const [isPresentationOpen, setIsPresentationOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#fdf8f9] text-[#2e1420] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#fff5f8] text-[#380c25] flex flex-col font-sans">
       {/* Top Navigation Bar */}
       <Navbar
         onOpenAuth={() => setIsAuthModalOpen(true)}

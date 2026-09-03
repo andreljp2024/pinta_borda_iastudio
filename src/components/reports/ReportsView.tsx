@@ -25,7 +25,7 @@ import {
 } from 'recharts';
 import { useApp } from '../../context/AppContext';
 
-const COLORS = ['#2e1420', '#c85a78', '#dc9b86', '#3c6b54', '#8a4157', '#644855', '#ca8974', '#8e727e'];
+const COLORS = ['#380c25', '#f43f7e', '#ff7597', '#3c6b54', '#db2777', '#863b63', '#ff7597', '#9b4f76'];
 
 export const ReportsView: React.FC = () => {
   const { sales, partners, products, categories, userRole, currentPartner } = useApp();
@@ -106,13 +106,13 @@ export const ReportsView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#c85a78] font-mono-craft">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#f43f7e] font-mono-craft">
             Inteligência Coletiva & BI
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420]">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25]">
             Relatórios & Indicadores
           </h2>
-          <p className="text-xs sm:text-sm text-[#8e727e] mt-1 font-light">
+          <p className="text-xs sm:text-sm text-[#9b4f76] mt-1 font-light">
             Métricas de desempenho comercial da loja física no Rio Anil Shopping.
           </p>
         </div>
@@ -129,75 +129,75 @@ export const ReportsView: React.FC = () => {
           }}
           className="outline-button text-xs font-mono-craft flex items-center gap-2 self-start sm:self-auto"
         >
-          <Download className="w-4 h-4 text-[#c85a78]" />
+          <Download className="w-4 h-4 text-[#f43f7e]" />
           <span>Exportar Relatório (JSON)</span>
         </button>
       </div>
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono-craft">
-        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs">
-          <span className="text-xs text-[#8e727e] uppercase font-semibold">Faturamento Bruto</span>
-          <div className="text-2xl font-bold text-[#2e1420] mt-1">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#fbcfe8] shadow-2xs">
+          <span className="text-xs text-[#9b4f76] uppercase font-semibold">Faturamento Bruto</span>
+          <div className="text-2xl font-bold text-[#380c25] mt-1">
             R$ {totalVolume.toFixed(2).replace('.', ',')}
           </div>
-          <span className="text-[11px] text-[#8e727e] mt-1 block">Volume total de peças vendidas</span>
+          <span className="text-[11px] text-[#9b4f76] mt-1 block">Volume total de peças vendidas</span>
         </div>
 
-        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs">
-          <span className="text-xs text-[#8e727e] uppercase font-semibold">Volume de Atendimentos</span>
-          <div className="text-2xl font-bold text-[#c85a78] mt-1">
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#fbcfe8] shadow-2xs">
+          <span className="text-xs text-[#9b4f76] uppercase font-semibold">Volume de Atendimentos</span>
+          <div className="text-2xl font-bold text-[#f43f7e] mt-1">
             {totalSalesCount} transações
           </div>
-          <span className="text-[11px] text-[#8e727e] mt-1 block">Cupons emitidos no balcão</span>
+          <span className="text-[11px] text-[#9b4f76] mt-1 block">Cupons emitidos no balcão</span>
         </div>
 
-        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#edd5dc] shadow-2xs">
-          <span className="text-xs text-[#8e727e] uppercase font-semibold">Ticket Médio</span>
+        <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#fbcfe8] shadow-2xs">
+          <span className="text-xs text-[#9b4f76] uppercase font-semibold">Ticket Médio</span>
           <div className="text-2xl font-bold text-[#3c6b54] mt-1">
             R$ {ticketMedio.toFixed(2).replace('.', ',')}
           </div>
-          <span className="text-[11px] text-[#8e727e] mt-1 block">Média por cliente atendido</span>
+          <span className="text-[11px] text-[#9b4f76] mt-1 block">Média por cliente atendido</span>
         </div>
       </div>
 
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Sales by Brand (7 cols) */}
-        <div className="lg:col-span-7 bg-[#ffffff] rounded-2xl p-6 border border-[#edd5dc] shadow-2xs space-y-4">
+        <div className="lg:col-span-7 bg-[#ffffff] rounded-2xl p-6 border border-[#fbcfe8] shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-display font-medium text-lg text-[#2e1420]">
+            <h3 className="font-display font-medium text-lg text-[#380c25]">
               Vendas por Marca / Ateliê (R$)
             </h3>
-            <span className="text-xs text-[#8e727e] font-mono-craft">Consolidado</span>
+            <span className="text-xs text-[#9b4f76] font-mono-craft">Consolidado</span>
           </div>
 
           <div className="h-72 w-full pt-4 font-mono-craft">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={salesByBrand} margin={{ top: 10, right: 10, left: -20, bottom: 25 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#edd5dc" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#fbcfe8" />
                 <XAxis
                   dataKey="name"
-                  tick={{ fontSize: 10, fill: '#8e727e' }}
+                  tick={{ fontSize: 10, fill: '#9b4f76' }}
                   interval={0}
                   angle={-20}
                   textAnchor="end"
                 />
-                <YAxis tick={{ fontSize: 10, fill: '#8e727e' }} />
+                <YAxis tick={{ fontSize: 10, fill: '#9b4f76' }} />
                 <Tooltip
                   formatter={(val: any) => [`R$ ${Number(val).toFixed(2).replace('.', ',')}`, 'Vendas']}
-                  contentStyle={{ backgroundColor: '#2e1420', borderRadius: '12px', color: '#ffffff', fontSize: '12px', border: '1px solid #2e1420' }}
+                  contentStyle={{ backgroundColor: '#380c25', borderRadius: '12px', color: '#ffffff', fontSize: '12px', border: '1px solid #380c25' }}
                 />
-                <Bar dataKey="value" fill="#c85a78" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="value" fill="#f43f7e" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Sales by Payment Method (5 cols) */}
-        <div className="lg:col-span-5 bg-[#ffffff] rounded-2xl p-6 border border-[#edd5dc] shadow-2xs space-y-4">
+        <div className="lg:col-span-5 bg-[#ffffff] rounded-2xl p-6 border border-[#fbcfe8] shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-display font-medium text-lg text-[#2e1420]">
+            <h3 className="font-display font-medium text-lg text-[#380c25]">
               Distribuição por Meio de Pagamento
             </h3>
           </div>
@@ -221,7 +221,7 @@ export const ReportsView: React.FC = () => {
                 </Pie>
                 <Tooltip
                   formatter={(val: any) => [`R$ ${Number(val).toFixed(2).replace('.', ',')}`, 'Total']}
-                  contentStyle={{ backgroundColor: '#2e1420', borderRadius: '12px', color: '#ffffff', fontSize: '12px', border: '1px solid #2e1420' }}
+                  contentStyle={{ backgroundColor: '#380c25', borderRadius: '12px', color: '#ffffff', fontSize: '12px', border: '1px solid #380c25' }}
                 />
                 <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
               </PieChart>
@@ -231,33 +231,33 @@ export const ReportsView: React.FC = () => {
       </div>
 
       {/* Top Products Table */}
-      <div className="bg-[#ffffff] rounded-2xl border border-[#edd5dc] shadow-2xs overflow-hidden">
-        <div className="p-4 sm:p-5 border-b border-[#edd5dc] flex items-center justify-between">
-          <h3 className="font-display font-medium text-lg text-[#2e1420]">
+      <div className="bg-[#ffffff] rounded-2xl border border-[#fbcfe8] shadow-2xs overflow-hidden">
+        <div className="p-4 sm:p-5 border-b border-[#fbcfe8] flex items-center justify-between">
+          <h3 className="font-display font-medium text-lg text-[#380c25]">
             Produtos Mais Vendidos no Balcão
           </h3>
-          <span className="text-xs text-[#8e727e] font-mono-craft">Top itens com maior saída</span>
+          <span className="text-xs text-[#9b4f76] font-mono-craft">Top itens com maior saída</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#f6ebef]/70 border-b border-[#edd5dc] text-[#8e727e] uppercase tracking-wider text-[10px] font-mono-craft">
+            <thead className="bg-[#fff0f5]/70 border-b border-[#fbcfe8] text-[#9b4f76] uppercase tracking-wider text-[10px] font-mono-craft">
               <tr>
                 <th className="py-3 px-4 font-semibold">Peça Artesanal</th>
                 <th className="py-3 px-4 font-semibold text-center">Unidades Vendidas</th>
                 <th className="py-3 px-4 font-semibold text-right">Faturamento Gerado</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#f6ebef] text-[#2e1420]">
+            <tbody className="divide-y divide-[#fff0f5] text-[#380c25]">
               {topProducts.map((prod, idx) => (
-                <tr key={prod.name} className="hover:bg-[#f6ebef]/40 transition-colors">
-                  <td className="py-3 px-4 font-medium text-[#2e1420] flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-[#f6ebef] text-[#2e1420] text-[10px] font-bold font-mono-craft flex items-center justify-center border border-[#edd5dc]">
+                <tr key={prod.name} className="hover:bg-[#fff0f5]/40 transition-colors">
+                  <td className="py-3 px-4 font-medium text-[#380c25] flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-[#fff0f5] text-[#380c25] text-[10px] font-bold font-mono-craft flex items-center justify-center border border-[#fbcfe8]">
                       {idx + 1}
                     </span>
                     {prod.name}
                   </td>
-                  <td className="py-3 px-4 text-center font-bold font-mono-craft text-[#2e1420]">
+                  <td className="py-3 px-4 text-center font-bold font-mono-craft text-[#380c25]">
                     {prod.quantity} un.
                   </td>
                   <td className="py-3 px-4 text-right font-bold font-mono-craft text-[#3c6b54]">

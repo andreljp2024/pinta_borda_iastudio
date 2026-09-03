@@ -257,31 +257,31 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1f0d15]/80 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
-      <div className="bg-[#fbf4f6] rounded-3xl max-w-5xl w-full shadow-2xl border border-[#edd5dc] overflow-hidden flex flex-col my-auto max-h-[92vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#230716]/80 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
+      <div className="bg-[#fff5f8] rounded-3xl max-w-5xl w-full shadow-2xl border border-[#fbcfe8] overflow-hidden flex flex-col my-auto max-h-[92vh]">
         {/* Modal Topbar */}
-        <div className="px-6 py-4 bg-[#ffffff] border-b border-[#edd5dc] flex items-center justify-between shrink-0">
+        <div className="px-6 py-4 bg-[#ffffff] border-b border-[#fbcfe8] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-[#2e1420] text-[#ffffff] flex items-center justify-center font-display font-medium text-sm border border-[#4a2536]">
+            <div className="w-9 h-9 rounded-full bg-[#380c25] text-[#ffffff] flex items-center justify-center font-display font-medium text-sm border border-[#5c1a3e]">
               p b
             </div>
             <div>
-              <span className="text-[10px] font-mono-craft text-[#9c3653] uppercase block">
+              <span className="text-[10px] font-mono-craft text-[#db2777] uppercase block">
                 Dossiê & Apresentação Institucional
               </span>
-              <h3 className="font-display font-medium text-[#2e1420] text-sm sm:text-base">
+              <h3 className="font-display font-medium text-[#380c25] text-sm sm:text-base">
                 Conexão Criativa e Colaborativa • Projeto Pinta e Borda
               </h3>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono-craft text-[#8e727e] hidden sm:inline-block">
+            <span className="text-xs font-mono-craft text-[#9b4f76] hidden sm:inline-block">
               Capítulo {currentSlideIndex + 1} de {SLIDES.length}
             </span>
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-[#f6ebef] hover:bg-[#edd5dc] text-[#2e1420] flex items-center justify-center transition-colors cursor-pointer border border-[#edd5dc]"
+              className="w-8 h-8 rounded-full bg-[#fff0f5] hover:bg-[#fbcfe8] text-[#380c25] flex items-center justify-center transition-colors cursor-pointer border border-[#fbcfe8]"
             >
               <X className="w-4 h-4" />
             </button>
@@ -289,15 +289,15 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
         </div>
 
         {/* Slide Selector Mini-Nav */}
-        <div className="bg-[#f6ebef]/50 px-6 py-2 border-b border-[#edd5dc] flex items-center gap-1.5 overflow-x-auto text-xs shrink-0 no-scrollbar">
+        <div className="bg-[#fff0f5]/50 px-6 py-2 border-b border-[#fbcfe8] flex items-center gap-1.5 overflow-x-auto text-xs shrink-0 no-scrollbar">
           {SLIDES.map((slide, index) => (
             <button
               key={slide.id}
               onClick={() => setCurrentSlideIndex(index)}
               className={`px-3.5 py-1.5 rounded-full whitespace-nowrap text-xs font-mono-craft transition-colors cursor-pointer ${
                 index === currentSlideIndex
-                  ? 'bg-[#2e1420] text-[#ffffff] shadow-xs'
-                  : 'text-[#644855] hover:bg-[#f6ebef] hover:text-[#2e1420]'
+                  ? 'bg-[#380c25] text-[#ffffff] shadow-xs'
+                  : 'text-[#863b63] hover:bg-[#fff0f5] hover:text-[#380c25]'
               }`}
             >
               {index + 1}. {slide.category}
@@ -310,50 +310,50 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
           {/* Slide 0: Capa */}
           {currentSlide.id === 'capa' && (
             <div className="space-y-8 text-center max-w-3xl mx-auto py-6">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f6ebef] text-[#2e1420] text-xs font-mono-craft border border-[#edd5dc]">
-                <Sparkles className="w-3.5 h-3.5 text-[#c85a78]" />
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fff0f5] text-[#380c25] text-xs font-mono-craft border border-[#fbcfe8]">
+                <Sparkles className="w-3.5 h-3.5 text-[#f43f7e]" />
                 Conexão Criativa e Colaborativa @projetopintaebordaslz
               </div>
 
               <div className="space-y-3">
-                <h1 className="font-display text-4xl sm:text-5xl font-medium text-[#2e1420] leading-tight">
+                <h1 className="font-display text-4xl sm:text-5xl font-medium text-[#380c25] leading-tight">
                   Projeto Social <br />
-                  <span className="text-[#c85a78] italic">Pinta e Borda</span>
+                  <span className="text-[#f43f7e] italic">Pinta e Borda</span>
                 </h1>
-                <p className="font-display text-xl sm:text-2xl text-[#644855] italic font-light">
+                <p className="font-display text-xl sm:text-2xl text-[#863b63] italic font-light">
                   "Levando a vida com arte e solidariedade!"
                 </p>
               </div>
 
-              <p className="text-sm sm:text-base text-[#644855] leading-relaxed max-w-2xl mx-auto font-light">
+              <p className="text-sm sm:text-base text-[#863b63] leading-relaxed max-w-2xl mx-auto font-light">
                 Uma rede autônoma de empreendedorismo social que conecta mais de 14 marcas autorais de mulheres
                 maranhenses, gerando autonomia econômica, geração de renda e sustentando ações voluntárias
                 itinerantes em hospitais e comunidades em vulnerabilidade de São Luís.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left">
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs">
-                  <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#9c3653] flex items-center justify-center font-bold mb-2">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
+                  <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#db2777] flex items-center justify-center font-bold mb-2">
                     <Heart className="w-4 h-4" />
                   </div>
-                  <h4 className="font-medium font-display text-sm text-[#2e1420]">Fundado em 2008</h4>
-                  <p className="text-[11px] text-[#644855] mt-1 font-light">Criado pela artista Keka (@ditodacor) com base no afeto e na cooperação feminina.</p>
+                  <h4 className="font-medium font-display text-sm text-[#380c25]">Fundado em 2008</h4>
+                  <p className="text-[11px] text-[#863b63] mt-1 font-light">Criado pela artista Keka (@ditodacor) com base no afeto e na cooperação feminina.</p>
                 </div>
 
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs">
-                  <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#2e1420] flex items-center justify-center font-bold mb-2">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
+                  <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#380c25] flex items-center justify-center font-bold mb-2">
                     <Store className="w-4 h-4" />
                   </div>
-                  <h4 className="font-medium font-display text-sm text-[#2e1420]">Loja no Shopping</h4>
-                  <p className="text-[11px] text-[#644855] mt-1 font-light">Rio Anil Shopping (Piso 2, em frente à Marisa) com vitrine e balcão coletivo.</p>
+                  <h4 className="font-medium font-display text-sm text-[#380c25]">Loja no Shopping</h4>
+                  <p className="text-[11px] text-[#863b63] mt-1 font-light">Rio Anil Shopping (Piso 2, em frente à Marisa) com vitrine e balcão coletivo.</p>
                 </div>
 
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs">
-                  <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#3c6b54] flex items-center justify-center font-bold mb-2">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
+                  <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#3c6b54] flex items-center justify-center font-bold mb-2">
                     <HandHeart className="w-4 h-4" />
                   </div>
-                  <h4 className="font-medium font-display text-sm text-[#2e1420]">100% Autônomo</h4>
-                  <p className="text-[11px] text-[#644855] mt-1 font-light">Sem dependência partidária ou governamental, sustentado por união e economia real.</p>
+                  <h4 className="font-medium font-display text-sm text-[#380c25]">100% Autônomo</h4>
+                  <p className="text-[11px] text-[#863b63] mt-1 font-light">Sem dependência partidária ou governamental, sustentado por união e economia real.</p>
                 </div>
               </div>
             </div>
@@ -363,35 +363,35 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
           {currentSlide.id === 'origem' && (
             <div className="space-y-6 max-w-3xl mx-auto">
               <div>
-                <span className="text-xs font-mono-craft text-[#9c3653] uppercase">
+                <span className="text-xs font-mono-craft text-[#db2777] uppercase">
                   {currentSlide.badge}
                 </span>
-                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420] mt-1">
+                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25] mt-1">
                   {currentSlide.title}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#644855] mt-1 font-light">{currentSlide.subtitle}</p>
+                <p className="text-xs sm:text-sm text-[#863b63] mt-1 font-light">{currentSlide.subtitle}</p>
               </div>
 
-              <div className="bg-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#edd5dc] shadow-2xs space-y-4 text-xs sm:text-sm text-[#644855] leading-relaxed font-light">
+              <div className="bg-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#fbcfe8] shadow-2xs space-y-4 text-xs sm:text-sm text-[#863b63] leading-relaxed font-light">
                 <p>
-                  O <strong className="text-[#2e1420] font-medium">Projeto Pinta e Borda</strong> é um coletivo autônomo formado por voluntárias, em sua grande maioria
-                  <strong className="text-[#2e1420] font-medium"> mulheres artesãs e pequenas empreendedoras</strong>.
+                  O <strong className="text-[#380c25] font-medium">Projeto Pinta e Borda</strong> é um coletivo autônomo formado por voluntárias, em sua grande maioria
+                  <strong className="text-[#380c25] font-medium"> mulheres artesãs e pequenas empreendedoras</strong>.
                 </p>
                 <p>
-                  Criado em <strong className="text-[#2e1420] font-medium">2008 pela artista Keka (@ditodacor)</strong>, foi carinhosamente abraçado por amigas e ateliês parceiros
+                  Criado em <strong className="text-[#380c25] font-medium">2008 pela artista Keka (@ditodacor)</strong>, foi carinhosamente abraçado por amigas e ateliês parceiros
                   no intuito de exercer o amor ao próximo através de ações solidárias realizadas de forma itinerante por toda a Ilha de São Luís.
                 </p>
                 <p>
-                  A essência do projeto está firmemente pautada na solidariedade por meio do <strong className="text-[#2e1420] font-medium">empreendedorismo social</strong>,
-                  atuando como um acolhedor <strong className="text-[#2e1420] font-medium">"guarda-chuva colaborativo"</strong> que capacita, fortalece e impulsiona pequenas marcas e ateliês.
+                  A essência do projeto está firmemente pautada na solidariedade por meio do <strong className="text-[#380c25] font-medium">empreendedorismo social</strong>,
+                  atuando como um acolhedor <strong className="text-[#380c25] font-medium">"guarda-chuva colaborativo"</strong> que capacita, fortalece e impulsiona pequenas marcas e ateliês.
                 </p>
 
-                <div className="p-4 bg-[#f6ebef]/70 rounded-2xl border border-[#edd5dc] text-[#2e1420]">
-                  <div className="font-mono-craft text-xs uppercase flex items-center gap-1.5 mb-1 text-[#9c3653]">
-                    <CheckCircle2 className="w-4 h-4 text-[#9c3653]" />
+                <div className="p-4 bg-[#fff0f5]/70 rounded-2xl border border-[#fbcfe8] text-[#380c25]">
+                  <div className="font-mono-craft text-xs uppercase flex items-center gap-1.5 mb-1 text-[#db2777]">
+                    <CheckCircle2 className="w-4 h-4 text-[#db2777]" />
                     Independência & Autonomia
                   </div>
-                  <p className="text-xs leading-relaxed font-light text-[#644855]">
+                  <p className="text-xs leading-relaxed font-light text-[#863b63]">
                     O Pinta e Borda não recebe repasses partidários ou estatais. Mantém-se através do voluntariado, da contribuição
                     das artesãs cooperadas, de palestras, oficinas e da venda de produtos sociais autênticos com split transparente.
                   </p>
@@ -404,49 +404,49 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
           {currentSlide.id === 'impacto-social' && (
             <div className="space-y-6 max-w-3xl mx-auto">
               <div>
-                <span className="text-xs font-mono-craft text-[#9c3653] uppercase">
+                <span className="text-xs font-mono-craft text-[#db2777] uppercase">
                   {currentSlide.badge}
                 </span>
-                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420] mt-1">
+                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25] mt-1">
                   {currentSlide.title}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#644855] mt-1 font-light">{currentSlide.subtitle}</p>
+                <p className="text-xs sm:text-sm text-[#863b63] mt-1 font-light">{currentSlide.subtitle}</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs space-y-2">
-                  <div className="w-10 h-10 rounded-xl bg-[#f6ebef] text-[#9c3653] flex items-center justify-center font-bold">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs space-y-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#db2777] flex items-center justify-center font-bold">
                     🥣
                   </div>
-                  <h3 className="font-display font-medium text-base text-[#2e1420]">Sopões nos Hospitais</h3>
-                  <p className="text-xs text-[#644855] leading-relaxed font-light">
+                  <h3 className="font-display font-medium text-base text-[#380c25]">Sopões nos Hospitais</h3>
+                  <p className="text-xs text-[#863b63] leading-relaxed font-light">
                     Alimento reconfortante e calor humano distribuído para acompanhantes e familiares em salas de espera de hospitais públicos de São Luís.
                   </p>
                 </div>
 
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs space-y-2">
-                  <div className="w-10 h-10 rounded-xl bg-[#f6ebef] text-[#2e1420] flex items-center justify-center font-bold">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs space-y-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#380c25] flex items-center justify-center font-bold">
                     🎨
                   </div>
-                  <h3 className="font-display font-medium text-base text-[#2e1420]">Recreação Infantil</h3>
-                  <p className="text-xs text-[#644855] leading-relaxed font-light">
+                  <h3 className="font-display font-medium text-base text-[#380c25]">Recreação Infantil</h3>
+                  <p className="text-xs text-[#863b63] leading-relaxed font-light">
                     Momentos lúdicos com brinquedos, contação de histórias, oficinas de arte e acolhimento para crianças em comunidades e enfermarias.
                   </p>
                 </div>
 
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs space-y-2">
-                  <div className="w-10 h-10 rounded-xl bg-[#f6ebef] text-[#3c6b54] flex items-center justify-center font-bold">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs space-y-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#3c6b54] flex items-center justify-center font-bold">
                     🧵
                   </div>
-                  <h3 className="font-display font-medium text-base text-[#2e1420]">Oficinas Formativas</h3>
-                  <p className="text-xs text-[#644855] leading-relaxed font-light">
+                  <h3 className="font-display font-medium text-base text-[#380c25]">Oficinas Formativas</h3>
+                  <p className="text-xs text-[#863b63] leading-relaxed font-light">
                     Capacitação artesanal com mulheres em situação de vulnerabilidade, ensinando técnicas de costura, cerâmica e miçangas para renda imediata.
                   </p>
                 </div>
               </div>
 
-              <div className="bg-[#2e1420] text-[#ffffff] p-6 rounded-3xl border border-[#4a2536] space-y-2 shadow-md">
-                <h4 className="font-display text-lg text-[#dc9b86]">
+              <div className="bg-[#380c25] text-[#ffffff] p-6 rounded-3xl border border-[#5c1a3e] space-y-2 shadow-md">
+                <h4 className="font-display text-lg text-[#ff7597]">
                   A Destinação Cooperativa da Loja
                 </h4>
                 <p className="text-xs text-[#c9d9d0] leading-relaxed font-light">
@@ -461,42 +461,42 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
           {currentSlide.id === 'loja-colaborativa' && (
             <div className="space-y-6 max-w-3xl mx-auto">
               <div>
-                <span className="text-xs font-mono-craft text-[#9c3653] uppercase">
+                <span className="text-xs font-mono-craft text-[#db2777] uppercase">
                   {currentSlide.badge}
                 </span>
-                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420] mt-1">
+                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25] mt-1">
                   {currentSlide.title}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#644855] mt-1 font-light">{currentSlide.subtitle}</p>
+                <p className="text-xs sm:text-sm text-[#863b63] mt-1 font-light">{currentSlide.subtitle}</p>
               </div>
 
-              <div className="bg-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#edd5dc] shadow-2xs space-y-4">
+              <div className="bg-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#fbcfe8] shadow-2xs space-y-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#2e1420] text-[#ffffff] flex items-center justify-center shrink-0 border border-[#4a2536]">
+                  <div className="w-12 h-12 rounded-2xl bg-[#380c25] text-[#ffffff] flex items-center justify-center shrink-0 border border-[#5c1a3e]">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-display font-medium text-xl text-[#2e1420]">
+                    <h3 className="font-display font-medium text-xl text-[#380c25]">
                       Quiosque Físico: Rio Anil Shopping • São Luís / MA
                     </h3>
-                    <p className="text-xs text-[#644855] mt-1 font-light">
-                      Localização nobre: <strong className="text-[#2e1420] font-medium">2º Piso, próximo à Praça de Alimentação e em frente à Loja Marisa</strong>.
+                    <p className="text-xs text-[#863b63] mt-1 font-light">
+                      Localização nobre: <strong className="text-[#380c25] font-medium">2º Piso, próximo à Praça de Alimentação e em frente à Loja Marisa</strong>.
                     </p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs">
-                  <div className="p-4 bg-[#fbf4f6] rounded-2xl border border-[#edd5dc]">
-                    <h4 className="font-display font-medium text-base text-[#2e1420] mb-1">Como Funciona a Parceria?</h4>
-                    <p className="text-[#644855] leading-relaxed font-light">
-                      As marcas interessadas em contribuir com o projeto devem se cadastrar inicialmente como <strong className="text-[#2e1420]">voluntárias</strong>,
+                  <div className="p-4 bg-[#fff5f8] rounded-2xl border border-[#fbcfe8]">
+                    <h4 className="font-display font-medium text-base text-[#380c25] mb-1">Como Funciona a Parceria?</h4>
+                    <p className="text-[#863b63] leading-relaxed font-light">
+                      As marcas interessadas em contribuir com o projeto devem se cadastrar inicialmente como <strong className="text-[#380c25]">voluntárias</strong>,
                       vivenciando de perto as etapas das ações sociais antes de integrar a vitrine física no shopping.
                     </p>
                   </div>
 
-                  <div className="p-4 bg-[#fbf4f6] rounded-2xl border border-[#edd5dc]">
-                    <h4 className="font-display font-medium text-base text-[#2e1420] mb-1">Incentivo ao Empreendedorismo</h4>
-                    <p className="text-[#644855] leading-relaxed font-light">
+                  <div className="p-4 bg-[#fff5f8] rounded-2xl border border-[#fbcfe8]">
+                    <h4 className="font-display font-medium text-base text-[#380c25] mb-1">Incentivo ao Empreendedorismo</h4>
+                    <p className="text-[#863b63] leading-relaxed font-light">
                       Mulheres e pequenos negócios maranhenses unem forças para diluir custos fixos de um dos maiores shoppings do estado,
                       praticando rodízio de balcão e atendimento com a alma do feito à mão.
                     </p>
@@ -511,17 +511,17 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <span className="text-xs font-mono-craft text-[#9c3653] uppercase">
+                  <span className="text-xs font-mono-craft text-[#db2777] uppercase">
                     {currentSlide.badge}
                   </span>
-                  <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420] mt-1">
+                  <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25] mt-1">
                     {currentSlide.title}
                   </h2>
-                  <p className="text-xs sm:text-sm text-[#644855] mt-1 font-light">
+                  <p className="text-xs sm:text-sm text-[#863b63] mt-1 font-light">
                     Conheça os 14 ateliês autorais maranhenses que dão vida e identidade ao Pinta e Borda.
                   </p>
                 </div>
-                <span className="text-xs font-mono-craft px-3 py-1 bg-[#f6ebef] text-[#2e1420] rounded-full self-start sm:self-auto border border-[#edd5dc]">
+                <span className="text-xs font-mono-craft px-3 py-1 bg-[#fff0f5] text-[#380c25] rounded-full self-start sm:self-auto border border-[#fbcfe8]">
                   14 Ateliês Oficiais
                 </span>
               </div>
@@ -530,34 +530,34 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
                 {BRANDS.map((brand) => (
                   <div
                     key={brand.name}
-                    className="bg-[#ffffff] rounded-3xl p-5 border border-[#edd5dc] hover:border-[#c85a78] hover:shadow-md transition-all flex flex-col justify-between"
+                    className="bg-[#ffffff] rounded-3xl p-5 border border-[#fbcfe8] hover:border-[#f43f7e] hover:shadow-md transition-all flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-mono-craft uppercase px-2.5 py-0.5 rounded-full bg-[#f6ebef] text-[#9c3653] border border-[#edd5dc]">
+                        <span className="text-[10px] font-mono-craft uppercase px-2.5 py-0.5 rounded-full bg-[#fff0f5] text-[#db2777] border border-[#fbcfe8]">
                           {brand.tag}
                         </span>
-                        <span className="text-[10px] font-mono-craft text-[#8e727e]">{brand.category}</span>
+                        <span className="text-[10px] font-mono-craft text-[#9b4f76]">{brand.category}</span>
                       </div>
 
-                      <h4 className="font-display font-medium text-lg text-[#2e1420]">
+                      <h4 className="font-display font-medium text-lg text-[#380c25]">
                         {brand.name}
                       </h4>
-                      <p className="text-xs text-[#8e727e] font-mono-craft mb-2">{brand.founder}</p>
+                      <p className="text-xs text-[#9b4f76] font-mono-craft mb-2">{brand.founder}</p>
 
-                      <p className="text-xs text-[#644855] leading-relaxed mb-4 font-light">
+                      <p className="text-xs text-[#863b63] leading-relaxed mb-4 font-light">
                         {brand.desc}
                       </p>
                     </div>
 
-                    <div className="pt-3 border-t border-[#edd5dc] flex items-center justify-between text-xs">
+                    <div className="pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs">
                       <a
                         href={`https://instagram.com/${brand.instagram.replace('@', '')}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-[#2e1420] hover:text-[#c85a78] font-mono-craft flex items-center gap-1"
+                        className="text-[#380c25] hover:text-[#f43f7e] font-mono-craft flex items-center gap-1"
                       >
-                        <Instagram className="w-3.5 h-3.5 text-[#c85a78]" />
+                        <Instagram className="w-3.5 h-3.5 text-[#f43f7e]" />
                         {brand.instagram}
                       </a>
 
@@ -581,17 +581,17 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
           {currentSlide.id === 'b2b-parcerias' && (
             <div className="space-y-6 max-w-3xl mx-auto">
               <div>
-                <span className="text-xs font-mono-craft text-[#9c3653] uppercase">
+                <span className="text-xs font-mono-craft text-[#db2777] uppercase">
                   {currentSlide.badge}
                 </span>
-                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420] mt-1">
+                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25] mt-1">
                   {currentSlide.title}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#644855] mt-1 font-light">{currentSlide.subtitle}</p>
+                <p className="text-xs sm:text-sm text-[#863b63] mt-1 font-light">{currentSlide.subtitle}</p>
               </div>
 
-              <div className="bg-[#2e1420] text-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#4a2536] shadow-md space-y-4">
-                <span className="text-xs font-mono-craft text-[#dc9b86] uppercase">
+              <div className="bg-[#380c25] text-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#5c1a3e] shadow-md space-y-4">
+                <span className="text-xs font-mono-craft text-[#ff7597] uppercase">
                   Chamada para Empreendedores e Gestores
                 </span>
                 <h3 className="font-display text-2xl sm:text-3xl font-medium text-[#ffffff] leading-snug">
@@ -603,28 +603,28 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs space-y-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#2e1420] flex items-center justify-center font-bold">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs space-y-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#380c25] flex items-center justify-center font-bold">
                     <Building2 className="w-4 h-4" />
                   </div>
-                  <h4 className="font-display font-medium text-base text-[#2e1420]">Ilhas em Shoppings & Hotéis</h4>
-                  <p className="text-[#644855] font-light">Pop-up stores organizadas com mix curado de artesanato maranhense e presença das criadoras.</p>
+                  <h4 className="font-display font-medium text-base text-[#380c25]">Ilhas em Shoppings & Hotéis</h4>
+                  <p className="text-[#863b63] font-light">Pop-up stores organizadas com mix curado de artesanato maranhense e presença das criadoras.</p>
                 </div>
 
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs space-y-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#9c3653] flex items-center justify-center font-bold">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs space-y-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#db2777] flex items-center justify-center font-bold">
                     <Gift className="w-4 h-4" />
                   </div>
-                  <h4 className="font-display font-medium text-base text-[#2e1420]">Brindes Afetivos ESG</h4>
-                  <p className="text-[#644855] font-light">Presentes de fim de ano e kits corporativos com produtos naturais, cerâmica e azulejaria com causa real.</p>
+                  <h4 className="font-display font-medium text-base text-[#380c25]">Brindes Afetivos ESG</h4>
+                  <p className="text-[#863b63] font-light">Presentes de fim de ano e kits corporativos com produtos naturais, cerâmica e azulejaria com causa real.</p>
                 </div>
 
-                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#edd5dc] shadow-2xs space-y-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#3c6b54] flex items-center justify-center font-bold">
+                <div className="bg-[#ffffff] p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs space-y-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#3c6b54] flex items-center justify-center font-bold">
                     <Calendar className="w-4 h-4" />
                   </div>
-                  <h4 className="font-display font-medium text-base text-[#2e1420]">Feiras & Convenções</h4>
-                  <p className="text-[#644855] font-light">Estandes criativos em congressos e eventos culturais, levando a identidade autêntica do Maranhão.</p>
+                  <h4 className="font-display font-medium text-base text-[#380c25]">Feiras & Convenções</h4>
+                  <p className="text-[#863b63] font-light">Estandes criativos em congressos e eventos culturais, levando a identidade autêntica do Maranhão.</p>
                 </div>
               </div>
             </div>
@@ -634,54 +634,54 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
           {currentSlide.id === 'contato' && (
             <div className="space-y-6 max-w-3xl mx-auto">
               <div>
-                <span className="text-xs font-mono-craft text-[#9c3653] uppercase">
+                <span className="text-xs font-mono-craft text-[#db2777] uppercase">
                   {currentSlide.badge}
                 </span>
-                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#2e1420] mt-1">
+                <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25] mt-1">
                   {currentSlide.title}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#644855] mt-1 font-light">{currentSlide.subtitle}</p>
+                <p className="text-xs sm:text-sm text-[#863b63] mt-1 font-light">{currentSlide.subtitle}</p>
               </div>
 
-              <div className="bg-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#edd5dc] shadow-2xs space-y-6">
+              <div className="bg-[#ffffff] rounded-3xl p-6 sm:p-8 border border-[#fbcfe8] shadow-2xs space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-4">
-                    <h3 className="font-display font-medium text-xl text-[#2e1420]">
+                    <h3 className="font-display font-medium text-xl text-[#380c25]">
                       Informações & Curadoria
                     </h3>
 
                     <div className="space-y-3 text-xs">
-                      <div className="flex items-center gap-3 text-[#644855]">
-                        <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#2e1420] flex items-center justify-center shrink-0 border border-[#edd5dc]">
+                      <div className="flex items-center gap-3 text-[#863b63]">
+                        <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#380c25] flex items-center justify-center shrink-0 border border-[#fbcfe8]">
                           <Phone className="w-4 h-4" />
                         </div>
                         <div>
-                          <div className="font-medium text-[#2e1420]">Telefone / WhatsApp</div>
-                          <a href="https://wa.me/5598988289123" target="_blank" rel="noreferrer" className="text-[#c85a78] hover:underline font-mono-craft">
+                          <div className="font-medium text-[#380c25]">Telefone / WhatsApp</div>
+                          <a href="https://wa.me/5598988289123" target="_blank" rel="noreferrer" className="text-[#f43f7e] hover:underline font-mono-craft">
                             (98) 9 8828-9123 (Keka da @ditodacor)
                           </a>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 text-[#644855]">
-                        <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#2e1420] flex items-center justify-center shrink-0 border border-[#edd5dc]">
+                      <div className="flex items-center gap-3 text-[#863b63]">
+                        <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#380c25] flex items-center justify-center shrink-0 border border-[#fbcfe8]">
                           <Mail className="w-4 h-4" />
                         </div>
                         <div>
-                          <div className="font-medium text-[#2e1420]">E-mail Oficial</div>
-                          <a href="mailto:projetopintaebordaslz@gmail.com" className="text-[#644855] hover:underline font-mono-craft">
+                          <div className="font-medium text-[#380c25]">E-mail Oficial</div>
+                          <a href="mailto:projetopintaebordaslz@gmail.com" className="text-[#863b63] hover:underline font-mono-craft">
                             projetopintaebordaslz@gmail.com
                           </a>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 text-[#644855]">
-                        <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#9c3653] flex items-center justify-center shrink-0 border border-[#edd5dc]">
+                      <div className="flex items-center gap-3 text-[#863b63]">
+                        <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#db2777] flex items-center justify-center shrink-0 border border-[#fbcfe8]">
                           <Instagram className="w-4 h-4" />
                         </div>
                         <div>
-                          <div className="font-medium text-[#2e1420]">Instagram</div>
-                          <a href="https://instagram.com/projetopintaebordaslz" target="_blank" rel="noreferrer" className="text-[#c85a78] hover:underline font-mono-craft">
+                          <div className="font-medium text-[#380c25]">Instagram</div>
+                          <a href="https://instagram.com/projetopintaebordaslz" target="_blank" rel="noreferrer" className="text-[#f43f7e] hover:underline font-mono-craft">
                             @projetopintaebordaslz
                           </a>
                         </div>
@@ -689,21 +689,21 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
                     </div>
                   </div>
 
-                  <div className="space-y-4 sm:border-l sm:border-[#edd5dc] sm:pl-6">
-                    <h3 className="font-display font-medium text-xl text-[#2e1420]">
+                  <div className="space-y-4 sm:border-l sm:border-[#fbcfe8] sm:pl-6">
+                    <h3 className="font-display font-medium text-xl text-[#380c25]">
                       Ponto Físico no Shopping
                     </h3>
 
-                    <div className="flex items-start gap-3 text-xs text-[#644855]">
-                      <div className="w-8 h-8 rounded-lg bg-[#f6ebef] text-[#2e1420] flex items-center justify-center shrink-0 border border-[#edd5dc]">
+                    <div className="flex items-start gap-3 text-xs text-[#863b63]">
+                      <div className="w-8 h-8 rounded-lg bg-[#fff0f5] text-[#380c25] flex items-center justify-center shrink-0 border border-[#fbcfe8]">
                         <MapPin className="w-4 h-4" />
                       </div>
                       <div className="leading-relaxed font-light">
-                        <div className="font-medium text-[#2e1420]">Rio Anil Shopping</div>
-                        <p className="text-[#644855] mt-0.5">
+                        <div className="font-medium text-[#380c25]">Rio Anil Shopping</div>
+                        <p className="text-[#863b63] mt-0.5">
                           2º Piso, Próximo à Praça de Alimentação e em frente à Loja Marisa.
                         </p>
-                        <p className="text-[#8e727e] font-mono-craft mt-1">São Luís / MA</p>
+                        <p className="text-[#9b4f76] font-mono-craft mt-1">São Luís / MA</p>
                       </div>
                     </div>
 
@@ -724,14 +724,14 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
         </div>
 
         {/* Modal Bottom Footer with Slide Navigation */}
-        <div className="px-6 py-4 bg-[#ffffff] border-t border-[#edd5dc] flex items-center justify-between shrink-0">
+        <div className="px-6 py-4 bg-[#ffffff] border-t border-[#fbcfe8] flex items-center justify-between shrink-0">
           <button
             onClick={handlePrev}
             disabled={currentSlideIndex === 0}
             className={`px-4 py-2 rounded-full text-xs font-mono-craft transition-colors flex items-center gap-1.5 cursor-pointer ${
               currentSlideIndex === 0
-                ? 'opacity-40 cursor-not-allowed text-[#8e727e] bg-[#f6ebef]'
-                : 'bg-[#f6ebef] hover:bg-[#edd5dc] text-[#2e1420]'
+                ? 'opacity-40 cursor-not-allowed text-[#9b4f76] bg-[#fff0f5]'
+                : 'bg-[#fff0f5] hover:bg-[#fbcfe8] text-[#380c25]'
             }`}
           >
             <ChevronLeft className="w-4 h-4" />
@@ -743,7 +743,7 @@ export const PresentationModal: React.FC<PresentationModalProps> = ({ isOpen, on
               <span
                 key={idx}
                 className={`h-2 rounded-full transition-all ${
-                  idx === currentSlideIndex ? 'w-6 bg-[#2e1420]' : 'w-2 bg-[#edd5dc]'
+                  idx === currentSlideIndex ? 'w-6 bg-[#380c25]' : 'w-2 bg-[#fbcfe8]'
                 }`}
               />
             ))}
