@@ -337,12 +337,12 @@ export const AdminDashboardLayout: React.FC<AdminDashboardLayoutProps> = ({
                       className="w-full h-full object-contain rounded-lg"
                     />
                   ) : (
-                    <span className="font-display font-bold text-sm tracking-tight">pb</span>
+                    <span className="font-bold text-sm tracking-tight">pb</span>
                   )}
                 </div>
                 {!sidebarCollapsed && (
                   <div className="leading-tight overflow-hidden">
-                    <span className="font-display font-medium text-base tracking-tight text-[#380c25] block truncate">
+                    <span className="font-semibold text-base tracking-tight text-[#380c25] block truncate">
                       pinta <em className="italic text-[#f43f7e]">e</em> borda
                     </span>
                     <span className="text-[9px] font-mono-craft font-semibold tracking-wider uppercase text-[#9b4f76] block">

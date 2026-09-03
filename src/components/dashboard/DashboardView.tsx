@@ -130,7 +130,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
               {isPartner ? `Ateliê: ${currentPartner.brandName}` : 'Gestão da Casa Colaborativa'}
             </div>
 
-            <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-[#ffffff]">
+            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#ffffff]">
               {isPartner
                 ? `Olá, ${currentPartner.ownerName}!`
                 : 'Bem-vinda à gestão da casa.'}
@@ -290,7 +290,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
         <div className="lg:col-span-7 bg-[#ffffff] rounded-2xl p-6 border border-[#fbcfe8] shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-display font-medium text-lg text-[#380c25]">
+              <h3 className="font-semibold text-lg text-[#380c25]">
                 Evolução de Vendas (Últimos 7 dias)
               </h3>
               <p className="text-xs font-mono-craft text-[#9b4f76]">Volume consolidado no balcão presencial</p>
@@ -317,7 +317,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
         <div className="lg:col-span-5 bg-[#ffffff] rounded-2xl p-6 border border-[#fbcfe8] shadow-2xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-[#fbcfe8] mb-3">
-              <h3 className="font-display font-medium text-lg text-[#380c25]">
+              <h3 className="font-semibold text-lg text-[#380c25]">
                 Últimas Vendas no Balcão
               </h3>
               <button
@@ -372,7 +372,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
       <div className="space-y-4 pt-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <h3 className="font-display font-medium text-xl text-[#380c25] flex items-center gap-2">
+            <h3 className="font-semibold text-xl text-[#380c25] flex items-center gap-2">
               <Layers className="w-5 h-5 text-[#f43f7e]" />
               <span>Menu de Módulos & Gestão Operacional</span>
             </h3>
@@ -400,7 +400,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
                   Frente de Caixa
                 </span>
               </div>
-              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+              <h4 className="font-semibold text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
                 PDV Balcão
               </h4>
               <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
@@ -433,7 +433,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
                   </span>
                 )}
               </div>
-              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+              <h4 className="font-semibold text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
                 Estoque no Shopping
               </h4>
               <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
@@ -460,7 +460,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
                   {activeShift ? 'Plantonista Ativo' : 'Aguardando'}
                 </span>
               </div>
-              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+              <h4 className="font-semibold text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
                 Plantões & Escala
               </h4>
               <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
@@ -487,7 +487,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
                   {products.length} itens
                 </span>
               </div>
-              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+              <h4 className="font-semibold text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
                 Produtos & Preços
               </h4>
               <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
@@ -514,7 +514,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
                   Transparência
                 </span>
               </div>
-              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+              <h4 className="font-semibold text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
                 Fechamento de Repasses
               </h4>
               <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
@@ -541,7 +541,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
                   Versão Celular
                 </span>
               </div>
-              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+              <h4 className="font-semibold text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
                 Portal da Artesã
               </h4>
               <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
@@ -568,7 +568,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
                   {partners.length} marcas
                 </span>
               </div>
-              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+              <h4 className="font-semibold text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
                 Ateliês Parceiros
               </h4>
               <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
@@ -595,7 +595,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
                   Exportações
                 </span>
               </div>
-              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+              <h4 className="font-semibold text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
                 Relatórios Gerenciais
               </h4>
               <p className="text-xs text-[#863b63] mt-1 leading-relaxed">

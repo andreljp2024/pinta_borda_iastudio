@@ -130,7 +130,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ sale, onClose }) => 
               <CheckCircle2 className="w-5 h-5 text-[#82c39a]" />
             </div>
             <div>
-              <h3 className="font-display font-medium text-base leading-tight">Venda Concluída com Sucesso</h3>
+              <h3 className="font-semibold text-base leading-tight">Venda Concluída com Sucesso</h3>
               <p className="text-[11px] text-[#c9d9d0] font-mono-craft">Cupom {sale.saleNumber}</p>
             </div>
           </div>
@@ -296,7 +296,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ sale, onClose }) => 
             /* Traditional Thermal / Paper Ticket View */
             <div className="space-y-4">
               <div className="text-center pb-3 border-b border-dashed border-[#fbcfe8]">
-                <h4 className="font-display font-bold text-lg text-[#380c25] tracking-tight">
+                <h4 className="font-bold text-lg text-[#380c25] tracking-tight">
                   pinta <em className="italic text-[#f43f7e]">e</em> borda
                 </h4>
                 <p className="text-[10px] uppercase tracking-widest text-[#f43f7e] font-mono-craft">

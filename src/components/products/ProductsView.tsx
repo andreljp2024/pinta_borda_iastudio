@@ -164,7 +164,7 @@ export const ProductsView: React.FC = () => {
           <span className="text-xs font-semibold uppercase tracking-wider text-[#f43f7e] font-mono-craft">
             Catálogo & Acervo
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25]">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-[#380c25]">
             Gestão de Produtos
           </h2>
           <p className="text-xs sm:text-sm text-[#9b4f76] mt-1 font-light">
@@ -256,7 +256,7 @@ export const ProductsView: React.FC = () => {
                         className="w-9 h-9 rounded-lg object-cover border border-[#fbcfe8]"
                       />
                       <div>
-                        <div className="max-w-xs truncate font-display text-sm">{prod.name}</div>
+                        <div className="max-w-xs truncate font-semibold text-sm">{prod.name}</div>
                         <div className="text-[10px] text-[#9b4f76] font-light">
                           {prod.description?.substring(0, 40)}...
                         </div>
@@ -338,7 +338,7 @@ export const ProductsView: React.FC = () => {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#380c25]/60 backdrop-blur-xs p-4">
           <div className="bg-[#ffffff] rounded-3xl max-w-lg w-full shadow-2xl border border-[#fbcfe8] p-6 space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
-            <h3 className="font-display font-medium text-xl text-[#380c25]">
+            <h3 className="font-semibold text-xl text-[#380c25]">
               {editingProduct ? 'Editar Produto Autoral' : 'Novo Produto para a Loja'}
             </h3>
 

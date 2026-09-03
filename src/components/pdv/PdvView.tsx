@@ -320,7 +320,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     <div className="text-[10px] font-bold uppercase tracking-wider text-[#f43f7e] truncate font-mono-craft">
                       {partner?.brandName || 'Artesão'}
                     </div>
-                    <h4 className="font-medium text-xs text-[#380c25] line-clamp-2 leading-tight mt-0.5 font-display">
+                    <h4 className="font-medium text-xs text-[#380c25] line-clamp-2 leading-tight mt-0.5">
                       {prod.name}
                     </h4>
                   </div>
@@ -355,7 +355,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
               <div className="flex items-center justify-between pb-3 border-b border-[#fbcfe8]">
                 <div className="flex items-center gap-2">
                   <ShoppingBag className="w-5 h-5 text-[#f43f7e]" />
-                  <h3 className="font-display font-medium text-base text-[#380c25]">
+                  <h3 className="font-semibold text-base text-[#380c25]">
                     Carrinho Multi-Marca
                   </h3>
                 </div>
@@ -381,7 +381,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     return (
                       <div key={item.product.id} className="py-2.5 flex items-center justify-between gap-2">
                         <div className="min-w-0 flex-1">
-                          <div className="text-xs font-medium text-[#380c25] truncate font-display">
+                          <div className="text-xs font-medium text-[#380c25] truncate">
                             {item.product.name}
                           </div>
                           <div className="text-[10px] text-[#f43f7e] font-mono-craft">

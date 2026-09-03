@@ -63,7 +63,7 @@ export const ShiftsView: React.FC = () => {
           <span className="text-xs font-semibold uppercase tracking-wider text-[#f43f7e] font-mono-craft">
             Escala & Presença
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-[#380c25]">
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#380c25]">
             Gestão de Expedientes (Plantão)
           </h2>
           <p className="text-xs sm:text-sm text-[#863b63] mt-1 font-light">
@@ -110,7 +110,7 @@ export const ShiftsView: React.FC = () => {
         <div className="flex items-center justify-between pb-4 border-b border-[#fbcfe8]">
           <div className="flex items-center gap-2.5">
             <div className={`w-3 h-3 rounded-full ${activeShift ? 'bg-[#3c6b54] animate-pulse' : 'bg-[#fbcfe8]'}`} />
-            <h3 className="font-display font-medium text-lg text-[#380c25]">
+            <h3 className="font-semibold text-lg text-[#380c25]">
               {activeShift ? 'Expediente em Andamento Agora' : 'Nenhum Expediente Ativo'}
             </h3>
           </div>
@@ -125,7 +125,7 @@ export const ShiftsView: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
             <div>
               <span className="text-[11px] text-[#9b4f76] uppercase font-semibold font-mono-craft">Operador Atual</span>
-              <div className="text-base font-bold text-[#380c25] mt-0.5 font-display">{activeShift.operatorName}</div>
+              <div className="text-base font-bold text-[#380c25] mt-0.5">{activeShift.operatorName}</div>
               <span className="text-xs text-[#f43f7e] font-medium font-mono-craft">{activeShift.partnerName}</span>
             </div>
 
@@ -176,7 +176,7 @@ export const ShiftsView: React.FC = () => {
         <div className="p-4 sm:p-5 border-b border-[#fbcfe8] flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-[#f43f7e]" />
-            <h3 className="font-display font-medium text-base text-[#380c25]">
+            <h3 className="font-semibold text-base text-[#380c25]">
               Histórico de Expedientes & Plantões
             </h3>
           </div>
@@ -207,7 +207,7 @@ export const ShiftsView: React.FC = () => {
                       {new Date(shift.startTime).toLocaleDateString('pt-BR')}
                     </td>
                     <td className="py-3 px-4">
-                      <div className="font-medium text-[#380c25] font-display">{shift.operatorName}</div>
+                      <div className="font-medium text-[#380c25]">{shift.operatorName}</div>
                       <div className="text-[10px] text-[#f43f7e] font-mono-craft">{shift.partnerName}</div>
                     </td>
                     <td className="py-3 px-4 font-mono-craft text-[#863b63]">
@@ -249,7 +249,7 @@ export const ShiftsView: React.FC = () => {
       {showStartModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#380c25]/60 backdrop-blur-xs p-4">
           <div className="bg-[#ffffff] rounded-3xl max-w-md w-full shadow-2xl border border-[#fbcfe8] p-6 space-y-4 animate-in fade-in zoom-in-95">
-            <h3 className="font-display font-medium text-lg text-[#380c25]">
+            <h3 className="font-semibold text-lg text-[#380c25]">
               Iniciar Expediente no Balcão
             </h3>
             <p className="text-xs text-[#863b63] font-light">
@@ -323,7 +323,7 @@ export const ShiftsView: React.FC = () => {
       {showHandoverModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#380c25]/60 backdrop-blur-xs p-4">
           <div className="bg-[#ffffff] rounded-3xl max-w-md w-full shadow-2xl border border-[#fbcfe8] p-6 space-y-4 animate-in fade-in zoom-in-95">
-            <h3 className="font-display font-medium text-lg text-[#380c25]">
+            <h3 className="font-semibold text-lg text-[#380c25]">
               Passagem de Plantão
             </h3>
             <p className="text-xs text-[#863b63] font-light">

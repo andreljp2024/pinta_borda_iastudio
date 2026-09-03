@@ -16,38 +16,73 @@
   --font-calibri-stack: 'Calibri', 'Carlito', 'Aptos', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
+/* Fallback font mapping to ensure Carlito acts as a seamless Calibri drop-in on all operating systems */
+@font-face {
+  font-family: 'Calibri';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Calibri'), local('Carlito-Regular'), local('Carlito');
+}
+
+@font-face {
+  font-family: 'Calibri';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Calibri Bold'), local('Calibri-Bold'), local('Carlito-Bold');
+}
+
+@font-face {
+  font-family: 'Calibri';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Calibri Italic'), local('Calibri-Italic'), local('Carlito-Italic');
+}
+
 .font-admin {
-  font-family: var(--font-calibri-stack);
+  font-family: var(--font-calibri-stack) !important;
   letter-spacing: -0.01em;
 }
 
-/* Ensure the entire admin dashboard layout, child views, modals, and tables use the Calibri stack */
+/* Ensure the entire admin dashboard layout, child views, modals, forms, and tables use the Calibri stack */
 .admin-scope,
-.admin-scope * {
-  font-family: var(--font-calibri-stack);
+.admin-scope *:not(.font-mono):not(.font-mono-craft):not(code):not(kbd):not(pre) {
+  font-family: var(--font-calibri-stack) !important;
 }
 
-/* Retain monospace styling only for codes/barcodes/PINs/currencies when explicitly needed */
+/* Retain monospace styling strictly for technical codes, barcodes, PINs, and currency amounts */
 .admin-scope .font-mono,
 .admin-scope .font-mono-craft,
 .admin-scope code,
-.admin-scope kbd {
+.admin-scope kbd,
+.admin-scope pre {
   font-family: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
 }
 
-/* Headings in admin use clean, highly legible humanist sans (estilo Calibri) instead of decorative serif */
+/* All headings, displays, labels, inputs, and UI elements in the admin backend */
 .admin-scope h1,
 .admin-scope h2,
 .admin-scope h3,
 .admin-scope h4,
 .admin-scope h5,
 .admin-scope h6,
+.admin-scope p,
+.admin-scope span,
+.admin-scope div,
+.admin-scope a,
+.admin-scope button,
+.admin-scope input,
+.admin-scope select,
+.admin-scope textarea,
+.admin-scope label,
+.admin-scope strong,
+.admin-scope b,
 .admin-scope .font-display,
 .admin-scope .font-serif,
 .admin-scope .font-serif-display,
-.admin-scope .font-serif-luxury {
+.admin-scope .font-serif-luxury,
+.admin-scope .font-sans {
   font-family: var(--font-calibri-stack) !important;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
 }
 
 /* Tables, form inputs, buttons, badges in admin */
@@ -58,11 +93,12 @@
 .admin-scope select,
 .admin-scope textarea,
 .admin-scope button {
-  font-family: var(--font-calibri-stack);
+  font-family: var(--font-calibri-stack) !important;
 }
 
-/* Increase reading comfort in data-dense tables and financial cards */
+/* Increase reading comfort in data-dense tables, reports, and financial cards */
 .admin-scope td,
+.admin-scope th,
 .admin-scope p,
 .admin-scope span,
 .admin-scope label {
