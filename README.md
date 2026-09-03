@@ -142,6 +142,83 @@ Os artefatos estáticos otimizados serão gerados no diretório `dist/`.
 
 ---
 
+## 🐙 Sincronização com GitHub
+
+Você pode conectar e sincronizar este projeto com um repositório no **GitHub** de duas formas:
+
+### Método 1: Exportação Nativa pelo Google AI Studio (Recomendado)
+1. No menu superior direito do Google AI Studio, clique no ícone de engrenagem / **Settings** (ou **Export**).
+2. Selecione **"Export to GitHub"**.
+3. Autorize sua conta do GitHub e selecione ou crie um repositório (ex.: `pinta-e-borda-sistema`).
+4. O AI Studio enviará automaticamente todos os arquivos, commits e histórico diretamente para o seu repositório.
+
+### Método 2: Exportação via ZIP ou Terminal Local (Git CLI)
+Caso baixe o projeto compactado via **Export as ZIP**:
+```bash
+# 1. Descompacte o arquivo e acesse a pasta raiz
+cd pinta-e-borda
+
+# 2. Inicialize o repositório git local
+git init
+
+# 3. Adicione todos os arquivos
+git add .
+
+# 4. Crie o primeiro commit de produção
+git commit -m "feat: versão de produção da casa colaborativa Pinta e Borda"
+
+# 5. Renomeie o branch principal para main
+git branch -M main
+
+# 6. Conecte ao seu repositório remoto no GitHub
+git remote add origin https://github.com/SEU-USUARIO/pinta-e-borda.git
+
+# 7. Envie os arquivos
+git push -u origin main
+```
+
+---
+
+## 🚢 Deploy para Produção
+
+O projeto é uma Single Page Application (SPA) de alta performance em React + Vite. Ele pode ser hospedado gratuitamente ou com custo mínimo em qualquer provedor moderno:
+
+### Opção A: Vercel (Recomendado para SPA)
+1. Acesse [vercel.com](https://vercel.com) e conecte sua conta do GitHub.
+2. Importe o repositório `pinta-e-borda`.
+3. Configurações automáticas:
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+4. Clique em **Deploy**. A cada novo `git push` no GitHub, a Vercel atualiza o site automaticamente em segundos com certificado SSL gratuito.
+
+### Opção B: Netlify
+1. Acesse [netlify.com](https://netlify.com) e clique em **Add new site** > **Import an existing project**.
+2. Conecte ao GitHub e selecione o repositório.
+3. Configure `npm run build` como build command e `dist` como publish directory.
+4. Para garantir o funcionamento das rotas SPA, certifique-se de que o arquivo de redirecionamento `/* /index.html 200` esteja configurado.
+
+### Opção C: Google Cloud Run (Container)
+1. Utilize o botão **Deploy to Cloud Run** diretamente nas opções do Google AI Studio.
+2. O sistema gerará um container otimizado de produção pronto para receber tráfego com domínio customizado e auto-scaling.
+
+---
+
+## 📋 Checklist para o Go-Live no Shopping
+
+Para colocar o sistema em operação diária com múltiplas pessoas acessando simultaneamente:
+
+- [x] **Interface e Fluxos Operacionais**: PDV, Portal da Artesã, Catálogo e Relatórios prontos.
+- [x] **Design System e Identidade Visual**: Cores autorais ajustadas e tipografia editorial.
+- [x] **Compilação e Tipagem Rigorosa**: Zero erros de TypeScript e build aprovado.
+- [ ] **Exportação para o GitHub**: Realizar o primeiro envio do código para controle de versão.
+- [ ] **Publicação da URL de Produção**: Configurar o deploy na Vercel, Netlify ou Cloud Run.
+- [ ] **Configuração do Domínio da Loja**: Apontar o domínio oficial (ex.: `sistema.pintaeborda.com.br` ou `pintaeborda.com.br`).
+- [ ] **Banco de Dados Centralizado (Firebase Firestore)**: Conectar para que as vendas do tablet do quiosque sincronizem instantaneamente no smartphone de todas as artesãs em tempo real.
+- [ ] **Treinamento das Atendentes**: Apresentar o fluxo de abertura de turno, passagem de bastão e envio de recibos no WhatsApp.
+
+---
+
 ## 📍 Localização e Contato
 
 - **Espaço Físico**: Rio Anil Shopping — Piso 2, São Luís – MA
