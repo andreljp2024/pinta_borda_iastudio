@@ -27,7 +27,7 @@ export const FeeRulesView: React.FC = () => {
     e.preventDefault();
     if (!editingRule) return;
 
-    updateFeeRule(editingRule.id, editFeePercentage);
+    updateFeeRule(editingRule.id, { feePercentage: Number(editFeePercentage) });
     setEditingRule(null);
   };
 

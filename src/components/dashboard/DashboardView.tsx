@@ -53,7 +53,7 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
   // Filtered sales
   const relevantSales = useMemo(() => {
     return sales.filter((s) => {
-      if (s.status === 'CANCELADA') return false;
+      if (s.status === 'CANCELADA' || s.status === 'CANCELADO' || s.status === 'ESTORNADO') return false;
       if (isPartner) {
         return s.items.some((it) => it.partnerId === currentPartner.id);
       }

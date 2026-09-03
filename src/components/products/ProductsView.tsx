@@ -26,6 +26,7 @@ export const ProductsView: React.FC = () => {
     currentPartner,
     addProduct,
     updateProduct,
+    deleteProduct,
   } = useApp();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -304,13 +305,26 @@ export const ProductsView: React.FC = () => {
                       </button>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <button
-                        onClick={() => handleOpenEditModal(prod)}
-                        className="p-1.5 text-[#863b63] hover:text-[#380c25] rounded-lg hover:bg-[#fff0f5] transition-colors cursor-pointer"
-                        title="Editar produto"
-                      >
-                        <Edit2 className="w-3.5 h-3.5" />
-                      </button>
+                      <div className="flex items-center justify-end gap-1">
+                        <button
+                          onClick={() => handleOpenEditModal(prod)}
+                          className="p-1.5 text-[#863b63] hover:text-[#380c25] rounded-lg hover:bg-[#fff0f5] transition-colors cursor-pointer"
+                          title="Editar produto"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (confirm(`Deseja realmente remover o produto "${prod.name}"?`)) {
+                              deleteProduct(prod.id);
+                            }
+                          }}
+                          className="p-1.5 text-[#f43f7e] hover:text-[#be185d] rounded-lg hover:bg-[#ffe4ee] transition-colors cursor-pointer"
+                          title="Excluir produto"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );

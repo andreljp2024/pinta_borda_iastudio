@@ -89,6 +89,7 @@ interface AppContextType {
   cancelSale: (saleId: string, reason: string) => boolean;
 
   createProduct: (productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>) => Product;
+  addProduct: (productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>) => Product;
   updateProduct: (productId: string, updates: Partial<Product>) => void;
   deleteProduct: (productId: string) => void;
 
@@ -100,13 +101,16 @@ interface AppContextType {
   }) => void;
 
   createPartner: (partnerData: Omit<Partner, 'id' | 'createdAt'>) => Partner;
+  addPartner: (partnerData: Omit<Partner, 'id' | 'createdAt'>) => Partner;
   updatePartner: (partnerId: string, updates: Partial<Partner>) => void;
 
   createFeeRule: (rule: Omit<PaymentFeeRule, 'id'>) => void;
-  updateFeeRule: (ruleId: string, updates: Partial<PaymentFeeRule>) => void;
+  updateFeeRule: (ruleId: string, updates: Partial<PaymentFeeRule> | number) => void;
 
   markMonthlyFeePaid: (feeId: string) => void;
-  markSettlementPaid: (settlementId: string) => void;
+  markMonthlyFeeAsPaid: (feeId: string) => void;
+  markSettlementPaid: (settlementId: string, paymentReference?: string) => void;
+  markSettlementAsPaid: (settlementId: string, paymentReference?: string) => void;
 
   markNotificationRead: (id: string) => void;
   markAllNotificationsRead: () => void;
@@ -761,8 +765,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     logAudit('CRIAR_REGRA_TAXA', 'PaymentFeeRule', newRule.id, `Nova taxa de maquininha configurada: ${newRule.feePercentage}% (${newRule.modality}).`);
   };
 
-  const updateFeeRule = (ruleId: string, updates: Partial<PaymentFeeRule>) => {
-    setFeeRules((prev) => prev.map((r) => (r.id === ruleId ? { ...r, ...updates } : r)));
+  const updateFeeRule = (ruleId: string, updates: Partial<PaymentFeeRule> | number) => {
+    const updateObj = typeof updates === 'number' ? { feePercentage: updates } : updates;
+    setFeeRules((prev) => prev.map((r) => (r.id === ruleId ? { ...r, ...updateObj } : r)));
     logAudit('ATUALIZAR_REGRA_TAXA', 'PaymentFeeRule', ruleId, `Taxa de maquininha atualizada.`);
   };
 
@@ -773,11 +778,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     logAudit('PAGAMENTO_MENSALIDADE', 'MonthlyFee', feeId, `Mensalidade marcada como paga.`);
   };
 
-  const markSettlementPaid = (settlementId: string) => {
+  const markSettlementPaid = (settlementId: string, paymentReference?: string) => {
     setSettlements((prev) =>
-      prev.map((s) => (s.id === settlementId ? { ...s, status: 'PAGO', paidAt: new Date().toISOString() } : s))
+      prev.map((s) =>
+        s.id === settlementId
+          ? {
+              ...s,
+              status: 'PAGO',
+              paidAt: new Date().toISOString(),
+              paymentReference: paymentReference || s.paymentReference || `PIX-${Date.now()}`,
+            }
+          : s
+      )
     );
-    logAudit('PAGAMENTO_REPASSE', 'Settlement', settlementId, `Repasse para artesão marcado como pago.`);
+    logAudit('PAGAMENTO_REPASSE', 'Settlement', settlementId, `Repasse para artesão marcado como pago (${paymentReference || 'Pix'}).`);
   };
 
   const markNotificationRead = (id: string) => {
@@ -818,15 +832,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         createSale,
         cancelSale,
         createProduct,
+        addProduct: createProduct,
         updateProduct,
         deleteProduct,
         addStockMovement,
         createPartner,
+        addPartner: createPartner,
         updatePartner,
         createFeeRule,
         updateFeeRule,
         markMonthlyFeePaid,
+        markMonthlyFeeAsPaid: markMonthlyFeePaid,
         markSettlementPaid,
+        markSettlementAsPaid: markSettlementPaid,
         markNotificationRead,
         markAllNotificationsRead,
         getApplicableFeeRule,

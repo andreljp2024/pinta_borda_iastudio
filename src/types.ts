@@ -9,11 +9,11 @@ export type ShiftStatus = 'AGENDADO' | 'ATIVO' | 'ENCERRADO' | 'CANCELADO';
 
 export type PaymentMethod = 'DINHEIRO' | 'PIX_DIRETO' | 'PIX_CENTRALIZADO' | 'DEBITO' | 'CREDITO';
 
-export type SaleStatus = 'PAGO' | 'PENDENTE' | 'CANCELADO' | 'ESTORNADO';
+export type SaleStatus = 'PAGO' | 'PENDENTE' | 'CANCELADO' | 'ESTORNADO' | 'CANCELADA' | 'CONCLUIDA';
 
 export type StockMovementType = 'ENTRADA' | 'VENDA' | 'DEVOLUCAO' | 'AJUSTE' | 'PERDA' | 'AVARIA' | 'INVENTARIO';
 
-export type MonthlyFeeStatus = 'ABERTO' | 'PAGO' | 'VENCIDO' | 'CANCELADO';
+export type MonthlyFeeStatus = 'ABERTO' | 'PAGO' | 'VENCIDO' | 'CANCELADO' | 'ATRASADO';
 
 export interface PartnerContract {
   id: string;

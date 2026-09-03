@@ -35,7 +35,7 @@ export const ReportsView: React.FC = () => {
   // Filter sales if partner role
   const scopedSales = useMemo(() => {
     return sales.filter((s) => {
-      if (s.status === 'CANCELADA') return false;
+      if (s.status === 'CANCELADA' || s.status === 'CANCELADO' || s.status === 'ESTORNADO') return false;
       if (userRole === 'PARTNER' && currentPartner) {
         return s.items.some((it) => it.partnerId === currentPartner.id);
       }

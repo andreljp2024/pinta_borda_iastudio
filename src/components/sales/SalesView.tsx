@@ -52,7 +52,11 @@ export const SalesView: React.FC = () => {
         if (!hasPartnerItem) return false;
       }
 
-      if (statusFilter !== 'all' && s.status !== statusFilter) {
+      const isSaleCanceled = s.status === 'CANCELADA' || s.status === 'CANCELADO' || s.status === 'ESTORNADO';
+      if (statusFilter === 'CONCLUIDA' && isSaleCanceled) {
+        return false;
+      }
+      if (statusFilter === 'CANCELADA' && !isSaleCanceled) {
         return false;
       }
 
@@ -164,7 +168,7 @@ export const SalesView: React.FC = () => {
                 </tr>
               ) : (
                 visibleSales.map((sale) => {
-                  const isCanceled = sale.status === 'CANCELADA';
+                  const isCanceled = sale.status === 'CANCELADA' || sale.status === 'CANCELADO' || sale.status === 'ESTORNADO';
                   return (
                     <tr key={sale.id} className="hover:bg-[#fff0f5]/40 transition-colors">
                       <td className="py-3.5 px-4 font-mono-craft">
