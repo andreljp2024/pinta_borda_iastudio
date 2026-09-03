@@ -1,206 +1,319 @@
 # Pinta e Borda — Casa Colaborativa & Sistema de Gestão
 
-> Sistema integrado para gestão de quiosque colaborativo, frente de caixa (PDV), acompanhamento para artesãs (Portal da Artesã) e vitrine digital com curadoria autoral de São Luís do Maranhão.
+> Sistema integrado para gestão de quiosque colaborativo, frente de caixa (PDV multi-ateliê), acompanhamento remoto para produtoras (Portal da Artesã), controle de plantões no Rio Anil Shopping e vitrine digital com curadoria autoral de São Luís do Maranhão.
 
 ---
 
 ## 🌿 Sobre o Projeto
 
-A **Pinta e Borda** é uma casa colaborativa localizada no **Rio Anil Shopping (Piso 2)**, em São Luís – MA. Reúne ateliês e marcas autorais maranhenses de cerâmica, bordado, biojoias, papelaria botânica, marcenaria e vestuário autoral em um espaço de economia criativa compartilhada.
+A **Pinta e Borda** é uma casa colaborativa localizada no **Rio Anil Shopping (Piso 2)**, em São Luís – MA. Reúne 14 ateliês e marcas autorais maranhenses de cerâmica, bordado manual, biojoias, papelaria botânica, marcenaria de resíduo e vestuário autoral em um modelo sustentável de economia criativa compartilhada.
 
-Este software resolve os desafios operacionais de um coletivo de artesanato:
-- **Rateio automático e transparente** de pagamentos recebidos no balcão entre múltiplos ateliês.
-- **Escala de plantões colaborativos** e conferência de caixa na troca de turno.
-- **Portal mobile-first da artesã** para acompanhamento remoto de vendas, estoque e repasses.
-- **Vitrine digital autoral** com experiência editorial inspirada no afeto e na cultura maranhense.
+Este ecossistema de software resolve integralmente os desafios operacionais do coletivo:
+- **Rateio financeiro automático e transparente**: divisão imediata de vendas multi-ateliê no balcão, abatendo taxas de operadoras de cartão e a taxa de manutenção da casa.
+- **Escala de plantões colaborativos**: gestão do revezamento de atendentes, abertura de caixa com conferência de fundo de troco, sangrias e passagem de turno.
+- **Portal mobile-first da artesã**: painel de bolso para acompanhamento em tempo real das peças vendidas no shopping, saldo a repassar, alerta de reposição e escala de trabalho.
+- **Vitrine digital autoral**: experiência editorial acolhedora que reflete o afeto e a identidade cultural de São Luís, com carrinho integrado e fechamento assistido via WhatsApp.
+- **Painel Administrativo Modular**: layout com menu lateral em 6 agrupamentos operacionais, busca rápida de módulos, atalhos de balcão e simulação de perfis de acesso (RBAC).
 
 ---
 
 ## 🏛️ Arquitetura & Módulos da Aplicação
 
-### 1. Vitrine Pública & Loja Digital (`/src/components/public/`)
-- **Landing Page Editorial**: Apresentação da casa colaborativa, manifesto do feito à mão, carrossel de ateliês parceiros e mapa interativo do Rio Anil Shopping.
-- **Vitrine Completa de Produtos**: Busca em tempo real, filtros por categoria (Bordados, Cerâmica, Biojoias, Papelaria, Decoração) e ordenação por relevância ou preço.
-- **Modal de Detalhes do Produto**: Informações detalhadas da peça, ateliê de origem, materiais e tempo estimado de confecção artesanal.
-- **Carrinho & Checkout Assistido**: Opções de retirada no balcão do shopping ou entrega local em São Luís, com geração de resumo pré-formatado para WhatsApp.
-- **Inscrição de Novas Marcas**: Formulário para artesãs e produtoras interessadas em expor peças ou participar de edições do coletivo.
+O sistema foi concebido em dois ambientes integrados: **Ambiente Público** (Vitrine e Dossiê) e **Ambiente de Gestão & Operação** (Dashboard com Layout Modular e Portal da Artesã).
 
-### 2. Portal da Artesã (`/src/components/portal/ArtisanPortalView.tsx`)
-- **Experiência Mobile-First**: Interface otimizada para smartphones com simulador de tela integrado e seletor rápido de ateliê.
-- **Meu Caixa**:
-  - Vendas do dia em tempo real (líquido a receber e bruto faturado).
-  - Previsão do próximo repasse quinzenal/mensal com dedução automática de taxas e manutenção de nicho.
-  - Dados bancários e chave Pix da artesã para conferência.
-  - Feed discriminado de cada peça vendida no balcão (horário, atendente de plantão e valor).
-- **Reposição de Estoque**:
-  - Alerta automático de peças esgotadas ou abaixo do estoque mínimo.
-  - Lançamento ágil de entrada de novas peças entregues na loja física.
-  - Botão de envio de aviso via WhatsApp diretamente para a atendente do dia.
-- **Plantões & Escala**:
-  - Exibição do próximo turno agendado (data, horário e colega de plantão).
-  - Solicitação de troca ou solicitação de cobertura de turno.
-- **Divulgação & Redes**:
-  - Link exclusivo com filtro direto nas peças do ateliê para uso no Instagram.
-  - Mensagens afetuosas pré-formatadas para envio a clientes no WhatsApp.
+```
+Pinta e Borda
+├── 🌐 Ambiente Público
+│   ├── Vitrine Digital Editorial (Landing Page)
+│   ├── Loja Virtual com Filtro por Ateliê
+│   ├── Carrinho com Checkout WhatsApp
+│   └── Dossiê Coletivo (História das 14 marcas)
+│
+└── 🛠️ Ambiente de Gestão (AdminDashboardLayout)
+    ├── 1. Principal: Visão Geral (Métricas, Gráficos e Central de Módulos)
+    ├── 2. Operações de Balcão: PDV Frente de Caixa, Vendas e Plantões & Escala
+    ├── 3. Catálogo & Estoque: Estoque no Shopping e Produtos & Peças
+    ├── 4. Comunidade & Ateliês: Gestão de Parceiros e Portal da Artesã (Mobile)
+    ├── 5. Financeiro & Taxas: Fechamento de Repasses e Regras de Taxas
+    └── 6. Inteligência & Controle: Relatórios Gerenciais e Trilha de Auditoria
+```
+
+---
+
+### 1. Vitrine Pública & Loja Digital (`/src/components/public/`)
+
+- **Landing Page Editorial**: Apresentação visual da casa colaborativa, manifesto do feito à mão, grid de marcas parceiras com fotografia de produto e mapa de localização no Rio Anil Shopping.
+- **Vitrine de Produtos**: Catálogo completo com busca em tempo real, filtros por categoria (Bordados, Cerâmica, Biojoias, Papelaria, Decoração, Vestuário) e ordenação por preço e novidades.
+- **Navegação por Ateliê**: Possibilidade de isolar a vitrine em uma única marca parceira (ideal para links na bio do Instagram das artesãs).
+- **Carrinho & Checkout Assistido**: Opções de retirada presencial no balcão do shopping ou entrega local em São Luís, com geração de resumo formatado pronto para envio no WhatsApp da loja.
+- **Inscrição de Novas Marcas**: Formulário integrado para captação de novas artesãs e coletivos interessados em expor no espaço.
+
+---
+
+### 2. Layout Modular de Gestão (`/src/components/layout/AdminDashboardLayout.tsx`)
+
+O painel de gestão conta com uma estrutura ergonômica de navegação projetada para telas de balcão (computadores/tablets) e celulares:
+
+- **Micro-Barra Superior de Expediente**:
+  - Indicador pulsante do plantão ativo em loja física (`Operador` + `Marca Parceira`).
+  - Botão de acesso rápido para abertura, passagem de turno ou fechamento de caixa.
+  - Link de alternância rápida entre o painel de gestão e a vitrine pública.
+- **Menu Lateral Categorizado (Sidebar)**:
+  - **Filtro de Módulos**: Busca textual instantânea para encontrar qualquer tela do sistema.
+  - **Badges Dinâmicos**: Contagem de alertas de estoque baixo, vendas do dia, marcação de expediente ativo e notificações não lidas.
+  - **Modo Compacto & Expandido**: Recolhimento no desktop para maximizar a área útil de trabalho e gaveta deslizante (*drawer*) no mobile.
+  - **Identidade do Operador**: Cartão de identificação visual com monograma e nível de acesso.
+- **Header Administrativo Contextual**:
+  - Breadcrumb dinâmico identificando o módulo atual.
+  - Menu de **Ações Rápidas** (*Nova Venda*, *Novo Produto*, *Passar Turno*, *Consultar Repasses*).
+  - Central de Notificações com badge de itens não lidos.
+  - Seletor de Perfil RBAC (*Coordenação Geral* ou *Ateliê Específico*).
+
+---
 
 ### 3. Frente de Caixa & PDV Colaborativo (`/src/components/pdv/PDVView.tsx`)
-- **Venda Multi-Ateliê**: Permite adicionar ao mesmo carrinho peças de marcas diferentes com rateio financeiro automático e imediato.
-- **Múltiplos Meios de Pagamento**: Pix, Dinheiro, Cartão de Débito, Cartão de Crédito à vista ou parcelado.
-- **Cálculo de Descontos e Acréscimos**: Aplicação proporcional por peça ou no total da compra.
-- **Comprovante de Venda**: Geração de recibo fiscal/gerencial e envio por WhatsApp.
 
-### 4. Gestão de Plantões & Caixa (`/src/components/shifts/ShiftManagementModal.tsx`)
-- **Abertura de Expediente**: Registro de atendente responsável, fundo de troco inicial e data/hora.
-- **Controle de Movimentações**: Registro de sangrias (retiradas) e suprimentos (reforço de troco).
-- **Fechamento e Passagem de Turno**: Conferência dos valores apurados (dinheiro físico vs. eletrônico) e checklist operacional de balcão.
+- **Carrinho Multi-Ateliê**: Permite adicionar peças de marcas diferentes em um único cupom de venda.
+- **Rateio Automático de Comissões**:
+  - O sistema calcula instantaneamente o subtotal bruto de cada marca.
+  - Desconta a taxa da maquininha de cartão conforme a modalidade escolhida.
+  - Aplica a comissão da casa colaborativa (ex.: 10%) configurada individualmente para cada artesã.
+  - Registra o valor líquido exato que cada ateliê tem a receber.
+- **Modalidades de Pagamento**: Pix Direto (QR Code da loja), Dinheiro (com calculadora de troco), Cartão de Débito e Cartão de Crédito (à vista ou parcelado).
+- **Comprovante Digital**: Geração de comprovante da venda com detalhamento das peças, ateliês e envio automático via WhatsApp para o cliente.
 
-### 5. Repasses, Taxas & Financeiro (`/src/components/settlements/SettlementView.tsx` & `fees/`)
-- **Configuração de Taxas**: Definição de taxas por modalidade de pagamento (taxa de máquina, Pix, comissão da casa).
-- **Fechamento de Período**: Consolidação de vendas por ateliê com abatimento das taxas e custo de manutenção de nicho.
-- **Lote de Pagamentos Pix**: Geração de relatórios de pagamento com chaves Pix de cada produtora.
+---
 
-### 6. Gestão de Estoque & Auditoria (`/src/components/stock/` & `audit/`)
-- **Auditoria Física**: Contagem física de peças nas prateleiras com conferência contra o saldo do sistema.
-- **Log de Eventos**: Rastreabilidade de movimentações de estoque, alterações de preços e lançamentos de vendas.
+### 4. Gestão de Plantões & Controle de Caixa (`/src/components/shifts/`)
 
-### 7. Dossiê Coletivo (`/src/components/presentation/CollectiveDossierView.tsx`)
-- Apresentação visual e histórica de cada uma das 14 marcas autorais participantes, perfil dos fundadores, técnicas manuais e manifesto do coletivo.
+- **Escala Colaborativa**: Grade semanal e mensal de revezamento das artesãs no atendimento presencial da loja no Rio Anil Shopping.
+- **Abertura de Caixa**: Registro da atendente responsável, conferência do fundo de troco inicial e timestamp de abertura.
+- **Movimentações em Dinheiro**: Registro auditado de sangrias (retiradas de numerário) e suprimentos (reforço de troco).
+- **Passagem de Turno & Fechamento**: Comparativo entre as vendas registradas pelo sistema e os valores apurados fisicamente (gaveta de dinheiro e comprovantes de cartão), com checklist de conferência do balcão.
+
+---
+
+### 5. Catálogo de Produtos & Controle de Estoque (`/src/components/products/` e `stock/`)
+
+- **Cadastro de Peças**: Código SKU autoral, código de barras, fotos, ateliê responsável, descrição dos materiais, custo de produção e preço de venda.
+- **Estoque Mínimo & Alertas**: Sinalização imediata de produtos que atingiram a faixa crítica ou esgotaram nas prateleiras do shopping.
+- **Movimentações Auditadas**: Registro de entradas de novas remessas, vendas no balcão, devoluções, perdas ou avarias com justificativa e responsável.
+- **Conferência Física / Inventário**: Ferramenta de auditoria de prateleiras para conferência periódica de itens expostos vs. saldo no sistema.
+
+---
+
+### 6. Portal da Artesã (`/src/components/portal/ArtisanPortalView.tsx`)
+
+Interface dedicada e otimizada para smartphones (`mobile-first`), pensada para a rotina da produtora que acompanha as vendas do seu ateliê enquanto produz em sua bancada:
+
+- **Meu Caixa**:
+  - Vendas do dia em tempo real (faturamento bruto e valor líquido a receber).
+  - Previsão do próximo repasse com dedução transparente de taxas e mensalidade do nicho.
+  - Dados cadastrais e chave Pix do ateliê para recebimento dos valores.
+  - Feed das vendas realizadas: horário exato, atendente de plantão e peça vendida.
+- **Reposição Ágil**:
+  - Alerta de peças com baixo estoque nas prateleiras do shopping.
+  - Registro de entrada de novas peças entregues na loja física.
+  - Botão de notificação via WhatsApp diretamente para a atendente do plantão.
+- **Plantões & Escala**:
+  - Próximo turno agendado da artesã no Rio Anil Shopping.
+  - Solicitação de troca de turno ou pedido de cobertura entre colegas.
+- **Ferramentas de Divulgação**:
+  - Link direto para a vitrine filtrada com apenas as peças do seu ateliê.
+  - Mensagens afetuosas pré-formatadas para divulgação em redes sociais e WhatsApp.
+
+---
+
+### 7. Repasses Financeiros, Taxas & Rateio (`/src/components/settlements/` e `fees/`)
+
+- **Tabela de Taxas por Meio de Pagamento**:
+  - Configuração de taxas por maquininha/terminal (Stone, PagBank, Cielo, etc.) e bandeira (Visa, Mastercard, Elo, Hipercard, Amex).
+  - Parametrização de taxas para Débito, Crédito à Vista e faixas de parcelamento (2x a 6x, 7x a 12x).
+- **Fechamento de Período**:
+  - Consolidação quinzenal ou mensal das vendas de cada marca.
+  - Extrato analítico demonstrando: Total Bruto (-) Taxas de Cartão (-) Comissão da Casa (-) Mensalidade do Espaço (=) Repasse Líquido.
+- **Geração de Lote Pix**: Exportação de lista de pagamentos com as chaves Pix cadastradas de cada artesã para quitação rápida pela coordenação.
+
+---
+
+### 8. Inteligência, Relatórios & Auditoria (`/src/components/reports/` e `audit/`)
+
+- **Relatórios Gerenciais**:
+  - Faturamento consolidado por período (dia, semana, mês).
+  - Curva ABC de produtos mais vendidos e faturamento por categoria artesanal.
+  - Desempenho comparativo entre as 14 marcas parceiras.
+  - Ticket médio da loja e desempenho de vendas por turno/atendente.
+- **Trilha de Auditoria (Audit Logs)**:
+  - Registro cronológico imutável de todas as ações sensíveis: cancelamento de vendas, ajustes manuais de estoque, alteração de taxas operacionais e trocas de turno.
+  - Identificação de usuário, data, hora, IP/perfil e justificativa registrada.
+
+---
+
+### 9. Dossiê Coletivo Interativo (`/src/components/presentation/`)
+
+- Apresentação visual e histórica das 14 marcas participantes da casa colaborativa.
+- Fichas com história dos fundadores, técnicas artesanais aplicadas (bordado, cerâmica de alta temperatura, reaproveitamento de madeira, etc.), fotos de ateliê e manifesto poético da Pinta e Borda.
 
 ---
 
 ## 🎨 Design System & Identidade Visual
 
-O visual do Pinta e Borda foi projetado com uma estética artesanal, calorosa e contemporânea, refletindo a riqueza cultural do Maranhão:
+O sistema adota a identidade autoral contemporânea da **Pinta e Borda**, inspirada na vivacidade das cores maranhenses, nas tramas têxteis e no acabamento manual:
 
-| Elemento | Cor / Valor | Aplicação |
+| Token Visual | Código Hex | Aplicação no Sistema |
 |---|---|---|
-| **Terracota Artesanal** | `#bd5b3e` / `#933f28` | Ações primárias, botões de destaque, ênfases afetivas e curadoria |
-| **Verde Floresta** | `#1c3830` / `#24463c` | Cabeçalho, barras de status, seção de marcas e fundos solenes |
-| **Linho / Algodão Cru** | `#faf7f0` / `#f3eee4` | Fundo principal, cartões suaves e superfícies respiráveis |
-| **Ouro Velho / Latão** | `#e0be75` / `#c8963e` | Ícones solares, numeração de ateliês e destaques especiais |
-| **Bordas Naturais** | `#e8ded0` | Divisores sutis, molduras de cartões e inputs |
+| **Rosa Vibrante / Magenta** | `#f43f7e` / `#db2777` | Ações primárias, botões de venda, tags de frente de caixa, destaques e CTAs |
+| **Vinho Profundo / Ameixa** | `#380c25` / `#420f2c` | Cabeçalhos, barra de expediente, textos de alto contraste e botões solenes |
+| **Algodão Rosa / Blush Cru** | `#fff5f8` / `#fff0f5` | Fundo principal da aplicação, cartões suaves e superfícies de respiração |
+| **Rosa Suave / Framboesa** | `#ff7597` / `#ffb8ce` | Indicadores de alerta, badges secundários e ornamentos de marca |
+| **Bordas em Blush** | `#fbcfe8` | Linhas divisórias elegantes, molduras de cartões e inputs |
+| **Verde Sucesso / Botânico** | `#1f4e38` / `#7ec498` | Indicadores de caixa aberto, transações pagas e expediente em curso |
 
-### Tipografia
-- **Display / Títulos**: *Playfair Display* (elegante, editorial, com ênfases poéticas em itálico).
-- **Corpo de Texto**: *DM Sans* (alta legibilidade em interfaces desktop e mobile).
-- **Etiquetas e Dados**: *DM Mono* (utilizada em códigos de produtos, referências, preços e status).
-
-### Classes Utilitárias Principais
-- `.brand-mark`: Monograma circular característico `p + b`.
-- `.craft-card`: Cartão acolhedor com elevação suave e bordas de 20px.
-- `.solid-button` / `.solid-forest-button` / `.outline-button`: Família de botões com cantos arredondados (999px) e feedback tátil ao clique.
+### Tipografia Oficial
+- **Display / Títulos**: *Playfair Display* (elegante, editorial, com ênfases poéticas em itálico para a palavra *e* na assinatura `pinta e borda`).
+- **Corpo de Leitura**: *DM Sans* (geometria limpa e altíssima legibilidade em telas de balcão e smartphones).
+- **Métricas & Códigos**: *DM Mono* (utilizada em códigos SKU, relatórios financeiros, valores monetários e timestamps).
+- **Dossiê & Manifesto**: *Cormorant Garamond* (leitura literária para citações e histórias dos ateliês).
 
 ---
 
-## 🔐 Níveis de Acesso (RBAC)
+## 🔐 Níveis de Acesso & Simulação RBAC
 
-O seletor de perfil no topo da aplicação permite alternar entre os papéis do ecossistema:
+O sistema dispõe de controle de acesso baseado em papéis (*Role-Based Access Control*), permitindo alternar perfis diretamente pela interface:
 
-1. **ADMIN (Gestora Geral)**: Acesso irrestrito a todos os módulos, fechamentos de repasses, relatórios globais, configuração de taxas e cadastro de parceiras.
-2. **OPERATOR (Atendente no Balcão)**: Foco na operação de vendas (PDV), abertura/fechamento de plantão e consulta de estoque do quiosque.
-3. **PARTNER (Marca Parceira)**: Visualização restrita aos dados do próprio ateliê, com acesso direto ao **Portal da Artesã** e métricas exclusivas do seu nicho.
+1. **ADMIN (Coordenação Geral)**:
+   - Visão panorâmica de todos os ateliês.
+   - Gestão de contratos, mensalidades e regras de taxas.
+   - Fechamento global de repasses e conferência de auditoria.
+   - Cadastro e inativação de produtos e marcas parceiras.
+2. **PARTNER (Marca Parceira / Artesã)**:
+   - Acesso restrito aos dados do próprio ateliê.
+   - Visualização do **Portal da Artesã** (vendas diárias, repasses líquidos previstos e alertas de estoque).
+   - Consulta à sua escala individual de plantões no quiosque.
+3. **OPERATOR (Atendente de Plantão no Balcão)**:
+   - Abertura, movimentação e encerramento de caixa.
+   - Registro ágil de vendas no PDV e emissão de comprovantes.
+   - Consulta e recebimento de reposições de estoque.
 
 ---
 
 ## 💻 Tecnologias Utilizadas
 
-- **Frontend**: [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Estilização**: [Tailwind CSS](https://tailwindcss.com/)
+- **Frontend**: [React 19](https://react.dev/) + [TypeScript 5.8](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite 6](https://vitejs.dev/)
+- **Estilização**: [Tailwind CSS v4](https://tailwindcss.com/) com classes utilitárias e design tokens customizados
+- **Animações**: [Motion](https://motion.dev/) para transições de tela e estados interativos
 - **Ícones**: [Lucide React](https://lucide.dev/)
-- **Gráficos & Visualização**: [Recharts](https://recharts.org/)
-- **Tipografia Web**: Google Fonts (*Playfair Display*, *DM Sans*, *DM Mono*)
+- **Gráficos**: [Recharts](https://recharts.org/) para visualização de faturamento e curva de vendas
+- **Efeitos de Celebração**: [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti) na conclusão de vendas
 
 ---
 
-## 🚀 Como Executar o Projeto
+## 🚀 Como Executar o Projeto Localmente
 
 ### Pré-requisitos
-- Node.js 18+ ou Bun
+- Node.js 18+ instalado (ou Bun / Yarn)
 
-### Instalação das Dependências
+### 1. Clonar o Repositório e Instalar Dependências
 ```bash
+# Clone o repositório
+git clone https://github.com/SEU-USUARIO/pinta-e-borda.git
+
+# Acesse o diretório
+cd pinta-e-borda
+
+# Instale os pacotes npm
 npm install
 ```
 
-### Execução em Modo de Desenvolvimento
+### 2. Iniciar Servidor de Desenvolvimento
 ```bash
 npm run dev
 ```
-O servidor de desenvolvimento estará disponível em `http://localhost:3000`.
+O sistema inicializará no endereço: `http://localhost:3000`.
 
-### Verificação de Tipos e Linter
+### 3. Validação de Tipos e Linter
 ```bash
 npm run lint
 ```
+Executa a checagem rigorosa de tipos com `tsc --noEmit`.
 
-### Compilação para Produção
+### 4. Build de Produção
 ```bash
 npm run build
 ```
-Os artefatos estáticos otimizados serão gerados no diretório `dist/`.
+Gera os arquivos otimizados e minificados no diretório `dist/`.
 
 ---
 
-## 🐙 Sincronização com GitHub
+## 📖 Manual Operacional de Uso no Shopping
 
-Você pode conectar e sincronizar este projeto com um repositório no **GitHub** de duas formas:
+### 🛍️ Fluxo 1: Abertura de Caixa e Início de Plantão
+1. No topo da tela, clique no botão **"Iniciar Expediente"** ou acesse **Plantões & Escala**.
+2. Selecione a atendente responsável e confirme a marca parceira de plantão.
+3. Informe o valor do **Fundo de Troco** disponível na gaveta física (ex.: R$ 150,00).
+4. Clique em **"Abrir Expediente"**. A micro-barra superior ficará verde com o status pulsante indicando o plantão em curso.
 
-### Método 1: Exportação Nativa pelo Google AI Studio (Recomendado)
-1. No menu superior direito do Google AI Studio, clique no ícone de engrenagem / **Settings** (ou **Export**).
-2. Selecione **"Export to GitHub"**.
-3. Autorize sua conta do GitHub e selecione ou crie um repositório (ex.: `pinta-e-borda-sistema`).
-4. O AI Studio enviará automaticamente todos os arquivos, commits e histórico diretamente para o seu repositório.
+### 💳 Fluxo 2: Realização de Venda no Balcão (PDV)
+1. Acesse o menu **PDV Frente de Caixa** (ou clique no atalho do header).
+2. Utilize o campo de busca ou os filtros de categoria para localizar os itens solicitados pelo cliente.
+3. Clique em **"Adicionar"** para incluir peças no carrinho (podem ser de marcas diferentes).
+4. Selecione a forma de pagamento: **Dinheiro**, **Pix**, **Cartão de Débito** ou **Cartão de Crédito**.
+5. Em pagamentos parcelados, selecione o número de parcelas para aplicação correta da taxa de maquininha.
+6. Clique em **"Concluir Venda"**.
+7. O sistema gera o comprovante digital detalhado, deduz o estoque automaticamente, envia notificação para a artesã dona da peça e exibe a opção de envio por WhatsApp para o comprador.
 
-### Método 2: Exportação via ZIP ou Terminal Local (Git CLI)
-Caso baixe o projeto compactado via **Export as ZIP**:
+### 📦 Fluxo 3: Recebimento de Novas Peças (Reposição de Estoque)
+1. No menu **Estoque no Shopping**, localize o produto entregue pela artesã.
+2. Clique no botão de **"Entrada de Estoque"**.
+3. Digite a quantidade de peças entregues e a justificativa (ex.: *"Remessa lote 04 entregue pela artesã"*).
+4. O saldo disponível é atualizado instantaneamente na prateleira física e na vitrine virtual.
+
+### 🔄 Fluxo 4: Passagem de Plantão e Encerramento de Caixa
+1. No final do turno, clique no botão **"Passar Plantão"** na barra superior.
+2. Realize a contagem do dinheiro físico presente na gaveta e compare com o saldo esperado pelo sistema.
+3. Se houver divergência, informe a justificativa no campo de observações.
+4. Caso outro plantonista assuma o quiosque, selecione o próximo operador e transfira o caixa; caso a loja esteja fechando, clique em **"Encerrar Caixa do Dia"**.
+
+---
+
+## 🐙 Sincronização com o GitHub
+
+### Método 1: Exportação Direta pelo Google AI Studio (Recomendado)
+1. No menu de configurações do Google AI Studio, clique em **Export to GitHub**.
+2. Selecione a sua organização/usuário e informe o nome do repositório desejado (ex.: `pinta-e-borda-gestao`).
+3. O sistema fará o envio de todos os arquivos e histórico de desenvolvimento.
+
+### Método 2: Via Terminal Local (Git CLI)
 ```bash
-# 1. Descompacte o arquivo e acesse a pasta raiz
-cd pinta-e-borda
-
-# 2. Inicialize o repositório git local
 git init
-
-# 3. Adicione todos os arquivos
 git add .
-
-# 4. Crie o primeiro commit de produção
-git commit -m "feat: versão de produção da casa colaborativa Pinta e Borda"
-
-# 5. Renomeie o branch principal para main
+git commit -m "feat: versão de produção com dashboard modular e portal da artesã"
 git branch -M main
-
-# 6. Conecte ao seu repositório remoto no GitHub
 git remote add origin https://github.com/SEU-USUARIO/pinta-e-borda.git
-
-# 7. Envie os arquivos
 git push -u origin main
 ```
 
 ---
 
-## 🚢 Deploy para Produção
+## 🚢 Hospedagem & Deploy para Produção
 
-O projeto é uma Single Page Application (SPA) de alta performance em React + Vite. Ele pode ser hospedado gratuitamente ou com custo mínimo em qualquer provedor moderno:
+Como uma Single Page Application (SPA) construída com Vite, o Pinta e Borda pode ser publicado com extrema agilidade:
 
-### Opção A: Vercel (Recomendado para SPA)
-1. Acesse [vercel.com](https://vercel.com) e conecte sua conta do GitHub.
+### Opção A: Vercel (Recomendada)
+1. Conecte sua conta do GitHub na [Vercel](https://vercel.com).
 2. Importe o repositório `pinta-e-borda`.
-3. Configurações automáticas:
-   - **Framework Preset**: Vite
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. Clique em **Deploy**. A cada novo `git push` no GitHub, a Vercel atualiza o site automaticamente em segundos com certificado SSL gratuito.
+3. A Vercel detectará automaticamente as configurações do Vite (`npm run build` e diretório de saída `dist`).
+4. Clique em **Deploy**. O sistema terá deploy contínuo (*CI/CD*) a cada commit.
 
 ### Opção B: Netlify
-1. Acesse [netlify.com](https://netlify.com) e clique em **Add new site** > **Import an existing project**.
-2. Conecte ao GitHub e selecione o repositório.
-3. Configure `npm run build` como build command e `dist` como publish directory.
-4. Para garantir o funcionamento das rotas SPA, certifique-se de que o arquivo de redirecionamento `/* /index.html 200` esteja configurado.
+1. Conecte o repositório no painel da [Netlify](https://netlify.com).
+2. Configure o comando de build como `npm run build` e a pasta de publicação como `dist`.
+3. Adicione a regra de reescrita no arquivo `_redirects` para suportar rotas de SPA: `/* /index.html 200`.
 
 ### Opção C: Google Cloud Run (Container)
-1. Utilize o botão **Deploy to Cloud Run** diretamente nas opções do Google AI Studio.
-2. O sistema gerará um container otimizado de produção pronto para receber tráfego com domínio customizado e auto-scaling.
+1. Clique em **Deploy to Cloud Run** nas opções do Google AI Studio.
+2. O ambiente containerizado será provisionado com escalabilidade automática, certificado SSL e alta disponibilidade.
 
 ---
 
@@ -208,19 +321,21 @@ O projeto é uma Single Page Application (SPA) de alta performance em React + Vi
 
 Para colocar o sistema em operação diária com múltiplas pessoas acessando simultaneamente:
 
-- [x] **Interface e Fluxos Operacionais**: PDV, Portal da Artesã, Catálogo e Relatórios prontos.
-- [x] **Design System e Identidade Visual**: Cores autorais ajustadas e tipografia editorial.
-- [x] **Compilação e Tipagem Rigorosa**: Zero erros de TypeScript e build aprovado.
+- [x] **Interface e Fluxos Operacionais**: PDV multi-ateliê, Portal da Artesã, Catálogo e Relatórios prontos.
+- [x] **Layout Modular do Dashboard**: Sidebar com 6 agrupamentos, busca rápida e micro-barra de expediente ativo.
+- [x] **Design System e Identidade Visual**: Cores autorais Pinta e Borda (paleta vibrante e acolhedora) e tipografia editorial.
+- [x] **Compilação e Tipagem Rigorosa**: Zero erros de TypeScript e build de produção aprovado.
 - [ ] **Exportação para o GitHub**: Realizar o primeiro envio do código para controle de versão.
-- [ ] **Publicação da URL de Produção**: Configurar o deploy na Vercel, Netlify ou Cloud Run.
+- [ ] **Publicação da URL de Produção**: Configurar o deploy contínuo na Vercel, Netlify ou Cloud Run.
 - [ ] **Configuração do Domínio da Loja**: Apontar o domínio oficial (ex.: `sistema.pintaeborda.com.br` ou `pintaeborda.com.br`).
 - [ ] **Banco de Dados Centralizado (Firebase Firestore)**: Conectar para que as vendas do tablet do quiosque sincronizem instantaneamente no smartphone de todas as artesãs em tempo real.
 - [ ] **Treinamento das Atendentes**: Apresentar o fluxo de abertura de turno, passagem de bastão e envio de recibos no WhatsApp.
 
 ---
 
-## 📍 Localização e Contato
+## 📍 Localização & Contatos Oficiais
 
-- **Espaço Físico**: Rio Anil Shopping — Piso 2, São Luís – MA
-- **Horário de Funcionamento**: Segunda a Sábado (10h às 22h) · Domingos e Feriados (14h às 20h)
-- **Instagram**: `@pintaebordaslz`
+- **Espaço Físico**: Rio Anil Shopping — Piso 2, São Luís – Maranhão
+- **Instagram Oficial**: [@pintaebordaslz](https://instagram.com/pintaebordaslz)
+- **Horário de Atendimento**: Segunda a Sábado: 10h às 22h · Domingos e Feriados: 14h às 20h
+
