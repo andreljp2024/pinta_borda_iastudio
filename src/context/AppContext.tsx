@@ -109,8 +109,24 @@ interface AppContextType {
 
   markMonthlyFeePaid: (feeId: string) => void;
   markMonthlyFeeAsPaid: (feeId: string) => void;
+  createMonthlyFee: (feeData: Omit<MonthlyFee, 'id'>) => MonthlyFee;
+  updateMonthlyFee: (feeId: string, updates: Partial<MonthlyFee>) => void;
+  deleteMonthlyFee: (feeId: string) => void;
+  generateMonthlyFeesForCompetency: (competency: string, dueDate: string) => MonthlyFee[];
+
   markSettlementPaid: (settlementId: string, paymentReference?: string) => void;
   markSettlementAsPaid: (settlementId: string, paymentReference?: string) => void;
+  createSettlement: (settlementData: Omit<PartnerSettlement, 'id'>) => PartnerSettlement;
+  updateSettlement: (settlementId: string, updates: Partial<PartnerSettlement>) => void;
+  deleteSettlement: (settlementId: string) => void;
+  generatePeriodicSettlements: (params: {
+    period: string;
+    startDate?: string;
+    endDate?: string;
+    partnerIds?: string[];
+    deductMonthlyFees?: boolean;
+    notes?: string;
+  }) => PartnerSettlement[];
 
   markNotificationRead: (id: string) => void;
   markAllNotificationsRead: () => void;
@@ -778,6 +794,57 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     logAudit('PAGAMENTO_MENSALIDADE', 'MonthlyFee', feeId, `Mensalidade marcada como paga.`);
   };
 
+  const createMonthlyFee = (feeData: Omit<MonthlyFee, 'id'>): MonthlyFee => {
+    const newFee: MonthlyFee = {
+      ...feeData,
+      id: `fee-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    };
+    setMonthlyFees((prev) => [newFee, ...prev]);
+    logAudit('CRIAR_MENSALIDADE', 'MonthlyFee', newFee.id, `Mensalidade ${newFee.competency} de R$ ${newFee.amount.toFixed(2)} criada para ${newFee.partnerName}.`);
+    return newFee;
+  };
+
+  const updateMonthlyFee = (feeId: string, updates: Partial<MonthlyFee>) => {
+    setMonthlyFees((prev) => prev.map((f) => (f.id === feeId ? { ...f, ...updates } : f)));
+    logAudit('ATUALIZAR_MENSALIDADE', 'MonthlyFee', feeId, `Mensalidade atualizada.`);
+  };
+
+  const deleteMonthlyFee = (feeId: string) => {
+    setMonthlyFees((prev) => prev.filter((f) => f.id !== feeId));
+    logAudit('EXCLUIR_MENSALIDADE', 'MonthlyFee', feeId, `Mensalidade removida.`);
+  };
+
+  const generateMonthlyFeesForCompetency = (competency: string, dueDate: string): MonthlyFee[] => {
+    const created: MonthlyFee[] = [];
+    const activePartners = partners.filter((p) => (p.status || p.contract?.status) !== 'ENCERRADO' && (p.status || p.contract?.status) !== 'INATIVO');
+
+    activePartners.forEach((partner) => {
+      const existing = monthlyFees.find((f) => f.partnerId === partner.id && (f.competency === competency || f.monthReference === competency));
+      if (!existing) {
+        const amount = partner.contract?.monthlyFee ?? partner.monthlyFee ?? 350;
+        const fee: MonthlyFee = {
+          id: `fee-${partner.id}-${competency.replace('/', '-')}`,
+          partnerId: partner.id,
+          partnerName: partner.brandName,
+          competency,
+          monthReference: competency,
+          amount,
+          dueDate,
+          status: 'ABERTO',
+          discount: 0,
+        };
+        created.push(fee);
+      }
+    });
+
+    if (created.length > 0) {
+      setMonthlyFees((prev) => [...created, ...prev]);
+      logAudit('GERAR_LOTE_MENSALIDADES', 'MonthlyFee', competency, `${created.length} mensalidades geradas para a competência ${competency}.`);
+    }
+
+    return created;
+  };
+
   const markSettlementPaid = (settlementId: string, paymentReference?: string) => {
     setSettlements((prev) =>
       prev.map((s) =>
@@ -792,6 +859,132 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       )
     );
     logAudit('PAGAMENTO_REPASSE', 'Settlement', settlementId, `Repasse para artesão marcado como pago (${paymentReference || 'Pix'}).`);
+  };
+
+  const createSettlement = (settlementData: Omit<PartnerSettlement, 'id'>): PartnerSettlement => {
+    const newSettlement: PartnerSettlement = {
+      ...settlementData,
+      id: `settle-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+      createdAt: settlementData.createdAt || new Date().toISOString(),
+      grossSales: settlementData.grossSales ?? settlementData.totalSalesGross,
+      netAmount: settlementData.netAmount ?? settlementData.netPayoutAmount,
+      paymentFeesDeducted: settlementData.paymentFeesDeducted ?? settlementData.totalCardFeesDeducted,
+      pintaBordaCommissionDeducted: settlementData.pintaBordaCommissionDeducted ?? settlementData.totalCommissionDeducted,
+    };
+    setSettlements((prev) => [newSettlement, ...prev]);
+    logAudit('CRIAR_REPASSE', 'Settlement', newSettlement.id, `Fechamento de repasse criado para ${newSettlement.partnerName} (${newSettlement.period}): R$ ${newSettlement.netPayoutAmount.toFixed(2)}.`);
+    return newSettlement;
+  };
+
+  const updateSettlement = (settlementId: string, updates: Partial<PartnerSettlement>) => {
+    setSettlements((prev) => prev.map((s) => (s.id === settlementId ? { ...s, ...updates } : s)));
+    logAudit('ATUALIZAR_REPASSE', 'Settlement', settlementId, `Repasse atualizado.`);
+  };
+
+  const deleteSettlement = (settlementId: string) => {
+    setSettlements((prev) => prev.filter((s) => s.id !== settlementId));
+    logAudit('EXCLUIR_REPASSE', 'Settlement', settlementId, `Fechamento de repasse excluído.`);
+  };
+
+  const generatePeriodicSettlements = (params: {
+    period: string;
+    startDate?: string;
+    endDate?: string;
+    partnerIds?: string[];
+    deductMonthlyFees?: boolean;
+    notes?: string;
+  }): PartnerSettlement[] => {
+    const { period, startDate, endDate, partnerIds, deductMonthlyFees, notes } = params;
+    const targetPartners = partnerIds && partnerIds.length > 0
+      ? partners.filter((p) => partnerIds.includes(p.id))
+      : partners;
+
+    const generated: PartnerSettlement[] = [];
+
+    // Filter sales in date range and valid status
+    const validSales = sales.filter((s) => {
+      if (s.status === 'CANCELADA' || s.status === 'CANCELADO' || s.status === 'ESTORNADO') return false;
+      if (startDate && new Date(s.timestamp) < new Date(startDate)) return false;
+      if (endDate && new Date(s.timestamp) > new Date(endDate)) return false;
+      return true;
+    });
+
+    targetPartners.forEach((partner) => {
+      // Find all items sold for this partner in valid sales
+      const partnerItems: { saleId: string; subtotal: number; fee: number; comm: number; net: number }[] = [];
+      validSales.forEach((s) => {
+        s.items.forEach((it) => {
+          if (it.partnerId === partner.id) {
+            partnerItems.push({
+              saleId: s.id,
+              subtotal: it.subtotal,
+              fee: it.feeAmount,
+              comm: it.pintaBordaCommissionAmount,
+              net: it.netAmountToPartner,
+            });
+          }
+        });
+      });
+
+      if (partnerItems.length === 0) return;
+
+      const gross = Math.round(partnerItems.reduce((acc, it) => acc + it.subtotal, 0) * 100) / 100;
+      const cardFees = Math.round(partnerItems.reduce((acc, it) => acc + it.fee, 0) * 100) / 100;
+      const commission = Math.round(partnerItems.reduce((acc, it) => acc + it.comm, 0) * 100) / 100;
+      let net = Math.round((gross - cardFees - commission) * 100) / 100;
+
+      let monthlyFeeDeducted = 0;
+      if (deductMonthlyFees) {
+        const openFee = monthlyFees.find(
+          (f) => f.partnerId === partner.id && (f.status === 'ABERTO' || f.status === 'PENDENTE' || f.status === 'VENCIDO' || f.status === 'ATRASADO')
+        );
+        if (openFee && net >= openFee.amount) {
+          monthlyFeeDeducted = openFee.amount;
+          net = Math.round((net - monthlyFeeDeducted) * 100) / 100;
+          // Mark fee as paid via deduction
+          setMonthlyFees((prev) =>
+            prev.map((f) =>
+              f.id === openFee.id
+                ? { ...f, status: 'PAGO', paidAt: new Date().toISOString(), notes: `Abatido no repasse (${period})` }
+                : f
+            )
+          );
+        }
+      }
+
+      const settlement: PartnerSettlement = {
+        id: `settle-${partner.id}-${Date.now()}`,
+        partnerId: partner.id,
+        partnerName: partner.brandName,
+        period,
+        createdAt: new Date().toISOString(),
+        totalSalesGross: gross,
+        totalCardFeesDeducted: cardFees,
+        totalCommissionDeducted: commission,
+        shiftFeeDeducted: 0,
+        monthlyFeeDeducted,
+        adjustments: 0,
+        netPayoutAmount: net,
+        status: 'PENDENTE',
+        pixUsed: partner.pixKey,
+        notes: notes || `Fechamento quinzenal calculado com base em ${partnerItems.length} itens vendidos.`,
+        grossSales: gross,
+        paymentFeesDeducted: cardFees,
+        pintaBordaCommissionDeducted: commission,
+        netAmount: net,
+        salesCount: partnerItems.length,
+        saleIds: Array.from(new Set(partnerItems.map((it) => it.saleId))),
+      };
+
+      generated.push(settlement);
+    });
+
+    if (generated.length > 0) {
+      setSettlements((prev) => [...generated, ...prev]);
+      logAudit('FECHAMENTO_PERIODO', 'Settlement', period, `Fechamento gerado para ${generated.length} parceiras. Total líquido: R$ ${generated.reduce((acc, g) => acc + g.netPayoutAmount, 0).toFixed(2)}.`);
+    }
+
+    return generated;
   };
 
   const markNotificationRead = (id: string) => {
@@ -843,8 +1036,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         updateFeeRule,
         markMonthlyFeePaid,
         markMonthlyFeeAsPaid: markMonthlyFeePaid,
+        createMonthlyFee,
+        updateMonthlyFee,
+        deleteMonthlyFee,
+        generateMonthlyFeesForCompetency,
         markSettlementPaid,
         markSettlementAsPaid: markSettlementPaid,
+        createSettlement,
+        updateSettlement,
+        deleteSettlement,
+        generatePeriodicSettlements,
         markNotificationRead,
         markAllNotificationsRead,
         getApplicableFeeRule,

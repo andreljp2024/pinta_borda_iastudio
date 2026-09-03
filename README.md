@@ -126,13 +126,22 @@ Interface dedicada e otimizada para smartphones (`mobile-first`), pensada para a
 
 ### 7. Repasses Financeiros, Taxas & Rateio (`/src/components/settlements/` e `fees/`)
 
-- **Tabela de Taxas por Meio de Pagamento**:
-  - Configuração de taxas por maquininha/terminal (Stone, PagBank, Cielo, etc.) e bandeira (Visa, Mastercard, Elo, Hipercard, Amex).
-  - Parametrização de taxas para Débito, Crédito à Vista e faixas de parcelamento (2x a 6x, 7x a 12x).
-- **Fechamento de Período**:
-  - Consolidação quinzenal ou mensal das vendas de cada marca.
-  - Extrato analítico demonstrando: Total Bruto (-) Taxas de Cartão (-) Comissão da Casa (-) Mensalidade do Espaço (=) Repasse Líquido.
-- **Geração de Lote Pix**: Exportação de lista de pagamentos com as chaves Pix cadastradas de cada artesã para quitação rápida pela coordenação.
+- **Motor de Fechamento Matemático Automatizado**:
+  - Apuração periódica (quinzenal, mensal ou período customizado) das vendas não canceladas diretamente a partir do histórico de vendas do balcão.
+  - Cálculo instantâneo do Total Bruto, Taxas de Maquininha Congeladas por item, Comissão Operacional da Casa (10%) e Saldo Líquido auditável.
+  - Opção inteligente de abatimento de mensalidade do nicho/espaço em aberto diretamente do repasse líquido de vendas, com baixa simultânea do recebível.
+- **Cobrança & Gestão de Mensalidades do Espaço**:
+  - Geração em lote de mensalidades por mês de competência (ex.: `10/2026`) com data de vencimento programada com base no contrato de cada ateliê.
+  - Painel de status financeiro (`ABERTO`, `PAGO`, `VENCIDO`) e registro de baixa manual ou automática.
+- **Extrato Analítico & DRE da Artesã (Prestação de Contas)**:
+  - Demonstrativo contábil com detalhamento transparente de cada transação: data/hora, número da venda, produto, preço unitário, alíquota de cartão congelada no ato da compra e valor líquido.
+  - Botão de **Copiar Resumo Formatado para WhatsApp** para envio direto à artesã com transparência total.
+  - Função de impressão e exportação rápida do extrato em padrão DRE.
+- **Geração & Cópia de Lote Pix**:
+  - Cópia instantânea de todas as chaves Pix e valores líquidos pendentes para liquidação bancária ágil pela coordenação do espaço.
+  - Registro do código de autenticação/comprovante Pix para conferência e auditoria contábil.
+- **Imutabilidade e Não-Retroatividade de Taxas (PRD Seção 18)**:
+  - Tabela de taxas por terminal (Stone, PagBank, Cielo) e bandeira/parcelamento gravadas permanentemente em cada transação, prevenindo divergências contábeis em alterações futuras.
 
 ---
 

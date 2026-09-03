@@ -191,12 +191,15 @@ export interface MonthlyFee {
   partnerId: string;
   partnerName: string;
   competency: string;             // ex: "08/2026", "09/2026"
+  monthReference?: string;        // alias for competency
   amount: number;
   dueDate: string;
   status: MonthlyFeeStatus;
   paidAt?: string;
   discount: number;
   notes?: string;
+  paymentProofUrl?: string;
+  receiptNumber?: string;
 }
 
 export interface PartnerSettlement {
@@ -204,6 +207,7 @@ export interface PartnerSettlement {
   partnerId: string;
   partnerName: string;
   period: string;                 // ex: "01/09/2026 a 15/09/2026"
+  createdAt?: string;
   totalSalesGross: number;
   totalCardFeesDeducted: number;
   totalCommissionDeducted: number;
@@ -214,7 +218,16 @@ export interface PartnerSettlement {
   status: 'PENDENTE' | 'PAGO' | 'AGENDADO';
   paidAt?: string;
   paymentProofUrl?: string;
+  paymentReference?: string;
   pixUsed?: string;
+  notes?: string;
+  // Aliases for compatibility
+  grossSales?: number;
+  paymentFeesDeducted?: number;
+  pintaBordaCommissionDeducted?: number;
+  netAmount?: number;
+  salesCount?: number;
+  saleIds?: string[];
 }
 
 export interface AppNotification {

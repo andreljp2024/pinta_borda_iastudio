@@ -487,8 +487,8 @@ export const ArtisanPortalView: React.FC = () => {
                 </div>
               </div>
 
-              {/* Financial Status Cards (Pix & Monthly fee) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono-craft text-xs">
+              {/* Financial Status Cards (Pix, Monthly fee & Latest Settlement) */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono-craft text-xs">
                 {/* Pix Registration Card */}
                 <div className="bg-white p-3.5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
                   <div className="flex items-center justify-between mb-1.5">
@@ -541,6 +541,32 @@ export const ArtisanPortalView: React.FC = () => {
                   </p>
                   <p className="text-[10px] text-[#9b4f76] mt-0.5">
                     Comissão da casa: {activePartner.contract.salesCommissionRate}%
+                  </p>
+                </div>
+
+                {/* Latest Settlement Card */}
+                <div className="bg-white p-3.5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[10px] uppercase font-bold text-[#9b4f76]">
+                      Último Fechamento
+                    </span>
+                    <span
+                      className={`px-1.5 py-0.2 text-[9px] font-bold rounded-full ${
+                        latestSettlement?.status === 'PAGO'
+                          ? 'bg-[#dff0e6] text-[#1f4e38]'
+                          : 'bg-[#ffe4ee] text-[#e11d48]'
+                      }`}
+                    >
+                      {latestSettlement?.status === 'PAGO' ? 'Liquidado' : latestSettlement ? 'Aguardando Pix' : 'Sem repasse'}
+                    </span>
+                  </div>
+                  <p className="font-bold text-[#380c25] text-xs">
+                    {latestSettlement
+                      ? `R$ ${(latestSettlement.netPayoutAmount ?? latestSettlement.netAmount ?? 0).toFixed(2).replace('.', ',')}`
+                      : 'R$ 0,00'}
+                  </p>
+                  <p className="text-[10px] text-[#9b4f76] mt-0.5 truncate">
+                    {latestSettlement ? `${latestSettlement.period}` : 'Nenhum fechamento recente'}
                   </p>
                 </div>
               </div>
