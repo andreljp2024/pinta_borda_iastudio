@@ -90,33 +90,33 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/60 backdrop-blur-xs p-4">
-      <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden relative animate-in fade-in zoom-in-95">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#253a35]/60 backdrop-blur-xs p-4 selection:bg-[#ded6ca] selection:text-[#253a35]">
+      <div className="bg-[#fffaf2] rounded-3xl max-w-md w-full shadow-2xl border border-[#ded6ca] overflow-hidden relative animate-in fade-in zoom-in-95">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 p-1 rounded-lg transition-colors cursor-pointer"
+          className="absolute top-4 right-4 text-[#7d8c83] hover:text-[#253a35] bg-[#ede5d8]/70 hover:bg-[#ede5d8] p-1.5 rounded-full transition-colors cursor-pointer border border-[#ded6ca]"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {shiftPromptStep === 'NONE' ? (
           <div className="p-6 sm:p-8">
             {/* Header */}
             <div className="text-center mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-600 to-rose-700 text-white flex items-center justify-center font-serif-display font-bold text-xl mx-auto shadow-sm mb-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#253a35] text-[#fffaf2] flex items-center justify-center font-display font-medium text-lg mx-auto shadow-md mb-3 border border-[#3c6b54]">
                 P&B
               </div>
-              <h2 className="font-serif-display text-2xl font-bold tracking-tight text-stone-900">
-                PINTA E BORDA
+              <h2 className="font-display text-2xl font-medium tracking-tight text-[#253a35]">
+                pinta <em className="italic text-[#b56f55]">e</em> borda
               </h2>
-              <p className="text-xs text-stone-500 mt-1">
+              <p className="text-xs text-[#7d8c83] mt-1 font-mono-craft">
                 Gestão Compartilhada • Rio Anil Shopping
               </p>
             </div>
 
             {/* Profile Tab Toggle */}
-            <div className="grid grid-cols-2 p-1 bg-stone-100 rounded-xl mb-6 text-sm font-semibold">
+            <div className="grid grid-cols-2 p-1 bg-[#ede5d8]/70 rounded-xl mb-6 text-xs font-semibold border border-[#ded6ca] font-mono-craft">
               <button
                 type="button"
                 onClick={() => {
@@ -125,8 +125,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 }}
                 className={`py-2 rounded-lg transition-all cursor-pointer ${
                   tab === 'ADMIN'
-                    ? 'bg-white text-stone-900 shadow-xs'
-                    : 'text-stone-500 hover:text-stone-800'
+                    ? 'bg-[#253a35] text-white shadow-xs'
+                    : 'text-[#52615a] hover:text-[#253a35]'
                 }`}
               >
                 ADMINISTRADOR
@@ -139,19 +139,19 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 }}
                 className={`py-2 rounded-lg transition-all cursor-pointer ${
                   tab === 'PARTNER'
-                    ? 'bg-white text-stone-900 shadow-xs'
-                    : 'text-stone-500 hover:text-stone-800'
+                    ? 'bg-[#253a35] text-white shadow-xs'
+                    : 'text-[#52615a] hover:text-[#253a35]'
                 }`}
               >
-                PARCEIRO
+                ARTESÃO / PARCEIRO
               </button>
             </div>
 
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               {tab === 'PARTNER' && (
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1.5">
-                    Selecione sua Marca / Ateliê
+                  <label className="block text-xs font-semibold text-[#253a35] mb-1.5 font-mono-craft">
+                    Selecione seu Ateliê / Marca
                   </label>
                   <select
                     value={selectedPartnerId}
@@ -160,7 +160,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                       const p = partners.find((pt) => pt.id === e.target.value);
                       if (p) setEmail(p.email);
                     }}
-                    className="w-full px-3 py-2.5 rounded-lg border border-stone-300 text-sm bg-stone-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-700/20 focus:border-amber-700"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] text-xs bg-white text-[#253a35] focus:outline-none"
                   >
                     {partners.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -172,7 +172,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
               )}
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1.5">
+                <label className="block text-xs font-semibold text-[#253a35] mb-1.5 font-mono-craft">
                   E-mail
                 </label>
                 <input
@@ -180,21 +180,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-3 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-700/20 focus:border-amber-700"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] text-xs bg-white text-[#253a35] focus:outline-none"
                   placeholder="seu@email.com"
                 />
               </div>
 
               <div>
                 <div className="flex justify-between items-center mb-1.5">
-                  <label className="text-xs font-semibold text-stone-700">Senha</label>
+                  <label className="text-xs font-semibold text-[#253a35] font-mono-craft">Senha</label>
                   <a
                     href="#forgot"
                     onClick={(e) => {
                       e.preventDefault();
                       alert('Recuperação de senha: Link seguro enviado ao e-mail cadastrado.');
                     }}
-                    className="text-xs text-amber-800 hover:underline"
+                    className="text-[11px] text-[#b56f55] hover:underline font-mono-craft"
                   >
                     Esqueci minha senha
                   </a>
@@ -204,14 +204,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-3 py-2.5 rounded-lg border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-700/20 focus:border-amber-700"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#ded6ca] text-xs bg-white text-[#253a35] focus:outline-none"
                   placeholder="••••••••"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2.5 px-4 bg-stone-900 hover:bg-stone-800 text-white text-sm font-semibold rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2 mt-2"
+                className="w-full solid-button !py-3 !px-4 text-xs font-semibold flex items-center justify-center gap-2 mt-2 cursor-pointer shadow-xs"
               >
                 <span>ENTRAR</span>
                 <ArrowRight className="w-4 h-4" />
@@ -219,11 +219,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             </form>
 
             {/* Quick Demonstration Buttons */}
-            <div className="mt-6 pt-4 border-t border-stone-200">
-              <p className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider mb-2">
+            <div className="mt-6 pt-4 border-t border-[#ded6ca]">
+              <p className="text-[10px] font-semibold text-[#7d8c83] uppercase tracking-wider mb-2 font-mono-craft">
                 Acesso Rápido para Avaliação:
               </p>
-              <div className="flex flex-wrap gap-1.5 text-xs">
+              <div className="flex flex-wrap gap-1.5 text-xs font-mono-craft">
                 <button
                   type="button"
                   onClick={() => {
@@ -232,7 +232,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     setActiveView('dashboard');
                     onClose();
                   }}
-                  className="px-2.5 py-1 bg-purple-100 text-purple-900 rounded-md font-medium hover:bg-purple-200 transition-colors cursor-pointer"
+                  className="px-2.5 py-1 bg-[#ede5d8] text-[#253a35] rounded-lg font-medium hover:bg-[#ded6ca] transition-colors cursor-pointer border border-[#ded6ca]"
                 >
                   Admin Geral
                 </button>
@@ -244,7 +244,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     setActiveView('dashboard');
                     onClose();
                   }}
-                  className="px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md font-medium hover:bg-amber-200 transition-colors cursor-pointer"
+                  className="px-2.5 py-1 bg-[#fffaf2] text-[#b56f55] rounded-lg font-medium hover:bg-[#ede5d8] transition-colors cursor-pointer border border-[#ded6ca]"
                 >
                   Tutabel (Infantil)
                 </button>
@@ -256,7 +256,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     setActiveView('dashboard');
                     onClose();
                   }}
-                  className="px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md font-medium hover:bg-amber-200 transition-colors cursor-pointer"
+                  className="px-2.5 py-1 bg-[#fffaf2] text-[#b56f55] rounded-lg font-medium hover:bg-[#ede5d8] transition-colors cursor-pointer border border-[#ded6ca]"
                 >
                   Armonizzare (Aromas)
                 </button>
@@ -268,7 +268,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     setActiveView('dashboard');
                     onClose();
                   }}
-                  className="px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md font-medium hover:bg-amber-200 transition-colors cursor-pointer"
+                  className="px-2.5 py-1 bg-[#fffaf2] text-[#b56f55] rounded-lg font-medium hover:bg-[#ede5d8] transition-colors cursor-pointer border border-[#ded6ca]"
                   title="Marca sem plantão, paga taxa de diarista"
                 >
                   MishiSaike (Sem plantão)
@@ -279,30 +279,30 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         ) : shiftPromptStep === 'START_SHIFT_PROMPT' ? (
           /* PRD Section 14: Prompt without active shift */
           <div className="p-6 sm:p-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center mx-auto mb-4">
+            <div className="w-12 h-12 rounded-full bg-[#ede5d8] text-[#b56f55] flex items-center justify-center mx-auto mb-4 border border-[#ded6ca]">
               <Clock className="w-6 h-6" />
             </div>
-            <h3 className="font-serif-display text-xl font-bold text-stone-900 mb-2">
+            <h3 className="font-display text-xl font-medium text-[#253a35] mb-2">
               Iniciar seu Expediente?
             </h3>
-            <p className="text-sm text-stone-600 mb-6">
+            <p className="text-xs text-[#52615a] mb-6 font-light">
               Você está entrando no sistema como{' '}
-              <strong className="text-stone-900">{currentPartner?.brandName}</strong>. Deseja
+              <strong className="text-[#253a35] font-semibold">{currentPartner?.brandName}</strong>. Deseja
               assumir a operação presencial do balcão no Rio Anil Shopping agora?
             </p>
 
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 font-mono-craft">
               <button
                 type="button"
                 onClick={handleConfirmStartShift}
-                className="w-full py-2.5 px-4 bg-rose-700 hover:bg-rose-800 text-white text-sm font-semibold rounded-xl shadow-md transition-colors cursor-pointer flex items-center justify-center gap-2"
+                className="w-full solid-button !py-2.5 !px-4 text-xs font-semibold cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>INICIAR EXPEDIENTE</span>
               </button>
               <button
                 type="button"
                 onClick={handleSkipShift}
-                className="w-full py-2.5 px-4 bg-stone-100 hover:bg-stone-200 text-stone-700 text-sm font-medium rounded-xl transition-colors cursor-pointer"
+                className="w-full outline-button !py-2.5 !px-4 text-xs font-medium cursor-pointer"
               >
                 ENTRAR SEM EXPEDIENTE
               </button>
@@ -311,37 +311,37 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         ) : (
           /* PRD Section 14: Prompt with another active partner */
           <div className="p-6 sm:p-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center mx-auto mb-4">
-              <AlertTriangle className="w-6 h-6 text-amber-600" />
+            <div className="w-12 h-12 rounded-full bg-[#ede5d8] text-[#b56f55] flex items-center justify-center mx-auto mb-4 border border-[#ded6ca]">
+              <AlertTriangle className="w-6 h-6" />
             </div>
-            <h3 className="font-serif-display text-xl font-bold text-stone-900 mb-2">
+            <h3 className="font-display text-xl font-medium text-[#253a35] mb-2">
               Expediente em Andamento
             </h3>
-            <div className="bg-stone-50 rounded-xl p-3 text-xs text-stone-700 mb-4 border border-stone-200">
+            <div className="bg-[#ede5d8]/50 rounded-xl p-3 text-xs text-[#52615a] mb-4 border border-[#ded6ca] font-mono-craft text-left">
               <p>
-                <strong>Operador atual:</strong> {activeShift?.operatorName}
+                <strong className="text-[#253a35]">Operador atual:</strong> {activeShift?.operatorName}
               </p>
               <p className="mt-1">
-                <strong>Início:</strong>{' '}
+                <strong className="text-[#253a35]">Início:</strong>{' '}
                 {activeShift ? new Date(activeShift.startTime).toLocaleTimeString('pt-BR') : ''}
               </p>
             </div>
-            <p className="text-sm text-stone-600 mb-6">
+            <p className="text-xs text-[#52615a] mb-6 font-light">
               Deseja solicitar a troca de expediente e assumir o balcão da loja agora?
             </p>
 
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 font-mono-craft">
               <button
                 type="button"
                 onClick={handleConfirmHandover}
-                className="w-full py-2.5 px-4 bg-amber-700 hover:bg-amber-800 text-white text-sm font-semibold rounded-xl shadow-md transition-colors cursor-pointer"
+                className="w-full solid-button !py-2.5 !px-4 text-xs font-semibold cursor-pointer"
               >
                 SOLICITAR TROCA E ASSUMIR
               </button>
               <button
                 type="button"
                 onClick={handleSkipShift}
-                className="w-full py-2.5 px-4 bg-stone-100 hover:bg-stone-200 text-stone-700 text-sm font-medium rounded-xl transition-colors cursor-pointer"
+                className="w-full outline-button !py-2.5 !px-4 text-xs font-medium cursor-pointer"
               >
                 NÃO, APENAS CONSULTAR MEUS DADOS
               </button>

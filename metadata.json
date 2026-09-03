@@ -1,6 +1,6 @@
 {
-  "name": "Pinta e Borda",
-  "description": "Plataforma de gestão para coworking e loja colaborativa de artesanato no Rio Anil Shopping, São Luís/MA.",
+  "name": "Pinta e Borda — casa colaborativa",
+  "description": "Pinta e Borda — casa colaborativa que reúne marcas autorais, encontros e peças que carregam o tempo, o cuidado e a identidade de quem cria. São Luís · Maranhão.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

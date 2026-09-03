@@ -41,33 +41,33 @@ export const AuditLogsView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-amber-800">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#b56f55] font-mono-craft">
             Governança & Rastreabilidade Integral
           </span>
-          <h2 className="font-serif-display text-2xl sm:text-3xl font-bold text-stone-900">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#253a35]">
             Trilha de Auditoria do Sistema
           </h2>
-          <p className="text-xs sm:text-sm text-stone-500 mt-1">
+          <p className="text-xs sm:text-sm text-[#7d8c83] mt-1 font-light">
             Registro cronológico e imutável de todas as ações administrativas, financeiras e de estoque.
           </p>
         </div>
 
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-stone-900 text-white rounded-xl text-xs font-semibold self-start sm:self-auto shadow-xs">
-          <Lock className="w-3.5 h-3.5 text-amber-400" />
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#253a35] text-[#fffaf2] rounded-xl text-xs font-mono-craft self-start sm:self-auto shadow-2xs border border-[#253a35]">
+          <Lock className="w-3.5 h-3.5 text-[#d4ba84]" />
           Logs Criptografados & Imutáveis
         </div>
       </div>
 
       {/* Filters Bar */}
-      <div className="bg-white rounded-2xl p-4 border border-stone-200 shadow-xs flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="bg-[#fffaf2] rounded-2xl p-4 border border-[#ded6ca] shadow-2xs flex flex-col sm:flex-row gap-3 items-center justify-between font-mono-craft">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-[#7d8c83] absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar por ação, operador ou detalhes..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-700/20"
+            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#ded6ca] focus:outline-none bg-white text-[#253a35]"
           />
         </div>
 
@@ -75,7 +75,7 @@ export const AuditLogsView: React.FC = () => {
           <select
             value={selectedEntity}
             onChange={(e) => setSelectedEntity(e.target.value)}
-            className="p-2 text-xs bg-stone-50 rounded-xl border border-stone-200 focus:bg-white focus:outline-none"
+            className="p-2 text-xs bg-white text-[#253a35] rounded-xl border border-[#ded6ca] focus:outline-none"
           >
             <option value="all">Todas as Entidades</option>
             <option value="SALE">Vendas</option>
@@ -91,22 +91,22 @@ export const AuditLogsView: React.FC = () => {
       </div>
 
       {/* Audit Logs Table */}
-      <div className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
-        <div className="p-4 sm:p-5 border-b border-stone-100 flex items-center justify-between">
+      <div className="bg-[#fffaf2] rounded-2xl border border-[#ded6ca] shadow-2xs overflow-hidden">
+        <div className="p-4 sm:p-5 border-b border-[#ded6ca] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Activity className="w-5 h-5 text-amber-700" />
-            <h3 className="font-serif-display font-bold text-base text-stone-900">
+            <Activity className="w-5 h-5 text-[#b56f55]" />
+            <h3 className="font-display font-medium text-lg text-[#253a35]">
               Registros Auditáveis
             </h3>
           </div>
-          <span className="text-xs text-stone-500 font-medium">
+          <span className="text-xs text-[#7d8c83] font-mono-craft">
             {filteredLogs.length} eventos registrados
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-stone-50 border-b border-stone-200 text-stone-600 uppercase tracking-wider text-[10px]">
+            <thead className="bg-[#ede5d8]/70 border-b border-[#ded6ca] text-[#7d8c83] uppercase tracking-wider text-[10px] font-mono-craft">
               <tr>
                 <th className="py-3 px-4 font-semibold">Data / Hora</th>
                 <th className="py-3 px-4 font-semibold">Usuário / Operador</th>
@@ -115,24 +115,24 @@ export const AuditLogsView: React.FC = () => {
                 <th className="py-3 px-4 font-semibold">Detalhamento Técnico</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100 text-stone-700">
+            <tbody className="divide-y divide-[#ede5d8] text-[#253a35]">
               {filteredLogs.map((log) => (
-                <tr key={log.id} className="hover:bg-stone-50/80 transition-colors">
-                  <td className="py-3.5 px-4 whitespace-nowrap text-stone-500 font-mono text-[11px]">
+                <tr key={log.id} className="hover:bg-[#ede5d8]/40 transition-colors">
+                  <td className="py-3.5 px-4 whitespace-nowrap text-[#7d8c83] font-mono-craft text-[11px]">
                     {new Date(log.timestamp).toLocaleString('pt-BR')}
                   </td>
-                  <td className="py-3.5 px-4 font-semibold text-stone-900">
+                  <td className="py-3.5 px-4 font-medium text-[#253a35]">
                     {log.userName}
                   </td>
                   <td className="py-3.5 px-4">
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-stone-100 text-stone-700 font-mono">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#ede5d8] text-[#253a35] font-mono-craft border border-[#ded6ca]">
                       {log.entity}
                     </span>
                   </td>
-                  <td className="py-3.5 px-4 font-medium text-stone-800">
+                  <td className="py-3.5 px-4 font-medium text-[#253a35]">
                     {log.action}
                   </td>
-                  <td className="py-3.5 px-4 text-stone-600 max-w-md break-words text-[11px]">
+                  <td className="py-3.5 px-4 text-[#52615a] max-w-md break-words text-[11px] font-light">
                     {log.details}
                   </td>
                 </tr>

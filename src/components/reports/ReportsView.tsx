@@ -25,7 +25,7 @@ import {
 } from 'recharts';
 import { useApp } from '../../context/AppContext';
 
-const COLORS = ['#9A3412', '#E11D48', '#059669', '#2563EB', '#7C3AED', '#D97706', '#0D9488', '#4B5563'];
+const COLORS = ['#253a35', '#b56f55', '#d4ba84', '#3c6b54', '#8c5946', '#52615a', '#c29d60', '#7d8c83'];
 
 export const ReportsView: React.FC = () => {
   const { sales, partners, products, categories, userRole, currentPartner } = useApp();
@@ -106,13 +106,13 @@ export const ReportsView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-amber-800">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#b56f55] font-mono-craft">
             Inteligência Coletiva & BI
           </span>
-          <h2 className="font-serif-display text-2xl sm:text-3xl font-bold text-stone-900">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#253a35]">
             Relatórios & Indicadores
           </h2>
-          <p className="text-xs sm:text-sm text-stone-500 mt-1">
+          <p className="text-xs sm:text-sm text-[#7d8c83] mt-1 font-light">
             Métricas de desempenho comercial da loja física no Rio Anil Shopping.
           </p>
         </div>
@@ -127,82 +127,82 @@ export const ReportsView: React.FC = () => {
             downloadAnchor.click();
             downloadAnchor.remove();
           }}
-          className="px-3.5 py-2 bg-white border border-stone-300 hover:bg-stone-50 text-stone-700 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer shadow-xs self-start sm:self-auto"
+          className="outline-button text-xs font-mono-craft flex items-center gap-2 self-start sm:self-auto"
         >
-          <Download className="w-4 h-4 text-stone-500" />
-          Exportar Relatório (JSON)
+          <Download className="w-4 h-4 text-[#b56f55]" />
+          <span>Exportar Relatório (JSON)</span>
         </button>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs">
-          <span className="text-xs text-stone-500 uppercase font-semibold">Faturamento Bruto</span>
-          <div className="text-2xl font-bold text-stone-900 mt-1">
-            R$ {totalVolume.toFixed(2)}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono-craft">
+        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs">
+          <span className="text-xs text-[#7d8c83] uppercase font-semibold">Faturamento Bruto</span>
+          <div className="text-2xl font-bold text-[#253a35] mt-1">
+            R$ {totalVolume.toFixed(2).replace('.', ',')}
           </div>
-          <span className="text-[11px] text-stone-400 mt-1 block">Volume total de peças vendidas</span>
+          <span className="text-[11px] text-[#7d8c83] mt-1 block">Volume total de peças vendidas</span>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs">
-          <span className="text-xs text-stone-500 uppercase font-semibold">Volume de Atendimentos</span>
-          <div className="text-2xl font-bold text-amber-900 mt-1">
+        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs">
+          <span className="text-xs text-[#7d8c83] uppercase font-semibold">Volume de Atendimentos</span>
+          <div className="text-2xl font-bold text-[#b56f55] mt-1">
             {totalSalesCount} transações
           </div>
-          <span className="text-[11px] text-stone-400 mt-1 block">Cupons emitidos no balcão</span>
+          <span className="text-[11px] text-[#7d8c83] mt-1 block">Cupons emitidos no balcão</span>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs">
-          <span className="text-xs text-stone-500 uppercase font-semibold">Ticket Médio</span>
-          <div className="text-2xl font-bold text-emerald-800 mt-1">
-            R$ {ticketMedio.toFixed(2)}
+        <div className="bg-[#fffaf2] rounded-2xl p-5 border border-[#ded6ca] shadow-2xs">
+          <span className="text-xs text-[#7d8c83] uppercase font-semibold">Ticket Médio</span>
+          <div className="text-2xl font-bold text-[#3c6b54] mt-1">
+            R$ {ticketMedio.toFixed(2).replace('.', ',')}
           </div>
-          <span className="text-[11px] text-stone-400 mt-1 block">Média por cliente atendido</span>
+          <span className="text-[11px] text-[#7d8c83] mt-1 block">Média por cliente atendido</span>
         </div>
       </div>
 
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Sales by Brand (7 cols) */}
-        <div className="lg:col-span-7 bg-white rounded-2xl p-6 border border-stone-200 shadow-sm space-y-4">
+        <div className="lg:col-span-7 bg-[#fffaf2] rounded-2xl p-6 border border-[#ded6ca] shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-serif-display font-bold text-base text-stone-900">
+            <h3 className="font-display font-medium text-lg text-[#253a35]">
               Vendas por Marca / Ateliê (R$)
             </h3>
-            <span className="text-xs text-stone-400 font-medium">Consolidado</span>
+            <span className="text-xs text-[#7d8c83] font-mono-craft">Consolidado</span>
           </div>
 
-          <div className="h-72 w-full pt-4">
+          <div className="h-72 w-full pt-4 font-mono-craft">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={salesByBrand} margin={{ top: 10, right: 10, left: -20, bottom: 25 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ded6ca" />
                 <XAxis
                   dataKey="name"
-                  tick={{ fontSize: 10, fill: '#6B7280' }}
+                  tick={{ fontSize: 10, fill: '#7d8c83' }}
                   interval={0}
                   angle={-20}
                   textAnchor="end"
                 />
-                <YAxis tick={{ fontSize: 10, fill: '#6B7280' }} />
+                <YAxis tick={{ fontSize: 10, fill: '#7d8c83' }} />
                 <Tooltip
-                  formatter={(val: any) => [`R$ ${Number(val).toFixed(2)}`, 'Vendas']}
-                  contentStyle={{ backgroundColor: '#1C1917', borderRadius: '8px', color: '#fff', fontSize: '12px' }}
+                  formatter={(val: any) => [`R$ ${Number(val).toFixed(2).replace('.', ',')}`, 'Vendas']}
+                  contentStyle={{ backgroundColor: '#253a35', borderRadius: '12px', color: '#fffaf2', fontSize: '12px', border: '1px solid #253a35' }}
                 />
-                <Bar dataKey="value" fill="#9A3412" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="value" fill="#b56f55" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Sales by Payment Method (5 cols) */}
-        <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-stone-200 shadow-sm space-y-4">
+        <div className="lg:col-span-5 bg-[#fffaf2] rounded-2xl p-6 border border-[#ded6ca] shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-serif-display font-bold text-base text-stone-900">
+            <h3 className="font-display font-medium text-lg text-[#253a35]">
               Distribuição por Meio de Pagamento
             </h3>
           </div>
 
-          <div className="h-72 w-full pt-4">
+          <div className="h-72 w-full pt-4 font-mono-craft">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -220,8 +220,8 @@ export const ReportsView: React.FC = () => {
                   ))}
                 </Pie>
                 <Tooltip
-                  formatter={(val: any) => [`R$ ${Number(val).toFixed(2)}`, 'Total']}
-                  contentStyle={{ backgroundColor: '#1C1917', borderRadius: '8px', color: '#fff', fontSize: '12px' }}
+                  formatter={(val: any) => [`R$ ${Number(val).toFixed(2).replace('.', ',')}`, 'Total']}
+                  contentStyle={{ backgroundColor: '#253a35', borderRadius: '12px', color: '#fffaf2', fontSize: '12px', border: '1px solid #253a35' }}
                 />
                 <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
               </PieChart>
@@ -231,37 +231,37 @@ export const ReportsView: React.FC = () => {
       </div>
 
       {/* Top Products Table */}
-      <div className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
-        <div className="p-4 sm:p-5 border-b border-stone-100 flex items-center justify-between">
-          <h3 className="font-serif-display font-bold text-base text-stone-900">
+      <div className="bg-[#fffaf2] rounded-2xl border border-[#ded6ca] shadow-2xs overflow-hidden">
+        <div className="p-4 sm:p-5 border-b border-[#ded6ca] flex items-center justify-between">
+          <h3 className="font-display font-medium text-lg text-[#253a35]">
             Produtos Mais Vendidos no Balcão
           </h3>
-          <span className="text-xs text-stone-500 font-medium">Top itens com maior saída</span>
+          <span className="text-xs text-[#7d8c83] font-mono-craft">Top itens com maior saída</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-stone-50 border-b border-stone-200 text-stone-600 uppercase tracking-wider text-[10px]">
+            <thead className="bg-[#ede5d8]/70 border-b border-[#ded6ca] text-[#7d8c83] uppercase tracking-wider text-[10px] font-mono-craft">
               <tr>
                 <th className="py-3 px-4 font-semibold">Peça Artesanal</th>
                 <th className="py-3 px-4 font-semibold text-center">Unidades Vendidas</th>
                 <th className="py-3 px-4 font-semibold text-right">Faturamento Gerado</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100 text-stone-700">
+            <tbody className="divide-y divide-[#ede5d8] text-[#253a35]">
               {topProducts.map((prod, idx) => (
-                <tr key={prod.name} className="hover:bg-stone-50/80 transition-colors">
-                  <td className="py-3 px-4 font-semibold text-stone-900 flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-stone-100 text-stone-700 text-[10px] font-bold flex items-center justify-center">
+                <tr key={prod.name} className="hover:bg-[#ede5d8]/40 transition-colors">
+                  <td className="py-3 px-4 font-medium text-[#253a35] flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-full bg-[#ede5d8] text-[#253a35] text-[10px] font-bold font-mono-craft flex items-center justify-center border border-[#ded6ca]">
                       {idx + 1}
                     </span>
                     {prod.name}
                   </td>
-                  <td className="py-3 px-4 text-center font-bold text-stone-900">
+                  <td className="py-3 px-4 text-center font-bold font-mono-craft text-[#253a35]">
                     {prod.quantity} un.
                   </td>
-                  <td className="py-3 px-4 text-right font-bold text-emerald-800">
-                    R$ {prod.total.toFixed(2)}
+                  <td className="py-3 px-4 text-right font-bold font-mono-craft text-[#3c6b54]">
+                    R$ {prod.total.toFixed(2).replace('.', ',')}
                   </td>
                 </tr>
               ))}

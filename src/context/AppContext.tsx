@@ -30,6 +30,7 @@ import {
 
 export type ActiveView =
   | 'landing'
+  | 'store'
   | 'dashboard'
   | 'pdv'
   | 'shifts'
@@ -37,13 +38,20 @@ export type ActiveView =
   | 'products'
   | 'partners'
   | 'financial'
+  | 'settlements'
+  | 'fees'
+  | 'sales'
   | 'reports'
-  | 'audit';
+  | 'audit'
+  | 'artisan-portal';
 
 interface AppContextType {
   // Navigation & Role
   activeView: ActiveView;
   setActiveView: (view: ActiveView) => void;
+  storePartnerFilter: string;
+  setStorePartnerFilter: (partnerId: string) => void;
+  navigateToStoreWithPartner: (partnerId: string) => void;
   userRole: UserRole;
   currentPartnerId: string;
   currentPartner: Partner | null;
@@ -112,8 +120,15 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Navigation & session state
   const [activeView, setActiveView] = useState<ActiveView>('landing');
+  const [storePartnerFilter, setStorePartnerFilter] = useState<string>('ALL');
   const [userRole, setUserRoleState] = useState<UserRole>('ADMIN');
   const [currentPartnerId, setCurrentPartnerId] = useState<string>('partner-tutabel');
+
+  const navigateToStoreWithPartner = (partnerId: string) => {
+    setStorePartnerFilter(partnerId);
+    setActiveView('store');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Persistence keys
   const [partners, setPartners] = useState<Partner[]>(() => {
@@ -778,6 +793,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       value={{
         activeView,
         setActiveView,
+        storePartnerFilter,
+        setStorePartnerFilter,
+        navigateToStoreWithPartner,
         userRole,
         currentPartnerId,
         currentPartner,

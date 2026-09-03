@@ -199,40 +199,40 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* Operator Shift Alert Bar (PRD Section 13 & 15) */}
-      <div className="bg-white rounded-2xl p-4 border border-stone-200 shadow-xs mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-[#fffaf2] rounded-2xl p-4 border border-[#ded6ca] shadow-2xs mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold">
+          <div className="w-10 h-10 rounded-xl bg-[#ede5d8] text-[#824f3c] flex items-center justify-center font-bold border border-[#ded6ca]">
             <Store className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold uppercase text-stone-500">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#7d8c83] font-mono-craft">
                 Ponto de Venda • Rio Anil Shopping
               </span>
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="inline-block w-2 h-2 rounded-full bg-[#3c6b54] animate-pulse" />
             </div>
-            <div className="text-sm font-bold text-stone-900">
+            <div className="text-sm font-bold text-[#253a35]">
               Operador em Atendimento:{' '}
-              <span className="text-amber-900 font-semibold">
+              <span className="text-[#b56f55] font-semibold">
                 {activeShift ? activeShift.operatorName : 'Administrador Geral'}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 font-mono-craft">
           {activeShift ? (
             <button
               onClick={onOpenShiftModal}
-              className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="outline-button !py-1.5 !px-3 text-xs flex items-center gap-1.5"
             >
-              <Clock className="w-3.5 h-3.5 text-stone-500" />
+              <Clock className="w-3.5 h-3.5 text-[#b56f55]" />
               Trocar Operador / Encerrar Turno
             </button>
           ) : (
             <button
               onClick={onOpenShiftModal}
-              className="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+              className="solid-button !py-1.5 !px-3 text-xs flex items-center gap-1.5"
             >
               <Clock className="w-3.5 h-3.5" />
               Registrar Entrada de Expediente
@@ -244,27 +244,27 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Product Selection Catalog (7 cols) */}
         <div className="lg:col-span-7 space-y-4">
-          <div className="bg-white rounded-2xl p-4 border border-stone-200 shadow-xs space-y-3">
+          <div className="bg-[#fffaf2] rounded-2xl p-4 border border-[#ded6ca] shadow-2xs space-y-3">
             {/* Search */}
             <div className="relative">
-              <Search className="w-4 h-4 text-stone-400 absolute left-3 top-3" />
+              <Search className="w-4 h-4 text-[#7d8c83] absolute left-3 top-3" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Pesquisar por nome, SKU (ex: TUT-001) ou marca..."
-                className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-700/20 focus:border-amber-700"
+                placeholder="Pesquisar por nome, SKU (ex: TUT-001) ou ateliê..."
+                className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-[#ded6ca] focus:outline-none focus:ring-2 focus:ring-[#b56f55]/20 focus:border-[#b56f55] bg-white placeholder-[#7d8c83]"
               />
             </div>
 
             {/* Category pills */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs font-mono-craft">
               <button
                 onClick={() => setSelectedCategoryId('all')}
                 className={`px-3 py-1.5 rounded-full shrink-0 font-medium transition-colors cursor-pointer ${
                   selectedCategoryId === 'all'
-                    ? 'bg-stone-900 text-white font-semibold'
-                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                    ? 'bg-[#253a35] text-[#fffaf2] font-semibold'
+                    : 'bg-[#ede5d8] text-[#52615a] hover:bg-[#e4d8c5]'
                 }`}
               >
                 Todos
@@ -275,8 +275,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                   onClick={() => setSelectedCategoryId(cat.id)}
                   className={`px-3 py-1.5 rounded-full shrink-0 font-medium transition-colors cursor-pointer ${
                     selectedCategoryId === cat.id
-                      ? 'bg-stone-900 text-white font-semibold'
-                      : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                      ? 'bg-[#253a35] text-[#fffaf2] font-semibold'
+                      : 'bg-[#ede5d8] text-[#52615a] hover:bg-[#e4d8c5]'
                   }`}
                 >
                   {cat.name}
@@ -295,44 +295,44 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                 <div
                   key={prod.id}
                   onClick={() => !isOutOfStock && handleAddToCart(prod)}
-                  className={`bg-white rounded-xl p-3 border transition-all flex flex-col justify-between select-none ${
+                  className={`bg-[#fffaf2] rounded-xl p-3 border transition-all flex flex-col justify-between select-none ${
                     isOutOfStock
-                      ? 'opacity-50 border-stone-200 cursor-not-allowed'
-                      : 'border-stone-200 hover:border-amber-500 hover:shadow-md cursor-pointer active:scale-98'
+                      ? 'opacity-50 border-[#ded6ca] cursor-not-allowed'
+                      : 'border-[#ded6ca] hover:border-[#b56f55] hover:shadow-sm cursor-pointer active:scale-98'
                   }`}
                 >
                   <div>
-                    <div className="relative aspect-4/3 rounded-lg overflow-hidden bg-stone-100 mb-2">
+                    <div className="relative aspect-4/3 rounded-lg overflow-hidden bg-[#ede5d8] mb-2">
                       <img
                         src={prod.imageUrl}
                         alt={prod.name}
                         className="w-full h-full object-cover"
                       />
-                      <span className="absolute bottom-1 right-1 bg-black/70 text-white text-[9px] px-1.5 py-0.5 rounded font-mono">
+                      <span className="absolute bottom-1 right-1 bg-[#253a35]/80 text-white text-[9px] px-1.5 py-0.5 rounded font-mono-craft">
                         {prod.sku}
                       </span>
                     </div>
 
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-amber-800 truncate">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-[#b56f55] truncate font-mono-craft">
                       {partner?.brandName || 'Artesão'}
                     </div>
-                    <h4 className="font-semibold text-xs text-stone-900 line-clamp-2 leading-tight mt-0.5">
+                    <h4 className="font-medium text-xs text-[#253a35] line-clamp-2 leading-tight mt-0.5 font-display">
                       {prod.name}
                     </h4>
                   </div>
 
-                  <div className="pt-2 mt-2 border-t border-stone-100 flex items-center justify-between">
+                  <div className="pt-2 mt-2 border-t border-[#ded6ca] flex items-center justify-between">
                     <div>
-                      <div className="text-xs font-bold text-stone-900">
-                        R$ {prod.price.toFixed(2)}
+                      <div className="text-xs font-bold text-[#253a35] font-mono-craft">
+                        R$ {prod.price.toFixed(2).replace('.', ',')}
                       </div>
-                      <div className="text-[10px] text-stone-400">
+                      <div className="text-[10px] text-[#7d8c83] font-mono-craft">
                         {prod.stock} em estoque
                       </div>
                     </div>
                     <button
                       disabled={isOutOfStock}
-                      className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-amber-600 hover:text-white flex items-center justify-center text-stone-700 transition-colors"
+                      className="w-7 h-7 rounded-lg bg-[#ede5d8] hover:bg-[#b56f55] hover:text-white flex items-center justify-center text-[#824f3c] transition-colors border border-[#ded6ca]"
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>
@@ -345,20 +345,20 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
         {/* Right Column: Multi-Brand Cashier & Payment Cart (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-5 flex flex-col justify-between">
+          <div className="bg-[#fffaf2] rounded-2xl border border-[#ded6ca] shadow-2xs p-5 flex flex-col justify-between">
             <div>
               {/* Cart Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-stone-200">
+              <div className="flex items-center justify-between pb-3 border-b border-[#ded6ca]">
                 <div className="flex items-center gap-2">
-                  <ShoppingBag className="w-5 h-5 text-amber-700" />
-                  <h3 className="font-serif-display font-bold text-base text-stone-900">
+                  <ShoppingBag className="w-5 h-5 text-[#b56f55]" />
+                  <h3 className="font-display font-medium text-base text-[#253a35]">
                     Carrinho Multi-Marca
                   </h3>
                 </div>
                 {cart.length > 0 && (
                   <button
                     onClick={handleClearCart}
-                    className="text-xs text-rose-600 hover:text-rose-800 hover:underline cursor-pointer"
+                    className="text-xs text-[#b56f55] hover:text-[#824f3c] hover:underline cursor-pointer font-mono-craft"
                   >
                     Limpar
                   </button>
@@ -366,9 +366,9 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
               </div>
 
               {/* Items List */}
-              <div className="divide-y divide-stone-100 max-h-60 overflow-y-auto my-3 pr-1">
+              <div className="divide-y divide-[#ede5d8] max-h-60 overflow-y-auto my-3 pr-1">
                 {cart.length === 0 ? (
-                  <div className="py-8 text-center text-stone-400 text-xs">
+                  <div className="py-8 text-center text-[#7d8c83] text-xs font-mono-craft">
                     Nenhum produto adicionado ao carrinho ainda. Clique nos itens ao lado para vender.
                   </div>
                 ) : (
@@ -377,11 +377,11 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     return (
                       <div key={item.product.id} className="py-2.5 flex items-center justify-between gap-2">
                         <div className="min-w-0 flex-1">
-                          <div className="text-xs font-semibold text-stone-900 truncate">
+                          <div className="text-xs font-medium text-[#253a35] truncate font-display">
                             {item.product.name}
                           </div>
-                          <div className="text-[10px] text-amber-800 font-medium">
-                            {partner?.brandName} • R$ {item.product.price.toFixed(2)} un.
+                          <div className="text-[10px] text-[#b56f55] font-mono-craft">
+                            {partner?.brandName} • R$ {item.product.price.toFixed(2).replace('.', ',')} un.
                           </div>
                         </div>
 
@@ -389,29 +389,29 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                         <div className="flex items-center gap-1.5 shrink-0">
                           <button
                             onClick={() => handleUpdateQuantity(item.product.id, -1)}
-                            className="w-6 h-6 rounded bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-700 cursor-pointer"
+                            className="w-6 h-6 rounded bg-[#ede5d8] hover:bg-[#ded6ca] flex items-center justify-center text-[#253a35] cursor-pointer"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="w-6 text-center text-xs font-bold text-stone-900">
+                          <span className="w-6 text-center text-xs font-bold text-[#253a35] font-mono-craft">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => handleUpdateQuantity(item.product.id, 1)}
-                            className="w-6 h-6 rounded bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-700 cursor-pointer"
+                            className="w-6 h-6 rounded bg-[#ede5d8] hover:bg-[#ded6ca] flex items-center justify-center text-[#253a35] cursor-pointer"
                           >
-                            <Plus className="w-3 h-3" />
+                            <Plus className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleRemoveFromCart(item.product.id)}
-                            className="w-6 h-6 rounded text-stone-400 hover:text-rose-600 flex items-center justify-center ml-1 cursor-pointer"
+                            className="w-6 h-6 rounded text-[#7d8c83] hover:text-[#b56f55] flex items-center justify-center ml-1 cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
 
-                        <div className="text-right font-bold text-xs text-stone-900 shrink-0 w-16">
-                          R$ {(item.product.price * item.quantity).toFixed(2)}
+                        <div className="text-right font-bold text-xs text-[#253a35] shrink-0 w-16 font-mono-craft">
+                          R$ {(item.product.price * item.quantity).toFixed(2).replace('.', ',')}
                         </div>
                       </div>
                     );
@@ -421,35 +421,35 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
               {/* Multi-brand Ownership Summary Tag */}
               {brandBreakdown.length > 1 && (
-                <div className="bg-amber-50/80 rounded-xl p-2.5 border border-amber-200/60 mb-3 text-[11px] text-amber-900 space-y-1">
-                  <div className="font-bold flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-amber-700" />
+                <div className="bg-[#ede5d8]/70 rounded-xl p-2.5 border border-[#ded6ca] mb-3 text-[11px] text-[#253a35] space-y-1 font-mono-craft">
+                  <div className="font-bold flex items-center gap-1 text-[#b56f55]">
+                    <Sparkles className="w-3 h-3 text-[#b56f55]" />
                     Venda Compartilhada ({brandBreakdown.length} marcas):
                   </div>
                   {brandBreakdown.map((b) => (
-                    <div key={b.brandName} className="flex justify-between text-stone-600">
+                    <div key={b.brandName} className="flex justify-between text-[#52615a]">
                       <span>{b.brandName} ({b.count} itens):</span>
-                      <span className="font-semibold text-stone-900">R$ {b.gross.toFixed(2)}</span>
+                      <span className="font-semibold text-[#253a35]">R$ {b.gross.toFixed(2).replace('.', ',')}</span>
                     </div>
                   ))}
                 </div>
               )}
 
               {/* Payment Methods (PRD Section 17, 18, 20, 21) */}
-              <div className="space-y-3 pt-2 border-t border-stone-200">
-                <label className="block text-xs font-bold text-stone-700 uppercase tracking-wide">
+              <div className="space-y-3 pt-2 border-t border-[#ded6ca]">
+                <label className="block text-xs font-bold text-[#253a35] uppercase tracking-wide font-mono-craft">
                   Forma de Pagamento
                 </label>
 
                 {/* Method selector tabs */}
-                <div className="grid grid-cols-4 gap-1.5 text-xs font-semibold">
+                <div className="grid grid-cols-4 gap-1.5 text-xs font-mono-craft">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('CREDITO')}
                     className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
                       paymentMethod === 'CREDITO'
-                        ? 'bg-stone-900 text-white border-stone-900 shadow-xs'
-                        : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'
+                        ? 'bg-[#253a35] text-white border-[#253a35] shadow-xs'
+                        : 'bg-[#ede5d8] border-[#ded6ca] text-[#253a35] hover:bg-[#e4d8c5]'
                     }`}
                   >
                     Crédito
@@ -460,8 +460,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     onClick={() => setPaymentMethod('DEBITO')}
                     className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
                       paymentMethod === 'DEBITO'
-                        ? 'bg-stone-900 text-white border-stone-900 shadow-xs'
-                        : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'
+                        ? 'bg-[#253a35] text-white border-[#253a35] shadow-xs'
+                        : 'bg-[#ede5d8] border-[#ded6ca] text-[#253a35] hover:bg-[#e4d8c5]'
                     }`}
                   >
                     Débito
@@ -472,8 +472,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     onClick={() => setPaymentMethod('PIX_CENTRALIZADO')}
                     className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
                       paymentMethod === 'PIX_CENTRALIZADO' || paymentMethod === 'PIX_DIRETO'
-                        ? 'bg-emerald-700 text-white border-emerald-700 shadow-xs'
-                        : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'
+                        ? 'bg-[#1f4e38] text-white border-[#1f4e38] shadow-xs'
+                        : 'bg-[#ede5d8] border-[#ded6ca] text-[#253a35] hover:bg-[#e4d8c5]'
                     }`}
                   >
                     Pix
@@ -484,8 +484,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                     onClick={() => setPaymentMethod('DINHEIRO')}
                     className={`py-2 px-1 rounded-lg border text-center transition-all cursor-pointer ${
                       paymentMethod === 'DINHEIRO'
-                        ? 'bg-stone-900 text-white border-stone-900 shadow-xs'
-                        : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'
+                        ? 'bg-[#253a35] text-white border-[#253a35] shadow-xs'
+                        : 'bg-[#ede5d8] border-[#ded6ca] text-[#253a35] hover:bg-[#e4d8c5]'
                     }`}
                   >
                     Dinheiro
@@ -494,16 +494,16 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
                 {/* Credit Configuration */}
                 {paymentMethod === 'CREDITO' && (
-                  <div className="bg-stone-50 p-3 rounded-xl border border-stone-200 space-y-2.5 text-xs">
+                  <div className="bg-[#ede5d8]/60 p-3 rounded-xl border border-[#ded6ca] space-y-2.5 text-xs font-mono-craft">
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="block text-[11px] font-semibold text-stone-600 mb-1">
+                        <label className="block text-[11px] font-semibold text-[#52615a] mb-1">
                           Bandeira
                         </label>
                         <select
                           value={cardBrand}
                           onChange={(e) => setCardBrand(e.target.value as any)}
-                          className="w-full p-2 bg-white rounded-lg border border-stone-200 text-xs focus:outline-none"
+                          className="w-full p-2 bg-white rounded-lg border border-[#ded6ca] text-xs focus:outline-none"
                         >
                           <option value="VISA">Visa</option>
                           <option value="MASTERCARD">Mastercard</option>
@@ -512,13 +512,13 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-semibold text-stone-600 mb-1">
+                        <label className="block text-[11px] font-semibold text-[#52615a] mb-1">
                           Parcelas
                         </label>
                         <select
                           value={installments}
                           onChange={(e) => setInstallments(Number(e.target.value))}
-                          className="w-full p-2 bg-white rounded-lg border border-stone-200 text-xs focus:outline-none"
+                          className="w-full p-2 bg-white rounded-lg border border-[#ded6ca] text-xs focus:outline-none"
                         >
                           <option value={1}>1x à vista ({applicableRule?.feePercentage || 3.99}%)</option>
                           <option value={2}>2x (7.89%)</option>
@@ -535,9 +535,9 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
                 {/* Debit Configuration */}
                 {paymentMethod === 'DEBITO' && (
-                  <div className="bg-stone-50 p-3 rounded-xl border border-stone-200 space-y-2 text-xs">
+                  <div className="bg-[#ede5d8]/60 p-3 rounded-xl border border-[#ded6ca] space-y-2 text-xs font-mono-craft">
                     <div className="flex items-center justify-between">
-                      <span className="text-stone-600">Bandeira:</span>
+                      <span className="text-[#52615a]">Bandeira:</span>
                       <div className="flex gap-2">
                         {(['VISA', 'MASTERCARD', 'ELO'] as const).map((b) => (
                           <button
@@ -545,7 +545,7 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                             type="button"
                             onClick={() => setCardBrand(b)}
                             className={`px-2 py-1 rounded text-xs font-semibold cursor-pointer ${
-                              cardBrand === b ? 'bg-stone-900 text-white' : 'bg-white border text-stone-700'
+                              cardBrand === b ? 'bg-[#253a35] text-white' : 'bg-white border border-[#ded6ca] text-[#253a35]'
                             }`}
                           >
                             {b}
@@ -553,23 +553,23 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                         ))}
                       </div>
                     </div>
-                    <div className="text-[11px] text-stone-500 flex justify-between">
+                    <div className="text-[11px] text-[#52615a] flex justify-between">
                       <span>Taxa Stone Débito:</span>
-                      <span className="font-semibold text-stone-800">{feePct}%</span>
+                      <span className="font-semibold text-[#253a35]">{feePct}%</span>
                     </div>
                   </div>
                 )}
 
                 {/* Pix Configuration (PRD Section 20) */}
                 {(paymentMethod === 'PIX_CENTRALIZADO' || paymentMethod === 'PIX_DIRETO') && (
-                  <div className="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-200 space-y-3 text-xs">
+                  <div className="bg-[#eaf4ef] p-3.5 rounded-xl border border-[#bed8c7] space-y-3 text-xs font-mono-craft">
                     <div className="flex items-center gap-2">
-                      <QrCode className="w-5 h-5 text-emerald-700" />
+                      <QrCode className="w-5 h-5 text-[#1f4e38]" />
                       <div>
-                        <div className="font-bold text-emerald-900">
+                        <div className="font-bold text-[#1f4e38]">
                           {paymentMethod === 'PIX_CENTRALIZADO' ? 'Pix Centralizado Pinta e Borda' : 'Pix Direto Marca'}
                         </div>
-                        <div className="text-[10px] text-emerald-700">
+                        <div className="text-[10px] text-[#2e684c]">
                           Chave CNPJ: 28.919.022/0001-87 (Pinta e Borda Coworking)
                         </div>
                       </div>
@@ -583,9 +583,9 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                           setPixCopied(true);
                           setTimeout(() => setPixCopied(false), 2000);
                         }}
-                        className="flex-1 py-1.5 px-2 bg-white hover:bg-emerald-100 rounded-lg border border-emerald-300 font-semibold text-emerald-800 flex items-center justify-center gap-1 cursor-pointer"
+                        className="flex-1 py-1.5 px-2 bg-white hover:bg-[#d9ede2] rounded-lg border border-[#bed8c7] font-semibold text-[#1f4e38] flex items-center justify-center gap-1 cursor-pointer"
                       >
-                        {pixCopied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                        {pixCopied ? <Check className="w-3.5 h-3.5 text-[#1f4e38]" /> : <Copy className="w-3.5 h-3.5" />}
                         {pixCopied ? 'Chave Copiada!' : 'Copiar Chave Pix'}
                       </button>
 
@@ -594,8 +594,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                         onClick={() => setPixWebhookConfirmed(true)}
                         className={`py-1.5 px-3 rounded-lg font-semibold text-xs flex items-center gap-1 cursor-pointer ${
                           pixWebhookConfirmed
-                            ? 'bg-emerald-700 text-white'
-                            : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                            ? 'bg-[#1f4e38] text-white'
+                            : 'bg-[#2d7353] text-white hover:bg-[#1f4e38]'
                         }`}
                       >
                         <CheckCircle2 className="w-3.5 h-3.5" />
@@ -607,74 +607,90 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
 
                 {/* Cash Configuration */}
                 {paymentMethod === 'DINHEIRO' && (
-                  <div className="bg-stone-50 p-3 rounded-xl border border-stone-200 space-y-2 text-xs">
+                  <div className="bg-[#ede5d8]/60 p-3 rounded-xl border border-[#ded6ca] space-y-2 text-xs font-mono-craft">
                     <div className="flex items-center justify-between gap-3">
-                      <label className="text-stone-600 font-semibold">Valor Recebido (R$):</label>
+                      <label className="text-[#52615a] font-semibold">Valor Recebido (R$):</label>
                       <input
                         type="number"
                         step="0.01"
                         value={cashReceived || ''}
                         onChange={(e) => setCashReceived(parseFloat(e.target.value) || 0)}
                         placeholder={totalGross.toFixed(2)}
-                        className="w-28 p-1.5 bg-white border border-stone-300 rounded text-right font-bold text-stone-900"
+                        className="w-28 p-1.5 bg-white border border-[#ded6ca] rounded text-right font-bold text-[#253a35]"
                       />
                     </div>
                     {cashReceived > totalGross && (
-                      <div className="flex justify-between items-center bg-emerald-50 p-2 rounded text-emerald-800 font-bold">
+                      <div className="flex justify-between items-center bg-[#dff0e6] p-2 rounded text-[#1f4e38] font-bold">
                         <span>Troco a Devolver:</span>
-                        <span>R$ {(cashReceived - totalGross).toFixed(2)}</span>
+                        <span>R$ {(cashReceived - totalGross).toFixed(2).replace('.', ',')}</span>
                       </div>
                     )}
                   </div>
                 )}
 
-                {/* Optional Customer info */}
-                <div className="grid grid-cols-2 gap-2 pt-1 text-xs">
-                  <input
-                    type="text"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="Nome do Cliente (opcional)"
-                    className="p-2 border border-stone-200 rounded-lg text-xs bg-stone-50 focus:bg-white focus:outline-none"
-                  />
-                  <input
-                    type="text"
-                    value={customerPhone}
-                    onChange={(e) => setCustomerPhone(e.target.value)}
-                    placeholder="WhatsApp do Cliente"
-                    className="p-2 border border-stone-200 rounded-lg text-xs bg-stone-50 focus:bg-white focus:outline-none"
-                  />
+                {/* Optional Customer info with WhatsApp digital receipt incentive */}
+                <div className="pt-2 border-t border-[#ded6ca] space-y-2">
+                  <div className="flex items-center justify-between text-[11px] font-mono-craft">
+                    <span className="font-semibold text-[#253a35] flex items-center gap-1.5">
+                      <span className="text-emerald-700">📱</span> Comprovante Digital via WhatsApp
+                    </span>
+                    <span className="text-[10px] text-[#7d8c83] bg-[#ede5d8] px-2 py-0.5 rounded-full font-medium">
+                      Sem papel • Sustentável
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        placeholder="Nome do Cliente (opcional)"
+                        className="w-full p-2 bg-white border border-[#ded6ca] rounded-xl text-xs text-[#253a35] focus:outline-none focus:border-[#1f4e38]"
+                      />
+                    </div>
+                    <div className="relative">
+                      <input
+                        type="tel"
+                        value={customerPhone}
+                        onChange={(e) => setCustomerPhone(e.target.value)}
+                        placeholder="WhatsApp do Cliente (DDD)"
+                        className="w-full pl-7 pr-2 py-2 bg-white border border-[#ded6ca] rounded-xl text-xs text-[#253a35] focus:outline-none focus:border-[#1f4e38]"
+                      />
+                      <span className="absolute left-2.5 top-2.5 text-[#7d8c83] text-[11px]">📱</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Financial Settlement & Checkout Button (PRD Section 16, 19, 22) */}
-            <div className="pt-4 border-t border-stone-200 space-y-3 mt-4">
-              <div className="bg-stone-50 rounded-xl p-3 text-xs space-y-1 border border-stone-200">
-                <div className="flex justify-between text-stone-600">
+            <div className="pt-4 border-t border-[#ded6ca] space-y-3 mt-4">
+              <div className="bg-[#ede5d8]/50 rounded-xl p-3 text-xs space-y-1 border border-[#ded6ca] font-mono-craft">
+                <div className="flex justify-between text-[#52615a]">
                   <span>Subtotal Bruto:</span>
-                  <span className="font-semibold text-stone-900">R$ {totalGross.toFixed(2)}</span>
+                  <span className="font-semibold text-[#253a35]">R$ {totalGross.toFixed(2).replace('.', ',')}</span>
                 </div>
-                <div className="flex justify-between text-stone-600">
+                <div className="flex justify-between text-[#52615a]">
                   <span>Taxa Máquina ({feePct}% congelada):</span>
-                  <span className="text-rose-700 font-medium">- R$ {estimatedFeeAmount.toFixed(2)}</span>
+                  <span className="text-[#b56f55] font-medium">- R$ {estimatedFeeAmount.toFixed(2).replace('.', ',')}</span>
                 </div>
-                <div className="flex justify-between text-stone-600">
+                <div className="flex justify-between text-[#52615a]">
                   <span>Comissão Pinta e Borda (10%):</span>
-                  <span className="text-stone-700 font-medium">- R$ {estimatedCommissionAmount.toFixed(2)}</span>
+                  <span className="text-[#52615a] font-medium">- R$ {estimatedCommissionAmount.toFixed(2).replace('.', ',')}</span>
                 </div>
-                <div className="flex justify-between text-emerald-800 font-bold pt-1 border-t border-stone-200">
+                <div className="flex justify-between text-[#1f4e38] font-bold pt-1 border-t border-[#ded6ca]">
                   <span>Repasse Líquido aos Artesãos:</span>
-                  <span>R$ {estimatedTotalNet.toFixed(2)}</span>
+                  <span>R$ {estimatedTotalNet.toFixed(2).replace('.', ',')}</span>
                 </div>
               </div>
 
               {/* Total Banner */}
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-xs text-stone-500 uppercase font-semibold">Total a Cobrar</span>
-                  <div className="text-2xl font-bold text-stone-900">
-                    R$ {totalGross.toFixed(2)}
+                  <span className="text-[11px] text-[#7d8c83] uppercase font-semibold font-mono-craft">Total a Cobrar</span>
+                  <div className="text-2xl font-bold text-[#253a35] font-mono-craft">
+                    R$ {totalGross.toFixed(2).replace('.', ',')}
                   </div>
                 </div>
 
@@ -682,10 +698,8 @@ export const PdvView: React.FC<{ onOpenShiftModal: () => void }> = ({ onOpenShif
                   type="button"
                   onClick={handleFinalizeSale}
                   disabled={cart.length === 0}
-                  className={`py-3.5 px-6 rounded-xl font-bold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer ${
-                    cart.length === 0
-                      ? 'bg-stone-200 text-stone-400 cursor-not-allowed shadow-none'
-                      : 'bg-rose-700 hover:bg-rose-800 text-white shadow-rose-900/20 active:scale-98'
+                  className={`solid-button !py-3.5 !px-6 text-sm flex items-center gap-2 cursor-pointer ${
+                    cart.length === 0 ? 'opacity-40 !cursor-not-allowed' : ''
                   }`}
                 >
                   <CheckCircle2 className="w-5 h-5" />

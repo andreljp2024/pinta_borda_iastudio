@@ -1,173 +1,444 @@
 import React, { useState, useMemo } from 'react';
 import {
+  Heart,
   Store,
   Sparkles,
-  Search,
-  Filter,
   MapPin,
   Clock,
+  Phone,
   Instagram,
-  MessageCircle,
-  ShoppingBag,
   ArrowRight,
-  ShieldCheck,
-  Heart,
-  ChevronRight,
+  ShoppingBag,
+  Users,
   CheckCircle2,
+  Share2,
+  MessageCircle,
+  UserPlus,
+  Search,
+  Filter,
+  X,
+  ExternalLink,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { Product, Partner } from '../../types';
+import { VolunteerRegistrationModal } from './VolunteerRegistrationModal';
 import { ProductDetailModal } from './ProductDetailModal';
+import { Product } from '../../types';
 
-export const LandingPage: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth }) => {
-  const { products, partners, categories, setActiveView } = useApp();
+// The 14 official partner brands of Pinta e Borda
+export const BRANDS_DOSSIE = [
+  {
+    id: 'ditodacor',
+    number: '01',
+    symbol: '✺',
+    name: 'Di Toda Cor',
+    founder: 'Keka (Fundadora do Coletivo)',
+    segment: 'Arte Regional & Azulejaria',
+    categoryGroup: 'decor',
+    categoryName: 'Arte & Decor',
+    phone: '(98) 98828-9123',
+    whatsapp: '5598988289123',
+    instagram: '@ditodacor',
+    tag: 'Curadoria & Fundação',
+    desc: 'Azulejos maranhenses esmaltados à mão, ímãs decorativos, canecas afetivas e oratórios coloridos inspirados na tradição luso-maranhense de São Luís.',
+    image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'armonizzare',
+    number: '02',
+    symbol: '⌁',
+    name: 'Armonizzare Aromas',
+    founder: 'Eliane Rocha',
+    segment: 'Aromas & Velas Vegetais',
+    categoryGroup: 'aromas',
+    categoryName: 'Casa & Bem-estar',
+    phone: '(98) 98114-1422',
+    whatsapp: '5598981141422',
+    instagram: '@armonizzarearomas',
+    tag: 'Aromaterapia',
+    desc: 'Velas aromáticas em cera vegetal de coco, difusores de varetas e home sprays com fragrâncias reconfortantes de alecrim silvestre, flor de cerejeira e bergamota.',
+    image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'bordandomomentos',
+    number: '03',
+    symbol: '◌',
+    name: 'Bordando Momentos',
+    founder: 'Arlete Ferreira',
+    segment: 'Bordado Livre & Bastidores',
+    categoryGroup: 'decor',
+    categoryName: 'Arte & Decor',
+    phone: '(98) 98177-8321',
+    whatsapp: '5598981778321',
+    instagram: '@bordandomomentos.slz',
+    tag: 'Bordado Manual',
+    desc: 'Bastidores decorativos com pontos livres, almofadas bordadas com poesia maranhense e toalhas personalizadas celebrando memórias de afeto.',
+    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'pikenabiojoias',
+    number: '04',
+    symbol: '✦',
+    name: 'Pikena Biojóias',
+    founder: 'Marilene Santos',
+    segment: 'Capim Dourado & Sementes',
+    categoryGroup: 'acessorios',
+    categoryName: 'Acessórios',
+    phone: '(98) 99219-6969',
+    whatsapp: '5598992196969',
+    instagram: '@pikenabiojoias',
+    tag: 'Ouro Vegetal',
+    desc: 'Gargantilhas, colares e brincos confeccionados em capim dourado e sementes nobres do cerrado e da Amazônia maranhense com acabamento nobre.',
+    image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'donasdomundo',
+    number: '05',
+    symbol: '✿',
+    name: 'Donas do Mundo',
+    founder: 'Cláudia Regina',
+    segment: 'Costura Criativa & Ecobags',
+    categoryGroup: 'moda',
+    categoryName: 'Moda autoral',
+    phone: '(98) 98845-6677',
+    whatsapp: '5598988456677',
+    instagram: '@donasdomundo.atelie',
+    tag: 'Costura Criativa',
+    desc: 'Ecobags de lona resistente, nécessaires impermeáveis, mochilas estampadas e carteiras práticas para o cotidiano urbano da mulher moderna.',
+    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'pretachic',
+    number: '06',
+    symbol: '⬡',
+    name: 'Preta Chic',
+    founder: 'Josy Santos',
+    segment: 'Acessórios & Cerâmica Plástica',
+    categoryGroup: 'acessorios',
+    categoryName: 'Acessórios',
+    phone: '(98) 97016-5274',
+    whatsapp: '5598970165274',
+    instagram: '@pretachicprodutos',
+    tag: 'Design Afirmativo',
+    desc: 'Maxi brincos botânicos inspirados no tinhorão, peças geométricas em cerâmica plástica e acessórios afirmativos com identidade afro-maranhense.',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'sereiaatelie',
+    number: '07',
+    symbol: '✺',
+    name: 'Sereia Ateliê',
+    founder: 'Renata Castro',
+    segment: 'Encadernação Manual & Papelaria',
+    categoryGroup: 'decor',
+    categoryName: 'Arte & Decor',
+    phone: '(98) 98573-8538',
+    whatsapp: '5598985738538',
+    instagram: '@sereia.atellie',
+    tag: 'Papelaria Afetiva',
+    desc: 'Cadernos artesanais costurados na lombada com linha de algodão, planners não-datados e cartões em papel kraft para eternizar momentos.',
+    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'tutabel',
+    number: '08',
+    symbol: '◌',
+    name: 'Tuta Bel? Criações',
+    founder: 'Yara Mendes',
+    segment: 'Moda Autoral & Patchwork',
+    categoryGroup: 'moda',
+    categoryName: 'Moda autoral',
+    phone: '(98) 98446-5330',
+    whatsapp: '5598984465330',
+    instagram: '@tuta_bel',
+    tag: 'Moda Autoral',
+    desc: 'Vestidos fluidos em viscose com estampas tropicais, peças em chita estilizada e nécessaires em patchwork colorido que respiram São Luís.',
+    image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'artetemperos',
+    number: '09',
+    symbol: '✦',
+    name: 'Arte & Temperos',
+    founder: 'Dona Socorro',
+    segment: 'Gourmet Artesanal & Geleias',
+    categoryGroup: 'gourmet',
+    categoryName: 'Gourmet',
+    phone: '(98) 98711-2233',
+    whatsapp: '5598987112233',
+    instagram: '@arteetemperos.slz',
+    tag: 'Sabores do Maranhão',
+    desc: 'Geleias artesanais de pimenta de cheiro com maracujá, molhos agridoces regionais e licores caseiros preparados com frutas nativas.',
+    image: 'https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'madreartemis',
+    number: '10',
+    symbol: '✿',
+    name: 'Madre Artemis',
+    founder: 'Talita Pinheiro',
+    segment: 'Cosmética Natural & Saboaria',
+    categoryGroup: 'aromas',
+    categoryName: 'Casa & Bem-estar',
+    phone: '(98) 98234-5566',
+    whatsapp: '5598982345566',
+    instagram: '@madreartemis',
+    tag: 'Biocosméticos',
+    desc: 'Sabonetes 100% vegetais saponificados a frio com argilas maranhenses, óleo de babaçu puro e óleos essenciais terapêuticos.',
+    image: 'https://images.unsplash.com/photo-1607006314640-1a7c505872c6?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'mishisaike',
+    number: '11',
+    symbol: '⬡',
+    name: 'Mishi Saike',
+    founder: 'Michele Sayuri',
+    segment: 'Cerâmica & Kokedamas',
+    categoryGroup: 'decor',
+    categoryName: 'Arte & Decor',
+    phone: '(98) 98412-9900',
+    whatsapp: '5598984129900',
+    instagram: '@mishi.saike',
+    tag: 'Design Botânico',
+    desc: 'Kokedamas japonesas com plantas tropicais e vasos cerâmicos modelados no torno com esmaltes minerais formulados no ateliê.',
+    image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'vooa',
+    number: '12',
+    symbol: '✺',
+    name: 'Vooa',
+    founder: 'Camila Alencar',
+    segment: 'Óculos & Design Solar',
+    categoryGroup: 'acessorios',
+    categoryName: 'Acessórios',
+    phone: '(98) 98163-9234',
+    whatsapp: '5598981639234',
+    instagram: '@use.vooa',
+    tag: 'Design Solar',
+    desc: 'Óculos solares de design contemporâneo com armações em acetato italiano e proteção UV total para viver o sol do Maranhão.',
+    image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'bijuqueira',
+    number: '13',
+    symbol: '◌',
+    name: 'Bijuqueira',
+    founder: 'Luciana Farias',
+    segment: 'Miçangas & Acessórios Praianos',
+    categoryGroup: 'acessorios',
+    categoryName: 'Acessórios',
+    phone: '(98) 98122-3344',
+    whatsapp: '5598981223344',
+    instagram: '@bijuqueira.slz',
+    tag: 'Vibe Solar',
+    desc: 'Colares de miçangas de vidro coloridas, tornozeleiras com búzios naturais e chokers inspirados no litoral e na maresia da Ilha.',
+    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=700&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 'coisasdakekel',
+    number: '14',
+    symbol: '✦',
+    name: 'Coisas da Kekel',
+    founder: 'Raquel Diniz',
+    segment: 'Crochê Moderno & Fio de Malha',
+    categoryGroup: 'decor',
+    categoryName: 'Arte & Decor',
+    phone: '(98) 98311-5522',
+    whatsapp: '5598983115522',
+    instagram: '@coisasdakekel',
+    tag: 'Crochê Afetivo',
+    desc: 'Cestos organizadores em fio de malha ecológico, porta-copos artesanais e clutches em crochê com texturas ricas e tons terrosos.',
+    image: 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=700&auto=format&fit=crop&q=80',
+  },
+];
 
+export const LandingPage: React.FC<{
+  onOpenAuth: () => void;
+  onOpenPresentation?: () => void;
+}> = ({ onOpenAuth, onOpenPresentation }) => {
+  const { setActiveView, products, partners } = useApp();
+
+  // Category filter for the catalog section
+  const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedPartner, setSelectedPartner] = useState<string>('all');
-  const [inStockOnly, setInStockOnly] = useState(false);
-  const [featuredOnly, setFeaturedOnly] = useState(false);
-  const [priceOrder, setPriceOrder] = useState<'default' | 'asc' | 'desc'>('default');
 
-  const [activeModalProduct, setActiveModalProduct] = useState<Product | null>(null);
+  // Category filter for the brands section
+  const [brandCategoryFilter, setBrandCategoryFilter] = useState('ALL');
 
-  // Filter products
+  // Selected brand for slide-in drawer
+  const [selectedBrandDrawer, setSelectedBrandDrawer] = useState<typeof BRANDS_DOSSIE[0] | null>(null);
+
+  // Selected product for detail modal
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  // Volunteer Modal
+  const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
+
+  // Favorites state for catalog products
+  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+
+  const toggleFavorite = (productId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setFavorites((prev) => ({ ...prev, [productId]: !prev[productId] }));
+  };
+
+  // Filter products for the catalog section
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
-      if (!p.isPublished || !p.isActive) return false;
+      const matchesSearch =
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.partnerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase());
 
-      // Search match
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const brand = partners.find((pt) => pt.id === p.partnerId)?.brandName.toLowerCase() || '';
-        const matchName = p.name.toLowerCase().includes(q);
-        const matchSku = p.sku.toLowerCase().includes(q);
-        const matchBrand = brand.includes(q);
-        if (!matchName && !matchSku && !matchBrand) return false;
-      }
+      const matchesCat =
+        selectedCategory === 'ALL' ||
+        (selectedCategory === 'acessorios' && p.category.toLowerCase().includes('acess')) ||
+        (selectedCategory === 'aromas' && (p.category.toLowerCase().includes('aroma') || p.category.toLowerCase().includes('bem'))) ||
+        (selectedCategory === 'moda' && p.category.toLowerCase().includes('moda')) ||
+        (selectedCategory === 'decor' && (p.category.toLowerCase().includes('decor') || p.category.toLowerCase().includes('arte'))) ||
+        (selectedCategory === 'gourmet' && p.category.toLowerCase().includes('gourmet'));
 
-      // Category match
-      if (selectedCategory !== 'all' && p.categoryId !== selectedCategory) {
-        return false;
-      }
-
-      // Partner match
-      if (selectedPartner !== 'all' && p.partnerId !== selectedPartner) {
-        return false;
-      }
-
-      // In stock
-      if (inStockOnly && p.stock <= 0) {
-        return false;
-      }
-
-      // Featured
-      if (featuredOnly && !p.isFeatured) {
-        return false;
-      }
-
-      return true;
-    }).sort((a, b) => {
-      if (priceOrder === 'asc') return a.price - b.price;
-      if (priceOrder === 'desc') return b.price - a.price;
-      return 0;
+      return matchesSearch && matchesCat;
     });
-  }, [products, partners, searchQuery, selectedCategory, selectedPartner, inStockOnly, featuredOnly, priceOrder]);
+  }, [products, searchQuery, selectedCategory]);
 
-  const activePartnerForModal = activeModalProduct
-    ? partners.find((p) => p.id === activeModalProduct.partnerId) || null
-    : null;
+  // Filter brands for the "Marcas com alma" section
+  const filteredBrands = useMemo(() => {
+    if (brandCategoryFilter === 'ALL') return BRANDS_DOSSIE;
+    return BRANDS_DOSSIE.filter((b) => b.categoryGroup === brandCategoryFilter);
+  }, [brandCategoryFilter]);
+
+  const selectedProductPartner = useMemo(() => {
+    if (!selectedProduct) return null;
+    return partners.find((p) => p.id === selectedProduct.partnerId) || null;
+  }, [selectedProduct, partners]);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-stone-900">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#F5EFEB] to-[#FAF8F5] border-b border-stone-200 pt-12 pb-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold tracking-wide border border-amber-200">
-                <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-                Rio Anil Shopping • São Luís/MA
+    <div className="min-h-screen bg-[#faf7f0] text-[#1e352e]">
+      {/* 1. HERO SECTION */}
+      <section className="relative pt-12 pb-20 sm:pt-16 sm:pb-28 border-b border-[#e8ded0] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 space-y-8">
+              {/* Eyebrow */}
+              <div className="inline-flex items-center gap-2 text-xs font-mono-craft uppercase tracking-[0.22em] text-[#bd5b3e] font-medium">
+                <span className="w-7 h-[1.5px] bg-[#bd5b3e]" />
+                <span>Feito à mão, feito com intenção</span>
               </div>
 
-              <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-stone-900 leading-[1.15]">
-                O ponto de encontro do <span className="text-amber-800 italic">artesanato autoral</span> maranhense.
+              {/* Main Headline */}
+              <h1 className="font-display text-4xl sm:text-6xl lg:text-[68px] leading-[1.08] text-[#1e352e] font-medium tracking-tight">
+                Onde o feito à mão{' '}
+                <em className="font-normal italic text-[#bd5b3e]">encontra</em>{' '}
+                novas histórias.
               </h1>
 
-              <p className="text-stone-600 text-base sm:text-lg max-w-2xl leading-relaxed">
-                O <strong>Pinta e Borda</strong> é uma loja colaborativa e espaço de coworking onde
-                mais de uma dezena de marcas autorais dividem um ponto físico nobre, oferecendo biojóias,
-                velas aromáticas, costura criativa, bordados e cerâmicas botânicas exclusivas.
+              {/* Sub-paragraph */}
+              <p className="text-base sm:text-lg text-[#476056] leading-relaxed max-w-xl font-light">
+                Uma casa colaborativa em São Luís que reúne marcas autorais, encontros afetivos e
+                peças que carregam o tempo, o cuidado e a identidade de quem cria.
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
                 <a
                   href="#catalogo"
-                  className="px-6 py-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-semibold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  className="solid-button large flex items-center gap-2"
                 >
-                  <ShoppingBag className="w-4 h-4 text-amber-400" />
-                  Ver Catálogo Físico
+                  <span>Conheça o catálogo</span>
+                  <ArrowRight className="w-4 h-4" />
                 </a>
 
                 <a
                   href="#marcas"
-                  className="px-6 py-3 rounded-xl bg-white border border-stone-300 hover:bg-stone-50 text-stone-800 font-semibold text-sm transition-colors cursor-pointer"
+                  className="outline-button large"
                 >
-                  Conhecer as Marcas
+                  Ver marcas da casa
                 </a>
 
                 <button
-                  onClick={() => setActiveView('pdv')}
-                  className="px-4 py-3 rounded-xl bg-rose-50 text-rose-800 hover:bg-rose-100 font-semibold text-sm transition-colors cursor-pointer border border-rose-200 flex items-center gap-1.5"
+                  onClick={() => setIsVolunteerModalOpen(true)}
+                  className="outline-button large !border-dashed text-[#bd5b3e] hover:text-[#1e352e]"
                 >
-                  <Store className="w-4 h-4" />
-                  Balcão PDV
+                  Quero expor / Apoiar
                 </button>
               </div>
 
-              {/* Badges / Guarantees */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-stone-200 text-xs text-stone-600">
-                <div>
-                  <div className="font-bold text-stone-900 text-lg">100%</div>
-                  <div>Autoral & Feito à Mão</div>
+              {/* Maker Avatar Stack */}
+              <div className="pt-4 flex items-center gap-4 border-t border-[#e8ded0] max-w-md">
+                <div className="flex -space-x-2.5 overflow-hidden">
+                  <img
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#faf7f0] object-cover"
+                    src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80"
+                    alt="Keka"
+                  />
+                  <img
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#faf7f0] object-cover"
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=80"
+                    alt="Artesã"
+                  />
+                  <img
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-[#faf7f0] object-cover"
+                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&auto=format&fit=crop&q=80"
+                    alt="Artesã"
+                  />
+                  <div className="inline-flex items-center justify-center h-10 w-10 rounded-full ring-2 ring-[#faf7f0] bg-[#f0e7d8] text-[#933f28] text-xs font-mono-craft font-bold">
+                    +14
+                  </div>
                 </div>
-                <div>
-                  <div className="font-bold text-stone-900 text-lg">13+</div>
-                  <div>Ateliês Maranhenses</div>
-                </div>
-                <div>
-                  <div className="font-bold text-stone-900 text-lg">Diário</div>
-                  <div>Plantão com Artesãos</div>
+                <div className="text-xs font-mono-craft text-[#476056] leading-tight">
+                  <strong className="block text-[#1e352e] font-semibold">14 ateliês independentes</strong>
+                  em um só endereço compartilhado
                 </div>
               </div>
             </div>
 
-            {/* Visual Hero Collage */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white aspect-4/3 lg:aspect-square">
-                <img
-                  src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800&auto=format&fit=crop&q=80"
-                  alt="Espaço Pinta e Borda no Rio Anil Shopping"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                  <span className="text-xs font-semibold tracking-wider uppercase text-amber-300">
-                    Rio Anil Shopping • Piso 1
-                  </span>
-                  <h3 className="font-serif-display text-xl font-bold">
-                    Visite nossa loja física ou converse direto com os artesãos no WhatsApp
-                  </h3>
+            {/* Right Architectural Hero Art Column */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="hero-art w-full max-w-[420px] aspect-[4/5] relative">
+                {/* Architectural arch background photo */}
+                <div className="photo-shape w-full h-full relative overflow-hidden shadow-2xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80"
+                    alt="Ateliê Pinta e Borda"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1c3830]/90 via-[#1c3830]/25 to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6 text-[#fffaf2]">
+                    <span className="text-[10px] font-mono-craft uppercase tracking-[0.22em] text-[#e0be75] font-semibold block mb-1">
+                      Rio Anil Shopping · Piso 2
+                    </span>
+                    <h3 className="font-display text-2xl font-medium leading-tight">
+                      Acolhimento, arte e autonomia feminina.
+                    </h3>
+                  </div>
                 </div>
-              </div>
 
-              {/* Floating review card */}
-              <div className="absolute -bottom-5 -left-4 sm:-left-6 bg-white rounded-xl p-3.5 shadow-xl border border-stone-200 flex items-center gap-3 max-w-xs">
-                <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
-                  <Heart className="w-5 h-5 fill-current" />
+                {/* Sun disk element */}
+                <div className="art-sun" />
+
+                {/* Floating terracotta craft badge */}
+                <div className="card-one text-[#fffaf2]">
+                  <span className="text-[9px] font-mono-craft uppercase tracking-[0.2em] text-[#fbebe6] block">
+                    Curadoria
+                  </span>
+                  <div className="font-display text-lg leading-tight font-medium">
+                    feito à mão
+                  </div>
+                  <span className="text-[10px] text-[#fbebe6]/90 font-mono-craft block mt-1">
+                    com afeto maranhense
+                  </span>
                 </div>
-                <div className="text-xs">
-                  <div className="font-semibold text-stone-900">Economia Criativa Viva</div>
-                  <div className="text-stone-500">Compre direto de quem cria com afeto.</div>
+
+                {/* Floating card two */}
+                <div className="card-two">
+                  <div className="text-xs font-mono-craft text-[#933f28] uppercase font-bold tracking-wider">
+                    Casa Colaborativa
+                  </div>
+                  <div className="font-display text-sm font-medium text-[#1e352e]">
+                    São Luís · Maranhão
+                  </div>
                 </div>
               </div>
             </div>
@@ -175,57 +446,329 @@ export const LandingPage: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth }
         </div>
       </section>
 
-      {/* Brands Showcase Section (PRD Section 2 e 8.2) */}
-      <section id="marcas" className="py-16 bg-white border-b border-stone-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="font-serif-display text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
-              As Marcas do Pinta e Borda
-            </h2>
-            <p className="text-stone-600 text-sm sm:text-base mt-3">
-              Cada ateliê possui identidade própria e um artesão dedicado. Conheça quem dá vida ao nosso espaço colaborativo.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {partners.map((partner) => (
-              <div
-                key={partner.id}
-                className="bg-[#FAF8F5] rounded-xl p-4 border border-stone-200 hover:border-amber-400 hover:shadow-md transition-all flex flex-col justify-between group"
+      {/* 2. TICKER / BRAND RIBBON */}
+      <div className="bg-[#f3eee4] border-b border-[#e8ded0] py-3.5 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 flex items-center gap-6">
+          <span className="text-[10px] font-mono-craft uppercase tracking-[0.25em] text-[#933f28] font-bold shrink-0">
+            Criações que têm história ·
+          </span>
+          <div className="flex items-center gap-8 overflow-x-auto no-scrollbar whitespace-nowrap text-xs font-mono-craft text-[#476056]">
+            {BRANDS_DOSSIE.map((brand, idx) => (
+              <button
+                key={brand.id}
+                onClick={() => setSelectedBrandDrawer(brand)}
+                className="hover:text-[#bd5b3e] transition-colors cursor-pointer flex items-center gap-2 shrink-0"
               >
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <img
-                      src={partner.brandLogo}
-                      alt={partner.brandName}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-xs"
-                    />
-                    <div>
-                      <h4 className="font-serif-display font-bold text-stone-900 text-sm group-hover:text-amber-800 transition-colors">
-                        {partner.brandName}
-                      </h4>
-                      <span className="text-[11px] text-stone-500 block truncate">
-                        {partner.category}
-                      </span>
-                    </div>
-                  </div>
+                <span className="text-[#bd5b3e]">{brand.symbol}</span>
+                <span className="font-medium text-[#1e352e]">{brand.name}</span>
+                {idx < BRANDS_DOSSIE.length - 1 && (
+                  <span className="text-[#c8b7a6] font-light">·</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
 
-                  <p className="text-xs text-stone-600 line-clamp-3 mb-4 leading-relaxed">
-                    {partner.brandDescription}
+      {/* 3. SECTION "O ESPAÇO" (#sobre) */}
+      <section id="sobre" className="py-20 sm:py-28 border-b border-[#ded6ca]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left architectural photo */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="relative w-full max-w-[380px] aspect-[4/5]">
+                <div className="photo-shape w-full h-full relative overflow-hidden shadow-xl border border-[#ded6ca]">
+                  <img
+                    src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=700&auto=format&fit=crop&q=80"
+                    alt="Espaço Pinta e Borda"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[#253a35]/20" />
+                </div>
+                <div className="card-two !bottom-6 !-left-4 !top-auto">
+                  <div className="text-[9px] font-mono-craft text-[#a66e53] uppercase tracking-[0.2em]">
+                    Manifesto
+                  </div>
+                  <div className="font-display text-base font-medium text-[#253a35] italic">
+                    "Um lugar para criar, partilhar e viver de arte."
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right content */}
+            <div className="lg:col-span-7 space-y-8">
+              <div className="space-y-3">
+                <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#a66e53] font-medium">
+                  01 · O espaço & o coletivo
+                </div>
+                <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#253a35] leading-tight">
+                  Mais que uma loja.{' '}
+                  <span className="italic text-[#b56f55]">Um ponto de encontro.</span>
+                </h2>
+              </div>
+
+              <div className="space-y-4 text-base text-[#52615a] leading-relaxed font-light">
+                <p>
+                  O <strong>Pinta e Borda</strong> nasceu em 2008 pelas mãos da artista plástica e artesã <strong>Keka (@ditodacor)</strong> como um projeto social itinerante. Com o tempo, transformou-se na primeira casa colaborativa em shopping center voltada exclusivamente ao artesanato autoral do Maranhão.
+                </p>
+                <p>
+                  Aqui operamos sob a lógica de <strong>coworking artesanal</strong>: compartilhamento de nichos físicos, divisão mútua de custos de locação, e rodízio colaborativo no balcão de vendas.
+                </p>
+                <p>
+                  <strong>Sem atravessadores:</strong> 90% do valor de cada peça vai direto para a artesã criadora, enquanto 10% sustenta a manutenção coletiva do espaço e as ações solidárias do projeto.
+                </p>
+              </div>
+
+              {/* 3 Coworking Pillar Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div className="p-5 rounded-2xl bg-[#ede5d8]/70 border border-[#ded6ca] space-y-2">
+                  <div className="font-mono-craft text-xs text-[#b56f55] font-bold">01</div>
+                  <h4 className="font-display text-lg font-medium text-[#253a35]">
+                    Coworking Criativo
+                  </h4>
+                  <p className="text-xs text-[#52615a] leading-relaxed">
+                    Nichos personalizados onde cada ateliê expõe sua identidade de forma profissional.
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-stone-200/60 flex items-center justify-between text-xs">
-                  <span className="text-stone-500 font-medium">{partner.ownerName}</span>
-                  <a
-                    href={`https://wa.me/${partner.whatsapp.replace(/\D/g, '')}?text=Ol%C3%A1!%20Conheci%20a%20${encodeURIComponent(partner.brandName)}%20pelo%20Pinta%20e%20Borda.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-emerald-700 hover:text-emerald-800 font-semibold flex items-center gap-1 cursor-pointer"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5" />
-                    Contato
-                  </a>
+                <div className="p-5 rounded-2xl bg-[#ede5d8]/70 border border-[#ded6ca] space-y-2">
+                  <div className="font-mono-craft text-xs text-[#b56f55] font-bold">02</div>
+                  <h4 className="font-display text-lg font-medium text-[#253a35]">
+                    Escala Cooperativa
+                  </h4>
+                  <p className="text-xs text-[#52615a] leading-relaxed">
+                    Plantonistas treinadas que atendem e vendem produtos de todas as colegas com mesmo carinho.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-[#ede5d8]/70 border border-[#ded6ca] space-y-2">
+                  <div className="font-mono-craft text-xs text-[#b56f55] font-bold">03</div>
+                  <h4 className="font-display text-lg font-medium text-[#253a35]">
+                    Split Transparente
+                  </h4>
+                  <p className="text-xs text-[#52615a] leading-relaxed">
+                    Fechamento quinzenal automatizado com extrato detalhado por Pix e zero retenções ocultas.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. SECTION "CATÁLOGO DA CASA" (#catalogo) */}
+      <section id="catalogo" className="py-20 sm:py-28 border-b border-[#ded6ca] bg-[#fbf9f5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* Header & Filter Controls */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-3">
+              <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#a66e53] font-medium">
+                02 · Catálogo da casa
+              </div>
+              <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#253a35]">
+                Feito para levar para a vida.
+              </h2>
+              <p className="text-sm sm:text-base text-[#476056] max-w-lg font-light">
+                Peças exclusivas disponíveis para pronta entrega na loja física do Rio Anil Shopping ou sob encomenda direta com a artesã.
+              </p>
+            </div>
+
+            {/* Search Input */}
+            <div className="w-full md:w-72 relative">
+              <input
+                type="text"
+                placeholder="Buscar por peça ou ateliê..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-4 py-2.5 rounded-full border border-[#e8ded0] bg-[#ffffff] text-xs font-mono-craft text-[#1e352e] placeholder-[#7a9186] focus:outline-none focus:border-[#bd5b3e] focus:ring-1 focus:ring-[#bd5b3e]/20 shadow-xs"
+              />
+              <Search className="w-4 h-4 text-[#7a9186] absolute left-3 top-3" />
+            </div>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+            {[
+              { id: 'ALL', label: 'Todos os produtos' },
+              { id: 'acessorios', label: 'Acessórios & Biojóias' },
+              { id: 'aromas', label: 'Casa & Bem-estar' },
+              { id: 'moda', label: 'Moda autoral' },
+              { id: 'decor', label: 'Arte & Azulejaria' },
+              { id: 'gourmet', label: 'Gourmet regional' },
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-4 py-2 rounded-full text-xs font-mono-craft whitespace-nowrap transition-all cursor-pointer ${
+                  selectedCategory === cat.id
+                    ? 'bg-[#1c3830] text-[#fffaf2] font-medium shadow-xs'
+                    : 'bg-[#f3eee4] text-[#476056] hover:bg-[#e8ded0] hover:text-[#1e352e]'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Product Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredProducts.slice(0, 8).map((product) => {
+              const isFav = favorites[product.id];
+              return (
+                <div
+                  key={product.id}
+                  onClick={() => setSelectedProduct(product)}
+                  className="craft-card group cursor-pointer p-4 transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Artwork Container */}
+                    <div className="w-full aspect-[4/4.5] rounded-2xl bg-[#f0e7d8] relative overflow-hidden mb-4">
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      {/* Heart button */}
+                      <button
+                        onClick={(e) => toggleFavorite(product.id, e)}
+                        className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-xs transition-colors cursor-pointer ${
+                          isFav
+                            ? 'bg-[#bd5b3e] text-white shadow-xs'
+                            : 'bg-white/85 text-[#476056] hover:text-[#bd5b3e]'
+                        }`}
+                      >
+                        <Heart className={`w-4 h-4 ${isFav ? 'fill-current' : ''}`} />
+                      </button>
+
+                      {/* Featured badge */}
+                      {product.isFeatured && (
+                        <div className="absolute bottom-3 left-3 bg-[#1c3830]/90 text-[#e0be75] text-[10px] font-mono-craft px-2.5 py-1 rounded-full backdrop-blur-xs flex items-center gap-1">
+                          <Sparkles className="w-3 h-3 text-[#e0be75]" />
+                          Destaque
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Meta info */}
+                    <div className="space-y-1.5">
+                      <div className="text-[10px] font-mono-craft uppercase tracking-wider text-[#bd5b3e] font-medium truncate">
+                        {product.partnerName}
+                      </div>
+                      <h3 className="font-display text-lg font-medium text-[#1e352e] group-hover:text-[#bd5b3e] transition-colors leading-snug line-clamp-2">
+                        {product.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Price & Action */}
+                  <div className="pt-4 mt-2 border-t border-[#e8ded0] flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-mono-craft text-[#7a9186] block">Preço</span>
+                      <span className="font-mono-craft font-bold text-lg text-[#1e352e]">
+                        R$ {product.price.toFixed(2).replace('.', ',')}
+                      </span>
+                    </div>
+
+                    <span className="text-xs font-mono-craft font-semibold text-[#bd5b3e] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+                      Ver detalhes →
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Bottom Catalog Callout */}
+          <div className="pt-4 text-center">
+            <button
+              onClick={() => setActiveView('store')}
+              className="solid-forest-button large inline-flex items-center gap-2"
+            >
+              <ShoppingBag className="w-4 h-4 text-[#e0be75]" />
+              <span>Acessar vitrine digital completa ({products.length} peças)</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. SECTION "MARCAS COM ALMA" (#marcas) - Botanical Forest Green */}
+      <section id="marcas" className="py-20 sm:py-28 bg-[#1c3830] text-[#fffaf2] border-b border-[#142a24]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-3">
+              <div className="text-xs font-mono-craft uppercase tracking-[0.25em] text-[#e0be75] font-semibold">
+                03 · Quem faz acontecer
+              </div>
+              <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#fffaf2]">
+                Marcas com alma.
+              </h2>
+              <p className="text-sm sm:text-base text-[#c9d9d0] max-w-xl font-light">
+                Conheça as artesãs, designers e empreendedoras que tecem a identidade cultural da nossa casa.
+              </p>
+            </div>
+
+            {/* Filter Pills */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+              {[
+                { id: 'ALL', label: 'Todas' },
+                { id: 'decor', label: 'Arte & Decor' },
+                { id: 'acessorios', label: 'Acessórios' },
+                { id: 'aromas', label: 'Aromas' },
+                { id: 'moda', label: 'Moda' },
+                { id: 'gourmet', label: 'Gourmet' },
+              ].map((f) => (
+                <button
+                  key={f.id}
+                  onClick={() => setBrandCategoryFilter(f.id)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono-craft transition-all cursor-pointer ${
+                    brandCategoryFilter === f.id
+                      ? 'bg-[#e0be75] text-[#1c3830] font-bold shadow-xs'
+                      : 'bg-[#25463c] text-[#c9d9d0] hover:bg-[#2d5246] hover:text-[#fffaf2]'
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Brands Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredBrands.map((brand) => (
+              <div
+                key={brand.id}
+                onClick={() => setSelectedBrandDrawer(brand)}
+                className="bg-[#24463c]/70 hover:bg-[#24463c] rounded-3xl p-6 border border-[#375e52] hover:border-[#e0be75] transition-all cursor-pointer group flex flex-col justify-between space-y-6 shadow-sm hover:shadow-2xl"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-xs font-mono-craft text-[#e0be75] pb-4 border-b border-[#375e52]">
+                    <span className="font-semibold">{brand.number}</span>
+                    <span className="text-lg">{brand.symbol}</span>
+                    <span className="text-[10px] tracking-widest uppercase bg-[#19332c] px-2.5 py-0.5 rounded-full text-[#c9d9d0]">
+                      {brand.categoryName}
+                    </span>
+                  </div>
+
+                  <div className="pt-4 space-y-2">
+                    <h3 className="font-display text-2xl font-medium text-[#fffaf2] group-hover:text-[#e0be75] transition-colors">
+                      {brand.name}
+                    </h3>
+                    <p className="text-xs font-mono-craft text-[#9ebfb0]">
+                      {brand.segment} · por {brand.founder}
+                    </p>
+                    <p className="text-xs text-[#d6e3dc] leading-relaxed pt-2 line-clamp-3 font-light">
+                      {brand.desc}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-4 border-t border-[#375e52] text-xs font-mono-craft text-[#e0be75]">
+                  <span>{brand.instagram}</span>
+                  <span className="group-hover:translate-x-1 transition-transform flex items-center gap-1 text-[#fffaf2] group-hover:text-[#e0be75]">
+                    Conhecer ateliê →
+                  </span>
                 </div>
               </div>
             ))}
@@ -233,394 +776,293 @@ export const LandingPage: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth }
         </div>
       </section>
 
-      {/* Interactive Catalog Section (PRD Section 8.3 & 8.4) */}
-      <section id="catalogo" className="py-16 bg-[#FAF8F5]">
+      {/* 6. SECTION "VISITE A CASA" (#visite) */}
+      <section id="visite" className="py-20 sm:py-28 border-b border-[#ded6ca]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <span className="text-xs font-semibold tracking-wide uppercase text-amber-800">
-                Pronta Entrega no Shopping
-              </span>
-              <h2 className="font-serif-display text-3xl font-bold text-stone-900 mt-1">
-                Catálogo Físico da Loja
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="text-xs font-mono-craft uppercase tracking-[0.2em] text-[#a66e53] font-medium">
+                04 · Visite a casa
+              </div>
+              <h2 className="font-display text-3xl sm:text-5xl font-medium text-[#253a35] leading-tight">
+                Venha tomar um café conosco.
               </h2>
-              <p className="text-stone-600 text-sm mt-1">
-                Veja o que está exposto no Rio Anil Shopping e converse direto com o artesão responsável no WhatsApp.
+              <p className="text-base text-[#52615a] leading-relaxed font-light">
+                Estamos de portas abertas todos os dias no Rio Anil Shopping, reunindo o melhor da produção artesanal maranhense com acolhimento e afeto.
               </p>
-            </div>
 
-            <div className="flex items-center gap-2 text-xs font-semibold text-stone-600">
-              <span>{filteredProducts.length} itens encontrados</span>
-            </div>
-          </div>
+              <div className="space-y-4 pt-4 text-sm">
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#ede5d8]/60 border border-[#ded6ca]">
+                  <MapPin className="w-5 h-5 text-[#b56f55] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block text-[#253a35] font-semibold">Endereço</strong>
+                    <span className="text-[#52615a] text-xs leading-relaxed block">
+                      Rio Anil Shopping, Piso 2 (em frente à Loja Marisa)
+                      <br />
+                      Avenida São Luís Rei de França, Turu — São Luís / MA
+                    </span>
+                  </div>
+                </div>
 
-          {/* Filters Bar */}
-          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200 shadow-xs mb-8 space-y-4">
-            {/* Search Input and Selects */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {/* Search */}
-              <div className="relative">
-                <Search className="w-4 h-4 text-stone-400 absolute left-3 top-3" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Buscar produto, marca ou SKU..."
-                  className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm rounded-lg border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-700/20 focus:border-amber-700"
-                />
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#ede5d8]/60 border border-[#ded6ca]">
+                  <Clock className="w-5 h-5 text-[#b56f55] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block text-[#253a35] font-semibold">Horários de Funcionamento</strong>
+                    <span className="text-[#52615a] text-xs leading-relaxed block">
+                      Segunda a Sábado: 10h às 22h
+                      <br />
+                      Domingos e Feriados: 14h às 20h
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-[#ede5d8]/60 border border-[#ded6ca]">
+                  <Phone className="w-5 h-5 text-[#b56f55] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block text-[#253a35] font-semibold">Contato & Curadoria</strong>
+                    <span className="text-[#52615a] text-xs leading-relaxed block">
+                      WhatsApp: (98) 98828-9123 (Keka)
+                      <br />
+                      Instagram: @ditodacor · @pintaeborda
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              {/* Category Filter */}
-              <div>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-700/20 focus:border-amber-700"
+              <div className="pt-2 flex flex-wrap gap-3">
+                <a
+                  href="https://wa.me/5598988289123?text=Ol%C3%A1%2C%20Keka!%20Gostaria%20de%20visitar%20a%20Casa%20Pinta%20e%20Borda."
+                  target="_blank"
+                  rel="noreferrer"
+                  className="solid-button text-sm flex items-center gap-2"
                 >
-                  <option value="all">Todas as Categorias</option>
-                  {categories.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Falar no WhatsApp com a Keka</span>
+                </a>
 
-              {/* Partner Filter */}
-              <div>
-                <select
-                  value={selectedPartner}
-                  onChange={(e) => setSelectedPartner(e.target.value)}
-                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-700/20 focus:border-amber-700"
-                >
-                  <option value="all">Todas as Marcas Autorais</option>
-                  {partners.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.brandName}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Price Order */}
-              <div>
-                <select
-                  value={priceOrder}
-                  onChange={(e) => setPriceOrder(e.target.value as any)}
-                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-stone-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-700/20 focus:border-amber-700"
-                >
-                  <option value="default">Ordenar: Padrão</option>
-                  <option value="asc">Menor Preço</option>
-                  <option value="desc">Maior Preço</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Quick check pills */}
-            <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-stone-100 text-xs">
-              <button
-                onClick={() => setInStockOnly(!inStockOnly)}
-                className={`px-3 py-1.5 rounded-full border cursor-pointer transition-colors ${
-                  inStockOnly
-                    ? 'bg-emerald-50 border-emerald-300 text-emerald-800 font-semibold'
-                    : 'bg-stone-50 border-stone-200 text-stone-600 hover:bg-stone-100'
-                }`}
-              >
-                ✓ Em estoque na loja física
-              </button>
-
-              <button
-                onClick={() => setFeaturedOnly(!featuredOnly)}
-                className={`px-3 py-1.5 rounded-full border cursor-pointer transition-colors ${
-                  featuredOnly
-                    ? 'bg-amber-50 border-amber-300 text-amber-900 font-semibold'
-                    : 'bg-stone-50 border-stone-200 text-stone-600 hover:bg-stone-100'
-                }`}
-              >
-                ★ Apenas Destaques do Ateliê
-              </button>
-
-              {(searchQuery || selectedCategory !== 'all' || selectedPartner !== 'all' || inStockOnly || featuredOnly) && (
                 <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    setSelectedCategory('all');
-                    setSelectedPartner('all');
-                    setInStockOnly(false);
-                    setFeaturedOnly(false);
-                    setPriceOrder('default');
-                  }}
-                  className="text-amber-800 hover:underline ml-auto font-medium cursor-pointer"
+                  onClick={() => setIsVolunteerModalOpen(true)}
+                  className="outline-button text-sm"
                 >
-                  Limpar Filtros
+                  <UserPlus className="w-4 h-4 text-[#b56f55]" />
+                  <span>Cadastrar Ateliê / Voluntariado</span>
                 </button>
-              )}
-            </div>
-          </div>
-
-          {/* Product Grid */}
-          {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((prod) => {
-                const partner = partners.find((p) => p.id === prod.partnerId);
-                return (
-                  <div
-                    key={prod.id}
-                    onClick={() => setActiveModalProduct(prod)}
-                    className="bg-white rounded-2xl overflow-hidden border border-stone-200 hover:border-amber-400 hover:shadow-lg transition-all flex flex-col justify-between group cursor-pointer"
-                  >
-                    <div className="relative aspect-4/3 bg-stone-100 overflow-hidden">
-                      <img
-                        src={prod.imageUrl}
-                        alt={prod.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-
-                      {/* Stock badge */}
-                      <div className="absolute top-2.5 right-2.5">
-                        {prod.stock > 0 ? (
-                          <span className="bg-white/90 backdrop-blur-xs text-stone-800 text-[10px] font-bold px-2 py-0.5 rounded-md shadow-xs">
-                            {prod.stock} un. em loja
-                          </span>
-                        ) : (
-                          <span className="bg-rose-50 text-rose-700 text-[10px] font-bold px-2 py-0.5 rounded-md border border-rose-200 shadow-xs">
-                            Sob Encomenda
-                          </span>
-                        )}
-                      </div>
-
-                      {prod.isFeatured && (
-                        <div className="absolute top-2.5 left-2.5 bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-xs">
-                          Destaque
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="p-4 flex flex-col justify-between flex-1">
-                      <div>
-                        {partner && (
-                          <div className="text-[11px] font-semibold text-amber-800 uppercase tracking-wider mb-1">
-                            {partner.brandName}
-                          </div>
-                        )}
-                        <h4 className="font-serif-display font-bold text-stone-900 text-sm group-hover:text-amber-800 transition-colors line-clamp-2">
-                          {prod.name}
-                        </h4>
-                        <p className="text-xs text-stone-500 line-clamp-2 mt-1">
-                          {prod.description}
-                        </p>
-                      </div>
-
-                      <div className="pt-3 mt-3 border-t border-stone-100 flex items-center justify-between">
-                        <div>
-                          <span className="text-xs text-stone-400 block leading-none">Preço</span>
-                          <span className="text-base font-bold text-stone-900">
-                            R$ {prod.price.toFixed(2)}
-                          </span>
-                        </div>
-
-                        <span className="text-xs text-emerald-700 group-hover:text-emerald-800 font-semibold flex items-center gap-1">
-                          <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                          Consultar
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="bg-white rounded-2xl p-12 text-center border border-stone-200">
-              <ShoppingBag className="w-12 h-12 text-stone-300 mx-auto mb-3" />
-              <h3 className="font-serif-display text-lg font-bold text-stone-800">
-                Nenhum produto encontrado com os filtros atuais
-              </h3>
-              <p className="text-xs text-stone-500 mt-1 max-w-sm mx-auto">
-                Tente buscar por outro termo ou remover filtros para ver mais peças artesanais.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* About Section: Coworking & Loja Colaborativa */}
-      <section id="sobre" className="py-16 bg-stone-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <span className="text-xs font-semibold tracking-wider uppercase text-amber-400">
-                O Conceito Pinta e Borda
-              </span>
-              <h2 className="font-serif-display text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
-                Mais do que uma vitrine: um modelo cooperativo de sustentabilidade artesanal.
-              </h2>
-              <p className="text-stone-300 text-sm sm:text-base leading-relaxed">
-                Manter uma loja própria em shopping center é um desafio para artesãos individuais. O
-                <strong> Pinta e Borda</strong> resolve isso através do compartilhamento de custos:
-                cada marca possui seu espaço físico dedicado, e todos os artesãos se revezam em
-                escalas de plantão, atendendo clientes e operando as vendas de forma coletiva.
-              </p>
-
-              <div className="space-y-3 pt-2">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-white text-sm">Estoque Compartilhado:</strong>
-                    <span className="text-stone-300 text-xs block">
-                      Cada peça possui código SKU exclusivo vinculado ao seu criador.
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-white text-sm">Escala de Plantão Solidária:</strong>
-                    <span className="text-stone-300 text-xs block">
-                      Quem está no balcão vende as peças de todas as marcas com carinho e conhecimento autoral.
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-white text-sm">Transparência Financeira:</strong>
-                    <span className="text-stone-300 text-xs block">
-                      Repasses automáticos com cálculo de taxas congeladas e prestação de contas auditável.
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
 
-            <div className="bg-stone-800/80 rounded-2xl p-6 sm:p-8 border border-stone-700 space-y-6">
-              <h3 className="font-serif-display text-xl font-bold text-amber-300">
-                Quer expor no Pinta e Borda?
-              </h3>
-              <p className="text-stone-300 text-xs sm:text-sm leading-relaxed">
-                Se você produz artesanato autoral no Maranhão e busca um espaço físico estruturado no
-                Rio Anil Shopping, junte-se ao nosso coworking. Trabalhamos com contrato transparente:
-                mensalidade fixa, rateio proporcional de taxas e escala de atendimento.
-              </p>
+            {/* Right Card / Visual */}
+            <div className="lg:col-span-6 flex justify-center">
+              <div className="w-full max-w-[440px] rounded-3xl p-8 bg-[#253a35] text-[#fffaf2] border border-[#38524a] space-y-6 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-[#d4ba84]/10 blur-2xl pointer-events-none" />
 
-              <div className="p-4 bg-stone-900/60 rounded-xl border border-stone-700 text-xs space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-stone-400">Modelo:</span>
-                  <span className="text-white font-semibold">Coworking + Loja Colaborativa</span>
+                <div className="brand-mark text-[#d4ba84]">
+                  <span>p</span>
+                  <span>b</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-stone-400">Ponto:</span>
-                  <span className="text-white font-semibold">Rio Anil Shopping (Piso 1)</span>
+
+                <div className="space-y-2">
+                  <div className="text-[10px] font-mono-craft tracking-[0.2em] uppercase text-[#d4ba84]">
+                    Casa Colaborativa
+                  </div>
+                  <h3 className="font-display text-3xl font-medium leading-tight">
+                    "Levando a vida com arte e solidariedade."
+                  </h3>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-stone-400">Vendas:</span>
-                  <span className="text-white font-semibold">PDV Balcão + WhatsApp Direto</span>
+
+                <p className="text-xs text-[#a9c2b4] leading-relaxed font-light">
+                  Fundado em 2008 sem qualquer vínculo estatal ou partidário, o projeto é mantido pelo afeto e dedicação de dezenas de mulheres maranhenses que acreditam no poder transformador do artesanato autoral.
+                </p>
+
+                <div className="pt-4 border-t border-[#38524a] flex items-center justify-between text-xs font-mono-craft text-[#d4ba84]">
+                  <span>São Luís · Maranhão</span>
+                  <span>Desde 2008</span>
                 </div>
               </div>
-
-              <a
-                href="https://wa.me/5598981234567?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20como%20expor%20minha%20marca%20no%20Pinta%20e%20Borda."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-4 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-semibold text-sm shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <MessageCircle className="w-4 h-4 fill-current" />
-                Falar com a Coordenação da Loja
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Location Section (PRD Section 8.2) */}
-      <section id="localizacao" className="py-16 bg-white border-b border-stone-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#FAF8F5] rounded-3xl p-6 sm:p-10 border border-stone-200 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            <div className="lg:col-span-2 space-y-4">
-              <span className="text-xs font-semibold uppercase text-amber-800">
-                Venha nos visitar
-              </span>
-              <h3 className="font-serif-display text-2xl sm:text-3xl font-bold text-stone-900">
-                Pinta e Borda no Rio Anil Shopping
-              </h3>
-              <p className="text-stone-600 text-sm leading-relaxed max-w-xl">
-                Estamos localizados no Piso 1 do Rio Anil Shopping, em São Luís/MA, oferecendo uma experiência
-                acolhedora onde você pode sentir as texturas, testar aromas e conhecer pessoalmente os criadores das peças.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs">
-                <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-amber-800 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-stone-900">Endereço:</strong>
-                    <div className="text-stone-600">
-                      Av. São Luís Rei de França, 8 - Turu, São Luís - MA, 65065-470
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <Clock className="w-4 h-4 text-amber-800 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-stone-900">Horário de Funcionamento:</strong>
-                    <div className="text-stone-600">
-                      Segunda a Sábado: 10h às 22h<br />
-                      Domingos e Feriados: 13h às 21h
-                    </div>
-                  </div>
-                </div>
+      {/* 7. FOOTER */}
+      <footer className="py-12 bg-[#ede5d8] border-t border-[#ded6ca] text-[#52615a] text-xs font-mono-craft">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <div className="brand-mark text-[#253a35]">
+              <span>p</span>
+              <span>b</span>
+            </div>
+            <div>
+              <div className="font-display text-base font-medium text-[#253a35]">
+                pinta <em className="italic font-normal text-[#b56f55]">e</em> borda
+              </div>
+              <div className="text-[9px] uppercase tracking-widest text-[#a66e53]">
+                casa colaborativa · são luís / ma
               </div>
             </div>
+          </div>
 
-            <div className="bg-white rounded-2xl p-5 border border-stone-200 shadow-sm text-center space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center mx-auto">
-                <Store className="w-6 h-6" />
-              </div>
-              <h4 className="font-serif-display font-bold text-stone-900">
-                Área Restrita de Gestão
-              </h4>
-              <p className="text-xs text-stone-500">
-                Espaço exclusivo para artesãos e administradores operarem o balcão, gerenciarem expedientes e consultarem repasses.
-              </p>
+          <div className="flex items-center gap-6 text-[11px]">
+            <a href="#sobre" className="hover:text-[#b56f55] transition-colors">
+              O espaço
+            </a>
+            <a href="#marcas" className="hover:text-[#b56f55] transition-colors">
+              Marcas
+            </a>
+            <a href="#catalogo" className="hover:text-[#b56f55] transition-colors">
+              Catálogo
+            </a>
+            <a href="#visite" className="hover:text-[#b56f55] transition-colors">
+              Visite
+            </a>
+            {onOpenPresentation && (
               <button
-                onClick={() => {
-                  onOpenAuth();
-                }}
-                className="w-full py-2.5 px-4 bg-stone-900 hover:bg-stone-800 text-white rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                onClick={onOpenPresentation}
+                className="text-[#b56f55] font-bold hover:underline cursor-pointer"
               >
-                Acessar Painel do Artesão / PDV
+                Dossiê
               </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-stone-950 text-stone-400 text-xs py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-amber-600 text-white flex items-center justify-center font-serif-display font-bold text-xs">
-              P&B
-            </div>
-            <span className="text-stone-200 font-semibold font-serif-display text-sm">
-              Pinta e Borda
-            </span>
-            <span>• Coworking & Loja Colaborativa de Artesanato</span>
+            )}
+            <button
+              onClick={() => setActiveView('artisan-portal')}
+              className="text-[#1f4e38] font-bold hover:underline cursor-pointer"
+            >
+              Portal da Artesã
+            </button>
           </div>
 
-          <div className="text-center sm:text-right">
-            <div>Rio Anil Shopping, São Luís/MA • Versão 2.0</div>
-            <div className="text-stone-600 mt-0.5">Plataforma Digital de Operação Compartilhada</div>
+          <div className="text-[11px] text-[#7d8c83]">
+            © {new Date().getFullYear()} Pinta e Borda · Feito à mão com afeto.
           </div>
         </div>
       </footer>
 
-      {/* Product Detail Modal */}
+      {/* 8. SLIDE-IN BRAND DETAIL DRAWER (`brand-drawer`) */}
+      {selectedBrandDrawer && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop */}
+          <div
+            onClick={() => setSelectedBrandDrawer(null)}
+            className="absolute inset-0 bg-[#253a35]/60 backdrop-blur-xs transition-opacity"
+          />
+
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div className="w-screen max-w-md bg-[#fffaf2] border-l border-[#ded6ca] shadow-2xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-300">
+              <div className="space-y-6">
+                {/* Header with Close */}
+                <div className="flex items-center justify-between pb-4 border-b border-[#ded6ca]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl text-[#b56f55] font-mono-craft">
+                      {selectedBrandDrawer.symbol}
+                    </span>
+                    <span className="text-xs font-mono-craft uppercase tracking-widest text-[#a66e53]">
+                      Ateliê {selectedBrandDrawer.number}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setSelectedBrandDrawer(null)}
+                    className="p-2 rounded-full hover:bg-[#ede5d8] text-[#52615a] cursor-pointer transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Brand Image & Header */}
+                <div className="space-y-4">
+                  <div className="w-full h-48 rounded-2xl overflow-hidden border border-[#ded6ca]">
+                    <img
+                      src={selectedBrandDrawer.image}
+                      alt={selectedBrandDrawer.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div>
+                    <h3 className="font-display text-3xl font-medium text-[#253a35]">
+                      {selectedBrandDrawer.name}
+                    </h3>
+                    <p className="text-xs font-mono-craft text-[#a66e53] mt-1">
+                      {selectedBrandDrawer.segment}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Founder Info */}
+                <div className="p-4 rounded-2xl bg-[#ede5d8]/70 border border-[#ded6ca] space-y-1">
+                  <span className="text-[10px] font-mono-craft uppercase tracking-wider text-[#7d8c83] block">
+                    Criadora responsável
+                  </span>
+                  <div className="font-display text-base font-medium text-[#253a35]">
+                    {selectedBrandDrawer.founder}
+                  </div>
+                  <div className="text-xs font-mono-craft text-[#b56f55]">
+                    {selectedBrandDrawer.instagram}
+                  </div>
+                </div>
+
+                {/* Full Description */}
+                <div className="space-y-2">
+                  <h4 className="text-xs font-mono-craft uppercase tracking-wider text-[#7d8c83]">
+                    Sobre a marca
+                  </h4>
+                  <p className="text-sm text-[#52615a] leading-relaxed font-light">
+                    {selectedBrandDrawer.desc}
+                  </p>
+                </div>
+
+                {/* Coworking presence badge */}
+                <div className="p-3 bg-[#eef3f0] rounded-xl border border-[#cbe0d3] text-[#253a35] flex items-center gap-2.5 text-xs">
+                  <Store className="w-4 h-4 text-[#3c6b54] shrink-0" />
+                  <div>
+                    <strong className="block font-medium">Nicho ativo no Rio Anil Shopping</strong>
+                    <span className="text-[11px] text-[#527364]">
+                      Peças disponíveis para pronta entrega na casa física.
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-6 border-t border-[#ded6ca] space-y-3">
+                <a
+                  href={`https://wa.me/${selectedBrandDrawer.whatsapp}?text=${encodeURIComponent(
+                    `Olá! Encontrei o ateliê ${selectedBrandDrawer.name} na vitrine do Pinta e Borda e gostaria de conhecer mais sobre suas peças!`
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="solid-button w-full !py-3 flex items-center justify-center gap-2 text-center text-xs sm:text-sm"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Conversar no WhatsApp com o Ateliê</span>
+                </a>
+
+                <button
+                  onClick={() => {
+                    setSelectedBrandDrawer(null);
+                    setActiveView('store');
+                  }}
+                  className="outline-button w-full !py-3 flex items-center justify-center gap-2 text-center text-xs font-mono-craft"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Ver peças na Loja Virtual</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 9. PRODUCT DETAIL MODAL */}
       <ProductDetailModal
-        product={activeModalProduct}
-        partner={activePartnerForModal}
-        onClose={() => setActiveModalProduct(null)}
+        product={selectedProduct}
+        partner={selectedProductPartner}
+        onClose={() => setSelectedProduct(null)}
+      />
+
+      {/* 10. VOLUNTEER REGISTRATION MODAL */}
+      <VolunteerRegistrationModal
+        isOpen={isVolunteerModalOpen}
+        onClose={() => setIsVolunteerModalOpen(false)}
       />
     </div>
   );
