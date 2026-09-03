@@ -14,6 +14,7 @@ import {
   AuditLog,
   SaleItem,
   PaymentMethod,
+  CommunityAnnouncement,
 } from '../types';
 import {
   INITIAL_PARTNERS,
@@ -26,6 +27,7 @@ import {
   INITIAL_SETTLEMENTS,
   INITIAL_NOTIFICATIONS,
   INITIAL_AUDIT_LOGS,
+  INITIAL_ANNOUNCEMENTS,
 } from '../mockData';
 
 export type ActiveView =
@@ -70,6 +72,7 @@ interface AppContextType {
   settlements: PartnerSettlement[];
   notifications: AppNotification[];
   auditLogs: AuditLog[];
+  announcements: CommunityAnnouncement[];
 
   // Actions
   startShift: (partnerId: string, operatorName: string, notes?: string) => Shift;
@@ -103,6 +106,11 @@ interface AppContextType {
   createPartner: (partnerData: Omit<Partner, 'id' | 'createdAt'>) => Partner;
   addPartner: (partnerData: Omit<Partner, 'id' | 'createdAt'>) => Partner;
   updatePartner: (partnerId: string, updates: Partial<Partner>) => void;
+  deletePartner: (partnerId: string) => void;
+  togglePartnerStatus: (partnerId: string) => void;
+
+  createAnnouncement: (data: Omit<CommunityAnnouncement, 'id' | 'date'>) => CommunityAnnouncement;
+  deleteAnnouncement: (id: string) => void;
 
   createFeeRule: (rule: Omit<PaymentFeeRule, 'id'>) => void;
   updateFeeRule: (ruleId: string, updates: Partial<PaymentFeeRule> | number) => void;
@@ -153,7 +161,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Persistence keys
   const [partners, setPartners] = useState<Partner[]>(() => {
     const saved = localStorage.getItem('pb_partners');
-    return saved ? JSON.parse(saved) : INITIAL_PARTNERS;
+    const base: Partner[] = saved ? JSON.parse(saved) : INITIAL_PARTNERS;
+    // Normalize partner fields so that monthlyFee, commissionPercentage, spaceType, worksShifts, and status are always safely defined
+    return base.map((p) => ({
+      ...p,
+      monthlyFee: p.monthlyFee ?? p.contract?.monthlyFee ?? 350,
+      commissionPercentage: p.commissionPercentage ?? p.contract?.salesCommissionRate ?? 10,
+      worksShifts: p.worksShifts ?? (p.contract?.shiftRequirement === 'REGULAR'),
+      spaceType: p.spaceType || 'Nicho Central',
+      status: p.status || p.contract?.status || 'ATIVO',
+      dueDay: p.dueDay ?? 10,
+      admissionDate: p.admissionDate || p.contract?.startDate || '2026-01-01',
+    }));
   });
 
   const [products, setProducts] = useState<Product[]>(() => {
@@ -203,10 +222,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return saved ? JSON.parse(saved) : INITIAL_AUDIT_LOGS;
   });
 
+  const [announcements, setAnnouncements] = useState<CommunityAnnouncement[]>(() => {
+    const saved = localStorage.getItem('pb_announcements');
+    return saved ? JSON.parse(saved) : INITIAL_ANNOUNCEMENTS;
+  });
+
   // Sync with localStorage
   useEffect(() => {
     localStorage.setItem('pb_partners', JSON.stringify(partners));
   }, [partners]);
+
+  useEffect(() => {
+    localStorage.setItem('pb_announcements', JSON.stringify(announcements));
+  }, [announcements]);
 
   useEffect(() => {
     localStorage.setItem('pb_products', JSON.stringify(products));
@@ -757,9 +785,29 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const createPartner = (partnerData: Omit<Partner, 'id' | 'createdAt'>): Partner => {
+    const monthlyFee = partnerData.monthlyFee ?? partnerData.contract?.monthlyFee ?? 350;
+    const commissionPercentage = partnerData.commissionPercentage ?? partnerData.contract?.salesCommissionRate ?? 10;
+    const worksShifts = partnerData.worksShifts ?? true;
+    const status = partnerData.status ?? 'ATIVO';
+
     const newPartner: Partner = {
       ...partnerData,
       id: `partner-${Date.now()}`,
+      monthlyFee,
+      commissionPercentage,
+      worksShifts,
+      status,
+      contract: partnerData.contract || {
+        id: `cont-${Date.now()}`,
+        startDate: partnerData.admissionDate || new Date().toISOString().split('T')[0],
+        monthlyFee,
+        salesCommissionRate: commissionPercentage,
+        commissionBase: 'BRUTO',
+        shiftRequirement: worksShifts ? 'REGULAR' : 'ISENTO_COM_TAXA',
+        shiftFeePerDay: worksShifts ? 0 : 50,
+        pixMode: 'DIRETO',
+        status,
+      },
       createdAt: new Date().toISOString(),
     };
     setPartners((prev) => [...prev, newPartner]);
@@ -768,8 +816,60 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const updatePartner = (partnerId: string, updates: Partial<Partner>) => {
-    setPartners((prev) => prev.map((p) => (p.id === partnerId ? { ...p, ...updates } : p)));
+    setPartners((prev) =>
+      prev.map((p) => {
+        if (p.id !== partnerId) return p;
+        const updated = { ...p, ...updates };
+        if (updated.contract) {
+          updated.contract = {
+            ...updated.contract,
+            monthlyFee: updated.monthlyFee ?? updated.contract.monthlyFee,
+            salesCommissionRate: updated.commissionPercentage ?? updated.contract.salesCommissionRate,
+            shiftRequirement: updated.worksShifts ? 'REGULAR' : 'ISENTO_COM_TAXA',
+            status: (updated.status as any) || updated.contract.status,
+          };
+        }
+        return updated;
+      })
+    );
     logAudit('ATUALIZAR_PARCEIRO', 'Partner', partnerId, `Dados cadastrais/contratuais do parceiro atualizados.`);
+  };
+
+  const deletePartner = (partnerId: string) => {
+    const partner = partners.find((p) => p.id === partnerId);
+    setPartners((prev) => prev.filter((p) => p.id !== partnerId));
+    logAudit('EXCLUIR_PARCEIRO', 'Partner', partnerId, `Parceiro "${partner?.brandName || partnerId}" removido.`);
+  };
+
+  const togglePartnerStatus = (partnerId: string) => {
+    setPartners((prev) =>
+      prev.map((p) => {
+        if (p.id !== partnerId) return p;
+        const nextStatus = p.status === 'ATIVO' ? 'INATIVO' : 'ATIVO';
+        return {
+          ...p,
+          status: nextStatus,
+          contract: p.contract ? { ...p.contract, status: nextStatus as any } : p.contract,
+        };
+      })
+    );
+    logAudit('ALTERAR_STATUS_PARCEIRO', 'Partner', partnerId, `Status do parceiro alterado.`);
+  };
+
+  const createAnnouncement = (data: Omit<CommunityAnnouncement, 'id' | 'date'>) => {
+    const newAnn: CommunityAnnouncement = {
+      ...data,
+      id: `ann-${Date.now()}`,
+      date: new Date().toISOString(),
+    };
+    setAnnouncements((prev) => [newAnn, ...prev]);
+    logAudit('CRIAR_COMUNICADO', 'CommunityAnnouncement', newAnn.id, `Novo comunicado publicado: "${newAnn.title}"`);
+    return newAnn;
+  };
+
+  const deleteAnnouncement = (id: string) => {
+    setAnnouncements((prev) => prev.filter((a) => a.id !== id));
+    logAudit('EXCLUIR_COMUNICADO', 'CommunityAnnouncement', id, `Comunicado removido do mural.`);
   };
 
   const createFeeRule = (rule: Omit<PaymentFeeRule, 'id'>) => {
@@ -1032,6 +1132,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         createPartner,
         addPartner: createPartner,
         updatePartner,
+        deletePartner,
+        togglePartnerStatus,
+        announcements,
+        createAnnouncement,
+        deleteAnnouncement,
         createFeeRule,
         updateFeeRule,
         markMonthlyFeePaid,

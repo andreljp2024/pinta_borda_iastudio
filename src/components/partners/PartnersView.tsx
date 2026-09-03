@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Users,
   Plus,
@@ -13,471 +13,778 @@ import {
   ExternalLink,
   Edit2,
   Clock,
+  LayoutGrid,
+  List,
+  Store,
+  Bell,
+  BookOpen,
+  MapPin,
+  Copy,
+  Check,
+  Smartphone,
+  Eye,
+  Trash2,
+  Power,
+  Package,
+  Layers,
+  Phone,
+  Sparkles,
+  Share2,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { Partner } from '../../types';
+import { Partner, UserRole } from '../../types';
 import { handleImageError, FALLBACK_AVATAR_IMAGE } from '../../utils/imageFallbacks';
+import { PartnerCard } from './PartnerCard';
+import { PartnerDetailModal } from './PartnerDetailModal';
+import { PartnerFormModal } from './PartnerFormModal';
+import { CommunityMuralTab } from './CommunityMuralTab';
+import { SpacesMapTab } from './SpacesMapTab';
+import { CollectiveGuidelinesTab } from './CollectiveGuidelinesTab';
 
 export const PartnersView: React.FC = () => {
-  const { partners, updatePartner, addPartner, userRole } = useApp();
+  const {
+    partners,
+    products,
+    shifts,
+    sales,
+    settlements,
+    announcements,
+    userRole,
+    setUserRole,
+    addPartner,
+    updatePartner,
+    deletePartner,
+    togglePartnerStatus,
+    createAnnouncement,
+    deleteAnnouncement,
+    setActiveView,
+    navigateToStoreWithPartner,
+  } = useApp();
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  // Navigation Sub-tab
+  const [activeTab, setActiveTab] = useState<'ATELIES' | 'MURAL' | 'MAPA' | 'REGIMENTO'>('ATELIES');
 
-  // Partner Modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingPartner, setEditingPartner] = useState<Partner | null>(null);
+  // Filters for Ateliês
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
+  const [selectedShiftFilter, setSelectedShiftFilter] = useState<string>('ALL');
+  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
 
-  // Form State
-  const [brandName, setBrandName] = useState('');
-  const [ownerName, setOwnerName] = useState('');
-  const [document, setDocument] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
-  const [instagram, setInstagram] = useState('');
-  const [category, setCategory] = useState('');
-  const [pixKey, setPixKey] = useState('');
-  const [pixKeyType, setPixKeyType] = useState<'CPF' | 'CNPJ' | 'EMAIL' | 'PHONE' | 'RANDOM'>('CPF');
-  const [monthlyFee, setMonthlyFee] = useState<number>(350);
-  const [commissionPercentage, setCommissionPercentage] = useState<number>(10);
-  const [worksShifts, setWorksShifts] = useState(true);
-  const [spaceType, setSpaceType] = useState('Nicho Central');
-  const [brandDescription, setBrandDescription] = useState('');
+  // Modals
+  const [detailPartner, setDetailPartner] = useState<Partner | null>(null);
+  const [formPartner, setFormPartner] = useState<Partner | null>(null);
+  const [isCreatingPartner, setIsCreatingPartner] = useState(false);
+  const [showContactListModal, setShowContactListModal] = useState(false);
+  const [copiedContacts, setCopiedContacts] = useState(false);
+  const [copiedPixId, setCopiedPixId] = useState<string | null>(null);
 
-  const filteredPartners = partners.filter((p) => {
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      const matchBrand = p.brandName.toLowerCase().includes(q);
-      const matchOwner = p.ownerName.toLowerCase().includes(q);
-      const matchDoc = p.document.toLowerCase().includes(q);
-      if (!matchBrand && !matchOwner && !matchDoc) return false;
-    }
-    if (selectedCategory !== 'all' && p.category !== selectedCategory) {
-      return false;
-    }
-    return true;
-  });
+  // Dynamic Categories from Partners
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    partners.forEach((p) => {
+      if (p.category) set.add(p.category);
+    });
+    return Array.from(set);
+  }, [partners]);
 
-  const handleOpenEdit = (partner: Partner) => {
-    setEditingPartner(partner);
-    setBrandName(partner.brandName);
-    setOwnerName(partner.ownerName);
-    setDocument(partner.document);
-    setEmail(partner.email);
-    setPhone(partner.phone);
-    setWhatsapp(partner.whatsapp);
-    setInstagram(partner.instagram || '');
-    setCategory(partner.category);
-    setPixKey(partner.pixKey);
-    setPixKeyType(partner.pixKeyType);
-    setMonthlyFee(partner.monthlyFee);
-    setCommissionPercentage(partner.commissionPercentage);
-    setWorksShifts(partner.worksShifts);
-    setSpaceType(partner.spaceType);
-    setBrandDescription(partner.brandDescription);
-    setIsModalOpen(true);
+  // Filtered Partners
+  const filteredPartners = useMemo(() => {
+    return partners.filter((p) => {
+      const matchesSearch =
+        p.brandName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.ownerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (p.document && p.document.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (p.category && p.category.toLowerCase().includes(searchTerm.toLowerCase()));
+
+      const matchesCategory =
+        selectedCategory === 'ALL' || p.category === selectedCategory;
+
+      const currentStatus = p.status || p.contract?.status || 'ATIVO';
+      const matchesStatus =
+        selectedStatus === 'ALL' || currentStatus === selectedStatus;
+
+      const worksShifts =
+        p.worksShifts ?? (p.contract?.shiftRequirement === 'REGULAR');
+      const matchesShift =
+        selectedShiftFilter === 'ALL' ||
+        (selectedShiftFilter === 'SHIFTS' && worksShifts) ||
+        (selectedShiftFilter === 'EXEMPT' && !worksShifts);
+
+      return matchesSearch && matchesCategory && matchesStatus && matchesShift;
+    });
+  }, [partners, searchTerm, selectedCategory, selectedStatus, selectedShiftFilter]);
+
+  // Statistics
+  const activeCount = partners.filter(
+    (p) => (p.status || p.contract?.status) === 'ATIVO'
+  ).length;
+
+  const regularShiftCount = partners.filter(
+    (p) => p.worksShifts ?? (p.contract?.shiftRequirement === 'REGULAR')
+  ).length;
+
+  const totalCatalogUnits = products.reduce((acc, p) => acc + (p.stock || 0), 0);
+
+  // Quick Action: Open Artisan Portal for a specific Partner
+  const handleOpenArtisanPortal = (partner: Partner) => {
+    setUserRole('PARTNER', partner.id);
+    setActiveView('artisan-portal');
   };
 
-  const handleOpenCreate = () => {
-    setEditingPartner(null);
-    setBrandName('');
-    setOwnerName('');
-    setDocument('');
-    setEmail('');
-    setPhone('');
-    setWhatsapp('');
-    setInstagram('');
-    setCategory('Artesanato Geral');
-    setPixKey('');
-    setPixKeyType('CPF');
-    setMonthlyFee(350);
-    setCommissionPercentage(10);
-    setWorksShifts(true);
-    setSpaceType('Prateleira');
-    setBrandDescription('');
-    setIsModalOpen(true);
-  };
-
-  const handleSavePartner = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!brandName.trim() || !ownerName.trim()) {
-      alert('Preencha os campos obrigatórios.');
-      return;
-    }
-
-    if (editingPartner) {
-      updatePartner(editingPartner.id, {
-        brandName,
-        ownerName,
-        document,
-        email,
-        phone,
-        whatsapp,
-        instagram,
-        category,
-        pixKey,
-        pixKeyType,
-        monthlyFee,
-        commissionPercentage,
-        worksShifts,
-        spaceType,
-        brandDescription,
-      });
+  // Quick Action: Open Store filtered by Partner
+  const handleOpenStoreWithPartner = (partnerId: string) => {
+    if (navigateToStoreWithPartner) {
+      navigateToStoreWithPartner(partnerId);
     } else {
-      addPartner({
-        brandName,
-        ownerName,
-        document,
-        email,
-        phone,
-        whatsapp,
-        instagram,
-        category,
-        pixKey,
-        pixKeyType,
-        monthlyFee,
-        commissionPercentage,
-        worksShifts,
-        spaceType,
-        brandDescription,
-        status: 'ATIVO',
-        admissionDate: new Date().toISOString().split('T')[0],
-        dueDay: 10,
-        brandLogo: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=200&auto=format&fit=crop&q=80',
-      });
+      setActiveView('store');
     }
+  };
 
-    setIsModalOpen(false);
+  // Save Partner (Create or Update)
+  const handleSavePartner = (partnerData: any) => {
+    if (formPartner) {
+      updatePartner(formPartner.id, partnerData);
+    } else {
+      addPartner(partnerData);
+    }
+    setFormPartner(null);
+    setIsCreatingPartner(false);
+  };
+
+  // Copy Contact List
+  const handleCopyContacts = () => {
+    const list = partners
+      .map(
+        (p) =>
+          `• *${p.brandName}* (${p.ownerName}) - WhatsApp: ${p.whatsapp || p.phone || 'N/A'}`
+      )
+      .join('\n');
+
+    const text = `📋 *LISTA DE CONTATOS DAS ARTESÃS - PINTA E BORDA*\n\n${list}\n\n_Casa Colaborativa no Rio Anil Shopping_`;
+    navigator.clipboard.writeText(text);
+    setCopiedContacts(true);
+    setTimeout(() => setCopiedContacts(false), 2500);
+  };
+
+  const handleCopyPix = (partner: Partner) => {
+    if (!partner.pixKey) return;
+    navigator.clipboard.writeText(partner.pixKey);
+    setCopiedPixId(partner.id);
+    setTimeout(() => setCopiedPixId(null), 2000);
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="space-y-6 max-w-7xl mx-auto pb-12">
+      {/* 1. Page Header & Primary Actions */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#fbcfe8] pb-5">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#f43f7e] font-mono-craft">
-            Comunidade de Criadores
-          </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#380c25]">
-            Marcas & Artesãos Parceiros
+          <div className="flex items-center gap-2 mb-1">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono-craft font-semibold bg-[#fff0f5] text-[#f43f7e] border border-[#fbcfe8]">
+              Comunidade & Ateliês
+            </span>
+            <span className="text-xs text-[#9b4f76] font-mono-craft">
+              Rio Anil Shopping • Piso 2
+            </span>
+          </div>
+          <h2 className="font-display font-medium text-2xl sm:text-3xl text-[#380c25]">
+            Marcas Autorais & Convivência Coletiva
           </h2>
-          <p className="text-xs sm:text-sm text-[#9b4f76] mt-1 font-light">
-            Gestão cadastral, dados bancários Pix, contratos e escalas dos ateliês do Rio Anil Shopping.
+          <p className="text-xs sm:text-sm text-[#863b63] mt-0.5 font-light max-w-2xl">
+            Gestão integrada das 15 marcas parceiras, dados contratuais e repasses Pix, mural de
+            comunicados coletivos e mapa de alocação física no shopping.
           </p>
         </div>
 
-        {userRole === 'ADMIN' && (
+        <div className="flex items-center gap-2 flex-wrap font-mono-craft text-xs">
           <button
-            onClick={handleOpenCreate}
-            className="solid-button text-xs flex items-center gap-2 self-start sm:self-auto"
+            type="button"
+            onClick={() => setShowContactListModal(true)}
+            className="outline-button !py-2 !px-3 text-xs flex items-center gap-1.5"
+            title="Ver e copiar telefones de contato de todas as artesãs"
           >
-            <Plus className="w-4 h-4 text-[#ff7597]" />
-            <span>Cadastrar Novo Ateliê</span>
+            <Phone className="w-3.5 h-3.5 text-[#1f4e38]" />
+            <span>Contatos WhatsApp</span>
           </button>
-        )}
-      </div>
 
-      {/* Filter Row */}
-      <div className="bg-[#ffffff] rounded-2xl p-4 border border-[#fbcfe8] shadow-2xs flex flex-col sm:flex-row gap-3 items-center justify-between font-mono-craft">
-        <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-[#9b4f76] absolute left-3 top-2.5" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Buscar por marca, artesão ou CPF/CNPJ..."
-            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#fbcfe8] focus:outline-none bg-white text-[#380c25]"
-          />
-        </div>
-
-        <div className="text-xs text-[#9b4f76]">
-          {filteredPartners.length} marcas cadastradas
+          {userRole === 'ADMIN' && (
+            <button
+              type="button"
+              onClick={() => {
+                setFormPartner(null);
+                setIsCreatingPartner(true);
+              }}
+              className="solid-button !py-2 !px-4 text-xs flex items-center gap-1.5 font-bold shadow-sm"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Novo Ateliê</span>
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Partners Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPartners.map((partner) => (
-          <div
-            key={partner.id}
-            className="bg-[#ffffff] rounded-2xl border border-[#fbcfe8] shadow-2xs hover:border-[#f43f7e]/40 hover:shadow-md transition-all p-5 flex flex-col justify-between"
-          >
-            <div>
-              {/* Header */}
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={partner.brandLogo}
-                    alt={partner.brandName}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-[#fbcfe8] shadow-2xs"
-                  />
-                  <div>
-                    <h4 className="font-display font-medium text-[#380c25] text-base">
-                      {partner.brandName}
-                    </h4>
-                    <span className="text-xs text-[#9b4f76] font-light">{partner.ownerName}</span>
-                  </div>
-                </div>
+      {/* 2. Top Metric Cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
+          <div className="flex items-center justify-between text-[#9b4f76] mb-1">
+            <span className="text-xs font-mono-craft uppercase font-medium">Marcas no Coletivo</span>
+            <Users className="w-4 h-4 text-[#f43f7e]" />
+          </div>
+          <div className="font-display font-medium text-2xl sm:text-3xl text-[#380c25]">
+            {activeCount}{' '}
+            <span className="text-xs font-mono-craft font-normal text-[#9b4f76]">
+              / {partners.length} ativas
+            </span>
+          </div>
+          <span className="text-[11px] text-[#1f4e38] font-mono-craft block mt-1">
+            100% autoral maranhense
+          </span>
+        </div>
 
-                <span
-                  className={`px-2 py-0.5 rounded-full text-[10px] font-bold font-mono-craft ${
-                    partner.status === 'ATIVO'
-                      ? 'bg-[#dff0e6] text-[#1f4e38] border border-[#bcdbc7]'
-                      : 'bg-[#fff0f5] text-[#863b63] border border-[#fbcfe8]'
-                  }`}
-                >
-                  {partner.status}
-                </span>
-              </div>
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
+          <div className="flex items-center justify-between text-[#9b4f76] mb-1">
+            <span className="text-xs font-mono-craft uppercase font-medium">Estrutura & Nichos</span>
+            <Store className="w-4 h-4 text-[#3c6b54]" />
+          </div>
+          <div className="font-display font-medium text-2xl sm:text-3xl text-[#380c25]">
+            15{' '}
+            <span className="text-xs font-mono-craft font-normal text-[#9b4f76]">espaços</span>
+          </div>
+          <span className="text-[11px] text-[#1f4e38] font-mono-craft block mt-1">
+            100% taxa de ocupação
+          </span>
+        </div>
 
-              <div className="text-xs text-[#863b63] line-clamp-2 mb-4 font-light">
-                {partner.brandDescription}
-              </div>
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
+          <div className="flex items-center justify-between text-[#9b4f76] mb-1">
+            <span className="text-xs font-mono-craft uppercase font-medium">Regime de Plantão</span>
+            <Clock className="w-4 h-4 text-[#f43f7e]" />
+          </div>
+          <div className="font-display font-medium text-2xl sm:text-3xl text-[#380c25]">
+            {regularShiftCount}{' '}
+            <span className="text-xs font-mono-craft font-normal text-[#9b4f76]">
+              na escala
+            </span>
+          </div>
+          <span className="text-[11px] text-[#863b63] font-mono-craft block mt-1">
+            {partners.length - regularShiftCount} com diaristas pagas
+          </span>
+        </div>
 
-              {/* Badges / Specs */}
-              <div className="grid grid-cols-2 gap-2 text-[11px] bg-[#fff0f5]/60 rounded-xl p-3 border border-[#fbcfe8] mb-4 font-mono-craft">
-                <div>
-                  <span className="text-[#9b4f76] block text-[10px]">Espaço Físico:</span>
-                  <strong className="text-[#380c25]">{partner.spaceType}</strong>
-                </div>
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-[#fbcfe8] shadow-2xs">
+          <div className="flex items-center justify-between text-[#9b4f76] mb-1">
+            <span className="text-xs font-mono-craft uppercase font-medium">Mural de Avisos</span>
+            <Bell className="w-4 h-4 text-[#db2777]" />
+          </div>
+          <div className="font-display font-medium text-2xl sm:text-3xl text-[#380c25]">
+            {announcements.length}{' '}
+            <span className="text-xs font-mono-craft font-normal text-[#9b4f76]">
+              comunicados
+            </span>
+          </div>
+          <span className="text-[11px] text-[#db2777] font-mono-craft block mt-1">
+            Alinhamento coletivo ativo
+          </span>
+        </div>
+      </div>
 
-                <div>
-                  <span className="text-[#9b4f76] block text-[10px]">Mensalidade:</span>
-                  <strong className="text-[#380c25]">
-                    R$ {partner.monthlyFee.toFixed(2).replace('.', ',')}/mês
-                  </strong>
-                </div>
+      {/* 3. Main Navigation Tabs */}
+      <div className="flex items-center gap-2 border-b border-[#fbcfe8] pb-1 font-mono-craft text-xs overflow-x-auto">
+        <button
+          type="button"
+          onClick={() => setActiveTab('ATELIES')}
+          className={`px-4 py-2.5 rounded-xl font-semibold transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+            activeTab === 'ATELIES'
+              ? 'bg-[#380c25] text-white shadow-2xs'
+              : 'text-[#863b63] hover:text-[#380c25] hover:bg-[#fff0f5]'
+          }`}
+        >
+          <Users className="w-4 h-4" />
+          <span>Ateliês & Marcas ({partners.length})</span>
+        </button>
 
-                <div>
-                  <span className="text-[#9b4f76] block text-[10px]">Chave Pix:</span>
-                  <span className="text-[#380c25] text-[10px] truncate block">
-                    {partner.pixKey}
-                  </span>
-                </div>
+        <button
+          type="button"
+          onClick={() => setActiveTab('MURAL')}
+          className={`px-4 py-2.5 rounded-xl font-semibold transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+            activeTab === 'MURAL'
+              ? 'bg-[#380c25] text-white shadow-2xs'
+              : 'text-[#863b63] hover:text-[#380c25] hover:bg-[#fff0f5]'
+          }`}
+        >
+          <Bell className="w-4 h-4" />
+          <span>Mural da Casa ({announcements.length})</span>
+        </button>
 
-                <div>
-                  <span className="text-[#9b4f76] block text-[10px]">Escala de Plantão:</span>
-                  <strong
-                    className={partner.worksShifts ? 'text-[#3c6b54]' : 'text-[#f43f7e]'}
-                  >
-                    {partner.worksShifts ? 'Cumpre Plantão' : 'Taxa Diarista'}
-                  </strong>
-                </div>
-              </div>
-            </div>
+        <button
+          type="button"
+          onClick={() => setActiveTab('MAPA')}
+          className={`px-4 py-2.5 rounded-xl font-semibold transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+            activeTab === 'MAPA'
+              ? 'bg-[#380c25] text-white shadow-2xs'
+              : 'text-[#863b63] hover:text-[#380c25] hover:bg-[#fff0f5]'
+          }`}
+        >
+          <Store className="w-4 h-4" />
+          <span>Mapa dos Nichos</span>
+        </button>
 
-            {/* Actions */}
-            <div className="pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs">
-              <div className="flex items-center gap-2">
-                <a
-                  href={`https://wa.me/${partner.whatsapp.replace(/\D/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-1.5 text-[#3c6b54] hover:bg-[#dff0e6] rounded-lg transition-colors cursor-pointer"
-                  title="WhatsApp"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                </a>
+        <button
+          type="button"
+          onClick={() => setActiveTab('REGIMENTO')}
+          className={`px-4 py-2.5 rounded-xl font-semibold transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+            activeTab === 'REGIMENTO'
+              ? 'bg-[#380c25] text-white shadow-2xs'
+              : 'text-[#863b63] hover:text-[#380c25] hover:bg-[#fff0f5]'
+          }`}
+        >
+          <BookOpen className="w-4 h-4" />
+          <span>Regimento & Diretrizes</span>
+        </button>
+      </div>
 
-                {partner.instagram && (
-                  <a
-                    href={`https://instagram.com/${partner.instagram.replace('@', '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1.5 text-[#f43f7e] hover:bg-[#ffe4ee] rounded-lg transition-colors cursor-pointer"
-                    title="Instagram"
-                  >
-                    <Instagram className="w-4 h-4" />
-                  </a>
-                )}
-              </div>
+      {/* 4. Tab Contents */}
 
-              {userRole === 'ADMIN' && (
+      {/* TAB 1: ATELIÊS & MARCAS */}
+      {activeTab === 'ATELIES' && (
+        <div className="space-y-5 animate-in fade-in duration-150">
+          {/* Filter and Search Bar */}
+          <div className="bg-white p-4 rounded-2xl border border-[#fbcfe8] shadow-2xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 text-xs font-mono-craft">
+            {/* Search Input */}
+            <div className="relative flex-1 min-w-[240px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9b4f76] w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Buscar por marca, artesão(ã), CPF/CNPJ ou categoria..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-9 pr-4 py-2 bg-[#fff0f5]/40 border border-[#fbcfe8] rounded-xl text-xs text-[#380c25] focus:outline-none focus:ring-1 focus:ring-[#f43f7e] placeholder:text-[#9b4f76]"
+              />
+              {searchTerm && (
                 <button
-                  onClick={() => handleOpenEdit(partner)}
-                  className="outline-button !py-1 !px-2.5 text-xs font-mono-craft flex items-center gap-1"
+                  type="button"
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
                 >
-                  <Edit2 className="w-3 h-3" />
-                  Editar
+                  ✕
                 </button>
               )}
             </div>
-          </div>
-        ))}
-      </div>
 
-      {/* Partner Edit/Create Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#380c25]/60 backdrop-blur-xs p-4">
-          <div className="bg-[#ffffff] rounded-3xl max-w-lg w-full shadow-2xl border border-[#fbcfe8] p-6 space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
-            <h3 className="font-display font-medium text-xl text-[#380c25]">
-              {editingPartner ? 'Editar Ateliê Parceiro' : 'Novo Ateliê Parceiro'}
-            </h3>
+            {/* Select Dropdowns */}
+            <div className="flex items-center gap-2 flex-wrap">
+              {/* Category Filter */}
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="py-2 px-3 bg-white border border-[#fbcfe8] rounded-xl text-xs text-[#380c25] focus:outline-none"
+              >
+                <option value="ALL">Todas as Categorias</option>
+                {categories.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
 
-            <form onSubmit={handleSavePartner} className="space-y-3 text-xs">
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">Nome da Marca</label>
-                  <input
-                    type="text"
-                    value={brandName}
-                    onChange={(e) => setBrandName(e.target.value)}
-                    required
-                    placeholder="Ex: Tutabel"
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
+              {/* Status Filter */}
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+                className="py-2 px-3 bg-white border border-[#fbcfe8] rounded-xl text-xs text-[#380c25] focus:outline-none"
+              >
+                <option value="ALL">Todos os Status</option>
+                <option value="ATIVO">Ativos</option>
+                <option value="INATIVO">Inativos</option>
+                <option value="SUSPENSO">Suspensos</option>
+                <option value="PENDENTE">Pendentes</option>
+              </select>
 
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">Nome do Artesão</label>
-                  <input
-                    type="text"
-                    value={ownerName}
-                    onChange={(e) => setOwnerName(e.target.value)}
-                    required
-                    placeholder="Ex: Maria Alice Rodrigues"
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
+              {/* Shift Filter */}
+              <select
+                value={selectedShiftFilter}
+                onChange={(e) => setSelectedShiftFilter(e.target.value)}
+                className="py-2 px-3 bg-white border border-[#fbcfe8] rounded-xl text-xs text-[#380c25] focus:outline-none"
+              >
+                <option value="ALL">Todos os Plantões</option>
+                <option value="SHIFTS">Cumpre Escala</option>
+                <option value="EXEMPT">Paga Diarista</option>
+              </select>
 
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">CPF ou CNPJ</label>
-                  <input
-                    type="text"
-                    value={document}
-                    onChange={(e) => setDocument(e.target.value)}
-                    required
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs font-mono-craft bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">E-mail</label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">WhatsApp de Atendimento</label>
-                  <input
-                    type="text"
-                    value={whatsapp}
-                    onChange={(e) => setWhatsapp(e.target.value)}
-                    required
-                    placeholder="(98) 98123-4567"
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">Instagram (@)</label>
-                  <input
-                    type="text"
-                    value={instagram}
-                    onChange={(e) => setInstagram(e.target.value)}
-                    placeholder="@marca.artesanal"
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">Chave Pix Repasse</label>
-                  <input
-                    type="text"
-                    value={pixKey}
-                    onChange={(e) => setPixKey(e.target.value)}
-                    required
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs font-mono-craft bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">Tipo da Chave Pix</label>
-                  <select
-                    value={pixKeyType}
-                    onChange={(e) => setPixKeyType(e.target.value as any)}
-                    className="w-full p-2.5 bg-white text-[#380c25] rounded-xl border border-[#fbcfe8] text-xs focus:outline-none"
-                  >
-                    <option value="CPF">CPF</option>
-                    <option value="CNPJ">CNPJ</option>
-                    <option value="EMAIL">E-mail</option>
-                    <option value="PHONE">Telefone</option>
-                    <option value="RANDOM">Chave Aleatória</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">Mensalidade (R$)</label>
-                  <input
-                    type="number"
-                    value={monthlyFee}
-                    onChange={(e) => setMonthlyFee(parseFloat(e.target.value) || 0)}
-                    required
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs font-bold font-mono-craft bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">Espaço no Ponto</label>
-                  <input
-                    type="text"
-                    value={spaceType}
-                    onChange={(e) => setSpaceType(e.target.value)}
-                    placeholder="Ex: Nicho Central, Arara..."
-                    className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs bg-white text-[#380c25] focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block font-semibold text-[#380c25] mb-1 font-mono-craft">Descrição do Ateliê</label>
-                <textarea
-                  value={brandDescription}
-                  onChange={(e) => setBrandDescription(e.target.value)}
-                  rows={2}
-                  className="w-full p-2.5 border border-[#fbcfe8] rounded-xl text-xs bg-white text-[#380c25] focus:outline-none"
-                />
-              </div>
-
-              <div className="pt-2 font-mono-craft">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={worksShifts}
-                    onChange={(e) => setWorksShifts(e.target.checked)}
-                    className="rounded text-[#3c6b54] focus:ring-[#3c6b54]"
-                  />
-                  <span className="font-semibold text-[#380c25]">
-                    Cumpre escala de plantão no shopping (se desmarcado, paga diarista)
-                  </span>
-                </label>
-              </div>
-
-              <div className="flex justify-end gap-2 pt-4 border-t border-[#fbcfe8] font-mono-craft">
+              {/* View Mode Toggle */}
+              <div className="flex items-center bg-[#fff0f5] p-0.5 rounded-xl border border-[#fbcfe8]">
                 <button
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="outline-button !py-2 !px-3 text-xs"
+                  onClick={() => setViewMode('grid')}
+                  className={`p-1.5 rounded-lg transition-colors ${
+                    viewMode === 'grid'
+                      ? 'bg-white text-[#f43f7e] shadow-2xs font-bold'
+                      : 'text-[#863b63] hover:text-[#380c25]'
+                  }`}
+                  title="Visualização em Grade"
                 >
-                  Cancelar
+                  <LayoutGrid className="w-4 h-4" />
                 </button>
                 <button
-                  type="submit"
-                  className="solid-button text-xs font-bold"
+                  type="button"
+                  onClick={() => setViewMode('table')}
+                  className={`p-1.5 rounded-lg transition-colors ${
+                    viewMode === 'table'
+                      ? 'bg-white text-[#f43f7e] shadow-2xs font-bold'
+                      : 'text-[#863b63] hover:text-[#380c25]'
+                  }`}
+                  title="Visualização em Tabela"
                 >
-                  Salvar Dados do Ateliê
+                  <List className="w-4 h-4" />
                 </button>
               </div>
-            </form>
+            </div>
+          </div>
+
+          {/* Results Count and State */}
+          <div className="flex items-center justify-between text-xs text-[#9b4f76] font-mono-craft px-1">
+            <span>
+              Exibindo <strong>{filteredPartners.length}</strong> de {partners.length} marcas
+            </span>
+            {(searchTerm || selectedCategory !== 'ALL' || selectedStatus !== 'ALL' || selectedShiftFilter !== 'ALL') && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchTerm('');
+                  setSelectedCategory('ALL');
+                  setSelectedStatus('ALL');
+                  setSelectedShiftFilter('ALL');
+                }}
+                className="text-[#f43f7e] hover:underline"
+              >
+                Limpar Filtros
+              </button>
+            )}
+          </div>
+
+          {/* GRID VIEW */}
+          {viewMode === 'grid' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {filteredPartners.map((partner) => {
+                const partnerProducts = products.filter((p) => p.partnerId === partner.id);
+                const totalStock = partnerProducts.reduce((sum, p) => sum + (p.stock || 0), 0);
+
+                return (
+                  <PartnerCard
+                    key={partner.id}
+                    partner={partner}
+                    productCount={partnerProducts.length}
+                    totalStock={totalStock}
+                    userRole={userRole}
+                    onViewDetail={setDetailPartner}
+                    onEdit={(p) => {
+                      setFormPartner(p);
+                      setIsCreatingPartner(false);
+                    }}
+                    onToggleStatus={userRole === 'ADMIN' ? togglePartnerStatus : undefined}
+                    onOpenPortal={handleOpenArtisanPortal}
+                  />
+                );
+              })}
+            </div>
+          )}
+
+          {/* TABLE VIEW */}
+          {viewMode === 'table' && (
+            <div className="bg-white rounded-2xl border border-[#fbcfe8] shadow-2xs overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs font-mono-craft">
+                  <thead className="bg-[#fff5f8] border-b border-[#fbcfe8] text-[#9b4f76] uppercase text-[10px]">
+                    <tr>
+                      <th className="p-3.5 font-semibold">Marca & Logo</th>
+                      <th className="p-3.5 font-semibold">Artesã(ão)</th>
+                      <th className="p-3.5 font-semibold">Categoria</th>
+                      <th className="p-3.5 font-semibold">Espaço</th>
+                      <th className="p-3.5 font-semibold">Mensalidade</th>
+                      <th className="p-3.5 font-semibold">Plantão</th>
+                      <th className="p-3.5 font-semibold">Chave Pix</th>
+                      <th className="p-3.5 font-semibold">Status</th>
+                      <th className="p-3.5 font-semibold text-right">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#fbcfe8]/70">
+                    {filteredPartners.map((partner) => {
+                      const monthlyFee = partner.monthlyFee ?? partner.contract?.monthlyFee ?? 350;
+                      const worksShifts = partner.worksShifts ?? (partner.contract?.shiftRequirement === 'REGULAR');
+                      const status = partner.status || partner.contract?.status || 'ATIVO';
+
+                      return (
+                        <tr
+                          key={partner.id}
+                          className="hover:bg-[#fff5f8]/50 transition-colors group"
+                        >
+                          <td className="p-3.5">
+                            <div className="flex items-center gap-2.5">
+                              <img
+                                src={partner.brandLogo}
+                                alt={partner.brandName}
+                                loading="lazy"
+                                referrerPolicy="no-referrer"
+                                onError={(e) => handleImageError(e, FALLBACK_AVATAR_IMAGE)}
+                                className="w-8 h-8 rounded-full object-cover border border-[#fbcfe8] shrink-0"
+                              />
+                              <span className="font-display font-medium text-[#380c25] text-xs">
+                                {partner.brandName}
+                              </span>
+                            </div>
+                          </td>
+
+                          <td className="p-3.5 text-[#863b63]">{partner.ownerName}</td>
+
+                          <td className="p-3.5">
+                            <span className="px-2 py-0.5 rounded-full text-[10px] bg-[#fff0f5] text-[#863b63] border border-[#fbcfe8]">
+                              {partner.category}
+                            </span>
+                          </td>
+
+                          <td className="p-3.5 text-[#380c25]">{partner.spaceType || 'Nicho Central'}</td>
+
+                          <td className="p-3.5 font-bold text-[#380c25]">
+                            R$ {monthlyFee.toFixed(2).replace('.', ',')}
+                          </td>
+
+                          <td className="p-3.5">
+                            <span
+                              className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                                worksShifts
+                                  ? 'bg-[#dff0e6] text-[#1f4e38]'
+                                  : 'bg-[#fff0f5] text-[#863b63]'
+                              }`}
+                            >
+                              {worksShifts ? 'Cumpre Escala' : 'Paga Diarista'}
+                            </span>
+                          </td>
+
+                          <td className="p-3.5">
+                            <div className="flex items-center gap-1">
+                              <span className="font-mono text-[11px] truncate max-w-[120px]">
+                                {partner.pixKey || 'Não cadastrada'}
+                              </span>
+                              {partner.pixKey && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleCopyPix(partner)}
+                                  className="p-1 hover:bg-[#fff0f5] rounded text-[#863b63]"
+                                  title="Copiar Pix"
+                                >
+                                  {copiedPixId === partner.id ? (
+                                    <Check className="w-3.5 h-3.5 text-[#1f4e38]" />
+                                  ) : (
+                                    <Copy className="w-3.5 h-3.5" />
+                                  )}
+                                </button>
+                              )}
+                            </div>
+                          </td>
+
+                          <td className="p-3.5">
+                            <span
+                              className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                                status === 'ATIVO'
+                                  ? 'bg-[#dff0e6] text-[#1f4e38]'
+                                  : 'bg-stone-100 text-stone-600'
+                              }`}
+                            >
+                              {status}
+                            </span>
+                          </td>
+
+                          <td className="p-3.5 text-right">
+                            <div className="flex items-center justify-end gap-1">
+                              <button
+                                type="button"
+                                onClick={() => setDetailPartner(partner)}
+                                className="p-1.5 text-[#863b63] hover:text-[#380c25] hover:bg-[#fff0f5] rounded-lg transition-colors"
+                                title="Ver Ficha Completa"
+                              >
+                                <Eye className="w-3.5 h-3.5" />
+                              </button>
+
+                              {partner.whatsapp && (
+                                <a
+                                  href={`https://wa.me/${partner.whatsapp.replace(/\D/g, '')}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="p-1.5 text-[#1f4e38] hover:bg-[#dff0e6] rounded-lg transition-colors"
+                                  title="Chamar no WhatsApp"
+                                >
+                                  <MessageCircle className="w-3.5 h-3.5" />
+                                </a>
+                              )}
+
+                              {userRole === 'ADMIN' && (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setFormPartner(partner);
+                                    setIsCreatingPartner(false);
+                                  }}
+                                  className="p-1.5 text-[#380c25] hover:bg-[#fff0f5] rounded-lg transition-colors"
+                                  title="Editar Ateliê"
+                                >
+                                  <Edit2 className="w-3.5 h-3.5" />
+                                </button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {filteredPartners.length === 0 && (
+            <div className="p-12 text-center bg-white rounded-3xl border border-[#fbcfe8]">
+              <Users className="w-10 h-10 text-[#f43f7e] mx-auto mb-2 opacity-50" />
+              <h4 className="font-display font-medium text-[#380c25] text-lg">
+                Nenhuma marca encontrada
+              </h4>
+              <p className="text-xs text-[#863b63] font-light mt-1">
+                Tente ajustar os filtros de busca, categoria ou status da marca.
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* TAB 2: MURAL DA CASA */}
+      {activeTab === 'MURAL' && (
+        <CommunityMuralTab
+          announcements={announcements}
+          userRole={userRole}
+          onCreateAnnouncement={createAnnouncement}
+          onDeleteAnnouncement={deleteAnnouncement}
+        />
+      )}
+
+      {/* TAB 3: MAPA DOS NICHOS */}
+      {activeTab === 'MAPA' && (
+        <SpacesMapTab
+          partners={partners}
+          onSelectPartner={setDetailPartner}
+        />
+      )}
+
+      {/* TAB 4: REGIMENTO & DIRETRIZES */}
+      {activeTab === 'REGIMENTO' && <CollectiveGuidelinesTab />}
+
+      {/* 5. Modals & Drawers */}
+
+      {/* Partner Detail Modal */}
+      {detailPartner && (
+        <PartnerDetailModal
+          partner={detailPartner}
+          products={products}
+          shifts={shifts}
+          settlements={settlements}
+          userRole={userRole}
+          onClose={() => setDetailPartner(null)}
+          onEdit={(p) => {
+            setDetailPartner(null);
+            setFormPartner(p);
+            setIsCreatingPartner(false);
+          }}
+          onOpenPortal={handleOpenArtisanPortal}
+          onOpenStore={handleOpenStoreWithPartner}
+        />
+      )}
+
+      {/* Partner Form Modal (Create / Edit) */}
+      {(isCreatingPartner || formPartner) && (
+        <PartnerFormModal
+          partner={formPartner}
+          categories={categories}
+          onClose={() => {
+            setFormPartner(null);
+            setIsCreatingPartner(false);
+          }}
+          onSave={handleSavePartner}
+        />
+      )}
+
+      {/* Contact List Modal */}
+      {showContactListModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#380c25]/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+          <div className="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-[#fbcfe8] overflow-hidden flex flex-col max-h-[85vh]">
+            <div className="p-5 border-b border-[#fbcfe8] bg-[#fff5f8] flex items-center justify-between">
+              <div>
+                <h3 className="font-display font-medium text-lg text-[#380c25]">
+                  Contatos WhatsApp das Artesãs
+                </h3>
+                <p className="text-xs text-[#9b4f76]">
+                  Lista telefônica das 15 marcas parceiras para recados e plantão.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowContactListModal(false)}
+                className="text-[#863b63] hover:text-[#380c25] p-1 rounded-full"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-5 overflow-y-auto flex-1 divide-y divide-[#fbcfe8]/70 text-xs">
+              {partners.map((p) => (
+                <div
+                  key={p.id}
+                  className="py-2.5 flex items-center justify-between gap-3 font-mono-craft"
+                >
+                  <div className="min-w-0">
+                    <strong className="text-[#380c25] block text-xs truncate">
+                      {p.brandName}
+                    </strong>
+                    <span className="text-[11px] text-[#9b4f76] block truncate">
+                      {p.ownerName}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[#380c25] font-mono text-xs">
+                      {p.whatsapp || p.phone || 'Sem telefone'}
+                    </span>
+                    {p.whatsapp && (
+                      <a
+                        href={`https://wa.me/${p.whatsapp.replace(/\D/g, '')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="solid-button !py-1 !px-2 text-[11px] flex items-center gap-1"
+                      >
+                        <MessageCircle className="w-3 h-3" />
+                        Chamar
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="p-4 bg-[#fff5f8] border-t border-[#fbcfe8] flex items-center justify-between font-mono-craft text-xs">
+              <button
+                type="button"
+                onClick={handleCopyContacts}
+                className="outline-button !py-2 !px-3 text-xs flex items-center gap-1.5 font-bold"
+              >
+                {copiedContacts ? <Check className="w-4 h-4 text-[#1f4e38]" /> : <Copy className="w-4 h-4" />}
+                <span>{copiedContacts ? 'Contatos Copiados!' : 'Copiar Todos os Contatos'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowContactListModal(false)}
+                className="outline-button !py-2 !px-4 text-xs"
+              >
+                Fechar
+              </button>
+            </div>
           </div>
         </div>
       )}

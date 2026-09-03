@@ -9,6 +9,7 @@ import {
   PartnerSettlement,
   AppNotification,
   AuditLog,
+  CommunityAnnouncement,
 } from './types';
 
 export const INITIAL_CATEGORIES: ProductCategory[] = [
@@ -1350,3 +1351,59 @@ export const INITIAL_AUDIT_LOGS: AuditLog[] = [
     details: 'Venda multi-marca #PB-2026-0184 de R$ 130,00 registrada (Preta Chic + Pikena Biojóias).',
   },
 ];
+
+export const INITIAL_ANNOUNCEMENTS: CommunityAnnouncement[] = [
+  {
+    id: 'ann-01',
+    title: 'Horário Especial no Feriado da Independência - Rio Anil Shopping',
+    content: 'A administração do Rio Anil Shopping confirmou horário especial das 14h às 20h para a próxima segunda-feira (07/09). Nossa escala de plantão operará em turno único compartilhado. A abertura e conferência de caixa devem ser iniciadas às 13h40.',
+    authorName: 'Coordenação Pinta e Borda',
+    authorRole: 'Gestão Coletiva',
+    priority: 'URGENTE',
+    category: 'SHOPPING',
+    date: '2026-09-02T10:00:00Z',
+    pinned: true,
+  },
+  {
+    id: 'ann-02',
+    title: 'Café Coletivo & Reunião de Alinhamento Mensal',
+    content: 'Convidamos todas as 15 artesãs para nosso encontro presencial na próxima quinta-feira às 19h no lounge da loja. Pautas: prestação de contas dos repasses de agosto, novos expositores de centro e rodízio dos nichos da vitrine externa.',
+    authorName: 'Keka (Di Toda Cor)',
+    authorRole: 'Coordenação do Coletivo',
+    priority: 'IMPORTANTE',
+    category: 'GERAL',
+    date: '2026-09-01T15:30:00Z',
+    pinned: true,
+  },
+  {
+    id: 'ann-03',
+    title: 'Campanha de Primavera: Cores & Florescer Maranhense',
+    content: 'Iniciamos a ambientação da vitrine para a estação das flores! Solicitamos aos ateliês que tragam novas peças temáticas (tons vivos, bordados florais, biojoias botânicas e cerâmica) devidamente etiquetadas com código SKU até quarta-feira.',
+    authorName: 'Curadoria Coletiva',
+    authorRole: 'Comissão de Vitrine',
+    priority: 'IMPORTANTE',
+    category: 'EVENTO',
+    date: '2026-08-30T11:20:00Z',
+  },
+  {
+    id: 'ann-04',
+    title: 'Padronização das Etiquetas e Leitores de Código no Caixa',
+    content: 'Para garantir agilidade no atendimento e evitar filas no balcão, todas as peças devem ter a etiqueta com código SKU e código de barras legível. Em caso de dúvidas na impressão de etiquetas, solicite apoio à coordenação.',
+    authorName: 'Suporte Operacional',
+    authorRole: 'Equipe de Caixa',
+    priority: 'NORMAL',
+    category: 'ESTOQUE',
+    date: '2026-08-28T09:00:00Z',
+  },
+  {
+    id: 'ann-05',
+    title: 'Checklist de Troca de Plantão & Fundo de Troco',
+    content: 'Lembrete diário: a passagem de turno deve incluir a conferência do fundo fixo de R$ 100,00 na gaveta de notas, guarda dos canhotos de cartão na pasta vermelha e recolhimento de embalagens da bancada de atendimento.',
+    authorName: 'Coordenação de Plantões',
+    authorRole: 'Operações',
+    priority: 'NORMAL',
+    category: 'PLANTAO',
+    date: '2026-08-25T14:10:00Z',
+  },
+];
+

@@ -202,18 +202,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                 Plantões
               </button>
 
-              {userRole === 'ADMIN' && (
-                <button
-                  onClick={() => setActiveView('partners')}
-                  className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
-                    activeView === 'partners'
-                      ? 'bg-[#380c25] text-white font-semibold'
-                      : 'text-[#863b63] hover:text-[#380c25] hover:bg-[#ffe8f0]'
-                  }`}
-                >
-                  Parceiras
-                </button>
-              )}
+              <button
+                onClick={() => setActiveView('partners')}
+                className={`px-3 py-2 rounded-full transition-colors cursor-pointer ${
+                  activeView === 'partners'
+                    ? 'bg-[#380c25] text-white font-semibold'
+                    : 'text-[#863b63] hover:text-[#380c25] hover:bg-[#ffe8f0]'
+                }`}
+              >
+                Comunidade
+              </button>
 
               <button
                 onClick={() => setActiveView('financial')}
@@ -628,16 +626,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               Expedientes
             </button>
-            {userRole === 'ADMIN' && (
-              <button
-                onClick={() => setActiveView('partners')}
-                className={`px-2.5 py-1 rounded-full shrink-0 ${
-                  activeView === 'partners' ? 'bg-[#380c25] text-white font-bold' : 'text-[#863b63]'
-                }`}
-              >
-                Parceiros
-              </button>
-            )}
+            <button
+              onClick={() => setActiveView('partners')}
+              className={`px-2.5 py-1 rounded-full shrink-0 ${
+                activeView === 'partners' ? 'bg-[#380c25] text-white font-bold' : 'text-[#863b63]'
+              }`}
+            >
+              Comunidade
+            </button>
             <button
               onClick={() => setActiveView('financial')}
               className={`px-2.5 py-1 rounded-full shrink-0 ${

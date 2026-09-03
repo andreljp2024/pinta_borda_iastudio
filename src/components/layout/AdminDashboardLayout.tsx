@@ -163,11 +163,10 @@ export const AdminDashboardLayout: React.FC<AdminDashboardLayoutProps> = ({
       items: [
         {
           id: 'partners',
-          label: 'Ateliês Parceiros',
+          label: 'Comunidade & Ateliês',
           icon: Users,
           badge: `${partners.length} marcas`,
-          adminOnly: true,
-          description: 'Gestão das 14 marcas autorais',
+          description: 'Diretório das marcas, mural e espaços',
         },
         {
           id: 'artisan-portal',

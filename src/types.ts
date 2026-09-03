@@ -15,6 +15,8 @@ export type StockMovementType = 'ENTRADA' | 'VENDA' | 'DEVOLUCAO' | 'AJUSTE' | '
 
 export type MonthlyFeeStatus = 'ABERTO' | 'PAGO' | 'VENCIDO' | 'CANCELADO' | 'ATRASADO';
 
+export type PartnerStatus = 'ATIVO' | 'INATIVO' | 'SUSPENSO' | 'PENDENTE' | 'ENCERRADO';
+
 export interface PartnerContract {
   id: string;
   startDate: string;
@@ -25,7 +27,7 @@ export interface PartnerContract {
   shiftRequirement: 'REGULAR' | 'ISENTO_COM_TAXA' | 'ISENTO_TOTAL';
   shiftFeePerDay: number;         // Taxa de diária/diarista caso não faça plantão (R$)
   pixMode: 'DIRETO' | 'CENTRALIZADO';
-  status: 'ATIVO' | 'SUSPENSO' | 'ENCERRADO';
+  status: PartnerStatus;
 }
 
 export interface Partner {
@@ -56,7 +58,7 @@ export interface Partner {
   commissionPercentage?: number;
   worksShifts?: boolean;
   spaceType?: string;
-  status?: 'ATIVO' | 'INATIVO' | 'PENDENTE';
+  status?: PartnerStatus;
   admissionDate?: string;
   dueDay?: number;
 }
@@ -252,3 +254,16 @@ export interface AuditLog {
   entityId: string;
   details: string;
 }
+
+export interface CommunityAnnouncement {
+  id: string;
+  title: string;
+  content: string;
+  authorName: string;
+  authorRole?: string;
+  priority: 'NORMAL' | 'IMPORTANTE' | 'URGENTE';
+  category: 'GERAL' | 'SHOPPING' | 'PLANTAO' | 'EVENTO' | 'ESTOQUE' | 'CURADORIA';
+  date: string;
+  pinned?: boolean;
+}
+
