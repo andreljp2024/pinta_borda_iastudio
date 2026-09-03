@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import {
   TrendingUp,
   ShoppingBag,
+  ShoppingCart,
   DollarSign,
   Users,
   Clock,
@@ -16,6 +17,10 @@ import {
   ShieldCheck,
   Bell,
   Smartphone,
+  Boxes,
+  FileBarChart,
+  FileSpreadsheet,
+  Layers,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -359,6 +364,248 @@ export const DashboardView: React.FC<{ onOpenAuth: () => void }> = ({ onOpenAuth
               <span>Consultar Repasses Líquidos às Parceiras</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Central de Módulos da Gestão (Dashboard Modular Menu) */}
+      <div className="space-y-4 pt-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 className="font-display font-medium text-xl text-[#380c25] flex items-center gap-2">
+              <Layers className="w-5 h-5 text-[#f43f7e]" />
+              <span>Menu de Módulos & Gestão Operacional</span>
+            </h3>
+            <p className="text-xs text-[#863b63] mt-0.5">
+              Acesso rápido e organizado a todas as funções da casa colaborativa no Rio Anil Shopping
+            </p>
+          </div>
+          <span className="text-[11px] font-mono-craft text-[#9b4f76] bg-white px-3 py-1 rounded-full border border-[#fbcfe8] self-start sm:self-auto">
+            {isPartner ? 'Visão: Ateliê Parceiro' : 'Visão: Coordenação Geral'}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Card: PDV Balcão */}
+          <div
+            onClick={() => setActiveView('pdv')}
+            className="craft-card p-5 cursor-pointer group hover:border-[#f43f7e] flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#f43f7e] flex items-center justify-center group-hover:bg-[#f43f7e] group-hover:text-white transition-all shadow-2xs">
+                  <ShoppingBag className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-[#f43f7e] text-white">
+                  Frente de Caixa
+                </span>
+              </div>
+              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+                PDV Balcão
+              </h4>
+              <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
+                Vendas no balcão presencial, cálculo automático de comissões, PIX, dinheiro e comprovante digital.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs font-mono-craft text-[#f43f7e] font-semibold">
+              <span>Abrir Caixa</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card: Estoque no Shopping */}
+          <div
+            onClick={() => setActiveView('stock')}
+            className="craft-card p-5 cursor-pointer group hover:border-[#f43f7e] flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#380c25] flex items-center justify-center group-hover:bg-[#380c25] group-hover:text-white transition-all shadow-2xs">
+                  <Boxes className="w-5 h-5" />
+                </div>
+                {lowStockCount > 0 ? (
+                  <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-[#ff7597] text-white">
+                    {lowStockCount} em alerta
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-[#dff0e6] text-[#1f4e38]">
+                    Regular
+                  </span>
+                )}
+              </div>
+              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+                Estoque no Shopping
+              </h4>
+              <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
+                Controle de saldo físico nas prateleiras, aviso de reposição para as artesãs e histórico de entradas.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs font-mono-craft text-[#f43f7e] font-semibold">
+              <span>Gerenciar Estoque</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card: Plantões & Escalas */}
+          <div
+            onClick={() => setActiveView('shifts')}
+            className="craft-card p-5 cursor-pointer group hover:border-[#f43f7e] flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#380c25] flex items-center justify-center group-hover:bg-[#380c25] group-hover:text-white transition-all shadow-2xs">
+                  <Calendar className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-[#ffe4ee] text-[#db2777]">
+                  {activeShift ? 'Plantonista Ativo' : 'Aguardando'}
+                </span>
+              </div>
+              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+                Plantões & Escala
+              </h4>
+              <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
+                Calendário colaborativo da loja física, trocas de horário entre artesãs e registro de abertura/fechamento.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs font-mono-craft text-[#f43f7e] font-semibold">
+              <span>Ver Escala</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card: Produtos & Catálogo */}
+          <div
+            onClick={() => setActiveView('products')}
+            className="craft-card p-5 cursor-pointer group hover:border-[#f43f7e] flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#380c25] flex items-center justify-center group-hover:bg-[#380c25] group-hover:text-white transition-all shadow-2xs">
+                  <Package className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-stone-100 text-stone-700">
+                  {products.length} itens
+                </span>
+              </div>
+              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+                Produtos & Preços
+              </h4>
+              <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
+                Cadastro de peças com código de barras, fotos, descrição autoral e precificação com comissão discriminada.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs font-mono-craft text-[#f43f7e] font-semibold">
+              <span>Catálogo Geral</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card: Fechamento de Repasses */}
+          <div
+            onClick={() => setActiveView('settlements')}
+            className="craft-card p-5 cursor-pointer group hover:border-[#f43f7e] flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#3c6b54] flex items-center justify-center group-hover:bg-[#1f4e38] group-hover:text-white transition-all shadow-2xs">
+                  <DollarSign className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-[#dff0e6] text-[#1f4e38]">
+                  Transparência
+                </span>
+              </div>
+              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+                Fechamento de Repasses
+              </h4>
+              <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
+                Extratos detalhados de vendas, taxas de cartão já deduzidas e comprovante de transferência para as artesãs.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs font-mono-craft text-[#f43f7e] font-semibold">
+              <span>Ver Fechamentos</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card: Portal da Artesã */}
+          <div
+            onClick={() => setActiveView('artisan-portal')}
+            className="craft-card p-5 cursor-pointer group hover:border-[#f43f7e] flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#ffe4ee] text-[#db2777] flex items-center justify-center group-hover:bg-[#f43f7e] group-hover:text-white transition-all shadow-2xs">
+                  <Smartphone className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-[#f43f7e] text-white">
+                  Versão Celular
+                </span>
+              </div>
+              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+                Portal da Artesã
+              </h4>
+              <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
+                Interface leve pensada para o smartphone da produtora: acompanhar vendas do dia, avisar reposição e plantão.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs font-mono-craft text-[#f43f7e] font-semibold">
+              <span>Acessar no Celular</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card: Ateliês Parceiros */}
+          <div
+            onClick={() => setActiveView('partners')}
+            className="craft-card p-5 cursor-pointer group hover:border-[#f43f7e] flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#380c25] flex items-center justify-center group-hover:bg-[#380c25] group-hover:text-white transition-all shadow-2xs">
+                  <Users className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-[#ffe4ee] text-[#db2777]">
+                  {partners.length} marcas
+                </span>
+              </div>
+              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+                Ateliês Parceiros
+              </h4>
+              <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
+                Perfil de cada artesã, contatos, dados PIX, histórico de pontualidade e termos de cooperação.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs font-mono-craft text-[#f43f7e] font-semibold">
+              <span>Ver Ateliês</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card: Relatórios & Auditoria */}
+          <div
+            onClick={() => setActiveView('reports')}
+            className="craft-card p-5 cursor-pointer group hover:border-[#f43f7e] flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-[#fff0f5] text-[#380c25] flex items-center justify-center group-hover:bg-[#380c25] group-hover:text-white transition-all shadow-2xs">
+                  <FileBarChart className="w-5 h-5" />
+                </div>
+                <span className="text-[10px] font-mono-craft font-bold px-2 py-0.5 rounded-full bg-stone-100 text-stone-700">
+                  Exportações
+                </span>
+              </div>
+              <h4 className="font-display font-medium text-base text-[#380c25] group-hover:text-[#f43f7e] transition-colors">
+                Relatórios Gerenciais
+              </h4>
+              <p className="text-xs text-[#863b63] mt-1 leading-relaxed">
+                Curva ABC de produtos mais vendidos, faturamento por marca parceira e desempenho dos plantões.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-[#fbcfe8] flex items-center justify-between text-xs font-mono-craft text-[#f43f7e] font-semibold">
+              <span>Abrir Relatórios</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
           </div>
         </div>
       </div>
